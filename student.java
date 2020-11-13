@@ -2,5 +2,8 @@
 public class student {
 sssdadas;
 aaaa;
-asdsad;
+private void hfhfhfhfhf() {
+	// TODO Auto-generated method stub
+
+}
 }
