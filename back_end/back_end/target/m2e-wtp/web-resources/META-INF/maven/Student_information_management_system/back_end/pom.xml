@@ -34,6 +34,12 @@
              <artifactId>mysql-connector-java</artifactId>
              <version>5.1.44</version>
          </dependency>
+         <dependency>
+		    <groupId>com.spring4all</groupId>
+			<artifactId>swagger-spring-boot-starter</artifactId>
+			<version>1.7.0.RELEASE</version>
+		</dependency>
+         
   </dependencies>
   <build>
     <finalName>back_end</finalName>
