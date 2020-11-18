@@ -18,7 +18,7 @@
         <template slot="title"><i class="el-icon-message"></i>信息查询</template>
         <el-menu-item-group>
           <el-menu-item index="1-1">学生信息统计</el-menu-item>
-          <el-menu-item index="1-2" @click="selectuser">学生信息查询</el-menu-item>
+          <el-menu-item index="1-2">学生信息查询</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
 
@@ -43,32 +43,63 @@
 </el-container>
    </el-container>
 
-<el-dialog title="修改用户信息" :visible.sync="dialogVisible" width="35%">
+<el-dialog title="提示" :visible.sync="dialogVisible" width="50%">
       <span>
         <el-form ref="form" :model="form" label-width="100px">
-          <el-form-item label="登陆ID" >
-            <el-input v-model="form.id" plain disabled></el-input>
+          <el-form-item label="年份">
+            <el-input v-model="form.year"></el-input>
           </el-form-item>
-          <el-form-item label="姓名">
+          <el-form-item label="物品名称">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
-          
-          <el-form-item label="手机"  >
-            <el-input v-model="form.tel"></el-input>
+          <el-form-item label="物品性质">
+            <el-select v-model="form.type" placeholder="请选择物品性质">
+              <el-option label="家用电器" value="家用电器"></el-option>
+              <el-option label="衣物" value="衣物"></el-option>
+              <el-option label="鞋子" value="鞋子"></el-option>
+              <el-option label="家具" value="家具"></el-option>
+              <el-option label="书籍" value="书籍"></el-option>
+              <el-option label="衣物" value="衣物"></el-option>
+              <el-option label="零食" value="零食"></el-option>
+              <el-option label="珠宝" value="珠宝"></el-option>
+            </el-select>
           </el-form-item>
-          <el-form-item label="修改密码">
-            <el-input v-model="form.pass"></el-input>
+          <el-form-item label="成本（万）">
+            <el-input v-model="form.cost"></el-input>
           </el-form-item>
-         <el-form-item label="确认密码">
-            <el-input v-model="form.repass"></el-input>
+          <el-form-item label="率润（万）">
+            <el-input v-model="form.rate"></el-input>
+          </el-form-item>
+          <el-form-item label="物品质量等级">
+            <el-radio-group v-model="form.quality">
+              <el-radio label="一级"></el-radio>
+              <el-radio label="二级"></el-radio>
+              <el-radio label="三级"></el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="主要出售地区">
+            <el-checkbox-group v-model="form.region">
+              <el-checkbox label="北京" name="type"></el-checkbox>
+              <el-checkbox label="上海" name="type"></el-checkbox>
+              <el-checkbox label="深圳" name="type"></el-checkbox>
+              <el-checkbox label="广州" name="type"></el-checkbox>
+            </el-checkbox-group>
+          </el-form-item>
+          <el-form-item label="备注">
+            <el-input type="textarea" v-model="form.text"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="onSubmit">确认</el-button>
-            <el-button @click="dialogVisible = false">取消</el-button>
+            <el-button type="primary" @click="onSubmit">立即创建</el-button>
+            <el-button>取消</el-button>
           </el-form-item>
         </el-form>
       </span>
-      
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false"
+          >确 定</el-button
+        >
+      </span>
     </el-dialog>
  
 
@@ -86,34 +117,16 @@
       return {
         tabPosition: 'left',
         dialogVisible: false, //控制对话框的显示和隐藏
-         dialog: false,
-        form: {
-        id: "",
-        name: "",
-        tel: "",
-        pass: "",
-        repass: "",
-      },
-      
       };
     },
     methods: {
      
       handleClose(key, keyPath) {
         console.log(key, keyPath);
-      },
-       // 将表单数据添加到表格中去
-    onSubmit() {
-      //console.log(this.table)
-      this.table.push(this.form);
-
-      this.dialogVisible = false;
-    },
-    selectuser(){
-      this.$router.push({ path: '/selectuser'})
-    }
-    
-
+      }
+//       updateuser(){
+//         this.$router.push({ path: '/updateuser'})
+// }
     }
   }
  

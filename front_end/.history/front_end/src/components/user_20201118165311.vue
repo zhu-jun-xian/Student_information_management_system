@@ -18,7 +18,7 @@
         <template slot="title"><i class="el-icon-message"></i>信息查询</template>
         <el-menu-item-group>
           <el-menu-item index="1-1">学生信息统计</el-menu-item>
-          <el-menu-item index="1-2" @click="selectuser">学生信息查询</el-menu-item>
+          <el-menu-item index="1-2">学生信息查询</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
 
@@ -49,7 +49,7 @@
           <el-form-item label="登陆ID" >
             <el-input v-model="form.id" plain disabled></el-input>
           </el-form-item>
-          <el-form-item label="姓名">
+          <el-form-item label="姓名" prop="name">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
           
@@ -94,7 +94,12 @@
         pass: "",
         repass: "",
       },
-      
+      rules: {
+          name: [
+            { required: true, message: '请输入活动名称', trigger: 'blur' },
+            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          ]
+      }
       };
     },
     methods: {
@@ -109,9 +114,6 @@
 
       this.dialogVisible = false;
     },
-    selectuser(){
-      this.$router.push({ path: '/selectuser'})
-    }
     
 
     }

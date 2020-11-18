@@ -18,7 +18,7 @@
         <template slot="title"><i class="el-icon-message"></i>信息查询</template>
         <el-menu-item-group>
           <el-menu-item index="1-1">学生信息统计</el-menu-item>
-          <el-menu-item index="1-2" @click="selectuser">学生信息查询</el-menu-item>
+          <el-menu-item index="1-2">学生信息查询</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
 
@@ -109,9 +109,6 @@
 
       this.dialogVisible = false;
     },
-    selectuser(){
-      this.$router.push({ path: '/selectuser'})
-    }
     
 
     }

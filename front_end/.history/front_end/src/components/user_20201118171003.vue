@@ -109,9 +109,7 @@
 
       this.dialogVisible = false;
     },
-    selectuser(){
-      this.$router.push({ path: '/selectuser'})
-    }
+    selectuser
     
 
     }

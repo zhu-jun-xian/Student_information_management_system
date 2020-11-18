@@ -18,7 +18,7 @@
         <template slot="title"><i class="el-icon-message"></i>信息查询</template>
         <el-menu-item-group>
           <el-menu-item index="1-1">学生信息统计</el-menu-item>
-          <el-menu-item index="1-2" @click="selectuser">学生信息查询</el-menu-item>
+          <el-menu-item index="1-2">学生信息查询</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
 
@@ -53,8 +53,10 @@
             <el-input v-model="form.name"></el-input>
           </el-form-item>
           
-          <el-form-item label="手机"  >
-            <el-input v-model="form.tel"></el-input>
+          <el-form-item label="手机"  prop="tel" :rules="[
+      { required: true, message: '年龄不能为空'},
+      { type: 'number', message: '年龄必须为数字值'}]">
+            <el-input v-model="form.tel" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="修改密码">
             <el-input v-model="form.pass"></el-input>
@@ -93,8 +95,8 @@
         tel: "",
         pass: "",
         repass: "",
-      },
-      
+        
+      }
       };
     },
     methods: {
@@ -109,9 +111,6 @@
 
       this.dialogVisible = false;
     },
-    selectuser(){
-      this.$router.push({ path: '/selectuser'})
-    }
     
 
     }

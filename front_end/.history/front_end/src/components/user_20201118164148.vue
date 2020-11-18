@@ -18,7 +18,7 @@
         <template slot="title"><i class="el-icon-message"></i>信息查询</template>
         <el-menu-item-group>
           <el-menu-item index="1-1">学生信息统计</el-menu-item>
-          <el-menu-item index="1-2" @click="selectuser">学生信息查询</el-menu-item>
+          <el-menu-item index="1-2">学生信息查询</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
 
@@ -49,11 +49,17 @@
           <el-form-item label="登陆ID" >
             <el-input v-model="form.id" plain disabled></el-input>
           </el-form-item>
-          <el-form-item label="姓名">
+          <el-form-item label="姓名" :rules="[
+      { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+      { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+    ]">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
           
-          <el-form-item label="手机"  >
+          <el-form-item label="手机" :rules="[
+      { required: true, message: '年龄不能为空'},
+      { type: 'number', message: '年龄必须为数字值'}
+    ]">
             <el-input v-model="form.tel"></el-input>
           </el-form-item>
           <el-form-item label="修改密码">
@@ -93,8 +99,8 @@
         tel: "",
         pass: "",
         repass: "",
-      },
-      
+        
+      }
       };
     },
     methods: {
@@ -109,9 +115,6 @@
 
       this.dialogVisible = false;
     },
-    selectuser(){
-      this.$router.push({ path: '/selectuser'})
-    }
     
 
     }

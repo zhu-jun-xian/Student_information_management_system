@@ -18,7 +18,7 @@
         <template slot="title"><i class="el-icon-message"></i>信息查询</template>
         <el-menu-item-group>
           <el-menu-item index="1-1">学生信息统计</el-menu-item>
-          <el-menu-item index="1-2" @click="selectuser">学生信息查询</el-menu-item>
+          <el-menu-item index="1-2">学生信息查询</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
 
@@ -43,17 +43,17 @@
 </el-container>
    </el-container>
 
-<el-dialog title="修改用户信息" :visible.sync="dialogVisible" width="35%">
+<el-dialog title="修改用户信息" :visible.sync="dialogVisible" width="30%">
       <span>
         <el-form ref="form" :model="form" label-width="100px">
-          <el-form-item label="登陆ID" >
-            <el-input v-model="form.id" plain disabled></el-input>
+          <el-form-item label="登陆ID">
+            <el-input v-model="form.id"></el-input>
           </el-form-item>
           <el-form-item label="姓名">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
           
-          <el-form-item label="手机"  >
+          <el-form-item label="手机">
             <el-input v-model="form.tel"></el-input>
           </el-form-item>
           <el-form-item label="修改密码">
@@ -93,8 +93,8 @@
         tel: "",
         pass: "",
         repass: "",
-      },
-      
+        
+      }
       };
     },
     methods: {
@@ -109,9 +109,6 @@
 
       this.dialogVisible = false;
     },
-    selectuser(){
-      this.$router.push({ path: '/selectuser'})
-    }
     
 
     }

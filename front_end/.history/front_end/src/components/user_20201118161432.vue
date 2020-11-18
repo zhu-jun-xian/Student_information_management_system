@@ -18,7 +18,7 @@
         <template slot="title"><i class="el-icon-message"></i>信息查询</template>
         <el-menu-item-group>
           <el-menu-item index="1-1">学生信息统计</el-menu-item>
-          <el-menu-item index="1-2" @click="selectuser">学生信息查询</el-menu-item>
+          <el-menu-item index="1-2">学生信息查询</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
 
@@ -43,32 +43,35 @@
 </el-container>
    </el-container>
 
-<el-dialog title="修改用户信息" :visible.sync="dialogVisible" width="35%">
+<el-dialog title="修改用户信息" :visible.sync="dialogVisible" width="50%">
       <span>
         <el-form ref="form" :model="form" label-width="100px">
-          <el-form-item label="登陆ID" >
-            <el-input v-model="form.id" plain disabled></el-input>
+          <el-form-item label="登陆ID">
+            <el-input v-model="form.year"></el-input>
           </el-form-item>
           <el-form-item label="姓名">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
           
-          <el-form-item label="手机"  >
-            <el-input v-model="form.tel"></el-input>
+          <el-form-item label="成本（万）">
+            <el-input v-model="form.cost"></el-input>
           </el-form-item>
-          <el-form-item label="修改密码">
-            <el-input v-model="form.pass"></el-input>
+          <el-form-item label="率润（万）">
+            <el-input v-model="form.rate"></el-input>
           </el-form-item>
-         <el-form-item label="确认密码">
-            <el-input v-model="form.repass"></el-input>
-          </el-form-item>
+         
           <el-form-item>
             <el-button type="primary" @click="onSubmit">确认</el-button>
-            <el-button @click="dialogVisible = false">取消</el-button>
+            <el-button>取消</el-button>
           </el-form-item>
         </el-form>
       </span>
-      
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false"
+          >确 定</el-button
+>
+      </span>
     </el-dialog>
  
 
@@ -88,13 +91,15 @@
         dialogVisible: false, //控制对话框的显示和隐藏
          dialog: false,
         form: {
-        id: "",
+        year: "",
         name: "",
-        tel: "",
-        pass: "",
-        repass: "",
-      },
-      
+        type: "",
+        cost: "",
+        rate: "",
+        quality: "",
+        region: [],
+        text: ""
+      }
       };
     },
     methods: {
@@ -109,11 +114,10 @@
 
       this.dialogVisible = false;
     },
-    selectuser(){
-      this.$router.push({ path: '/selectuser'})
-    }
     
-
+//       updateuser(){
+//         this.$router.push({ path: '/updateuser'})
+// }
     }
   }
  
