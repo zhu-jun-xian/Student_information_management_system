@@ -3,15 +3,15 @@ use Student;
 
 DROP TABLE IF EXISTS `studentInformation`;
 CREATE TABLE `studentInformation` (
-  `id` int(20) NOT NULL AUTO_INCREMENT,
-  `number` varchar(30) DEFAULT NULL, 
-  `name` varchar(30) DEFAULT NULL,
-  `birth` varchar(10) DEFAULT NULL,
-  `gender` varchar(10) DEFAULT NULL,
-  `phoneNumber` varchar(30) DEFAULT NULL,
-  `classRoom` varchar(10) DEFAULT NULL,
-  `major` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(20) NOT NULL,
+  `number` varchar(30) NOT NULL, 
+  `name` varchar(30) ,
+  `birth` varchar(10) ,
+  `gender` varchar(10) ,
+  `phoneNumber` varchar(30) ,
+  `classRoom` varchar(10) ,
+  `major` varchar(30) ,
+  PRIMARY KEY (`number`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 insert into `studentInformation` values('1','3117004500','后裔','19980601','男','110120','5','电信');
