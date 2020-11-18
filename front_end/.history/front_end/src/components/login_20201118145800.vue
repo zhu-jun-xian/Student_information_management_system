@@ -8,7 +8,7 @@
 <el-input  type="text"   v-model="ID" maxlength="30" show-word-limit></el-input></p>
 <p><span style="color:red" v-if="password.length==0">*</span>输入密码 :
 <el-input  type="password" v-model="password" maxlength="30" minlength="8"></el-input></p>
-<el-button class="button" @click="enter" type="primary" round>登录</el-button>
+<el-button class="button"  type="primary" round>登录</el-button>
 </div>
 </div>
 </template>
@@ -26,16 +26,13 @@ export default {
       
     };
   },
-  methods: {
-  //   //设置页面背景色
-  //  mounted(){
-  //   document.querySelector('body').setAttribute('style','background-color:rgb(153, 153, 255)')
-  //   },
-  enter(){
-        this.$router.push({ path: '/HelloWorld'})
-}
-}
-}
+methods: {
+  
+},
+   mounted(){
+    document.querySelector('body').setAttribute('style','background-color:rgb(153, 153, 255)')
+    },  //设置页面背景色
+  };
 </script>
 
 <style scoped>

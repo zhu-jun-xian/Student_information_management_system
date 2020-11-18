@@ -26,16 +26,16 @@ export default {
       
     };
   },
-  methods: {
-  //   //设置页面背景色
-  //  mounted(){
-  //   document.querySelector('body').setAttribute('style','background-color:rgb(153, 153, 255)')
-  //   },
+methods: {
+    //设置页面背景色
+   mounted(){
+    document.querySelector('body').setAttribute('style','background-color:rgb(153, 153, 255)')
+    },
   enter(){
         this.$router.push({ path: '/HelloWorld'})
 }
-}
-}
+  
+  }
 </script>
 
 <style scoped>

@@ -1,6 +1,5 @@
 import Vue from 'vue'
-import VueRouter from "vue-router";
-import login from '@/components/login'
+import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 
 Vue.use(VueRouter)
@@ -8,8 +7,8 @@ Vue.use(VueRouter)
 const routes = [
     
     
-  { path: '/', component: login},
-  { path: '/HelloWorld', component: HelloWorld },
+  { path: '/HelloWorld', component: HelloWorld1},
+  { path: '/', component: login },
 
 ];
 
