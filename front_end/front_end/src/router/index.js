@@ -12,9 +12,18 @@ const routes = [
 
 
     { path: '/', component: login },
-    { path: '/user', component: user },
+    { 
+        path: '/user', 
+        component: user , 
+        children: [ 
+        　　　{ 
+        　　　　path: '/selectstudent', 
+         　　　 component: selectstudent 
+        　　  }
+        　　]
+},
     { path: '/register', component: register },
-    { path: '/selectstudent', component: selectstudent },
+    // { path: '/selectstudent', component: selectstudent },
 
 ];
 

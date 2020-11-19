@@ -1,45 +1,46 @@
 <template>
    <div class="hello">
     <el-container>
-   <el-table :data="tableData" style="width: 100%">
+      <!-- <router-link to="/selectstudent"></router-link> -->
+   <el-table :data="selecttableData" style="width: 100%">
     <el-table-column label="序号"  width="50px">
       <template slot-scope="scope">
-        <span style="margin-left: 10px">{{ scope.row.date }}</span>
+        <span >{{ scope.row.id }}</span>
       </template>
     </el-table-column>
-     <el-table-column label="学号"  width="100px">
+     <el-table-column label="学号"  width="150px">
       <template slot-scope="scope">
-        <span style="margin-left: 10px">{{ scope.row.date }}</span>
+        <span >{{ scope.row.stunum }}</span>
       </template>
     </el-table-column>
-     <el-table-column label="学生姓名"  width="50px">
+     <el-table-column label="学生姓名"  width="100px">
       <template slot-scope="scope">
-        <span style="margin-left: 10px">{{ scope.row.date }}</span>
+        <span >{{ scope.row.stuname }}</span>
       </template>
     </el-table-column>
-     <el-table-column label="出生日期"  width="50px">
+     <el-table-column label="出生日期"  width="150px">
       <template slot-scope="scope">
-        <span style="margin-left: 10px">{{ scope.row.date }}</span>
+        <span >{{ scope.row.stubirth }}</span>
       </template>
     </el-table-column>
-     <el-table-column label="性别"  width="50px">
+     <el-table-column label="性别"  width="100px">
       <template slot-scope="scope">
-        <span style="margin-left: 10px">{{ scope.row.date }}</span>
+        <span >{{ scope.row.stusex }}</span>
       </template>
     </el-table-column>
-    <el-table-column label="手机号码"  width="50px">
+    <el-table-column label="手机号码"  width="150px">
       <template slot-scope="scope">
-        <span style="margin-left: 10px">{{ scope.row.date }}</span>
+        <span >{{ scope.row.stutel }}</span>
       </template>
     </el-table-column>
-    <el-table-column label="班级"  width="50px">
+    <el-table-column label="班级"  width="150px">
       <template slot-scope="scope">
-        <span style="margin-left: 10px">{{ scope.row.date }}</span>
+        <span >{{ scope.row.stuclass }}</span>
       </template>
     </el-table-column>
-    <el-table-column label="系部"  width="50px">
+    <el-table-column label="系部"  width="150px">
       <template slot-scope="scope">
-        <span style="margin-left: 10px">{{ scope.row.date }}</span>
+        <span >{{ scope.row.stugend }}</span>
       </template>
     </el-table-column>
 
@@ -63,23 +64,125 @@
     data() {
       return {
 
-        tableData: [{
-          date: '1',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '3',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '4',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }]
+        selecttableData: [{
+          id: '1',
+          stunum: '3217005359',
+          stuname:'张小虎',
+          stubirth:'2020-09-11',
+          stusex:'男',
+          stutel:'13456782225',
+          stuclass: '170806',
+          stugend:'智能制造学部'
+        },
+        {
+          id: '1',
+          stunum: '3217005359',
+          stuname:'张小虎',
+          stubirth:'2020-09-11',
+          stusex:'男',
+          stutel:'13456782225',
+          stuclass: '170806',
+          stugend:'智能制造学部'
+        },
+        {
+          id: '1',
+          stunum: '3217005359',
+          stuname:'张小虎',
+          stubirth:'2020-09-11',
+          stusex:'男',
+          stutel:'13456782225',
+          stuclass: '170806',
+          stugend:'智能制造学部'
+        },
+        {
+          id: '1',
+          stunum: '3217005359',
+          stuname:'张小虎',
+          stubirth:'2020-09-11',
+          stusex:'男',
+          stutel:'13456782225',
+          stuclass: '170806',
+          stugend:'智能制造学部'
+        },
+        {
+          id: '1',
+          stunum: '3217005359',
+          stuname:'张小虎',
+          stubirth:'2020-09-11',
+          stusex:'男',
+          stutel:'13456782225',
+          stuclass: '170806',
+          stugend:'智能制造学部'
+        },
+        {
+          id: '1',
+          stunum: '3217005359',
+          stuname:'张小虎',
+          stubirth:'2020-09-11',
+          stusex:'男',
+          stutel:'13456782225',
+          stuclass: '170806',
+          stugend:'智能制造学部'
+        },
+        {
+          id: '1',
+          stunum: '3217005359',
+          stuname:'张小虎',
+          stubirth:'2020-09-11',
+          stusex:'男',
+          stutel:'13456782225',
+          stuclass: '170806',
+          stugend:'智能制造学部'
+        },
+        {
+          id: '1',
+          stunum: '3217005359',
+          stuname:'张小虎',
+          stubirth:'2020-09-11',
+          stusex:'男',
+          stutel:'13456782225',
+          stuclass: '170806',
+          stugend:'智能制造学部'
+        },{
+          id: '1',
+          stunum: '3217005359',
+          stuname:'张小虎',
+          stubirth:'2020-09-11',
+          stusex:'男',
+          stutel:'13456782225',
+          stuclass: '170806',
+          stugend:'智能制造学部'
+        }
+        ,{
+          id: '1',
+          stunum: '3217005359',
+          stuname:'张小虎',
+          stubirth:'2020-09-11',
+          stusex:'男',
+          stutel:'13456782225',
+          stuclass: '170806',
+          stugend:'智能制造学部'
+        }
+        ,{
+          id: '1',
+          stunum: '3217005359',
+          stuname:'张小虎',
+          stubirth:'2020-09-11',
+          stusex:'男',
+          stutel:'13456782225',
+          stuclass: '170806',
+          stugend:'智能制造学部'
+        },
+        {
+          id: '1',
+          stunum: '3217005359',
+          stuname:'张小虎',
+          stubirth:'2020-09-11',
+          stusex:'男',
+          stutel:'13456782225',
+          stuclass: '170806',
+          stugend:'智能制造学部'
+        },]
       }
     },
     methods: {

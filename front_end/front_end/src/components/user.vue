@@ -5,6 +5,7 @@
 
       <span id="user_name" v-bind="username" style="font-size:20px">{{username}}</span>
        <el-button @click="exit">退出</el-button>
+       <el-button @click="selectuser1">修改</el-button>
  </el-header>
       
     <el-container style="height:700px; border: 1px solid #eee">
@@ -36,6 +37,13 @@
       </el-submenu>
     </el-menu>
   </el-aside>
+
+   <el-main>
+   
+       <router-view> 
+        <!-- <router-link to="/selectstudent"><router-link> -->
+        </router-view>
+    </el-main>
   
 </el-container>
    </el-container>
@@ -191,7 +199,7 @@
 </template>
 
 <script>
-
+// import selectstudent from '@/components/User/selectstudent'
  export default {
    
    data() {
@@ -280,9 +288,6 @@
 
       this.UpdateVisible = false;
     },
-    // selectuser(){
-    //   this.$router.push({ path: '/user/selectuser'})
-    // },
     resetForm(formName) {
         this.$refs[formName].resetFields();
       },
@@ -315,7 +320,9 @@
       this.$router.push({ path:'/'})    
   },
   selectuser1(){
-     this.$router.push({ path:'/selectstudent'})  
+    this.$router.push({ path:'/selectstudent'})
+    // <router-link to="/selectstudent"></router-link>
+     
   }
     
 
