@@ -37,12 +37,14 @@ export default {
           method:"post",
           url:"/api/login",
           data:{
-            name:"c1",
-            password:"c3"
+            id:this.ID,
+            password:this.password
           }
         }).then(response=>{
           alert(JSON.stringify(response.data))
+          this.$router.push({ path: '/user'})
         }).catch(err=>{
+          alert("密码或id错误")
           console.log("...err...",err)
         });
         // this.$router.push({ path: '/user'})
