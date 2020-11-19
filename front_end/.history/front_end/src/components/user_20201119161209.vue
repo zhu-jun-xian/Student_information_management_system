@@ -2,7 +2,9 @@
   <div class="hello">
     <el-container>
     <el-header style="text-align: right; font-size: 12px">
-          <el-button @click="exit">退出</el-button>
+      <el-dropdown>
+        <i class="el-icon-setting" style="margin-right: 15px"></i>
+          <button @click="eixt">退出</button>
         
      
       <span id="user_name">王小虎</span>
@@ -301,7 +303,7 @@
        this.dialogImageUrl = file.url;
     },
   exit(){
-      this.$router.push({ path:'/'})    
+      this.$router.push({ path: '/user/selectuser'})    
   }
     
 

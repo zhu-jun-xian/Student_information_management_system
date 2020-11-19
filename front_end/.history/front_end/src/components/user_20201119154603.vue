@@ -2,9 +2,12 @@
   <div class="hello">
     <el-container>
     <el-header style="text-align: right; font-size: 12px">
-          <el-button @click="exit">退出</el-button>
-        
-     
+      <el-dropdown>
+        <i class="el-icon-setting" style="margin-right: 15px"></i>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>退出</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
       <span id="user_name">王小虎</span>
     </el-header>
 
@@ -161,14 +164,23 @@
           </el-select>
        </el-form-item>
         <el-form-item label="添加照片" prop="adddialogImageUrl">
-      <el-upload  action="#" list-type="picture-card" :auto-upload="false"  limit=1>
+          <!-- <el-upload
+               class="avatar-uploader"
+                action="#"
+                :show-file-list="true"
+                :on-success="handleAvatarSuccess"
+                :before-upload="beforeAvatarUpload">
+            <img v-if="imageUrl" :src="imageUrl" class="avatar">
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload> -->
+      <el-upload  action="#" list-type="picture-card" :auto-upload="false"  >
            <i  slot="default" class="el-icon-plus" ></i>
            <div v-if="ifimg">
           <div  slot="file" slot-scope="{ file }">
           <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" @load="onLoad"/>
-          <span   class="el-upload-list__item-actions">
-           <!-- <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)">
-           <i class="el-icon-zoom-in"></i></span> -->
+        <span   class="el-upload-list__item-actions">
+           <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)">
+           <i class="el-icon-zoom-in"></i></span>
            <span class="el-upload-list__item-delete" @click="handleRemove(file)">
             <i class="el-icon-delete"></i></span>
         </span>
@@ -290,19 +302,21 @@
           this.addsystemtime=d.getFullYear()+"-"+mon+"-"+d.getDate()+"  "+d.getHours()+":"+d.getMinutes();
          document.querySelector("body").setAttribute("style", "background-color: #e5ffee");
   } ,//设置页面背景色
-    
-    handlePictureCardPreview(file) {
-      this.dialogImageUrl = file.url;
-      this.dialogVisible = true;
-    },
-    handleRemove(file){
-        this.ifimg=false;
-        file.url="";
-       this.dialogImageUrl = file.url;
-    },
-  exit(){
-      this.$router.push({ path:'/'})    
-  }
+     handleAvatarSuccess(res, file) {
+        this.imageUrl = URL.createObjectURL(file.raw);
+      },
+      beforeAvatarUpload(file) {
+        const isJPG = file.type === 'image/jpeg';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+        if (!isJPG) {
+          this.$message.error('上传头像图片只能是 JPG 格式!');
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        return isJPG && isLt2M;
+      }
     
 
     }

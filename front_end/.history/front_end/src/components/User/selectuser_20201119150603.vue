@@ -1,5 +1,5 @@
-<template>
-    <el-dialog title="学生信息录入" :visible.sync="addVisible" width="70%">
+《ele
+     <el-dialog title="学生信息录入" :visible.sync="addVisible" width="70%">
       <span>
         <el-form :model="addForm" :rules="addrules" ref="addForm" label-width="100px" class="addForm">
           <el-row><span>基本信息</span></el-row><hr />
@@ -43,5 +43,3 @@
  </el-form>
       </span> 
     </el-dialog>
-</template>
-     
