@@ -3,7 +3,7 @@
     <el-container>
     <el-header style="text-align: right; font-size: 12px">
           <el-button @click="exit">退出</el-button>
-          <el-button @click="selectuser1">查询</el-button>
+          el-button @click="exit">退出</el-button>
       <span id="user_name"></span>
       <span id="user_name">{{username}}</span>
  </el-header>
@@ -315,9 +315,6 @@
 
   exit(){
       this.$router.push({ path:'/'})    
-  },
-  selectuser1(){
-     this.$router.push({ path:'/selectstudent'})  
   }
     
 
