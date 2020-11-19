@@ -301,7 +301,7 @@
        this.dialogImageUrl = file.url;
     },
   exit(){
-      this.$router.push({ path:'/'})    
+      this.$router.push({ path:'/login'})    
   }
     
 

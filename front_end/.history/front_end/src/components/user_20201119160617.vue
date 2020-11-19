@@ -2,9 +2,12 @@
   <div class="hello">
     <el-container>
     <el-header style="text-align: right; font-size: 12px">
-          <el-button @click="exit">退出</el-button>
-        
-     
+      <el-dropdown>
+        <i class="el-icon-setting" style="margin-right: 15px"></i>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>退出</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
       <span id="user_name">王小虎</span>
     </el-header>
 
@@ -163,7 +166,7 @@
         <el-form-item label="添加照片" prop="adddialogImageUrl">
       <el-upload  action="#" list-type="picture-card" :auto-upload="false"  limit=1>
            <i  slot="default" class="el-icon-plus" ></i>
-           <div v-if="ifimg">
+           <!-- <div v-if="ifimg"> -->
           <div  slot="file" slot-scope="{ file }">
           <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" @load="onLoad"/>
           <span   class="el-upload-list__item-actions">
@@ -300,9 +303,7 @@
         file.url="";
        this.dialogImageUrl = file.url;
     },
-  exit(){
-      this.$router.push({ path:'/'})    
-  }
+  
     
 
     }
