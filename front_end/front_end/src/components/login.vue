@@ -12,8 +12,6 @@
   <el-col :span="4"><div><el-button class="button" @click="login" type="primary" round>登录</el-button></div></el-col>
   <el-col :span="4"><div><el-button class="button1" @click="register" type="primary" round>注册</el-button></div></el-col>
 </el-row>
-
-
 </div>
 </div>
 </template>
