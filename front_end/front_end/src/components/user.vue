@@ -5,7 +5,7 @@
           <el-button @click="exit">退出</el-button>
         
      
-      <span id="user_name">王小虎</span>
+      <span id="user_name">{{username}}}</span>
     </el-header>
 
     <el-container style="height:700px; border: 1px solid #eee">
@@ -194,6 +194,7 @@
    
    data() {
       return {
+        username:"3117001236",
         tabPosition: 'left',
         dialogVisible: false, //控制对话框的显示和隐藏
         UpdateVisible: false, //控制对话框的显示和隐藏
