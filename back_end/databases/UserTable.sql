@@ -3,7 +3,7 @@ use Student;
 drop table register;
 
 CREATE TABLE UserTable(
-`ID` varchar(100) NOT NULL,
+`ID` varchar(100) NOT NULL UNIQUE,
 `Name` varchar(20),
 `Tel` int(20),
 `Password` varchar(20),

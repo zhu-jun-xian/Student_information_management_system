@@ -3,8 +3,8 @@ use Student;
 
 DROP TABLE IF EXISTS `StudentInformationTable`;
 CREATE TABLE `StudentInformationTable` (
-  `stuNum` int(20) NOT NULL,
-  `stuID` varchar(30) NOT NULL, 
+  `stuNum` int(20) NOT NULL AUTO_INCREMENT,
+  `stuID` varchar(30) NOT NULL UNIQUE, 
   `stuName` varchar(30) ,
   `stuBirth` varchar(10) ,
   `stuSex` varchar(10) ,
