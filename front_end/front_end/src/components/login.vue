@@ -1,7 +1,10 @@
 
 <template>
 <div>
-<h1>{{msg}}</h1>
+<el-row>
+<el-col :span="22"><h1>{{msg}}</h1></el-col>
+<el-col :span="2"><div><el-button plain @click="register" style="margin-top:40px" type="info">注册</el-button></div></el-col>
+</el-row>
 <hr>
 <div class="inputStylelogin" id="login"> 
 <p><span style="color:red" v-if="ID.length==0">*</span>登录ID :
@@ -12,6 +15,9 @@
   <el-col :span="4"><div><el-button class="button" @click="login" type="primary" round>登录</el-button></div></el-col>
   <el-col :span="4"><div><el-button class="button1" @click="register" type="primary" round>注册</el-button></div></el-col>
 </el-row>
+
+  <div><el-button class="button" @click="login" type="primary" round>登录</el-button></div>
+  
 </div>
 </div>
 </template>
@@ -68,12 +74,9 @@ register(){
 <style scoped>
 .button{
   width: 140px;
-  margin-left:70% ;
+  margin-left:30% ;
 }
-.button1{
-  width: 140px;
-  margin-left:170px ;
-}
+
 .inputStylelogin {
     width: 450px;
     height: 200px;
