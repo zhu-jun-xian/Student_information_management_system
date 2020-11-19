@@ -8,10 +8,11 @@
 <el-input  type="text"   v-model="ID" maxlength="30" show-word-limit></el-input></p>
 <p><span style="color:red" v-if="password.length==0">*</span>输入密码 :
 <el-input  type="password" v-model="password" maxlength="30" minlength="8"></el-input></p>
-<div>
-<el-button class="button" @click="login" type="primary" round>登录</el-button>
-<el-button class="button" @click="register" type="primary" round>注册</el-button>
-</div>
+<el-row>
+  <el-col :span="4"><div><el-button class="button" @click="login" type="primary" round>登录</el-button></div></el-col>
+  <el-col :span="4"><div><el-button class="button1" @click="register" type="primary" round>注册</el-button></div></el-col>
+</el-row>
+
 
 </div>
 </div>
@@ -69,7 +70,11 @@ register(){
 <style scoped>
 .button{
   width: 140px;
-  margin-left:30% ;
+  margin-left:70% ;
+}
+.button1{
+  width: 140px;
+  margin-left:170px ;
 }
 .inputStylelogin {
     width: 450px;
@@ -77,5 +82,6 @@ register(){
     margin-top: 9%;
     margin-left:30%;
   }
+  
 
 </style>
