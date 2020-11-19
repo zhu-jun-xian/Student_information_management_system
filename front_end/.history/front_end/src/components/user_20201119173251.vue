@@ -2,11 +2,12 @@
   <div class="hello">
     <el-container>
     <el-header style="text-align: right; font-size: 12px">
-
-      <span id="user_name" v-bind="username" style="font-size:20px">{{username}}</span>
-       <el-button @click="exit">退出</el-button>
+          <el-button @click="exit">退出</el-button>
+          <el-button @click="selectuser1">退出</el-button>
+      <span id="user_name"></span>
+      <span id="user_name">{{username}}</span>
  </el-header>
-      
+
     <el-container style="height:700px; border: 1px solid #eee">
   <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
     <el-menu :default-openeds="['1', '3']">
@@ -196,6 +197,7 @@
    
    data() {
       return {
+        username:"",
         tabPosition: 'left',
         dialogVisible: false, //控制对话框的显示和隐藏
         UpdateVisible: false, //控制对话框的显示和隐藏
@@ -315,19 +317,12 @@
       this.$router.push({ path:'/'})    
   },
   selectuser1(){
-     this.$router.push({ path:'/selectstudent'})  
+    this.$router.push({ path:'/'})  
   }
     
 
     },
-    created(){
-      var name = this.$route.query.username;
-      console.log(name)
-       this.username=name;
-       console.log(this.username)
-    },
         mounted() {
-       
         var d = new Date();
         let mon=d.getMonth()+1;
         this.addsystemtime=d.getFullYear()+"-"+mon+"-"+d.getDate()+"  "+d.getHours()+":"+d.getMinutes();
