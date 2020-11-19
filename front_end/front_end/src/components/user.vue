@@ -5,6 +5,7 @@
           <el-button @click="exit">退出</el-button>
         
      
+      <span id="user_name" v-bind="username"></span>
     </el-header>
 
     <el-container style="height:700px; border: 1px solid #eee">
