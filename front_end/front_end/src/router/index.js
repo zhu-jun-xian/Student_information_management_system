@@ -7,17 +7,18 @@ import selectuser from '@/components/User/selectuser'
 Vue.use(VueRouter)
 
 const routes = [
-    
-    
-  { path: '/', component: login},
-  { path: '/user', component: user },
-  { path: '/user/selectuser', component: selectuser },
+
+
+    { path: '/', component: login },
+    { path: '/user', component: user },
+    // { path: '/register', component: register },
+    { path: '/user/selectuser', component: selectuser },
 
 ];
 
 const router = new VueRouter({
-  routes ,
-  mode:"history"
+    routes,
+    mode: "history"
 });
 
 export default router;

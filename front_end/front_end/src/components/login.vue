@@ -8,7 +8,11 @@
 <el-input  type="text"   v-model="ID" maxlength="30" show-word-limit></el-input></p>
 <p><span style="color:red" v-if="password.length==0">*</span>输入密码 :
 <el-input  type="password" v-model="password" maxlength="30" minlength="8"></el-input></p>
-<el-button class="button" @click="enter" type="primary" round>登录</el-button>
+<div>
+<el-button class="button" @click="login" type="primary" round>登录</el-button>
+<el-button class="button" @click="register" type="primary" round>注册</el-button>
+</div>
+
 </div>
 </div>
 </template>
@@ -28,11 +32,10 @@ export default {
     };
   },
   methods: {
-  //   //设置页面背景色
-  //  mounted(){
-  //   document.querySelector('body').setAttribute('style','background-color:rgb(153, 153, 255)')
-  //   },
-  enter(){
+register(){
+  this.$router.push({ path: '/register'})
+},
+  login(){
         axios({
           method:"post",
           url:"/api/login",
@@ -41,10 +44,15 @@ export default {
             password:this.password
           }
         }).then(response=>{
-          alert(JSON.stringify(response.data))
-          this.$router.push({ path: '/user'})
+          console.log(JSON.stringify(response.data)=="success")
+          if(JSON.stringify(response.data)=="success"){
+                this.$router.push({ path: '/user'})
+          }else if(JSON.stringify(response.data)=="false"){
+              alert("密码或id错误")
+          }
+          
         }).catch(err=>{
-          alert("密码或id错误")
+          
           console.log("...err...",err)
         });
         // this.$router.push({ path: '/user'})
