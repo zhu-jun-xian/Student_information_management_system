@@ -46,26 +46,26 @@
 
 <el-dialog title="修改用户信息" :visible.sync="UpdateVisible" width="35%">
       <span>
-        <el-form ref="Updateform" :model="Updateform" label-width="100px">
+        <el-form :model="UpdateForm" :rules="Updaterules" ref="UpdateForm" label-width="100px" class="UpdateForm">
           <el-form-item label="登陆ID" prop="id">
-            <el-input v-model="Updateform.id" plain disabled></el-input>
+            <el-input v-model="UpdateForm.id" plain disabled></el-input>
           </el-form-item>
           <el-form-item label="姓名" prop="name">
-            <el-input v-model="Updateform.name"></el-input>
+            <el-input v-model="UpdateForm.name"></el-input>
           </el-form-item>
           
           <el-form-item label="手机" prop="tel" >
-            <el-input v-model="Updateform.tel"></el-input>
+            <el-input v-model="UpdateForm.tel"></el-input>
           </el-form-item>
           <el-form-item label="修改密码" prop="pass">
-            <el-input v-model="Updateform.pass"></el-input>
+            <el-input v-model="UpdateForm.pass"></el-input>
           </el-form-item>
          <el-form-item label="确认密码" prop="repass">
-            <el-input v-model="Updateform.repass"></el-input>
+            <el-input v-model="UpdateForm.repass"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit">确认</el-button>
-            <el-button @click="resetForm('Updateform')">清空</el-button>
+            <el-button @click="resetForm('UpdateForm')">清空</el-button>
           </el-form-item>
         </el-form>
       </span> 
@@ -147,6 +147,26 @@
         pass: "",
         repass: "",
       },
+      dialogrules: {
+          stuname: [
+            { required: true, message: '请输入学生姓名', trigger: 'blur' },
+            { min: 2, max: 30, message: '姓名不符合规范', trigger: 'blur' }
+          ],
+          stunum: [
+            { required: true, message: '请输入学号', trigger: 'blur' },
+            { min: 10, max: 10, message: '学号不符合规范', trigger: 'blur' }
+          ],
+          stuclass: [
+            { required: true, message: '请输入班级', trigger: 'blur' },
+            { min: 6, max: 6, message: '班级不符合规范', trigger: 'blur' }
+          ],
+          sex: [
+            { required: true, message: '请选择', trigger: 'change' }
+          ],
+          academy: [
+            { required: true, message: '请选择', trigger: 'change' }
+          ],  
+        },
       selectForm: {
           stuname: '',
           stunum:'',

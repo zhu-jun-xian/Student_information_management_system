@@ -60,7 +60,7 @@
           <el-form-item label="修改密码" prop="pass">
             <el-input v-model="Updateform.pass"></el-input>
           </el-form-item>
-         <el-form-item label="确认密码" prop="repass">
+         <el-form-item label="确认密码" prop="stuname">
             <el-input v-model="Updateform.repass"></el-input>
           </el-form-item>
           <el-form-item>

@@ -126,6 +126,146 @@
  </el-form>
       </span> 
     </el-dialog> 
+
+    <el-dialog :visible.sync="dialogFormVisible">
+  <div>
+    <h1 style="margin-left:40%">{{ msg }}</h1>
+    <el-row><span>基本信息</span></el-row>
+    <hr />
+    <el-row>
+      <el-col :span="1"><div class="grid-content"></div></el-col>
+      <el-col :span="5"
+        ><span>学生姓名</span>
+        <div class="grid-content bg-purple">
+          <el-input
+            v-model="studentname"
+            placeholder="张三"
+            maxlength="30"
+          ></el-input></div
+      ></el-col>
+      <el-col :span="3"><div class="grid-content"></div></el-col>
+      <el-col :span="5"
+        ><span>学号</span>
+        <div class="grid-content ">
+          <el-input
+            v-model="studentnumber"
+            placeholder="311700xxxx"
+            maxlength="30"
+            style="width:100%"
+          ></el-input></div
+      ></el-col>
+      <el-col :span="3"><div class="grid-content"></div></el-col>
+      <el-col :span="4"
+        ><span>出生年月日</span>
+        <div class="grid-content">
+          <el-date-picker
+            v-model="value1"
+            type="date"
+            placeholder="选择日期"
+            style="width:100%"
+          >
+          </el-date-picker></div
+      ></el-col>
+    </el-row>
+
+    <el-row><span></span></el-row>
+
+    <el-row>
+      <el-col :span="1"><div class="grid-content"></div></el-col>
+      <el-col :span="5"
+        ><span>性别</span>
+        <div class="grid-content bg-purple">
+          <el-select
+            style="width:100%"
+            clearable
+            v-model="gender"
+            placeholder="请选择"
+          >
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option
+          ></el-select></div
+      ></el-col>
+      <el-col :span="3"><div class="grid-content"></div></el-col>
+      <el-col :span="5"
+        ><span>手机号码</span>
+        <div class="grid-content ">
+          <el-input v-model="tel" placeholder="137xxxx2222"></el-input></div
+      ></el-col>
+      <el-col :span="3"><div class="grid-content"></div></el-col>
+      <el-col :span="4"
+        ><span>班级</span>
+        <div class="grid-content ">
+          <el-input
+            v-model="classnumber"
+            placeholder="17xxxx"
+            style="width:100%"
+            maxlength="30"
+          ></el-input></div
+      ></el-col>
+    </el-row>
+
+    <el-row><span></span></el-row>
+
+    <el-row>
+     <el-col :span="1"><div class="grid-content"></div></el-col>
+      <el-col :span="5"><span>信息录入时间</span>
+      <div class="grid-content ">
+      <el-input disabled="false"
+            v-model="time"
+            placeholder="系统自动生成"
+            style="width:100%"
+          ></el-input></div
+      ></el-col>
+      
+      <el-col :span="3"><div class="grid-content"></div></el-col>
+      <el-col :span="5"
+        ><span>系部</span>
+        <div class="grid-content bg-purple">
+          <el-select
+            style="width:100%"
+            clearable
+            v-model="department"
+            placeholder="请选择"
+          >
+            <el-option
+              v-for="item in options2"
+              :key="item.value2"
+              :label="item.label2"
+              :value="item.value2"
+            ></el-option
+          ></el-select></div
+      ></el-col>
+      
+
+    </el-row>
+    <el-row><span></span></el-row>
+    <el-row><span>学生照片</span></el-row>
+    <hr />
+    <el-upload  action="#" list-type="picture-card" :auto-upload="false"  >
+      <i  slot="default" class="el-icon-plus" ></i>
+      <div v-if="ifimg">
+        <div  slot="file" slot-scope="{ file }">
+        <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" @load="onLoad"/>
+        <span   class="el-upload-list__item-actions">
+           <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)">
+           <i class="el-icon-zoom-in"></i></span>
+           <span class="el-upload-list__item-delete" @click="handleRemove(file)">
+            <i class="el-icon-delete"></i></span>
+        </span>
+      </div>
+      </div>
+ 
+    </el-upload>
+    <el-dialog :visible.sync="dialogVisible">
+      <img  width="100%" :src="dialogImageUrl" alt="" id="imgUpLoad" />
+    </el-dialog>
+    <el-button class="submit" type="submit" round >提交</el-button>
+  </div>
+ </el-dialog>
   </div> 
 </template>
 

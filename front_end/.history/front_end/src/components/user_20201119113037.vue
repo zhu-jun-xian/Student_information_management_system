@@ -46,7 +46,7 @@
 
 <el-dialog title="修改用户信息" :visible.sync="UpdateVisible" width="35%">
       <span>
-        <el-form ref="Updateform" :model="Updateform" label-width="100px">
+        <el-form :model="UpdateForm" :rules="dialogrules" ref="selectForm" label-width="100px" class="selectForm">
           <el-form-item label="登陆ID" prop="id">
             <el-input v-model="Updateform.id" plain disabled></el-input>
           </el-form-item>

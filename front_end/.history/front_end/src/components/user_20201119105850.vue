@@ -46,26 +46,26 @@
 
 <el-dialog title="修改用户信息" :visible.sync="UpdateVisible" width="35%">
       <span>
-        <el-form ref="Updateform" :model="Updateform" label-width="100px">
-          <el-form-item label="登陆ID" prop="id">
-            <el-input v-model="Updateform.id" plain disabled></el-input>
+        <el-form ref="form" :model="form" label-width="100px">
+          <el-form-item label="登陆ID" >
+            <el-input v-model="form.id" plain disabled></el-input>
           </el-form-item>
-          <el-form-item label="姓名" prop="name">
-            <el-input v-model="Updateform.name"></el-input>
+          <el-form-item label="姓名">
+            <el-input v-model="form.name"></el-input>
           </el-form-item>
           
-          <el-form-item label="手机" prop="tel" >
-            <el-input v-model="Updateform.tel"></el-input>
+          <el-form-item label="手机"  >
+            <el-input v-model="form.tel"></el-input>
           </el-form-item>
-          <el-form-item label="修改密码" prop="pass">
-            <el-input v-model="Updateform.pass"></el-input>
+          <el-form-item label="修改密码">
+            <el-input v-model="form.pass"></el-input>
           </el-form-item>
-         <el-form-item label="确认密码" prop="repass">
-            <el-input v-model="Updateform.repass"></el-input>
+         <el-form-item label="确认密码">
+            <el-input v-model="form.repass"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit">确认</el-button>
-            <el-button @click="resetForm('Updateform')">清空</el-button>
+            <el-button @click="UpdateVisible = false">取消</el-button>
           </el-form-item>
         </el-form>
       </span> 
@@ -73,7 +73,7 @@
 
     <el-dialog title="学生信息查询" :visible.sync="dialogVisible" width="35%">
       <span>
-        <el-form :model="selectForm" :rules="dialogrules" ref="selectForm" label-width="100px" class="selectForm">
+        <el-form :model="selectForm" :rules="rules" ref="selectForm" label-width="100px" class="selectForm">
           <el-form-item label="学生姓名" prop="stuname">
           <el-input v-model="selectForm.stuname"></el-input>
        </el-form-item>
@@ -99,8 +99,8 @@
           </el-select>
        </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('selectForm')">查询</el-button>
-    <el-button @click="resetForm('selectForm')">清空</el-button>
+    <el-button type="primary" @click="submitForm('ruleForm')">查询</el-button>
+    <el-button @click="resetForm('ruleForm')">清空</el-button>
   </el-form-item>
  </el-form>
       </span> 
@@ -108,20 +108,20 @@
 
     <el-dialog title="学生信息统计" :visible.sync="statisticsVisible" width="35%">
       <span>
-        <el-form :model="statisticsForm" :rules="statisticsrules" ref="statisticsForm" label-width="100px" class="statisticsForm">
+        <el-form :model="statisticsForm" :rules="rules" ref="statisticsForm" label-width="100px" class="statisticsForm">
           
-       <el-form-item label="统计规则" prop="irule">
+       <el-form-item label="信息统计规则" prop="irule">
           <el-select v-model="statisticsForm.irule" placeholder="请选择">
             <el-option label="院系" value="iacademy"></el-option>
-            <el-option label="班级" value="isex" ></el-option>
+            <el-option label="班级" value="isex"></el-option>
           </el-select>
        </el-form-item>
-       <el-form-item  prop="imassage"  style="width: 61%;">
-          <el-input v-model="statisticsForm.imassage"></el-input>
+       <el-form-item  prop="i">
+          <el-input v-model="selectForm.stuname"></el-input>
        </el-form-item>
-  <el-form-item >
-    <el-button type="primary" @click="submitForm('statisticsForm')">查询</el-button>
-    <el-button @click="resetForm('statisticsForm')">清空</el-button>
+  <el-form-item>
+    <el-button type="primary" @click="submitForm('ruleForm')">查询</el-button>
+    <el-button @click="resetForm('ruleForm')">清空</el-button>
   </el-form-item>
  </el-form>
       </span> 
@@ -138,9 +138,8 @@
         tabPosition: 'left',
         dialogVisible: false, //控制对话框的显示和隐藏
         UpdateVisible: false, //控制对话框的显示和隐藏
-        statisticsVisible:false,
-        dialog: false,
-        Updateform: {
+         dialog: false,
+        form: {
         id: "",
         name: "",
         tel: "",
@@ -154,7 +153,7 @@
           sex: '',
           academy:''
         },
-        dialogrules: {
+        rules: {
           stuname: [
             { required: true, message: '请输入学生姓名', trigger: 'blur' },
             { min: 2, max: 30, message: '姓名不符合规范', trigger: 'blur' }
@@ -172,23 +171,10 @@
           ],
           academy: [
             { required: true, message: '请选择', trigger: 'change' }
-          ],  
-        },
-         statisticsForm: {
-          irule: '',
-          imassage: '',
+          ],
           
-        },
-        statisticsrules: {
-         irule: [
-            { required: true, message: '请选择', trigger: 'change' }
-          ],
-         imassage: [
-            { required: true, message: '请输入', trigger: 'blur' },
-            { min: 2, max: 12, message: '不符合规范', trigger: 'blur' }
-          ],
+        
         }
-      
       
       };
     },
@@ -202,14 +188,12 @@
       //console.log(this.table)
       this.table.push(this.form);
 
-      this.UpdateVisible = false;
+      this.dialogVisible = false;
     },
-    // selectuser(){
-    //   this.$router.push({ path: '/user/selectuser'})
-    // },
-    resetForm(formName) {
-        this.$refs[formName].resetFields();
-      }
+    selectuser(){
+      this.$router.push({ path: '/user/selectuser'})
+    },
+    
     
 
     }

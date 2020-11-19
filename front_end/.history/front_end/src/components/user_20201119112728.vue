@@ -50,17 +50,17 @@
           <el-form-item label="登陆ID" prop="id">
             <el-input v-model="Updateform.id" plain disabled></el-input>
           </el-form-item>
-          <el-form-item label="姓名" prop="name">
+          <el-form-item label="姓名" prop="stuname">
             <el-input v-model="Updateform.name"></el-input>
           </el-form-item>
           
-          <el-form-item label="手机" prop="tel" >
+          <el-form-item label="手机"  >
             <el-input v-model="Updateform.tel"></el-input>
           </el-form-item>
-          <el-form-item label="修改密码" prop="pass">
+          <el-form-item label="修改密码">
             <el-input v-model="Updateform.pass"></el-input>
           </el-form-item>
-         <el-form-item label="确认密码" prop="repass">
+         <el-form-item label="确认密码">
             <el-input v-model="Updateform.repass"></el-input>
           </el-form-item>
           <el-form-item>

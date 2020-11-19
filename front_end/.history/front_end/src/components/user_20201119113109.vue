@@ -46,12 +46,12 @@
 
 <el-dialog title="修改用户信息" :visible.sync="UpdateVisible" width="35%">
       <span>
-        <el-form ref="Updateform" :model="Updateform" label-width="100px">
+        <el-form :model="UpdateForm" :rules="Updaterules" ref="UpdateForm" label-width="100px" class="UpdateForm">
           <el-form-item label="登陆ID" prop="id">
-            <el-input v-model="Updateform.id" plain disabled></el-input>
+            <el-input v-model="UpdateForm.id" plain disabled></el-input>
           </el-form-item>
           <el-form-item label="姓名" prop="name">
-            <el-input v-model="Updateform.name"></el-input>
+            <el-input v-model="UpdateForm.name"></el-input>
           </el-form-item>
           
           <el-form-item label="手机" prop="tel" >
