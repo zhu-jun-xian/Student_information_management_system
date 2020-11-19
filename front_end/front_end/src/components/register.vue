@@ -13,7 +13,7 @@
 <el-input  type="password" v-model="password" maxlength="30" minlength="8"></el-input></p>
 <p class="p1"><span style="color:red" v-if="password1.length==0">*</span>确认密码 :
 <el-input  type="password" v-model="password1" maxlength="30" minlength="8"></el-input></p>
-<el-button class="button"  type="primary" round>注册</el-button>
+<el-button class="button"  type="primary" round @click="registerUser" >注册</el-button>
 </div>
 </div>
 </template>
@@ -33,10 +33,32 @@ export default {
     };
   },
 methods: {
-  
+  registerUser(){
+     axios({
+          method:"post",
+          url:"/api/register",
+          data:{
+            id:this.ID,
+            username:this.username,
+            tel:this.tel,
+            password:this.password
+          }
+        }).then(response=>{
+          console.log(JSON.stringify(response.data)=="success")
+          if(JSON.stringify(response.data)=="success"){
+                this.$router.push({ path: '/user'})
+          }else if(JSON.stringify(response.data)=="false"){
+              alert("密码或id错误")
+          }
+          
+        }).catch(err=>{
+          
+          console.log("...err...",err)
+        });
+  }
 },
    mounted(){
-    document.querySelector('body').setAttribute('style','background-color:rgb(102, 255, 102)')
+    // document.querySelector('body').setAttribute('style','background-color:rgb(102, 255, 102)')
     },  //设置页面背景色
   };
 </script>
