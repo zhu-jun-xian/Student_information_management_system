@@ -26,7 +26,7 @@
         <template slot="title"><i class="el-icon-menu"></i>信息修改</template>
         <el-menu-item-group>
           <el-menu-item index="2-1" @click.native="UpdateVisible = true">修改用户信息</el-menu-item>
-          <el-menu-item index="2-2">新增用户信息</el-menu-item>
+          <el-menu-item index="2-2" @click.native="dialogAddstudentVisible = true">新增用户信息</el-menu-item>
           <el-menu-item index="2-3">删除学生信息</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
@@ -126,6 +126,147 @@
  </el-form>
       </span> 
     </el-dialog> 
+
+    
+      <el-dialog :visible.sync="dialogAddstudentVisible">
+  <div>
+    <p1 style="">{{ msg }}</p1>
+    <el-row><span>基本信息</span></el-row>
+    <hr />
+    <el-row>
+      <el-col :span="1"><div class="grid-content"></div></el-col>
+      <el-col :span="5"
+        ><span>学生姓名</span>
+        <div class="grid-content bg-purple">
+          <el-input
+            v-model="studentname"
+            placeholder="张三"
+            maxlength="30"
+          ></el-input></div
+      ></el-col>
+      <el-col :span="3"><div class="grid-content"></div></el-col>
+      <el-col :span="5"
+        ><span>学号</span>
+        <div class="grid-content ">
+          <el-input
+            v-model="studentnumber"
+            placeholder="311700xxxx"
+            maxlength="30"
+            style="width:100%"
+          ></el-input></div
+      ></el-col>
+      <el-col :span="3"><div class="grid-content"></div></el-col>
+      <el-col :span="4"
+        ><span>出生年月日</span>
+        <div class="grid-content">
+          <el-date-picker
+            v-model="value1"
+            type="date"
+            placeholder="选择日期"
+            style="width:100%"
+          >
+          </el-date-picker></div
+      ></el-col>
+    </el-row>
+
+    <el-row><span></span></el-row>
+
+    <el-row>
+      <el-col :span="1"><div class="grid-content"></div></el-col>
+      <el-col :span="5"
+        ><span>性别</span>
+        <div class="grid-content bg-purple">
+          <el-select
+            style="width:100%"
+            clearable
+            v-model="gender"
+            placeholder="请选择"
+          >
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option
+          ></el-select></div
+      ></el-col>
+      <el-col :span="3"><div class="grid-content"></div></el-col>
+      <el-col :span="5"
+        ><span>手机号码</span>
+        <div class="grid-content ">
+          <el-input v-model="tel" placeholder="137xxxx2222"></el-input></div
+      ></el-col>
+      <el-col :span="3"><div class="grid-content"></div></el-col>
+      <el-col :span="4"
+        ><span>班级</span>
+        <div class="grid-content ">
+          <el-input
+            v-model="classnumber"
+            placeholder="17xxxx"
+            style="width:100%"
+            maxlength="30"
+          ></el-input></div
+      ></el-col>
+    </el-row>
+
+    <el-row><span></span></el-row>
+
+    <el-row>
+     <el-col :span="1"><div class="grid-content"></div></el-col>
+      <el-col :span="5"><span>信息录入时间</span>
+      <div class="grid-content ">
+      <el-input disabled="false"
+            v-model="time"
+            placeholder="系统自动生成"
+            style="width:100%"
+          ></el-input></div
+      ></el-col>
+      
+      <el-col :span="3"><div class="grid-content"></div></el-col>
+      <el-col :span="5"
+        ><span>系部</span>
+        <div class="grid-content bg-purple">
+          <el-select
+            style="width:100%"
+            clearable
+            v-model="department"
+            placeholder="请选择"
+          >
+            <el-option
+              v-for="item in options2"
+              :key="item.value2"
+              :label="item.label2"
+              :value="item.value2"
+            ></el-option
+          ></el-select></div
+      ></el-col>
+      
+
+    </el-row>
+    <el-row><span></span></el-row>
+    <el-row><span>学生照片</span></el-row>
+    <hr />
+    <el-upload  action="#" list-type="picture-card" :auto-upload="false"  >
+      <i  slot="default" class="el-icon-plus" ></i>
+      <div v-if="ifimg">
+        <div  slot="file" slot-scope="{ file }">
+        <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" @load="onLoad"/>
+        <span   class="el-upload-list__item-actions">
+           <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)">
+           <i class="el-icon-zoom-in"></i></span>
+           <span class="el-upload-list__item-delete" @click="handleRemove(file)">
+            <i class="el-icon-delete"></i></span>
+        </span>
+      </div>
+      </div>
+ 
+    </el-upload>
+    <el-dialog :visible.sync="dialogVisible">
+      <img  width="100%" :src="dialogImageUrl" alt="" id="imgUpLoad" />
+    </el-dialog>
+    <el-button class="submit" type="submit" round >提交</el-button>
+  </div>
+ </el-dialog>
   </div> 
 </template>
 
@@ -140,12 +281,31 @@
         UpdateVisible: false, //控制对话框的显示和隐藏
         statisticsVisible:false,
         dialog: false,
+        msg: "学生信息录入",
+        studentname: "",
+        studentnumber: "",
+        gender: "",
+        tel: "",
+        time:"",
+        classnumber: "",
+        department: "",
+        dialogImageUrl: "",
+        dialogVisible: false,
+        disabled: false,
+        dialogAddstudentVisible: false,
+        ifimg:true,
+        imgShow:true,
         Updateform: {
         id: "",
         name: "",
         tel: "",
         pass: "",
         repass: "",
+      },
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        }
       },
       selectForm: {
           stuname: '',
@@ -187,8 +347,37 @@
             { required: true, message: '请输入', trigger: 'blur' },
             { min: 2, max: 12, message: '不符合规范', trigger: 'blur' }
           ],
+        },
+      value1: "",
+      options: [
+        {
+          value: "选项1",
+          label: "男"
+        },
+        {
+          value: "选项2",
+          label: "女"
         }
-      
+      ],
+      value: "",
+          options2: [{
+          value2: '选项1',
+          label2: '智能制造学部'
+        }, {
+          value2: '选项2',
+          label2: '土木工程学院'
+        }, {
+          value2: '选项3',
+          label2: '经济管理学院'
+        }, {
+          value2: '选项4',
+          label2: '外国语学院'
+        },
+        {
+          value2: '选项3',
+          label2: '艺术设计学院'
+        }],
+      value2: ""
       
       };
     },
@@ -209,10 +398,25 @@
     // },
     resetForm(formName) {
         this.$refs[formName].resetFields();
-      }
+      },
+          handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+    handleRemove(file){
+        this.ifimg=false;
+        file.url="";
+       this.dialogImageUrl = file.url;
+    },
     
 
-    }
+    },
+      mounted() {
+    var d = new Date();
+    let mon=d.getMonth()+1;
+    this.time=d.getFullYear()+"-"+mon+"-"+d.getDate()+"  "+d.getHours()+":"+d.getMinutes();
+    // document.querySelector("body").setAttribute("style", "background-color: #e5ffee");
+  } 
   }
  
     
@@ -230,5 +434,33 @@
   .el-aside {
     color: #333;
   }
+  .el-row {
+  margin-bottom: 20px;
+}
+.el-col {
+  border-radius: 4px;
+}
+.bg-purple-dark {
+  background: #99a9bf;
+}
+.bg-purple {
+  background: #d3dce6;
+}
+.bg-purple-light {
+  background: #e5e9f2;
+}
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+.row-bg {
+  padding: 10px 0;
+  background-color: #f9fafc;
+}
+.submit {
+  margin-left: 80%;
+  width: 10%;
+  
+}
 </style>
 
