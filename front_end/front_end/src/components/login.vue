@@ -11,11 +11,6 @@
 <el-input  type="text"   v-model="ID" maxlength="30" show-word-limit></el-input></p>
 <p><span style="color:red" v-if="password.length==0">*</span>输入密码 :
 <el-input  type="password" v-model="password" maxlength="30" minlength="8"></el-input></p>
-<el-row>
-  <el-col :span="4"><div><el-button class="button" @click="login" type="primary" round>登录</el-button></div></el-col>
-  <el-col :span="4"><div><el-button class="button1" @click="register" type="primary" round>注册</el-button></div></el-col>
-</el-row>
-
   <div><el-button class="button" @click="login" type="primary" round>登录</el-button></div>
   
 </div>
