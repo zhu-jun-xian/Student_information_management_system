@@ -1,6 +1,9 @@
 <template>
 <div>
-<h1>{{msg}}</h1>
+<el-row>
+<el-col :span="22"><h1>{{msg}}</h1></el-col>
+<el-col :span="2"><div><el-button plain @click="returnTologin" style="margin-top:40px" type="info" >返回登录</el-button></div></el-col>
+</el-row>
 <hr>
 <div class="inputStyle" id="register"> 
 <p class="p1"><span style="color:red" v-if="ID.length==0">*</span>登录ID :
@@ -33,7 +36,9 @@ export default {
     };
   },
 methods: {
-  
+  returnTologin(){
+  this.$router.push({ path: '/'})
+},
 },
    mounted(){
     // document.querySelector('body').setAttribute('style','background-color:rgb(102, 255, 102)')
