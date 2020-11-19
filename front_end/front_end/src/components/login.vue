@@ -50,7 +50,7 @@ register(){
       console.log(body);
      this.$router.push({ path: '/user',
                      query: 
-                            {username:"zhu"}
+                            {username:this.ID}
                         })
      break;
      case 'fault':

@@ -2,10 +2,8 @@
   <div class="hello">
     <el-container>
     <el-header style="text-align: right; font-size: 12px">
-          <el-button @click="exit">退出</el-button>
-        
-     
-      <span id="user_name" v-bind="username"></span>
+      <span id="user_name" v-bind="username" style="font-size:20px">{{username}}</span>
+       <el-button @click="exit">退出</el-button>
     </el-header>
 
     <el-container style="height:700px; border: 1px solid #eee">
