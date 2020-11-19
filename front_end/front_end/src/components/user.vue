@@ -3,10 +3,17 @@
     <el-container>
     <el-header style="text-align: right; font-size: 12px">
           <el-button @click="exit">退出</el-button>
+<<<<<<< HEAD
           <el-button @click="selectuser1">查询</el-button>
       <span id="user_name"></span>
       <span id="user_name">{{username}}</span>
  </el-header>
+=======
+        
+     
+      <span id="user_name" v-bind="username"></span>
+    </el-header>
+>>>>>>> 872f09ddae51cda333cb19334c492d9dccde20e0
 
     <el-container style="height:700px; border: 1px solid #eee">
   <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
@@ -197,7 +204,6 @@
    
    data() {
       return {
-        username:"",
         tabPosition: 'left',
         dialogVisible: false, //控制对话框的显示和隐藏
         UpdateVisible: false, //控制对话框的显示和隐藏
@@ -322,7 +328,14 @@
     
 
     },
+    created(){
+      var name = this.$route.query.username;
+      console.log(name)
+       this.username=name;
+       console.log(this.username)
+    },
         mounted() {
+       
         var d = new Date();
         let mon=d.getMonth()+1;
         this.addsystemtime=d.getFullYear()+"-"+mon+"-"+d.getDate()+"  "+d.getHours()+":"+d.getMinutes();
