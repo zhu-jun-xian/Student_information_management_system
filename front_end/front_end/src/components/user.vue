@@ -3,10 +3,9 @@
     <el-container>
     <el-header style="text-align: right; font-size: 12px">
           <el-button @click="exit">退出</el-button>
-        
-     
       <span id="user_name"></span>
-    </el-header>
+      <span id="user_name">{{username}}</span>
+ </el-header>
 
     <el-container style="height:700px; border: 1px solid #eee">
   <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
@@ -179,7 +178,7 @@
 
        </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('selectForm')">查询</el-button>
+    <el-button type="primary" @click="submitForm('addForm')">信息录入</el-button>
     <el-button @click="resetForm('addForm')">清空</el-button>
   </el-form-item>
  </el-form>
@@ -194,6 +193,7 @@
    
    data() {
       return {
+        username:"3117001236",
         tabPosition: 'left',
         dialogVisible: false, //控制对话框的显示和隐藏
         UpdateVisible: false, //控制对话框的显示和隐藏
