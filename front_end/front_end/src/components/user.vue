@@ -5,7 +5,7 @@
           <el-button @click="exit">退出</el-button>
         
      
-      <span id="user_name">{{username}}</span>
+      <span id="user_name" v-bind="username"></span>
     </el-header>
 
     <el-container style="height:700px; border: 1px solid #eee">
@@ -194,7 +194,6 @@
    
    data() {
       return {
-        username:"",
         tabPosition: 'left',
         dialogVisible: false, //控制对话框的显示和隐藏
         UpdateVisible: false, //控制对话框的显示和隐藏
@@ -301,7 +300,14 @@
     
 
     },
+    created(){
+      var name = this.$route.query.username;
+      console.log(name)
+       this.username=name;
+       console.log(this.username)
+    },
         mounted() {
+       
         var d = new Date();
         let mon=d.getMonth()+1;
         this.addsystemtime=d.getFullYear()+"-"+mon+"-"+d.getDate()+"  "+d.getHours()+":"+d.getMinutes();
