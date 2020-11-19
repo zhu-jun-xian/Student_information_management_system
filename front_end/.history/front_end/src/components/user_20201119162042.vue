@@ -5,7 +5,7 @@
           <el-button @click="exit">退出</el-button>
         
      
-      <span id="user_name"></span>
+      <span id="user_name">{{}}</span>
     </el-header>
 
     <el-container style="height:700px; border: 1px solid #eee">
@@ -125,7 +125,7 @@
     </el-dialog> 
 
 
-     <el-dialog title="学生信息录入" :visible.sync="addVisible" width="50%">
+     <el-dialog title="学生信息录入" :visible.sync="addVisible" width="70%">
       <span>
         <el-form :model="addForm" :rules="addrules" ref="addForm" label-width="100px" class="addForm">
           <el-form-item label="学生姓名" prop="addstudentname">
@@ -161,7 +161,7 @@
           </el-select>
        </el-form-item>
         <el-form-item label="添加照片" prop="adddialogImageUrl">
-      <el-upload  action="#" list-type="picture-card" :auto-upload="false"  :limit=1 >
+      <el-upload  action="#" list-type="picture-card" :auto-upload="false"  limit=1>
            <i  slot="default" class="el-icon-plus" ></i>
            <div v-if="ifimg">
           <div  slot="file" slot-scope="{ file }">
@@ -291,16 +291,15 @@
          document.querySelector("body").setAttribute("style", "background-color: #e5ffee");
   } ,//设置页面背景色
     
-    // handlePictureCardPreview(file) {
-    //   this.dialogImageUrl = file.url;
-    //   this.dialogVisible = true;
-    // },
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
     handleRemove(file){
         this.ifimg=false;
         file.url="";
        this.dialogImageUrl = file.url;
     },
-
   exit(){
       this.$router.push({ path:'/'})    
   }

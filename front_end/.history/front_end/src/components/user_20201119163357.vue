@@ -161,7 +161,7 @@
           </el-select>
        </el-form-item>
         <el-form-item label="添加照片" prop="adddialogImageUrl">
-      <el-upload  action="#" list-type="picture-card" :auto-upload="false"  :limit=1 >
+      <el-upload  action="#" list-type="picture-card" :auto-upload="false"  limit=1>
            <i  slot="default" class="el-icon-plus" ></i>
            <div v-if="ifimg">
           <div  slot="file" slot-scope="{ file }">
@@ -291,16 +291,16 @@
          document.querySelector("body").setAttribute("style", "background-color: #e5ffee");
   } ,//设置页面背景色
     
-    // handlePictureCardPreview(file) {
-    //   this.dialogImageUrl = file.url;
-    //   this.dialogVisible = true;
-    // },
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
     handleRemove(file){
         this.ifimg=false;
         file.url="";
        this.dialogImageUrl = file.url;
     },
-
+    
   exit(){
       this.$router.push({ path:'/'})    
   }

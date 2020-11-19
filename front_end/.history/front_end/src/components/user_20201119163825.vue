@@ -161,7 +161,7 @@
           </el-select>
        </el-form-item>
         <el-form-item label="添加照片" prop="adddialogImageUrl">
-      <el-upload  action="#" list-type="picture-card" :auto-upload="false"  :limit=1 >
+      <el-upload  action="#" list-type="picture-card" :auto-upload="false"  limit=1 disabled="true">
            <i  slot="default" class="el-icon-plus" ></i>
            <div v-if="ifimg">
           <div  slot="file" slot-scope="{ file }">
