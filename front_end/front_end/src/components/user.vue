@@ -5,7 +5,6 @@
           <el-button @click="exit">退出</el-button>
         
      
-      <span id="user_name" v-bind="username"></span>
     </el-header>
 
     <el-container style="height:700px; border: 1px solid #eee">
@@ -31,8 +30,8 @@
       <el-submenu index="3">
         <template slot="title"><i class="el-icon-setting"></i>设置</template>
         <el-menu-item-group>
-          <el-menu-item index="3-1">修改密码</el-menu-item>
-          <el-menu-item index="3-2">退出登陆</el-menu-item>
+          <el-menu-item index="3-1" @click.native="UpdateVisible = true">修改密码</el-menu-item>
+          <el-menu-item index="3-2" @click="exit">退出登陆</el-menu-item>
         </el-menu-item-group>  
       </el-submenu>
     </el-menu>
@@ -125,14 +124,17 @@
     </el-dialog> 
 
 
-     <el-dialog title="学生信息录入" :visible.sync="addVisible" width="70%">
+     <el-dialog title="学生信息录入" :visible.sync="addVisible" width="50%">
       <span>
         <el-form :model="addForm" :rules="addrules" ref="addForm" label-width="100px" class="addForm">
           <el-form-item label="学生姓名" prop="addstudentname">
-          <el-input v-model="addForm.addstudentname"></el-input>
+          <el-input v-model="addForm.addstudentname" style="width: 60%;"></el-input>
        </el-form-item>
         <el-form-item label="学号" prop="addstudentnumber">
-          <el-input v-model="addForm.addstudentnumber"></el-input>
+          <el-input v-model="addForm.addstudentnumber" style="width: 60%;"></el-input>
+       </el-form-item>
+        <el-form-item label="班级" prop=" addclassnumber">
+          <el-input v-model="addForm. addclassnumber" style="width:60%;"></el-input>
        </el-form-item>
        <el-form-item label="出生日期" prop="addtime">
          <el-col :span="11">
@@ -146,7 +148,7 @@
           </el-select>
        </el-form-item>
         <el-form-item label="电话" prop="addtel">
-          <el-input v-model="addForm.addtel"></el-input>
+          <el-input v-model="addForm.addtel" style="width: 60%;"></el-input>
        </el-form-item>
        <el-form-item label="系统录入时间" prop="addsystemtime">
           <el-input disabled="false" v-model="addsystemtime" placeholder="系统自动生成" style="width:50%"></el-input>
@@ -161,7 +163,7 @@
           </el-select>
        </el-form-item>
         <el-form-item label="添加照片" prop="adddialogImageUrl">
-      <el-upload  action="#" list-type="picture-card" :auto-upload="false"  limit=1>
+      <el-upload  action="#" list-type="picture-card" :auto-upload="false"  :limit=1 >
            <i  slot="default" class="el-icon-plus" ></i>
            <div v-if="ifimg">
           <div  slot="file" slot-scope="{ file }">
@@ -179,7 +181,7 @@
 
        </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('selectForm')">查询</el-button>
+    <el-button type="primary" @click="submitForm('addForm')">信息录入</el-button>
     <el-button @click="resetForm('addForm')">清空</el-button>
   </el-form-item>
  </el-form>
@@ -285,15 +287,30 @@
         this.$refs[formName].resetFields();
       },
 
+      mounted() {
+        var d = new Date();
+         let mon=d.getMonth()+1;
+          this.addsystemtime=d.getFullYear()+"-"+mon+"-"+d.getDate()+"  "+d.getHours()+":"+d.getMinutes();
+         document.querySelector("body").setAttribute("style", "background-color: #e5ffee");
+  } ,//设置页面背景色
+    
+    // handlePictureCardPreview(file) {
+    //   this.dialogImageUrl = file.url;
+    //   this.dialogVisible = true;
+    // },
+
+
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
     },
+
     handleRemove(file){
         this.ifimg=false;
         file.url="";
        this.dialogImageUrl = file.url;
     },
+
   exit(){
       this.$router.push({ path:'/'})    
   }
