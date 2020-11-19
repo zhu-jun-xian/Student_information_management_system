@@ -14,6 +14,7 @@
 </template>
 <script>
 // 登录界面
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -32,7 +33,19 @@ export default {
   //   document.querySelector('body').setAttribute('style','background-color:rgb(153, 153, 255)')
   //   },
   enter(){
-        this.$router.push({ path: '/user'})
+        axios({
+          method:"post",
+          url:"/api/login",
+          data:{
+            name:"c1",
+            password:"c3"
+          }
+        }).then(response=>{
+          alert(JSON.stringify(response.data))
+        }).catch(err=>{
+          console.log("...err...",err)
+        });
+        // this.$router.push({ path: '/user'})
 }
 }
 }
