@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from "vue-router";
 import login from '@/components/login'
 import user from '@/components/user'
+import register from '@/components/register'
 import selectuser from '@/components/User/selectuser'
 
 Vue.use(VueRouter)
@@ -11,7 +12,7 @@ const routes = [
 
     { path: '/', component: login },
     { path: '/user', component: user },
-    // { path: '/register', component: register },
+    { path: '/register', component: register },
     { path: '/user/selectuser', component: selectuser },
 
 ];

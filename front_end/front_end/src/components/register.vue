@@ -36,7 +36,7 @@ methods: {
   
 },
    mounted(){
-    document.querySelector('body').setAttribute('style','background-color:rgb(102, 255, 102)')
+    // document.querySelector('body').setAttribute('style','background-color:rgb(102, 255, 102)')
     },  //设置页面背景色
   };
 </script>
