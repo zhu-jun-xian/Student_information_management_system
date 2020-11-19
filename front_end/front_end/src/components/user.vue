@@ -194,7 +194,7 @@
    
    data() {
       return {
-        username:"3117001236",
+        username:"",
         tabPosition: 'left',
         dialogVisible: false, //控制对话框的显示和隐藏
         UpdateVisible: false, //控制对话框的显示和隐藏
@@ -286,6 +286,7 @@
         this.$refs[formName].resetFields();
       },
       mounted() {
+        username=this.$route.query.username;
         var d = new Date();
          let mon=d.getMonth()+1;
           this.addsystemtime=d.getFullYear()+"-"+mon+"-"+d.getDate()+"  "+d.getHours()+":"+d.getMinutes();
