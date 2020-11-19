@@ -149,7 +149,7 @@
           <el-input v-model="addForm.addtel"></el-input>
        </el-form-item>
        <el-form-item label="系统录入时间" prop="addsystemtime">
-          <el-input disabled="false" v-model="addsystemtime" placeholder="系统自动生成" style="width:100%"></el-input>
+          <el-input disabled="false" v-model="addsystemtime" placeholder="系统自动生成" style="width:50%"></el-input>
        </el-form-item>
        <el-form-item label="系部" prop="adddepartment">
           <el-select v-model="addForm.adddepartment" placeholder="请选择">
@@ -285,12 +285,7 @@
     resetForm(formName) {
         this.$refs[formName].resetFields();
       },
-      mounted() {
-        var d = new Date();
-         let mon=d.getMonth()+1;
-          this.addsystemtime=d.getFullYear()+"-"+mon+"-"+d.getDate()+"  "+d.getHours()+":"+d.getMinutes();
-         document.querySelector("body").setAttribute("style", "background-color: #e5ffee");
-  } ,//设置页面背景色
+
     
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
@@ -306,7 +301,13 @@
   }
     
 
-    }
+    },
+        mounted() {
+        var d = new Date();
+        let mon=d.getMonth()+1;
+        this.addsystemtime=d.getFullYear()+"-"+mon+"-"+d.getDate()+"  "+d.getHours()+":"+d.getMinutes();
+        //  document.querySelector("body").setAttribute("style", "background-color: #e5ffee");
+  } ,//设置页面背景色
   }
  
     
