@@ -2,9 +2,12 @@
   <div class="hello">
     <el-container>
     <el-header style="text-align: right; font-size: 12px">
-          <el-button @click="exit">退出</el-button>
-        
-     
+      <el-dropdown>
+        <i class="el-icon-setting" style="margin-right: 15px"></i>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>退出</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
       <span id="user_name">王小虎</span>
     </el-header>
 
@@ -172,7 +175,7 @@
            <span class="el-upload-list__item-delete" @click="handleRemove(file)">
             <i class="el-icon-delete"></i></span>
         </span>
-      </div>
+      <!-- </div> -->
       </div>
  
     </el-upload>
@@ -300,9 +303,7 @@
         file.url="";
        this.dialogImageUrl = file.url;
     },
-  exit(){
-      this.$router.push({ path:'/'})    
-  }
+  
     
 
     }

@@ -2,9 +2,12 @@
   <div class="hello">
     <el-container>
     <el-header style="text-align: right; font-size: 12px">
-          <el-button @click="exit">退出</el-button>
-        
-     
+      <el-dropdown>
+        <i class="el-icon-setting" style="margin-right: 15px"></i>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>退出</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
       <span id="user_name">王小虎</span>
     </el-header>
 
@@ -23,7 +26,7 @@
         <template slot="title"><i class="el-icon-menu"></i>信息修改</template>
         <el-menu-item-group>
           <el-menu-item index="2-1" @click.native="UpdateVisible = true">修改用户信息</el-menu-item>
-          <el-menu-item index="2-2" @click.native="addVisible = true">新增用户信息</el-menu-item>
+          <el-menu-item index="2-2" @click.native="dialogVisible = true">新增用户信息</el-menu-item>
           <el-menu-item index="2-3">删除学生信息</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
@@ -123,68 +126,6 @@
  </el-form>
       </span> 
     </el-dialog> 
-
-
-     <el-dialog title="学生信息录入" :visible.sync="addVisible" width="70%">
-      <span>
-        <el-form :model="addForm" :rules="addrules" ref="addForm" label-width="100px" class="addForm">
-          <el-form-item label="学生姓名" prop="addstudentname">
-          <el-input v-model="addForm.addstudentname"></el-input>
-       </el-form-item>
-        <el-form-item label="学号" prop="addstudentnumber">
-          <el-input v-model="addForm.addstudentnumber"></el-input>
-       </el-form-item>
-       <el-form-item label="出生日期" prop="addtime">
-         <el-col :span="11">
-            <el-date-picker type="date" placeholder="选择日期" v-model="addForm.addtime" style="width: 100%;"></el-date-picker>
-         </el-col>
-       </el-form-item>
-       <el-form-item label="性别" prop="addsex">
-          <el-select v-model="addForm.addsex" placeholder="请选择">
-            <el-option label="女" value="boy"></el-option>
-            <el-option label="男" value="girl"></el-option>
-          </el-select>
-       </el-form-item>
-        <el-form-item label="电话" prop="addtel">
-          <el-input v-model="addForm.addtel"></el-input>
-       </el-form-item>
-       <el-form-item label="系统录入时间" prop="addsystemtime">
-          <el-input disabled="false" v-model="addsystemtime" placeholder="系统自动生成" style="width:100%"></el-input>
-       </el-form-item>
-       <el-form-item label="系部" prop="adddepartment">
-          <el-select v-model="addForm.adddepartment" placeholder="请选择">
-            <el-option label="智能制造学部" value="intelligent"></el-option>
-            <el-option label="土木工程学院" value="building"></el-option>
-            <el-option label="经济管理学院" value="economics"></el-option>
-            <el-option label="外国语学院" value="foreign"></el-option>
-            <el-option label="艺术设计学院" value="arting"></el-option>
-          </el-select>
-       </el-form-item>
-        <el-form-item label="添加照片" prop="adddialogImageUrl">
-      <el-upload  action="#" list-type="picture-card" :auto-upload="false"  limit=1>
-           <i  slot="default" class="el-icon-plus" ></i>
-           <div v-if="ifimg">
-          <div  slot="file" slot-scope="{ file }">
-          <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" @load="onLoad"/>
-          <span   class="el-upload-list__item-actions">
-           <!-- <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)">
-           <i class="el-icon-zoom-in"></i></span> -->
-           <span class="el-upload-list__item-delete" @click="handleRemove(file)">
-            <i class="el-icon-delete"></i></span>
-        </span>
-      </div>
-      </div>
- 
-    </el-upload>
-
-       </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="submitForm('selectForm')">查询</el-button>
-    <el-button @click="resetForm('addForm')">清空</el-button>
-  </el-form-item>
- </el-form>
-      </span> 
-    </el-dialog>
   </div> 
 </template>
 
@@ -199,8 +140,6 @@
         UpdateVisible: false, //控制对话框的显示和隐藏
         statisticsVisible:false,
         dialog: false,
-        addVisible:false,
-         imageUrl: '',
         Updateform: {
         id: "",
         name: "",
@@ -215,24 +154,6 @@
           sex: '',
           academy:''
         },
-        statisticsForm: {
-          irule: '',
-          imassage: '',
-          
-        },
-        addForm:{
-          msg: "学生信息录入",
-          addstudentname: "",
-          addstudentnumber: "",
-          addtime:"",
-          addsex: "",
-          addtel: "",
-          addclassnumber: "",
-          addsystemtime:"",
-          adddepartment: "",
-          adddialogImageUrl: "",
-        },
-
         dialogrules: {
           stuname: [
             { required: true, message: '请输入学生姓名', trigger: 'blur' },
@@ -252,6 +173,11 @@
           academy: [
             { required: true, message: '请选择', trigger: 'change' }
           ],  
+        },
+         statisticsForm: {
+          irule: '',
+          imassage: '',
+          
         },
         statisticsrules: {
          irule: [
@@ -283,26 +209,7 @@
     // },
     resetForm(formName) {
         this.$refs[formName].resetFields();
-      },
-      mounted() {
-        var d = new Date();
-         let mon=d.getMonth()+1;
-          this.addsystemtime=d.getFullYear()+"-"+mon+"-"+d.getDate()+"  "+d.getHours()+":"+d.getMinutes();
-         document.querySelector("body").setAttribute("style", "background-color: #e5ffee");
-  } ,//设置页面背景色
-    
-    handlePictureCardPreview(file) {
-      this.dialogImageUrl = file.url;
-      this.dialogVisible = true;
-    },
-    handleRemove(file){
-        this.ifimg=false;
-        file.url="";
-       this.dialogImageUrl = file.url;
-    },
-  exit(){
-      this.$router.push({ path:'/'})    
-  }
+      }
     
 
     }
@@ -322,30 +229,6 @@
   
   .el-aside {
     color: #333;
-  }
-
-  .avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
-  }
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
-  }
-  .avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
   }
 </style>
 
