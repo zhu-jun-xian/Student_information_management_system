@@ -128,13 +128,13 @@
       <span>
         <el-form :model="addForm" :rules="addrules" ref="addForm" label-width="100px" class="addForm">
           <el-form-item label="学生姓名" prop="addstudentname">
-          <el-input v-model="addForm.addstudentname" style="width: 60%;"></el-input>
+          <el-input v-model="addForm.addstudentname" style="width: 61%;"></el-input>
        </el-form-item>
         <el-form-item label="学号" prop="addstudentnumber">
-          <el-input v-model="addForm.addstudentnumber" style="width: 60%;"></el-input>
+          <el-input v-model="addForm.addstudentnumber" style="width: 61%;"></el-input>
        </el-form-item>
         <el-form-item label="班级" prop=" addclassnumber">
-          <el-input v-model="addForm. addclassnumber" style="width:60%;"></el-input>
+          <el-input v-model="addForm. addclassnumber" style="width: 61%;"></el-input>
        </el-form-item>
        <el-form-item label="出生日期" prop="addtime">
          <el-col :span="11">
@@ -148,7 +148,7 @@
           </el-select>
        </el-form-item>
         <el-form-item label="电话" prop="addtel">
-          <el-input v-model="addForm.addtel" style="width: 60%;"></el-input>
+          <el-input v-model="addForm.addtel" ></el-input>
        </el-form-item>
        <el-form-item label="系统录入时间" prop="addsystemtime">
           <el-input disabled="false" v-model="addsystemtime" placeholder="系统自动生成" style="width:50%"></el-input>

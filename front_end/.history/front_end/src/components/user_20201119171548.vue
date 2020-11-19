@@ -281,9 +281,7 @@
 
       this.UpdateVisible = false;
     },
-    // selectuser(){
-    //   this.$router.push({ path: '/user/selectuser'})
-    // },
+   
     resetForm(formName) {
         this.$refs[formName].resetFields();
       },

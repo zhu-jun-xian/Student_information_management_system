@@ -196,7 +196,7 @@
    
    data() {
       return {
-        username:"",
+        username:"李m",
         tabPosition: 'left',
         dialogVisible: false, //控制对话框的显示和隐藏
         UpdateVisible: false, //控制对话框的显示和隐藏

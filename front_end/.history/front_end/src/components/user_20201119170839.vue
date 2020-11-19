@@ -148,7 +148,7 @@
           </el-select>
        </el-form-item>
         <el-form-item label="电话" prop="addtel">
-          <el-input v-model="addForm.addtel" style="width: 60%;"></el-input>
+          <el-input v-model="addForm.addtel" style="width: 61%;"></el-input>
        </el-form-item>
        <el-form-item label="系统录入时间" prop="addsystemtime">
           <el-input disabled="false" v-model="addsystemtime" placeholder="系统自动生成" style="width:50%"></el-input>

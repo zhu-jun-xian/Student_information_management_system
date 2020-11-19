@@ -1,42 +1,6 @@
 <template>
   <div class="hello">
-    <el-container>
-    <el-header style="text-align: right; font-size: 12px">
-          <el-button @click="exit">退出</el-button>
-      <span id="user_name"></span>
-      <span id="user_name">{{username}}</span>
- </el-header>
-
-    <el-container style="height:700px; border: 1px solid #eee">
-  <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-    <el-menu :default-openeds="['1', '3']">
-      <el-submenu index="1">
-        <template slot="title"><i class="el-icon-message"></i>信息查询</template>
-        <el-menu-item-group>
-          <el-menu-item index="1-1" @click.native="statisticsVisible = true">学生信息统计</el-menu-item>
-          <el-menu-item index="1-2" @click.native="dialogVisible = true">学生信息查询</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-
-      <el-submenu index="2">
-        <template slot="title"><i class="el-icon-menu"></i>信息修改</template>
-        <el-menu-item-group>
-          <el-menu-item index="2-1" @click.native="UpdateVisible = true">修改用户信息</el-menu-item>
-          <el-menu-item index="2-2" @click.native="addVisible = true">新增用户信息</el-menu-item>
-          <el-menu-item index="2-3">删除学生信息</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-
-      <el-submenu index="3">
-        <template slot="title"><i class="el-icon-setting"></i>设置</template>
-        <el-menu-item-group>
-          <el-menu-item index="3-1" @click.native="UpdateVisible = true">修改密码</el-menu-item>
-          <el-menu-item index="3-2" @click="exit">退出登陆</el-menu-item>
-        </el-menu-item-group>  
-      </el-submenu>
-    </el-menu>
-  </el-aside>
-  
+  </div>
 </el-container>
    </el-container>
 
@@ -281,9 +245,7 @@
 
       this.UpdateVisible = false;
     },
-    // selectuser(){
-    //   this.$router.push({ path: '/user/selectuser'})
-    // },
+   
     resetForm(formName) {
         this.$refs[formName].resetFields();
       },
