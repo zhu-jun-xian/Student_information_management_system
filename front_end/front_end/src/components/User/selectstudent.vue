@@ -43,13 +43,23 @@
         <span >{{ scope.row.stugend }}</span>
       </template>
     </el-table-column>
-
-    <el-table-column label="操作">
+    <el-table-column
+      align="right">
+      <template slot="header" slot-scope="scope">
+        <el-input
+          v-model="search"
+          size="mini"
+          placeholder="输入关键字搜索"/>
+      </template>
       <template slot-scope="scope">
-        <!-- <i class="el-icon-edit" @click="handleEdit(scope.$index, scope.row)"></i>
-        <i class="el-icon-delete" type="danger" @click="handleDelete(scope.$index, scope.row)"></i> -->
-        <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-        <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+        <el-button
+          size="mini"
+          @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+          
+        <el-button
+          size="mini"
+          type="danger"
+          @click.native.prevent="deleteRow(scope.$index, selecttableData)">Delete</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -63,7 +73,7 @@
    export default {
     data() {
       return {
-
+        search: '',
         selecttableData: [{
           id: '1',
           stunum: '3217005359',
@@ -77,106 +87,7 @@
         {
           id: '1',
           stunum: '3217005359',
-          stuname:'张小虎',
-          stubirth:'2020-09-11',
-          stusex:'男',
-          stutel:'13456782225',
-          stuclass: '170806',
-          stugend:'智能制造学部'
-        },
-        {
-          id: '1',
-          stunum: '3217005359',
-          stuname:'张小虎',
-          stubirth:'2020-09-11',
-          stusex:'男',
-          stutel:'13456782225',
-          stuclass: '170806',
-          stugend:'智能制造学部'
-        },
-        {
-          id: '1',
-          stunum: '3217005359',
-          stuname:'张小虎',
-          stubirth:'2020-09-11',
-          stusex:'男',
-          stutel:'13456782225',
-          stuclass: '170806',
-          stugend:'智能制造学部'
-        },
-        {
-          id: '1',
-          stunum: '3217005359',
-          stuname:'张小虎',
-          stubirth:'2020-09-11',
-          stusex:'男',
-          stutel:'13456782225',
-          stuclass: '170806',
-          stugend:'智能制造学部'
-        },
-        {
-          id: '1',
-          stunum: '3217005359',
-          stuname:'张小虎',
-          stubirth:'2020-09-11',
-          stusex:'男',
-          stutel:'13456782225',
-          stuclass: '170806',
-          stugend:'智能制造学部'
-        },
-        {
-          id: '1',
-          stunum: '3217005359',
-          stuname:'张小虎',
-          stubirth:'2020-09-11',
-          stusex:'男',
-          stutel:'13456782225',
-          stuclass: '170806',
-          stugend:'智能制造学部'
-        },
-        {
-          id: '1',
-          stunum: '3217005359',
-          stuname:'张小虎',
-          stubirth:'2020-09-11',
-          stusex:'男',
-          stutel:'13456782225',
-          stuclass: '170806',
-          stugend:'智能制造学部'
-        },{
-          id: '1',
-          stunum: '3217005359',
-          stuname:'张小虎',
-          stubirth:'2020-09-11',
-          stusex:'男',
-          stutel:'13456782225',
-          stuclass: '170806',
-          stugend:'智能制造学部'
-        }
-        ,{
-          id: '1',
-          stunum: '3217005359',
-          stuname:'张小虎',
-          stubirth:'2020-09-11',
-          stusex:'男',
-          stutel:'13456782225',
-          stuclass: '170806',
-          stugend:'智能制造学部'
-        }
-        ,{
-          id: '1',
-          stunum: '3217005359',
-          stuname:'张小虎',
-          stubirth:'2020-09-11',
-          stusex:'男',
-          stutel:'13456782225',
-          stuclass: '170806',
-          stugend:'智能制造学部'
-        },
-        {
-          id: '1',
-          stunum: '3217005359',
-          stuname:'张小虎',
+          stuname:'李四',
           stubirth:'2020-09-11',
           stusex:'男',
           stutel:'13456782225',
@@ -190,8 +101,11 @@
         console.log(index, row);
       },
       handleDelete(index, row) {
-        
+        row.splice(index, 1);
         console.log(index, row);
+      },
+      deleteRow(index, rows) {
+        rows.splice(index, 1);
       }
     }
   }

@@ -5,7 +5,7 @@
 
       <span id="user_name" v-bind="username" style="font-size:20px">{{username}}</span>
        <el-button @click="exit">退出</el-button>
-       <el-button @click="selectuser1">修改</el-button>
+       
  </el-header>
       
     <el-container style="height:700px; border: 1px solid #eee">
@@ -103,7 +103,7 @@
           </el-select>
        </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('selectForm')">查询</el-button>
+    <el-button type="primary" @click="selectuser1">查询</el-button>
     <el-button @click="resetForm('selectForm')">清空</el-button>
   </el-form-item>
  </el-form>
@@ -124,7 +124,7 @@
           <el-input v-model="statisticsForm.imassage"></el-input>
        </el-form-item>
   <el-form-item >
-    <el-button type="primary" @click="submitForm('statisticsForm')">查询</el-button>
+    <el-button type="primary" @click="submitForm('statisticsForm')">信息统计</el-button>
     <el-button @click="resetForm('statisticsForm')">清空</el-button>
   </el-form-item>
  </el-form>
@@ -322,6 +322,7 @@
   selectuser1(){
     this.$router.push({ path:'/selectstudent'})
     // <router-link to="/selectstudent"></router-link>
+    this.dialogVisible= false
      
   }
     
