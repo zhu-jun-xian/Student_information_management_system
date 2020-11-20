@@ -4,6 +4,7 @@
     <el-header style="text-align: right; font-size: 12px">
 
       <span id="user_name" v-bind="username" style="font-size:20px">{{username}}</span>
+      <!-- <el-button @click="selectuser1">查询</el-button> -->
        <el-button @click="exit">退出</el-button>
        
  </el-header>
@@ -39,9 +40,8 @@
   </el-aside>
 
    <el-main>
-     <!---  <router-view> 
-        <router-link to="/selectstudent"></router-link></router-link>
-        </router-view>--->
+     <!-- //盛放路由的容器 -->
+    <router-view> </router-view>
     </el-main>
   
 </el-container>
@@ -313,9 +313,9 @@
       this.$router.push({ path:'/'})    
   },
   selectuser1(){
-    this.$router.push({ path:'/selectstudent'})
+    this.$router.push({ path:'/selectstudent'});
     // <router-link to="/selectstudent"></router-link>
-    this.dialogVisible= false
+    this.dialogVisible= false;
      
   }
     

@@ -2,7 +2,7 @@
    <div class="hello">
     <el-container>
       <!-- <router-link to="/selectstudent"></router-link> -->
-   <el-table :data="selecttableData" style="width: 100%">
+   <el-table :data="selecttableData.filter(data => !search || data.stuname.toLowerCase().includes(search.toLowerCase())) " style="width: 100%">
     <el-table-column label="序号"  width="50px">
       <template slot-scope="scope">
         <span >{{ scope.row.id }}</span>
@@ -45,7 +45,7 @@
     </el-table-column>
     <el-table-column
       align="right">
-      <template slot="header">
+       <template slot="header" slot-scope="scope">
         <el-input
           v-model="search"
           size="mini"
@@ -54,7 +54,7 @@
       <template slot-scope="scope">
         <el-button
           size="mini"
-          @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+          @click.native="UpdateVisible = true">Edit</el-button>
           
         <el-button
           size="mini"
@@ -63,9 +63,35 @@
       </template>
     </el-table-column>
   </el-table>
-
-
     </el-container>
+
+    <el-dialog title="修改用户信息" :visible.sync="UpdateVisible" width="35%">
+      <span>
+        <el-form ref="Updateform" :model="Updateform" label-width="100px">
+          <el-form-item label="登陆ID" prop="id">
+            <el-input v-model="Updateform.id" plain disabled></el-input>
+          </el-form-item>
+          <el-form-item label="姓名" prop="name">
+            <el-input v-model="Updateform.name"></el-input>
+          </el-form-item>
+          
+          <el-form-item label="手机" prop="tel" >
+            <el-input v-model="Updateform.tel"></el-input>
+          </el-form-item>
+          <el-form-item label="修改密码" prop="pass">
+            <el-input v-model="Updateform.pass"></el-input>
+          </el-form-item>
+         <el-form-item label="确认密码" prop="repass">
+            <el-input v-model="Updateform.repass"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit">确认</el-button>
+            <el-button @click="resetForm('Updateform')">清空</el-button>
+          </el-form-item>
+        </el-form>
+      </span> 
+    </el-dialog> 
+
    </div>
 </template>
 
@@ -74,6 +100,14 @@
     data() {
       return {
         search: '',
+        UpdateVisible:false,
+         Updateform: {
+        id: "",
+        name: "",
+        tel: "",
+        pass: "",
+        repass: "",
+      },
         selecttableData: [{
           id: '1',
           stunum: '3217005359',
@@ -93,7 +127,9 @@
           stutel:'13456782225',
           stuclass: '170806',
           stugend:'智能制造学部'
-        },]
+        }],
+          search: '',
+
       }
     },
     methods: {
@@ -106,7 +142,17 @@
       },
       deleteRow(index, rows) {
         rows.splice(index, 1);
-      }
+      },   
+       // 将表单数据添加到表格中去
+    onSubmit() {
+      //console.log(this.table)
+      this.table.push(this.form);
+
+      this.UpdateVisible = false;
+    },
+    resetForm(formName) {
+        this.$refs[formName].resetFields();
+      },
     }
   }
 </script>
