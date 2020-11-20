@@ -39,9 +39,9 @@
   </el-aside>
 
    <el-main>
-       <router-view> 
-        <router-link to="/selectstudent"></router-link>
-        </router-view>
+     <!---  <router-view> 
+        <router-link to="/selectstudent"></router-link></router-link>
+        </router-view>--->
     </el-main>
   
 </el-container>
@@ -290,13 +290,7 @@
     resetForm(formName) {
         this.$refs[formName].resetFields();
       },
-
-      mounted() {
-        var d = new Date();
-         let mon=d.getMonth()+1;
-          this.addsystemtime=d.getFullYear()+"-"+mon+"-"+d.getDate()+"  "+d.getHours()+":"+d.getMinutes();
-         document.querySelector("body").setAttribute("style", "background-color: #e5ffee");
-  } ,//设置页面背景色
+//设置页面背景色
     
     // handlePictureCardPreview(file) {
     //   this.dialogImageUrl = file.url;
