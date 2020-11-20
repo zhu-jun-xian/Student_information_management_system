@@ -1,0 +1,79 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ibm.cn.mapper.MessagesMapper">
+	<insert id="addMessages" parameterType="com.ibm.cn.model.Messages">
+		INSERT INTO studentinformationtable(stuID,stuName,stuBirth,stuSex,stuTel,stuClass,stuDep,stuAddTimed,stuImgUrl) VALUES (#{stuID},#{stuName},#{stuBirth},#{stuSex},#{stuTel},#{stuClass},#{stuDep},#{stuAddTimed},#{stuImgUrl});
+	</insert>
+	
+	<select id="getAllMessages" resultType="com.ibm.cn.model.Messages">
+		SELECT * FROM studentinformationtable
+	</select>
+	
+	<select id="getMessagesById" parameterType="String"
+		resultType="com.ibm.cn.model.Messages">
+		SELECT * FROM studentinformationtable WHERE stuID=#{stuID}
+	</select>
+	
+	<select id="getMessagesByName" parameterType="String"
+		resultType="com.ibm.cn.model.Messages">
+		SELECT * FROM studentinformationtable WHERE stuName=#{stuName}
+	</select>
+	
+	<delete id="deleteMessagesById" parameterType="String">
+		DELETE FROM studentinformationtable WHERE stuID=#{stuID}
+	</delete>
+	
+	<delete id="deleteMessagesByName" parameterType="String">
+		DELETE FROM studentinformationtable WHERE stuName=#{stuName}
+	</delete>
+	
+	<update id="updateMessagesByName"
+		parameterType="com.ibm.cn.model.Messages">
+		UPDATE studentinformationtable SET stuID=#{stuID},stuName=#{stuName},stuBirth=#{stuBirth},stuSex=#{stuSex},stuTel=#{stuTel},stuClass=#{stuClass},stuDep=#{stuDep},stuAddTimed=#{stuAddTimed},stuImgUrl=#{stuImgUrl}
+		WHERE stuName=#{stuName}
+	</update>
+	
+	<update id="updateMessagesById"
+		parameterType="com.ibm.cn.model.Messages">
+		UPDATE studentinformationtable SET stuID=#{stuID},stuName=#{stuName},stuBirth=#{stuBirth},stuSex=#{stuSex},stuTel=#{stuTel},stuClass=#{stuClass},stuDep=#{stuDep},stuAddTimed=#{stuAddTimed},stuImgUrl=#{stuImgUrl}
+		WHERE stuID=#{stuID}
+	</update>
+	
+	
+	<select id="getByStuID" parameterType="String"
+		resultType="com.ibm.cn.model.Messages">
+		SELECT * FROM  studentinformationtable WHERE stuID=#{stuID}
+	</select>
+	
+	<select id="SelectByStuName" resultType="com.ibm.cn.model.Messages"  parameterType="String">
+		SELECT * FROM  studentinformationtable WHERE stuName=#{stuName}
+	</select>
+	
+	<select id="SelectByStuClass" resultType="com.ibm.cn.model.Messages"  parameterType="String">
+		SELECT * FROM  studentinformationtable WHERE stuClass=#{stuClass}
+	</select>
+	
+	<select id="SelectByStuDep" resultType="com.ibm.cn.model.Messages"  parameterType="String">
+		SELECT * FROM  studentinformationtable WHERE stuDep=#{stuDep}
+	</select>
+	
+	<select id="SelectByStuSex" resultType="com.ibm.cn.model.Messages"  parameterType="String">
+		SELECT * FROM  studentinformationtable WHERE stuSex=#{stuSex}
+	</select>
+	
+	<select id="CountByStuSex"  parameterType="String"
+		resultType="com.ibm.cn.model.Messages">
+		SELECT * FROM  studentinformationtable WHERE stuSex=#{stuSex}
+	</select>
+	
+	<select id="CountByStuClass"  parameterType="String"
+		resultType="com.ibm.cn.model.Messages">
+		SELECT * FROM  studentinformationtable WHERE stuClass=#{stuClass}
+	</select>
+	
+	<select id="CountByStuDep"  parameterType="String"
+		resultType="com.ibm.cn.model.Messages">
+		SELECT * FROM  studentinformationtable WHERE stuDep=#{stuDep}
+	</select>
+
+
+</mapper>
