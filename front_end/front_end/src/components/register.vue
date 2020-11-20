@@ -6,7 +6,7 @@
 </el-row>
 <hr>
 <div class="inputStyle" id="register"> 
-<p class="p1"><span style="color:red" v-if="ID.length==0">*</span>登录ID :
+<p class="p1"><span style="color:red" v-if="ID.length==0">*</span>登录学号ID :
 <el-input  type="text"   v-model="ID" maxlength="30" show-word-limit></el-input></p>
 <p class="p1"><span style="color:red" v-if="username.length==0">*</span>姓名 :
 <el-input  type="text"   v-model="username" maxlength="10" show-word-limit></el-input></p>
@@ -53,8 +53,8 @@ methods: {
           let body = response.data;
           switch (body){
                case 'success':
-                  alert("注册成功");
                          console.log(body);
+                  alert("注册成功");
                          this.$router.push({ path: '/',
                            query: 
                             {username:this.ID}

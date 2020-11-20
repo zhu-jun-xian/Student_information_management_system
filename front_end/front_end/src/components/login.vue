@@ -7,7 +7,7 @@
 </el-row>
 <hr>
 <div class="inputStylelogin" id="login"> 
-<p><span style="color:red" v-if="ID.length==0">*</span>登录ID :
+<p><span style="color:red" v-if="ID.length==0">*</span>登录学号ID :
 <el-input  type="text"   v-model="ID" maxlength="30" show-word-limit></el-input></p>
 <p><span style="color:red" v-if="password.length==0">*</span>输入密码 :
 <el-input  type="password" v-model="password" maxlength="30" minlength="8"></el-input></p>
@@ -55,7 +55,7 @@ register(){
      break;
      case 'fault':
       console.log(body);
-     alert("注册没有成功");
+     alert("没有登录成功");
      break;
      
   }
