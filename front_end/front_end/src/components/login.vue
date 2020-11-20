@@ -55,7 +55,7 @@ register(){
      break;
      case 'fault':
       console.log(body);
-     alert("密码 或 ID 错误");
+     alert("注册没有成功");
      break;
      
   }

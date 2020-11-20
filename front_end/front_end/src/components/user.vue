@@ -39,9 +39,8 @@
   </el-aside>
 
    <el-main>
-   
        <router-view> 
-        <!-- <router-link to="/selectstudent"><router-link> -->
+        <router-link to="/selectstudent"></router-link>
         </router-view>
     </el-main>
   

@@ -44,18 +44,28 @@ methods: {
           method:"post",
           url:"/api/register",
           data:{
-            id:this.ID,
-            username:this.username,
+              id:this.ID,
+            name:this.username,
             tel:this.tel,
             password:this.password
           }
         }).then(response=>{
-          console.log(JSON.stringify(response.data)=="success")
-          if(JSON.stringify(response.data)=="success"){
-                this.$router.push({ path: '/user'})
-          }else if(JSON.stringify(response.data)=="false"){
-              alert("密码或id错误")
-          }
+          let body = response.data;
+          switch (body){
+               case 'success':
+                  alert("注册成功");
+                         console.log(body);
+                         this.$router.push({ path: '/',
+                           query: 
+                            {username:this.ID}
+                        })
+                break;
+     case 'fault':
+      console.log(body);
+     alert("用户ID重复");
+     break;
+     
+  }
           
         }).catch(err=>{
           
