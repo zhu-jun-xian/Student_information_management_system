@@ -99,8 +99,18 @@
    export default {
     data() {
       return {
-        search: '',
+        
         UpdateVisible:false,
+        selecttableData: [{
+          id: '1',
+          stunum: '1111111111',
+          stuname:'1111',
+          stubirth:'11111111',
+          stusex:'11',
+          stutel:'11111111111',
+          stuclass: '111111',
+          stugend:'1111'
+        }],
          Updateform: {
         id: "",
         name: "",
@@ -108,26 +118,6 @@
         pass: "",
         repass: "",
       },
-        selecttableData: [{
-          id: '1',
-          stunum: '3217005359',
-          stuname:'张小虎',
-          stubirth:'2020-09-11',
-          stusex:'男',
-          stutel:'13456782225',
-          stuclass: '170806',
-          stugend:'智能制造学部'
-        },
-        {
-          id: '1',
-          stunum: '3217005359',
-          stuname:'李四',
-          stubirth:'2020-09-11',
-          stusex:'男',
-          stutel:'13456782225',
-          stuclass: '170806',
-          stugend:'智能制造学部'
-        }],
           search: '',
 
       }
