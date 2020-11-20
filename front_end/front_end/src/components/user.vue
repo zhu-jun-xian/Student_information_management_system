@@ -16,7 +16,8 @@
         <template slot="title"><i class="el-icon-message"></i>信息查询</template>
         <el-menu-item-group>
           <el-menu-item index="1-1" @click.native="statisticsVisible = true">学生信息统计</el-menu-item>
-          <el-menu-item index="1-2" @click.native="dialogVisible = true">学生信息查询</el-menu-item>
+          <!-- <el-menu-item index="1-2" @click.native="dialogVisible = true">学生信息查询</el-menu-item> -->
+          <el-menu-item index="1-2" @click="selectuser1">学生信息查询</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
 
@@ -42,7 +43,7 @@
    <el-main>
 
     <router-view> </router-view>
-
+<!-- 
       <el-table  border class="el-table-column" :data="stuData" style="width: 100%">
       <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuID" label="学号"  width="170%"></el-table-column>
@@ -53,7 +54,7 @@
       <el-table-column align="center" header-align="center" prop="stuClass" label="班级"  width="160%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuDep" label="系部"  width="160%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="" label="操作"  width="180%"></el-table-column>
-    </el-table>
+    </el-table> -->
 
 
     </el-main>
@@ -88,7 +89,7 @@
       </span> 
     </el-dialog> 
 
-    <el-dialog title="学生信息查询" :visible.sync="dialogVisible" width="35%">
+    <!-- <el-dialog title="学生信息查询" :visible.sync="dialogVisible" width="35%">
       <span>
         <el-form :model="selectForm" :rules="dialogrules" ref="selectForm" label-width="100px" class="selectForm">
           <el-form-item label="学生姓名" prop="stuname">
@@ -121,7 +122,7 @@
   </el-form-item>
  </el-form>
       </span> 
-    </el-dialog>  
+    </el-dialog>   -->
 
     <el-dialog title="学生信息统计" :visible.sync="statisticsVisible" width="35%">
       <span>
@@ -230,7 +231,7 @@
 
         ifimg:true,
         tabPosition: 'left',
-        dialogVisible: false, //控制对话框的显示和隐藏
+        // dialogVisible: false, //控制对话框的显示和隐藏
         UpdateVisible: false, //控制对话框的显示和隐藏
         statisticsVisible:false,
         dialog: false,
@@ -243,13 +244,13 @@
         pass: "",
         repass: "",
       },
-      selectForm: {
-          stuname: '',
-          stunum:'',
-          stuclass:'',
-          sex: '',
-          academy:''
-        },
+      // selectForm: {
+      //     stuname: '',
+      //     stunum:'',
+      //     stuclass:'',
+      //     sex: '',
+      //     academy:''
+      //   },
         statisticsForm: {
           irule: '',
           imassage: '',
@@ -340,8 +341,8 @@
   },
   selectuser1(){
     this.$router.push({ path:'/selectstudent'});
-    // <router-link to="/selectstudent"></router-link>
-    this.dialogVisible= false;
+
+    // this.dialogVisible= false;
      
   }
     
@@ -364,8 +365,8 @@
           console.log("...err...",err)
         });
     },
+
         mounted() {
-       
         var d = new Date();
         let mon=d.getMonth()+1;
         this.addsystemtime=d.getFullYear()+"-"+mon+"-"+d.getDate()+"  "+d.getHours()+":"+d.getMinutes();

@@ -1,50 +1,57 @@
 <template>
    <div class="hello">
+      <div>
+       <el-row>
+        <el-button round>学生信息查询</el-button>
+        <el-button round>班级查询</el-button>
+        <el-button round @click.native="selectgendVisible=true">院系查询</el-button> <el-divider></el-divider>
+      </el-row> 
+      </div>
     <el-container>
       <!-- <router-link to="/selectstudent"></router-link> -->
-   <el-table :data="selecttableData.filter(data => !search || data.stuname.toLowerCase().includes(search.toLowerCase())) " style="width: 100%">
-    <el-table-column label="序号"  width="50px">
-      <template slot-scope="scope">
+   <el-table :data="selecttableDatas"  :default-sort = "{prop: 'date', order: 'descending'}" style="width: 100%">
+    <el-table-column label="序号"  width="100px" sortable prop="id">
+      <template slot-scope="scope" >
         <span >{{ scope.row.id }}</span>
       </template>
     </el-table-column>
-     <el-table-column label="学号"  width="150px">
+     <el-table-column label="学号"  width="150px" prop="stunum" sortable>
       <template slot-scope="scope">
         <span >{{ scope.row.stunum }}</span>
       </template>
     </el-table-column>
-     <el-table-column label="学生姓名"  width="100px">
+     <el-table-column label="学生姓名"  width="100px" prop="stuname" >
       <template slot-scope="scope">
         <span >{{ scope.row.stuname }}</span>
       </template>
     </el-table-column>
-     <el-table-column label="出生日期"  width="150px">
+     <el-table-column label="出生日期"  width="150px" prop="stubirth" sortable>
       <template slot-scope="scope">
         <span >{{ scope.row.stubirth }}</span>
       </template>
     </el-table-column>
-     <el-table-column label="性别"  width="100px">
+     <el-table-column label="性别"  width="100px" prop="stusex" sortable>
       <template slot-scope="scope">
         <span >{{ scope.row.stusex }}</span>
       </template>
     </el-table-column>
-    <el-table-column label="手机号码"  width="150px">
+    <el-table-column label="手机号码"  width="150px" prop="stutel">
       <template slot-scope="scope">
         <span >{{ scope.row.stutel }}</span>
       </template>
     </el-table-column>
-    <el-table-column label="班级"  width="150px">
+    <el-table-column label="班级"  width="150px" prop="stuclass" sortable>
       <template slot-scope="scope">
         <span >{{ scope.row.stuclass }}</span>
       </template>
     </el-table-column>
-    <el-table-column label="系部"  width="150px">
+    <el-table-column label="系部"  width="150px" prop="stugend" sortable>
       <template slot-scope="scope">
         <span >{{ scope.row.stugend }}</span>
       </template>
     </el-table-column>
     <el-table-column
-      align="right">
+      align="right" prop="id">
        <template slot="header" slot-scope="scope">
         <el-input
           v-model="search"
@@ -92,6 +99,23 @@
       </span> 
     </el-dialog> 
 
+    <el-dialog title="选择院系" :visible.sync="selectgendVisible" width="30%">
+      <el-form :inline="true" :model="selectgendForm" class="selectgendForm_demo">
+        <el-form-item label="系部" prop="selectgendacademy">
+          <el-select v-model="selectgendForm.selectgendacademy" placeholder="请选择">
+            <el-option label="智能制造学部" value="intelligent"></el-option>
+            <el-option label="土木工程学院" value="building"></el-option>
+            <el-option label="经济管理学院" value="economics"></el-option>
+            <el-option label="外国语学院" value="foreign"></el-option>
+            <el-option label="艺术设计学院" value="arting"></el-option>
+          </el-select>
+       </el-form-item>
+       <el-form-item>
+          <el-button type="primary" @click="selectgendSubmit(this.selectgendacademy)">查询</el-button>
+      </el-form-item>
+</el-form>
+</el-dialog>
+
    </div>
 </template>
 
@@ -101,15 +125,44 @@
       return {
         
         UpdateVisible:false,
+        selectgendVisible:false,
         selecttableData: [{
           id: '1',
-          stunum: '1111111111',
-          stuname:'1111',
-          stubirth:'11111111',
-          stusex:'11',
-          stutel:'11111111111',
+          stunum: '3217005359',
+          stuname:'李四',
+          stubirth:'2019-07-19',
+          stusex:'男',
+          stutel:'1578905433',
           stuclass: '111111',
-          stugend:'1111'
+          stugend:'智能制造'
+        },
+        {
+          id: '2',
+          stunum: '3217005355',
+          stuname:'张三',
+          stubirth:'2019-07-19',
+          stusex:'男',
+          stutel:'1578905433',
+          stuclass: '111111',
+          stugend:'金光'
+        },{
+          id: '3',
+          stunum: '3217005356',
+          stuname:'王五',
+          stubirth:'2019-07-19',
+          stusex:'女',
+          stutel:'1578905433',
+          stuclass: '111111',
+          stugend:'智能制造'
+        },{
+          id: '2',
+          stunum: '3217005355',
+          stuname:'张三',
+          stubirth:'2019-07-19',
+          stusex:'男',
+          stutel:'1578905433',
+          stuclass: '111111',
+          stugend:'金光'
         }],
          Updateform: {
         id: "",
@@ -118,7 +171,10 @@
         pass: "",
         repass: "",
       },
-          search: '',
+      search: '',
+      selectgendForm:{
+        selectgendacademy:'',
+      }
 
       }
     },
@@ -143,6 +199,21 @@
     resetForm(formName) {
         this.$refs[formName].resetFields();
       },
+      selectgendSubmit(index){
+        this.selectgendVisible = false;
+      },
+    },
+    computed : { 
+     selecttableDatas(){
+        if(this.search) {
+          return this.selecttableData.filter(item =>{
+            return Object.keys(item).some(key => {    //1，2
+              return String(item[key]).toLowerCase().indexOf(this.search) > -1    //3
+            })
+          }
+          )
+        }else return this.selecttableData    //4
+     }
     }
   }
 </script>
