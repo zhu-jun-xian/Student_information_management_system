@@ -42,6 +42,18 @@
      <!---  <router-view> 
         <router-link to="/selectstudent"></router-link></router-link>
         </router-view>--->
+            <el-table  border class="el-table-column" :data="stuData" style="width: 100%">
+      <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column>
+      <el-table-column align="center" header-align="center" prop="stuID" label="学号"  width="170%"></el-table-column>
+      <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名"  width="160%"></el-table-column>
+      <el-table-column align="center" header-align="center" prop="stuBirth" label="出生年月日"  width="160%"></el-table-column>
+      <el-table-column align="center" header-align="center" prop="stuSex" label="性别"  width="110%"></el-table-column>
+      <el-table-column align="center" header-align="center" prop="stuTel" label="手机号码"  width="160%"></el-table-column>
+      <el-table-column align="center" header-align="center" prop="stuClass" label="班级"  width="160%"></el-table-column>
+      <el-table-column align="center" header-align="center" prop="stuDep" label="系部"  width="160%"></el-table-column>
+      <el-table-column align="center" header-align="center" prop="" label="操作"  width="180%"></el-table-column>
+    </el-table>
+
     </el-main>
   
 </el-container>
@@ -133,7 +145,7 @@
 
      <el-dialog title="学生信息录入" :visible.sync="addVisible" width="50%">
       <span>
-        <el-form :model="addForm" :rules="addrules" ref="addForm" label-width="100px" class="addForm">
+        <el-form :model="addForm"  ref="addForm" label-width="100px" class="addForm">
           <el-form-item label="学生姓名" prop="addstudentname">
           <el-input v-model="addForm.addstudentname" style="width: 60%;"></el-input>
        </el-form-item>
@@ -157,8 +169,8 @@
         <el-form-item label="电话" prop="addtel">
           <el-input v-model="addForm.addtel" style="width: 60%;"></el-input>
        </el-form-item>
-       <el-form-item label="系统录入时间" prop="addsystemtime">
-          <el-input disabled="false" v-model="addsystemtime" placeholder="系统自动生成" style="width:50%"></el-input>
+       <el-form-item label="系统录入时间" >
+          <el-input disabled="false"  placeholder="系统自动生成" style="width:50%"></el-input>
        </el-form-item>
        <el-form-item label="系部" prop="adddepartment">
           <el-select v-model="addForm.adddepartment" placeholder="请选择">
@@ -203,6 +215,18 @@
    
    data() {
       return {
+         stuData: [{
+            stuNum: '',
+            stuID: '',
+            stuName: '',
+            stuBirth:'',
+            stuSex:'',
+            stuTel:'',
+            stuClass:'',
+            stuDep:'',
+          }],
+
+        ifimg:true,
         tabPosition: 'left',
         dialogVisible: false, //控制对话框的显示和隐藏
         UpdateVisible: false, //控制对话框的显示和隐藏
@@ -326,6 +350,17 @@
       console.log(name)
        this.username=name;
        console.log(this.username)
+           axios({
+          method:"get",
+          url:"/api/findAll",
+        }).then(response=>{
+          let body = response.data;
+          console.log(typeof (body));
+         this.stuData=body
+        }).catch(err=>{
+          
+          console.log("...err...",err)
+        });
     },
         mounted() {
        
