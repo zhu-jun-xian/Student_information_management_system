@@ -25,8 +25,8 @@
       <el-submenu index="2">
         <template slot="title"><i class="el-icon-menu"></i>信息修改</template>
         <el-menu-item-group>
-          <el-menu-item index="2-1" @click.native="UpdateVisible = true">修改用户信息</el-menu-item>
-          <el-menu-item index="2-2" @click.native="addVisible = true">新增用户信息</el-menu-item>
+          <el-menu-item index="2-1" @click.native="UpdateVisible = true">修改学生信息</el-menu-item>
+          <el-menu-item index="2-2" @click.native="addVisible = true">新增学生信息</el-menu-item>
           <el-menu-item index="2-3">删除学生信息</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
@@ -168,33 +168,33 @@
      <el-dialog title="学生信息录入" :visible.sync="addVisible" width="50%">
       <span>
         <el-form :model="addForm"  ref="addForm" label-width="100px" class="addForm">
-          <el-form-item label="学生姓名" prop="addstudentname">
+          <el-form-item label="学生姓名">
           <el-input v-model="addForm.addstudentname" style="width: 60%;"></el-input>
        </el-form-item>
-        <el-form-item label="学号" prop="addstudentnumber">
+        <el-form-item label="学号">
           <el-input v-model="addForm.addstudentnumber" style="width: 60%;"></el-input>
        </el-form-item>
-        <el-form-item label="班级" prop=" addclassnumber">
-          <el-input v-model="addForm. addclassnumber" style="width:60%;"></el-input>
+        <el-form-item label="班级" >
+          <el-input v-model="addForm.addclassnumber" style="width:60%;"></el-input>
        </el-form-item>
-       <el-form-item label="出生日期" prop="addtime">
+       <el-form-item label="出生日期" >
          <el-col :span="11">
             <el-date-picker type="date" placeholder="选择日期" v-model="addForm.addtime" style="width: 100%;"></el-date-picker>
          </el-col>
        </el-form-item>
-       <el-form-item label="性别" prop="addsex">
+       <el-form-item label="性别" >
           <el-select v-model="addForm.addsex" placeholder="请选择">
             <el-option label="女" value="boy"></el-option>
             <el-option label="男" value="girl"></el-option>
           </el-select>
        </el-form-item>
-        <el-form-item label="电话" prop="addtel">
+        <el-form-item label="电话" >
           <el-input v-model="addForm.addtel" style="width: 60%;"></el-input>
        </el-form-item>
        <el-form-item label="系统录入时间" >
-          <el-input disabled="false"  placeholder="系统自动生成" style="width:50%"></el-input>
+          <el-input disabled="false" v-model="addsystemtime"  placeholder="系统自动生成" style="width:50%"></el-input>
        </el-form-item>
-       <el-form-item label="系部" prop="adddepartment">
+       <el-form-item label="系部">
           <el-select v-model="addForm.adddepartment" placeholder="请选择">
             <el-option label="智能制造学部" value="intelligent"></el-option>
             <el-option label="土木工程学院" value="building"></el-option>
@@ -203,7 +203,7 @@
             <el-option label="艺术设计学院" value="arting"></el-option>
           </el-select>
        </el-form-item>
-        <el-form-item label="添加照片" prop="adddialogImageUrl">
+        <el-form-item label="添加照片" >
       <el-upload  action="#" list-type="picture-card" :auto-upload="false"  :limit=1 >
            <i  slot="default" class="el-icon-plus" ></i>
            <div v-if="ifimg">
@@ -328,6 +328,36 @@
       handleClose(key, keyPath) {
         console.log(key, keyPath);
       },
+      submitForm(addForm){
+        var d = new Date();
+        let mon=d.getMonth()+1;
+        this.addsystemtime=d.getFullYear()+"-"+mon+"-"+d.getDate()+"  "+d.getHours()+":"+d.getMinutes();
+        axios({
+          method:"post",
+          url:"/api/addMessages",
+          data:{
+              stuID:this.addFrom.addstudentnumber,
+            stuName:this.addFrom.addstudentname,
+            stuBirth:this.addFrom.addtime,
+           stuSex:this.addFrom.addsex,
+           stuTel:this.addFrom.addtel,
+           stuClass:this.addFrom.addclassnumber,
+           stuDep:this.addFrom.adddepartment,
+           stuAddTimed:this.addFrom.addsystemtime,
+           stuImgUrl:this.addFrom.adddialogImageUrl
+                    }
+        }).then(response=>{
+  let body = response.data;
+          console.log(typeof (body));
+          console.log(JSON.stringify(body))
+          
+        }).catch(err=>{
+          
+          console.log("...err...",err)
+        });
+ 
+      },
+
        // 将表单数据添加到表格中去
     onSubmit() {
       //console.log(this.table)
