@@ -360,6 +360,7 @@
           let body = response.data;
           console.log(typeof (body));
          this.stuData=body
+          console.log(body)
         }).catch(err=>{
           
           console.log("...err...",err)
