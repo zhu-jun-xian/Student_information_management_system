@@ -140,7 +140,7 @@
             <el-option label="经济管理学院" value="经济管理学院"></el-option>
             <el-option label="外国语学院" value="外国语学院"></el-option>
             <el-option label="艺术设计学院" value="艺术设计学院"></el-option>
-          </el-select>
+       </el-select>
        </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="updateusermessage">确认</el-button>
