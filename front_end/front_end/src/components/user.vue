@@ -441,7 +441,7 @@ if(this.Updateform.pass===this.Updateform.repass){
     },
 
         mounted() {
-       
+       console.log("mount")
 
         var d = new Date();
         let mon=d.getMonth()+1;
