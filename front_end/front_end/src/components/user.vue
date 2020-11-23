@@ -69,11 +69,11 @@
             <el-input v-model="Updateform.id" plain disabled></el-input>
           </el-form-item>
           <el-form-item label="姓名" prop="name">
-            <el-input v-model="Updateform.name"></el-input>
+            <el-input v-model="Updateform.name" disabled></el-input>
           </el-form-item>
           
           <el-form-item label="手机" prop="tel" >
-            <el-input v-model="Updateform.tel"></el-input>
+            <el-input v-model="Updateform.tel" disabled></el-input>
           </el-form-item>
           <el-form-item label="修改密码" prop="pass">
             <el-input v-model="Updateform.pass"></el-input>
