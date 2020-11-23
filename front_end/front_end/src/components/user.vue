@@ -276,6 +276,7 @@
           currentPage:1,
         pageSize:10,
         ifimg:true,
+        stuData:[],
         tabPosition: 'left',
         // dialogVisible: false,
         passwordVisible: false,  //控制对话框的显示和隐藏
@@ -414,11 +415,11 @@ if(this.Updateform.pass===this.Updateform.repass){
         handleCurrentChange: function(val) {
             this.currentPage = val;
         },
-        handleUserList() {
-            this.$http.get('http://localhost:8080/user').then(res => {  //这是从本地请求的数据接口，
-                this.stuData = res.body
-            })
-        }
+        // handleUserList() {
+        //     this.$http.get('http://localhost:8080/user').then(res => {  //这是从本地请求的数据接口，
+        //         this.stuData = res.body
+        //     })
+        // }
     },
     created(){
        this.handleUserList();
@@ -426,11 +427,12 @@ if(this.Updateform.pass===this.Updateform.repass){
       console.log(name)
        this.username=name;
        console.log(this.username)
-           axios({
+          axios({
           method:"get",
           url:"/api/findAll",
         }).then(response=>{
           let body = response.data;
+          this.stuData = response.data;
           console.log(typeof (body));
          this.stuData=body
           console.log(JSON.stringify(body))
@@ -440,6 +442,8 @@ if(this.Updateform.pass===this.Updateform.repass){
     },
 
         mounted() {
+       
+
         var d = new Date();
         let mon=d.getMonth()+1;
         this.addsystemtime=d.getFullYear()+"-"+mon+"-"+d.getDate()+"  "+d.getHours()+":"+d.getMinutes();
