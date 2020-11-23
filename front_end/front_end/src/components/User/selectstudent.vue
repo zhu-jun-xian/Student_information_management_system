@@ -9,7 +9,8 @@
       </div>
     <el-container>
       <!-- <router-link to="/selectstudent"></router-link> -->
-   <el-table :data="selecttableDatas"  :default-sort = "{prop: 'date', order: 'descending'}" style="width: 100%">
+    <div>
+   <el-table :data="selectDatas.slice((currentPage-1)*pageSize,currentPage*pageSize)"  :default-sort = "{prop: 'date', order: 'descending'}" style="width: 100%">
     <el-table-column label="序号"  width="100px" sortable prop="id">
       <template slot-scope="scope" >
         <span >{{ scope.row.id }}</span>
@@ -52,7 +53,7 @@
     </el-table-column>
     <el-table-column
       align="right" prop="id">
-       <template slot="header" slot-scope="scope">
+       <template slot="header" >
         <el-input
           v-model="search"
           size="mini"
@@ -70,8 +71,19 @@
       </template>
     </el-table-column>
   </el-table>
+        <div class="block" style="margin-top:15px;">
+            <el-pagination align='center' 
+            @size-change="handleSizeChange" 
+            @current-change="handleCurrentChange" 
+            :current-page="currentPage" 
+            :page-sizes="[5,10,20,50]" 
+            :page-size="pageSize" 
+            layout="total, sizes, prev, pager, next, jumper" 
+            :total="selectDatas.length">
+            </el-pagination>
+        </div>
+    </div>
     </el-container>
-
     <el-dialog title="修改用户信息" :visible.sync="UpdateVisible" width="35%">
       <span>
         <el-form ref="Updateform" :model="Updateform" label-width="100px">
@@ -105,7 +117,7 @@
           <el-select v-model="selectgendForm.selectgendacademy" placeholder="请选择">
             <el-option label="智能制造学部" value="intelligent"></el-option>
             <el-option label="土木工程学院" value="building"></el-option>
-            <el-option label="经济管理学院" value="economics"></el-option>
+            <el-option label="经济管理学  院" value="economics"></el-option>
             <el-option label="外国语学院" value="foreign"></el-option>
             <el-option label="艺术设计学院" value="arting"></el-option>
           </el-select>
@@ -126,7 +138,91 @@
         
         UpdateVisible:false,
         selectgendVisible:false,
-        selecttableData: [{
+        selectDatas: [{
+          id: '1',
+          stunum: '3217005359',
+          stuname:'李四',
+          stubirth:'2019-07-19',
+          stusex:'男',
+          stutel:'1578905433',
+          stuclass: '111111',
+          stugend:'智能制造'
+        },
+        {
+          id: '2',
+          stunum: '3217005355',
+          stuname:'张三',
+          stubirth:'2019-07-19',
+          stusex:'男',
+          stutel:'1578905433',
+          stuclass: '111111',
+          stugend:'金光'
+        },{
+          id: '3',
+          stunum: '3217005356',
+          stuname:'王五',
+          stubirth:'2019-07-19',
+          stusex:'女',
+          stutel:'1578905433',
+          stuclass: '111111',
+          stugend:'智能制造'
+        },{
+          id: '1',
+          stunum: '3217005359',
+          stuname:'李四',
+          stubirth:'2019-07-19',
+          stusex:'男',
+          stutel:'1578905433',
+          stuclass: '111111',
+          stugend:'智能制造'
+        },
+        {
+          id: '2',
+          stunum: '3217005355',
+          stuname:'张三',
+          stubirth:'2019-07-19',
+          stusex:'男',
+          stutel:'1578905433',
+          stuclass: '111111',
+          stugend:'金光'
+        },{
+          id: '3',
+          stunum: '3217005356',
+          stuname:'王五',
+          stubirth:'2019-07-19',
+          stusex:'女',
+          stutel:'1578905433',
+          stuclass: '111111',
+          stugend:'智能制造'
+        },{
+          id: '1',
+          stunum: '3217005359',
+          stuname:'李四',
+          stubirth:'2019-07-19',
+          stusex:'男',
+          stutel:'1578905433',
+          stuclass: '111111',
+          stugend:'智能制造'
+        },
+        {
+          id: '2',
+          stunum: '3217005355',
+          stuname:'张三',
+          stubirth:'2019-07-19',
+          stusex:'男',
+          stutel:'1578905433',
+          stuclass: '111111',
+          stugend:'金光'
+        },{
+          id: '3',
+          stunum: '3217005356',
+          stuname:'王五',
+          stubirth:'2019-07-19',
+          stusex:'女',
+          stutel:'1578905433',
+          stuclass: '111111',
+          stugend:'智能制造'
+        },{
           id: '1',
           stunum: '3217005359',
           stuname:'李四',
@@ -164,6 +260,8 @@
           stuclass: '111111',
           stugend:'金光'
         }],
+        currentPage:1,
+        pageSize:10,
          Updateform: {
         id: "",
         name: "",
@@ -202,7 +300,19 @@
       selectgendSubmit(index){
         this.selectgendVisible = false;
       },
+        //分页
+        handleSizeChange(val) {
+         console.log(`每页 ${val} 条`);
+         this.currentPage = 1;
+         this.pageSize = val;
+        },
+        handleCurrentChange: function(val) {
+            this.currentPage = val;
+        },
+
     },
+  
+
     computed : { 
      selecttableDatas(){
         if(this.search) {
