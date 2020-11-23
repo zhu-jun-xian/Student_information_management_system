@@ -38,5 +38,10 @@
 		select * from student limit #{currIndex} , #{pageSize}
 	</select>
 
+ 	<update id="updateUser"
+  		parameterType="com.ibm.cn.model.Student">
+  		UPDATE usertable SET password=#{password}
+ 		 WHERE id=#{id}
+ 	</update>
 
 </mapper>

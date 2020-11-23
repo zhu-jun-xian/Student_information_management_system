@@ -21,6 +21,7 @@ public class MessagesController {
 	@GetMapping("/findAll")
 	public List<Messages> findAll() {
 		List<Messages> list =  messagesService.getAllMessages();
+		System.out.println("sdsdsd");
 		return list;
 	}
 	
