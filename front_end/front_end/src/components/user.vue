@@ -373,7 +373,26 @@
     },
     methods: {
       addstusubmitForm(){
-        
+         axios({
+          method:"post",
+          url:"/api/addMessages",
+          
+          data:{
+            stuID:this.addForm.addstudentnumber,
+            stuName:this.addForm.addstudentname,
+            stuBirth:this.addForm.addtime,
+            stuSex:this.addForm.addsex,
+            stuTel:this.addtel,
+            stuClass:this.addclassnumber,
+            stuDep:this.adddepartment,
+            stuAddTimed:addsystemtime,
+            stuImgUrl:this.imageUrl
+          }
+        }).then(response=>{
+ console.log("addstusubmitForm")
+        }).catch(err=>{
+          console.log("...err...",err)
+        });
       },
       rowclick(row){
         console.log(typeof(row))
