@@ -88,11 +88,11 @@
             <el-input v-model="Updateform.id" plain disabled></el-input>
           </el-form-item>
           <el-form-item label="姓名" prop="name">
-            <el-input v-model="Updateform.name"></el-input>
+            <el-input v-model="Updateform.name" disabled></el-input>
           </el-form-item>
           
           <el-form-item label="手机" prop="tel" >
-            <el-input v-model="Updateform.tel"></el-input>
+            <el-input v-model="Updateform.tel" disabled></el-input>
           </el-form-item>
           <el-form-item label="修改密码" prop="pass">
             <el-input v-model="Updateform.pass"></el-input>
@@ -333,7 +333,11 @@
     onSubmit() {
       //console.log(this.table)
       this.table.push(this.form);
+if(this.Updateform.pass===this.Updateform.repass){
 
+}else{
+  alert("两次密码不一致")
+}
       this.UpdateVisible = false;
     },
     resetForm(formName) {
