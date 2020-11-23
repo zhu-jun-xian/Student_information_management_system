@@ -48,7 +48,7 @@ register(){
   switch (body){
     case 'success':
       console.log(body);
-     this.$router.push({ path: '/inforstudent',
+     this.$router.push({ path: '/user',
                      query: 
                             {username:this.ID}
                         })

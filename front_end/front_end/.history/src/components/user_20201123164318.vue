@@ -74,8 +74,8 @@
             layout="total, sizes, prev, pager, next, jumper" 
             :total="stuData.length">
             </el-pagination>
-        </div>
-    </div> -->
+        </div> -->
+    </div>
     </el-main>
   
 </el-container>
