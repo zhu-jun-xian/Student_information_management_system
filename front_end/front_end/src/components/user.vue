@@ -45,7 +45,7 @@
 
     <router-view> </router-view>
    <div>
-    <el-table  border class="el-table-column" :data="stuData.slice((currentPage-1)*pageSize,currentPage*pageSize)" style="width: 100%" @row-click="rowclick(this.stuId)">
+    <el-table  border class="el-table-column" :data="stuData.slice((currentPage-1)*pageSize,currentPage*pageSize)" style="width: 100%" @row-click="rowclick">
       <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuID" label="学号"  width="170%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名"  width="160%"></el-table-column>
@@ -81,7 +81,7 @@
 </el-container>
    </el-container>
 
-<el-dialog title="修改登录密码" :visible.sync="passwordVisible" width="35%">
+<el-dialog title="修改登录密码" :visible.sync="passwordVisible" width="35%" @open="updatepasswordopen">
       <span>
         <el-form ref="passwordform" :model="passwordform" label-width="100px">
           <el-form-item label="登陆ID" prop="id">
@@ -101,7 +101,7 @@
             <el-input v-model="passwordform.repass"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="onSubmit">确认</el-button>
+            <el-button type="primary" @click="updatepassonSubmit">确认</el-button>
             <el-button @click="resetForm('passwordform')">清空</el-button>
           </el-form-item>
         </el-form>
@@ -372,8 +372,9 @@
       };
     },
     methods: {
-      rowclick(stuID){
-        console.log(stuID)
+      rowclick(row){
+        console.log(typeof(row))
+        console.log(row.stuID)
       },
      selectrouteruser(){
  this.$router.push({ path:'/user'}) 
@@ -381,12 +382,31 @@
       handleClose(key, keyPath) {
         console.log(key, keyPath);
       },
+      updatepasswordopen(){
+        console.log("updatepasswordopen")
+        let id = this.$route.query.username;
+        axios({
+          method:"post",
+          url:"/api/getUserById1",
+          data:{
+            id:id
+          }
+        }).then(response=>{
+          let body = response.data;
+          console.log(typeof (body));
+         this.passwordform.id=body.id,
+         this.passwordform.name=body.name,
+         this.passwordform.tel=body.tel
+          console.log(JSON.stringify(body))
+        }).catch(err=>{
+          console.log("...err...",err)
+        });
+      },
        // 将表单数据添加到表格中去
-    onSubmit() {
-      //console.log(this.table)
-      this.table.push(this.form);
-if(this.Updateform.pass===this.Updateform.repass){
-
+    updatepassonSubmit() {
+      
+if(this.passwordform.pass===this.passwordform.repass){
+        
 }else{
   alert("两次密码不一致")
 }
@@ -401,7 +421,6 @@ if(this.Updateform.pass===this.Updateform.repass){
     //   this.dialogImageUrl = file.url;
     //   this.dialogVisible = true;
     // },
-
 
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
