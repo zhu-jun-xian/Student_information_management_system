@@ -25,8 +25,8 @@
       <el-submenu index="2">
         <template slot="title"><i class="el-icon-menu"></i>信息修改</template>
         <el-menu-item-group>
-          <el-menu-item index="2-1" @click.native="UpdateVisible = true">修改用户信息</el-menu-item>
-          <el-menu-item index="2-2" @click.native="addVisible = true">新增用户信息</el-menu-item>
+          <el-menu-item index="2-1" @click.native="UpdateVisible = true">修改学生信息</el-menu-item>
+          <el-menu-item index="2-2" @click.native="addVisible = true">新增学生信息</el-menu-item>
           <el-menu-item index="2-3">删除学生信息</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
@@ -45,7 +45,7 @@
 
     <router-view> </router-view>
    <div>
-    <el-table  border class="el-table-column" :data="stuData.slice((currentPage-1)*pageSize,currentPage*pageSize)" style="width: 100%" @row-click="rowclick">
+    <el-table border class="el-table-column" :data="stuData.slice((currentPage-1)*pageSize,currentPage*pageSize)" style="width: 100%" @row-click="rowclick">
       <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuID" label="学号"  width="170%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名"  width="160%"></el-table-column>
@@ -62,7 +62,7 @@
         <el-button
           size="mini"
           type="danger"
-          @click.native.prevent="deleteRow(scope.$index, selecttableData)">Delete</el-button></el-table-column>
+          @click.native.prevent="deleteRow()">Delete</el-button></el-table-column>
     </el-table> 
     <div class="block" style="margin-top:15px;">
             <el-pagination align='center' 
@@ -108,7 +108,7 @@
       </span> 
     </el-dialog> 
 
-<el-dialog title="修改用户信息" :visible.sync="UpdateVisible" width="35%">
+<el-dialog title="修改学生信息" :visible.sync="UpdateVisible" width="35%">
       <span>
         <el-form ref="Updateform" :model="Updateform" label-width="100px">
           <el-form-item label="学号" prop="studentnumber">
@@ -275,6 +275,7 @@
    
    data() {
       return {
+        rowID:'',
          stuData: [{
             stuNum: '',
             stuID: '',
@@ -386,7 +387,7 @@
             stuClass:this.addclassnumber,
             stuDep:this.adddepartment,
             stuAddTimed:addsystemtime,
-            stuImgUrl:this.imageUrl
+            stuImgUrl:this.addForm.adddialogImageUrl
           }
         }).then(response=>{
  console.log("addstusubmitForm")
@@ -394,9 +395,41 @@
           console.log("...err...",err)
         });
       },
+      deleteRow(){
+ let stuid=this.rowID
+         console.log("deleteRow:"+stuid)
+axios({
+          method:"post",
+          url:"/api/deleteMessagesById",
+          data:{
+            stuID:stuid
+          }
+        }).then(response=>{
+          console.log(response.data)
+          if(response.data=="ok"){
+alert("删除成功")
+ axios({
+          method:"get",
+          url:"/api/findAll",
+        }).then(response=>{
+          let body = response.data;
+          
+          console.log(typeof (body));
+         this.stuData=body
+          console.log(JSON.stringify(body))
+        }).catch(err=>{
+          console.log("...err...",err)
+        });
+          }
+          
+        }).catch(err=>{
+          console.log("...err...",err)
+        });
+      },
       rowclick(row){
-        console.log(typeof(row))
-        console.log(row.stuID)
+        this.rowID=row.stuID
+        console.log("rowclick:"+row.stuID)
+        return row.stuID
       },
      selectrouteruser(){
  this.$router.push({ path:'/user'}) 
