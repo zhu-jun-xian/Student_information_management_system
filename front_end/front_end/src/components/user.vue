@@ -34,7 +34,7 @@
       <el-submenu index="3">
         <template slot="title"><i class="el-icon-setting"></i>设置</template>
         <el-menu-item-group>
-          <el-menu-item index="3-1" @click.native="UpdateVisible = true">修改密码</el-menu-item>
+          <el-menu-item index="3-1" @click.native="UpdateVisible = true" @click="updateuserpass()">修改密码</el-menu-item>
           <el-menu-item index="3-2" @click="exit">退出登陆</el-menu-item>
         </el-menu-item-group>  
       </el-submenu>
@@ -101,7 +101,7 @@
             <el-input v-model="Updateform.repass"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="onSubmit">确认</el-button>
+            <el-button type="primary" @click="revise()">确认</el-button>
             <el-button @click="resetForm('Updateform')">清空</el-button>
           </el-form-item>
         </el-form>
@@ -222,7 +222,7 @@
 
        </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('addForm')">信息录入</el-button>
+    <el-button type="primary" @click="addForm()">信息录入</el-button>
     <el-button @click="resetForm('addForm')">清空</el-button>
   </el-form-item>
  </el-form>
@@ -328,7 +328,7 @@
       handleClose(key, keyPath) {
         console.log(key, keyPath);
       },
-      submitForm(addForm){
+      addForm(){
         var d = new Date();
         let mon=d.getMonth()+1;
         this.addsystemtime=d.getFullYear()+"-"+mon+"-"+d.getDate()+"  "+d.getHours()+":"+d.getMinutes();
@@ -336,7 +336,7 @@
           method:"post",
           url:"/api/addMessages",
           data:{
-              stuID:this.addFrom.addstudentnumber,
+            stuID:this.addFrom.addstudentnumber,
             stuName:this.addFrom.addstudentname,
             stuBirth:this.addFrom.addtime,
            stuSex:this.addFrom.addsex,
@@ -359,9 +359,8 @@
       },
 
        // 将表单数据添加到表格中去
-    onSubmit() {
-      //console.log(this.table)
-      this.table.push(this.form);
+    revise() {
+    
 if(this.Updateform.pass===this.Updateform.repass){
 
 }else{
@@ -400,6 +399,30 @@ if(this.Updateform.pass===this.Updateform.repass){
     // this.dialogVisible= false;
      
   },
+  UpdateVisibleupdateuserpass(){
+    var name = this.$route.query.username;
+      console.log(name)
+        var d = new Date();
+        let mon=d.getMonth()+1;
+        this.addsystemtime=d.getFullYear()+"-"+mon+"-"+d.getDate()+"  "+d.getHours()+":"+d.getMinutes();
+        axios({
+          method:"get",
+          url:"/api/getUserById",
+          data:{
+            id:name
+          }
+        }).then(response=>{
+          let body = response.data;
+          console.log(typeof (body));
+        this.Updateform.id=body.id,
+        this.Updateform.name=body.name,
+        this.Updateform.tel=body.tel
+          console.log(JSON.stringify(body))
+        }).catch(err=>{
+          
+          console.log("...err...",err)
+        });
+  },
             //分页
         handleSizeChange(val) {
          console.log(`每页 ${val} 条`);
@@ -428,12 +451,11 @@ if(this.Updateform.pass===this.Updateform.repass){
           
           console.log("...err...",err)
         });
+           
     },
 
         mounted() {
-        var d = new Date();
-        let mon=d.getMonth()+1;
-        this.addsystemtime=d.getFullYear()+"-"+mon+"-"+d.getDate()+"  "+d.getHours()+":"+d.getMinutes();
+          
         //  document.querySelector("body").setAttribute("style", "background-color: #e5ffee");
   } ,//设置页面背景色
   }
