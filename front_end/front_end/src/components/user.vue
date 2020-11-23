@@ -260,7 +260,7 @@
 
        </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('addForm')">信息录入</el-button>
+    <el-button type="primary" @click="addstusubmitForm">信息录入</el-button>
     <el-button @click="resetForm('addForm')">清空</el-button>
   </el-form-item>
  </el-form>
@@ -372,6 +372,9 @@
       };
     },
     methods: {
+      addstusubmitForm(){
+        
+      },
       rowclick(row){
         console.log(typeof(row))
         console.log(row.stuID)
@@ -406,7 +409,19 @@
     updatepassonSubmit() {
       
 if(this.passwordform.pass===this.passwordform.repass){
-        
+        axios({
+          method:"post",
+          url:"/api/updateUserPassword",
+          data:{
+            id:this.passwordform.id,
+            password:this.passwordform.pass
+          }
+        }).then(response=>{
+          alert("密码修改成功，请重新登录")
+          this.$router.push({ path:'/'})
+        }).catch(err=>{
+          console.log("...err...",err)
+        });
 }else{
   alert("两次密码不一致")
 }
