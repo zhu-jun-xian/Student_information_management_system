@@ -422,7 +422,6 @@ if(this.Updateform.pass===this.Updateform.repass){
         // }
     },
     created(){
-       this.handleUserList();
       var name = this.$route.query.username;
       console.log(name)
        this.username=name;
@@ -432,7 +431,7 @@ if(this.Updateform.pass===this.Updateform.repass){
           url:"/api/findAll",
         }).then(response=>{
           let body = response.data;
-          this.stuData = response.data;
+          
           console.log(typeof (body));
          this.stuData=body
           console.log(JSON.stringify(body))
