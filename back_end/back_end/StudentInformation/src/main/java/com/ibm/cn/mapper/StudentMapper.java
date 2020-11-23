@@ -26,4 +26,6 @@ public interface StudentMapper {
 	public String count(@RequestBody String stuClass );
 	
 	public String countstudent(String stuClass);
+	
+	 public int updateUser(Student student);
 }
