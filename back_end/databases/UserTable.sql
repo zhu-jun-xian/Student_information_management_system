@@ -5,7 +5,7 @@ drop table register;
 CREATE TABLE UserTable(
 `ID` varchar(100) NOT NULL UNIQUE,
 `Name` varchar(20),
-`Tel` int(20),
+`Tel` varchar(20),
 `Password` varchar(20),
 PRIMARY KEY (`ID`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -4,44 +4,52 @@ public class Student {
  private String id;
  private String name;
  private String password;
+ private String oldpassword;
  private String tel;
 public String getId() {
-	return id;
+ return id;
 }
 public void setId(String id) {
-	this.id = id;
+ this.id = id;
+ 
 }
 public String getName() {
-	return name;
+ return name;
 }
 public void setName(String name) {
-	this.name = name;
+ this.name = name;
 }
 public String getPassword() {
-	return password;
+ return password;
 }
 public void setPassword(String password) {
-	this.password = password;
+ this.password = password;
 }
 public String getTel() {
-	return tel;
+ return tel;
 }
 public void setTel(String tel) {
-	this.tel = tel;
+ this.tel = tel;
 }
 public Student(String id, String name, String password, String tel) {
-	super();
-	this.id = id;
-	this.name = name;
-	this.password = password;
-	this.tel = tel;
+ super();
+ this.id = id;
+ this.name = name;
+ this.password = password;
+ this.tel = tel;
 }
 public Student() {
-	super();
+ super();
 }
 @Override
 public String toString() {
-	return "Student [id=" + id + ", name=" + name + ", password=" + password + ", tel=" + tel + "]";
+ return "Student [id=" + id + ", name=" + name + ", password=" + password + ", tel=" + tel + "]";
+}
+public String getOldpassword() {
+ return oldpassword;
+}
+public void setOldpassword(String oldpassword) {
+ this.oldpassword = oldpassword;
 }
 
 }
