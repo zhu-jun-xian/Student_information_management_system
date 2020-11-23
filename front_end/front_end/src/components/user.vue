@@ -45,7 +45,7 @@
 
     <router-view> </router-view>
    <div>
-    <el-table  border class="el-table-column" :data="stuData" style="width: 100%">
+    <el-table  border class="el-table-column" :data="stuData.slice((currentPage-1)*pageSize,currentPage*pageSize)" style="width: 100%">
       <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuID" label="学号"  width="170%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名"  width="160%"></el-table-column>
@@ -174,8 +174,8 @@
         <el-form-item label="学号" prop="addstudentnumber">
           <el-input v-model="addForm.addstudentnumber" style="width: 60%;"></el-input>
        </el-form-item>
-        <el-form-item label="班级" prop=" addclassnumber">
-          <el-input v-model="addForm. addclassnumber" style="width:60%;"></el-input>
+        <el-form-item label="班级" prop="addclassnumber">
+          <el-input v-model="addForm.addclassnumber" style="width:60%;"></el-input>
        </el-form-item>
        <el-form-item label="出生日期" prop="addtime">
          <el-col :span="11">
@@ -247,7 +247,8 @@
             stuClass:'',
             stuDep:'',
           }],
-
+          currentPage:1,
+        pageSize:10,
         ifimg:true,
         tabPosition: 'left',
         // dialogVisible: false, //控制对话框的显示和隐藏
@@ -375,9 +376,14 @@
         handleCurrentChange: function(val) {
             this.currentPage = val;
         },
-
+        handleUserList() {
+            this.$http.get('http://localhost:8080/user').then(res => {  //这是从本地请求的数据接口，
+                this.stuData = res.body
+            })
+        }
     },
     created(){
+       this.handleUserList();
       var name = this.$route.query.username;
       console.log(name)
        this.username=name;
@@ -391,7 +397,6 @@
          this.stuData=body
           console.log(JSON.stringify(body))
         }).catch(err=>{
-          
           console.log("...err...",err)
         });
     },

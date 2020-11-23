@@ -179,7 +179,15 @@
       selectgendSubmit(index){
         this.selectgendVisible = false;
       },
-
+        //分页
+        handleSizeChange(val) {
+         console.log(`每页 ${val} 条`);
+         this.currentPage = 1;
+         this.pageSize = val;
+        },
+        handleCurrentChange: function(val) {
+            this.currentPage = val;
+        },
 
     },
   
