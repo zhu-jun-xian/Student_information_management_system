@@ -332,7 +332,11 @@
     onSubmit() {
       //console.log(this.table)
       this.table.push(this.form);
+if(this.Updateform.pass===this.Updateform.repass){
 
+}else{
+  alert("两次密码不一致")
+}
       this.UpdateVisible = false;
     },
     resetForm(formName) {
