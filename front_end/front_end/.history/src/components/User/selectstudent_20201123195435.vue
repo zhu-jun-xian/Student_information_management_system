@@ -2,7 +2,7 @@
   <div class="hello">
     <div>
      
-        <el-button round  @click.native="selectstuVisible=true" >学生信息查询</el-button>
+        <el-button round  @click="selectstuVisible=true" >学生信息查询</el-button>
         <el-button round  @click.native="selectclassVisible=true">班级查询</el-button>
         <el-button round  @click.native="selectgendVisible=true">院系查询</el-button>
         
@@ -100,36 +100,27 @@
           </el-select>
        </el-form-item>
        <el-form-item>
-          <el-button type="primary" @click="selectgendSubmit">查询</el-button>
+          <el-button type="primary" @click="selectgendSubmit(this.selectgendacademy)">查询</el-button>
       </el-form-item>
       </el-form>
   </el-dialog>
 
-  <el-dialog title="选择班级" :visible.sync="selectclassVisible" width="30%">
-      <el-form :inline="true" :model="selectclassForm" class="selectclassForm_demo">
-        <el-form-item label="班级" >
-            <el-input v-model="slectclassForm.selectclass"></el-input>
-           </el-form-item>
+  <el-dialog title="选择院系" :visible.sync="selectclassVisible" width="30%">
+      <el-form :inline="true" :model="selectclassForm" class="selectgendForm_demo">
+        <el-form-item label="系部：" prop="selectclass">
+          <el-select v-model="selectclassForm.selectgendacademy" placeholder="请选择">
+            <el-option label="智能制造学部" value="intelligent"></el-option>
+            <el-option label="土木工程学院" value="building"></el-option>
+            <el-option label="经济管理学院" value="economics"></el-option>
+            <el-option label="外国语学院" value="foreign"></el-option>
+            <el-option label="艺术设计学院" value="arting"></el-option>
+          </el-select>
+       </el-form-item>
        <el-form-item>
-          <el-button type="primary" @click="selectclassSubmit(this.selectclass)">查询</el-button>
+          <el-button type="primary" @click="selectgendSubmit(this.selectgendacademy)">查询</el-button>
       </el-form-item>
       </el-form>
   </el-dialog>
-
-  <el-dialog title="学生信息查询" :visible.sync="selectstuVisible" width="30%">
-      <el-form :inline="true" :model="selectstuForm" class="selectstuForm_demo">
-        <el-form-item label="学号" >
-            <el-input v-model="selectstuForm.selectstunum"></el-input>
-           </el-form-item>
-           <el-form-item label="姓名" >
-            <el-input v-model="selectstuForm.selectstuname"></el-input>
-           </el-form-item>
-           <el-form-item>
-          <el-button type="primary" @click="selectstuSubmit()">查询</el-button>
-      </el-form-item>
-      </el-form>
-  </el-dialog>
-    
     
     
   </div> 
@@ -161,8 +152,6 @@
         // dialogVisible: false,
         UpdateVisible: false, //控制对话框的显示和隐藏
         selectgendVisible:false,
-        selectclassVisible:false,
-        selectstuVisible:false,
         dialog: false,
          imageUrl: '',
       Updateform: {
@@ -177,13 +166,6 @@
       selectgendForm:{
         selectgendacademy:"",
       },
-      slectclassForm:{
-        selectclass:"",
-      },
-      selectstuForm:{
-        selectstunum:"",
-        selectstuname:"",
-      },
       
       
       };
@@ -191,10 +173,6 @@
 
 
     methods: {
-        selectgendSubmit(){
-
-        },
-
       updateusermessage(){
          let stuid=this.rowID
          console.log("updateusermessage:"+stuid)

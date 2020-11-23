@@ -2,7 +2,7 @@
   <div class="hello">
     <div>
      
-        <el-button round  @click.native="selectstuVisible=true" >学生信息查询</el-button>
+        <el-button round  @click="selectstuVisible=true" >学生信息查询</el-button>
         <el-button round  @click.native="selectclassVisible=true">班级查询</el-button>
         <el-button round  @click.native="selectgendVisible=true">院系查询</el-button>
         
@@ -100,36 +100,21 @@
           </el-select>
        </el-form-item>
        <el-form-item>
-          <el-button type="primary" @click="selectgendSubmit">查询</el-button>
+          <el-button type="primary" @click="selectgendSubmit(this.selectgendacademy)">查询</el-button>
       </el-form-item>
       </el-form>
   </el-dialog>
 
-  <el-dialog title="选择班级" :visible.sync="selectclassVisible" width="30%">
+  <el-dialog title="选择院系" :visible.sync="selectclassVisible" width="30%">
       <el-form :inline="true" :model="selectclassForm" class="selectclassForm_demo">
         <el-form-item label="班级" >
             <el-input v-model="slectclassForm.selectclass"></el-input>
            </el-form-item>
        <el-form-item>
-          <el-button type="primary" @click="selectclassSubmit(this.selectclass)">查询</el-button>
+          <el-button type="primary" @click="selectgendSubmit(this.selectgendacademy)">查询</el-button>
       </el-form-item>
       </el-form>
   </el-dialog>
-
-  <el-dialog title="学生信息查询" :visible.sync="selectstuVisible" width="30%">
-      <el-form :inline="true" :model="selectstuForm" class="selectstuForm_demo">
-        <el-form-item label="学号" >
-            <el-input v-model="selectstuForm.selectstunum"></el-input>
-           </el-form-item>
-           <el-form-item label="姓名" >
-            <el-input v-model="selectstuForm.selectstuname"></el-input>
-           </el-form-item>
-           <el-form-item>
-          <el-button type="primary" @click="selectstuSubmit()">查询</el-button>
-      </el-form-item>
-      </el-form>
-  </el-dialog>
-    
     
     
   </div> 
@@ -161,8 +146,7 @@
         // dialogVisible: false,
         UpdateVisible: false, //控制对话框的显示和隐藏
         selectgendVisible:false,
-        selectclassVisible:false,
-        selectstuVisible:false,
+        selectclassVisible:fa;
         dialog: false,
          imageUrl: '',
       Updateform: {
@@ -177,13 +161,6 @@
       selectgendForm:{
         selectgendacademy:"",
       },
-      slectclassForm:{
-        selectclass:"",
-      },
-      selectstuForm:{
-        selectstunum:"",
-        selectstuname:"",
-      },
       
       
       };
@@ -191,10 +168,6 @@
 
 
     methods: {
-        selectgendSubmit(){
-
-        },
-
       updateusermessage(){
          let stuid=this.rowID
          console.log("updateusermessage:"+stuid)

@@ -191,9 +191,7 @@
 
 
     methods: {
-        selectgendSubmit(){
-
-        },
+selectgendSubmit
 
       updateusermessage(){
          let stuid=this.rowID

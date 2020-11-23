@@ -100,7 +100,7 @@
           </el-select>
        </el-form-item>
        <el-form-item>
-          <el-button type="primary" @click="selectgendSubmit">查询</el-button>
+          <el-button type="primary" @click="selectgendSubmit(this.selectgendacademy)">查询</el-button>
       </el-form-item>
       </el-form>
   </el-dialog>
@@ -124,9 +124,6 @@
            <el-form-item label="姓名" >
             <el-input v-model="selectstuForm.selectstuname"></el-input>
            </el-form-item>
-           <el-form-item>
-          <el-button type="primary" @click="selectstuSubmit()">查询</el-button>
-      </el-form-item>
       </el-form>
   </el-dialog>
     
@@ -181,9 +178,8 @@
         selectclass:"",
       },
       selectstuForm:{
-        selectstunum:"",
-        selectstuname:"",
-      },
+        sele
+      }
       
       
       };
@@ -191,10 +187,6 @@
 
 
     methods: {
-        selectgendSubmit(){
-
-        },
-
       updateusermessage(){
          let stuid=this.rowID
          console.log("updateusermessage:"+stuid)

@@ -119,8 +119,7 @@
        <el-form-item label="性别" prop="addsex">
           <el-select v-model="addForm.addsex" placeholder="请选择">
             <el-option label="女" value="男"></el-option>
-            <el-option label="男" value="女"></el-option>
-          </el-select>
+            <el-option label="男" value="girl女
        </el-form-item>
         <el-form-item label="电话" prop="addtel">
           <el-input v-model="addForm.addtel" style="width: 60%;"></el-input>

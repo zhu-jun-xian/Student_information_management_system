@@ -1,25 +1,20 @@
 <template>
   <div class="hello">
     <div>
-     
-        <el-button round  @click.native="selectstuVisible=true" >学生信息查询</el-button>
-        <el-button round  @click.native="selectclassVisible=true">班级查询</el-button>
-        <el-button round  @click.native="selectgendVisible=true">院系查询</el-button>
-        
-      <el-divider></el-divider>
+      
     </div>
     <el-container>  
  
    <div>
-    <el-table border class="el-table-column" :data="stuData.slice((currentPage-1)*pageSize,currentPage*pageSize)" :default-sort = "{prop: 'date', order: 'descending'}" style="width: 100%" @row-click="rowclick">
-      <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%" sortable></el-table-column>
-      <el-table-column align="center" header-align="center" prop="stuID" label="学号"  width="170%" sortable></el-table-column>
+    <el-table border class="el-table-column" :data="stuData.slice((currentPage-1)*pageSize,currentPage*pageSize)" style="width: 100%" @row-click="rowclick">
+      <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column>
+      <el-table-column align="center" header-align="center" prop="stuID" label="学号"  width="170%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名"  width="160%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuBirth" label="出生年月日"  width="160%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuSex" label="性别"  width="110%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuTel" label="手机号码"  width="160%"></el-table-column>
-      <el-table-column align="center" header-align="center" prop="stuClass" label="班级"  width="160%" sortable></el-table-column>
-      <el-table-column align="center" header-align="center" prop="stuDep" label="系部"  width="160%" sortable></el-table-column>
+      <el-table-column align="center" header-align="center" prop="stuClass" label="班级"  width="160%"></el-table-column>
+      <el-table-column align="center" header-align="center" prop="stuDep" label="系部"  width="160%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="" label="操作"  width="180%">
       <el-button
           size="mini"
@@ -47,7 +42,7 @@
 
 
 <el-dialog title="修改学生信息" :visible.sync="UpdateVisible" width="35%">
-      <span>
+      
         <el-form ref="Updateform" :model="Updateform" label-width="100px">
           <el-form-item label="学号" prop="studentnumber">
             <el-input v-model="rowID" plain disabled></el-input>
@@ -87,49 +82,6 @@
         </el-form>
       </span> 
     </el-dialog> 
-
-    <el-dialog title="选择院系" :visible.sync="selectgendVisible" width="30%">
-      <el-form :inline="true" :model="selectgendForm" class="selectgendForm_demo">
-        <el-form-item label="系部：" prop="selectgendacademy">
-          <el-select v-model="selectgendForm.selectgendacademy" placeholder="请选择">
-            <el-option label="智能制造学部" value="intelligent"></el-option>
-            <el-option label="土木工程学院" value="building"></el-option>
-            <el-option label="经济管理学院" value="economics"></el-option>
-            <el-option label="外国语学院" value="foreign"></el-option>
-            <el-option label="艺术设计学院" value="arting"></el-option>
-          </el-select>
-       </el-form-item>
-       <el-form-item>
-          <el-button type="primary" @click="selectgendSubmit">查询</el-button>
-      </el-form-item>
-      </el-form>
-  </el-dialog>
-
-  <el-dialog title="选择班级" :visible.sync="selectclassVisible" width="30%">
-      <el-form :inline="true" :model="selectclassForm" class="selectclassForm_demo">
-        <el-form-item label="班级" >
-            <el-input v-model="slectclassForm.selectclass"></el-input>
-           </el-form-item>
-       <el-form-item>
-          <el-button type="primary" @click="selectclassSubmit(this.selectclass)">查询</el-button>
-      </el-form-item>
-      </el-form>
-  </el-dialog>
-
-  <el-dialog title="学生信息查询" :visible.sync="selectstuVisible" width="30%">
-      <el-form :inline="true" :model="selectstuForm" class="selectstuForm_demo">
-        <el-form-item label="学号" >
-            <el-input v-model="selectstuForm.selectstunum"></el-input>
-           </el-form-item>
-           <el-form-item label="姓名" >
-            <el-input v-model="selectstuForm.selectstuname"></el-input>
-           </el-form-item>
-           <el-form-item>
-          <el-button type="primary" @click="selectstuSubmit()">查询</el-button>
-      </el-form-item>
-      </el-form>
-  </el-dialog>
-    
     
     
   </div> 
@@ -142,7 +94,6 @@
    data() {
       return {
         rowID:'',
-        search:'',
          stuData: [{
             stuNum: '',
             stuID: '',
@@ -160,9 +111,6 @@
         tabPosition: 'left',
         // dialogVisible: false,
         UpdateVisible: false, //控制对话框的显示和隐藏
-        selectgendVisible:false,
-        selectclassVisible:false,
-        selectstuVisible:false,
         dialog: false,
          imageUrl: '',
       Updateform: {
@@ -174,27 +122,12 @@
         classnumber: "",
         department: "",
       },
-      selectgendForm:{
-        selectgendacademy:"",
-      },
-      slectclassForm:{
-        selectclass:"",
-      },
-      selectstuForm:{
-        selectstunum:"",
-        selectstuname:"",
-      },
-      
       
       };
     },
 
 
     methods: {
-        selectgendSubmit(){
-
-        },
-
       updateusermessage(){
          let stuid=this.rowID
          console.log("updateusermessage:"+stuid)
@@ -316,6 +249,7 @@ alert("删除成功")
           console.log("...err...",err)
         });
     },
+
   }
  
 </script>

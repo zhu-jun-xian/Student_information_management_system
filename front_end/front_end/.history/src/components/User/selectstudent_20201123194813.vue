@@ -2,7 +2,7 @@
   <div class="hello">
     <div>
      
-        <el-button round  @click.native="selectstuVisible=true" >学生信息查询</el-button>
+        <el-button round  @click="selectstuVisible=true" >学生信息查询</el-button>
         <el-button round  @click.native="selectclassVisible=true">班级查询</el-button>
         <el-button round  @click.native="selectgendVisible=true">院系查询</el-button>
         
@@ -42,7 +42,6 @@
             </el-pagination>
         </div>
     </div>
-  
 </el-container>
 
 
@@ -87,49 +86,50 @@
         </el-form>
       </span> 
     </el-dialog> 
-
-    <el-dialog title="选择院系" :visible.sync="selectgendVisible" width="30%">
-      <el-form :inline="true" :model="selectgendForm" class="selectgendForm_demo">
-        <el-form-item label="系部：" prop="selectgendacademy">
-          <el-select v-model="selectgendForm.selectgendacademy" placeholder="请选择">
-            <el-option label="智能制造学部" value="intelligent"></el-option>
-            <el-option label="土木工程学院" value="building"></el-option>
-            <el-option label="经济管理学院" value="economics"></el-option>
-            <el-option label="外国语学院" value="foreign"></el-option>
-            <el-option label="艺术设计学院" value="arting"></el-option>
-          </el-select>
-       </el-form-item>
-       <el-form-item>
-          <el-button type="primary" @click="selectgendSubmit">查询</el-button>
-      </el-form-item>
-      </el-form>
-  </el-dialog>
-
-  <el-dialog title="选择班级" :visible.sync="selectclassVisible" width="30%">
-      <el-form :inline="true" :model="selectclassForm" class="selectclassForm_demo">
-        <el-form-item label="班级" >
-            <el-input v-model="slectclassForm.selectclass"></el-input>
-           </el-form-item>
-       <el-form-item>
-          <el-button type="primary" @click="selectclassSubmit(this.selectclass)">查询</el-button>
-      </el-form-item>
-      </el-form>
-  </el-dialog>
-
-  <el-dialog title="学生信息查询" :visible.sync="selectstuVisible" width="30%">
-      <el-form :inline="true" :model="selectstuForm" class="selectstuForm_demo">
-        <el-form-item label="学号" >
-            <el-input v-model="selectstuForm.selectstunum"></el-input>
-           </el-form-item>
-           <el-form-item label="姓名" >
-            <el-input v-model="selectstuForm.selectstuname"></el-input>
-           </el-form-item>
-           <el-form-item>
-          <el-button type="primary" @click="selectstuSubmit()">查询</el-button>
-      </el-form-item>
-      </el-form>
-  </el-dialog>
     
+<el-dialog title="修改学生信息" :visible.sync="sele" width="35%">
+      <span>
+        <el-form ref="Updateform" :model="Updateform" label-width="100px">
+          <el-form-item label="学号" prop="studentnumber">
+            <el-input v-model="rowID" plain disabled></el-input>
+          </el-form-item>
+          <el-form-item label="学生姓名" prop="name">
+            <el-input v-model="Updateform.name"></el-input>
+          </el-form-item>
+          
+          <el-form-item label="出生年月" prop="time" >
+                       <el-input v-model="Updateform.time" placeholder="20200501"></el-input>
+          </el-form-item>
+           <el-form-item label="性别" prop="sex">
+                <el-select v-model="Updateform.sex" placeholder="请选择" style="width:100%" >
+                     <el-option label="男" value="男"></el-option>
+                      <el-option label="女" value="女"></el-option>
+                 </el-select>
+          </el-form-item>
+         <el-form-item label="手机号码" prop="tel">
+            <el-input v-model="Updateform.tel"></el-input>
+           </el-form-item>
+           <el-form-item label="班级" prop="classnumber">
+            <el-input v-model="Updateform.classnumber"></el-input>
+           </el-form-item>
+           <el-form-item label="系部" prop="department">
+           <el-select v-model="Updateform.department" placeholder="请选择" style="width:100%" >
+            <el-option label="智能制造学部" value="智能制造学部"></el-option>
+            <el-option label="土木工程学院" value="土木工程学院"></el-option>
+            <el-option label="经济管理学院" value="经济管理学院"></el-option>
+            <el-option label="外国语学院" value="外国语学院"></el-option>
+            <el-option label="艺术设计学院" value="艺术设计学院"></el-option>
+          </el-select>
+           </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="updateusermessage">确认</el-button>
+            <el-button @click="resetForm('Updateform')">清空</el-button>
+          </el-form-item>
+        </el-form>
+      </span> 
+    </el-dialog> 
+
+  
     
     
   </div> 
@@ -161,8 +161,6 @@
         // dialogVisible: false,
         UpdateVisible: false, //控制对话框的显示和隐藏
         selectgendVisible:false,
-        selectclassVisible:false,
-        selectstuVisible:false,
         dialog: false,
          imageUrl: '',
       Updateform: {
@@ -174,27 +172,12 @@
         classnumber: "",
         department: "",
       },
-      selectgendForm:{
-        selectgendacademy:"",
-      },
-      slectclassForm:{
-        selectclass:"",
-      },
-      selectstuForm:{
-        selectstunum:"",
-        selectstuname:"",
-      },
-      
       
       };
     },
 
 
     methods: {
-        selectgendSubmit(){
-
-        },
-
       updateusermessage(){
          let stuid=this.rowID
          console.log("updateusermessage:"+stuid)
