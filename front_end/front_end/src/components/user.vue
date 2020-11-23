@@ -43,7 +43,7 @@
    <el-main>
 
     <router-view> </router-view>
-<!-- 
+
       <el-table  border class="el-table-column" :data="stuData" style="width: 100%">
       <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuID" label="学号"  width="170%"></el-table-column>
@@ -54,8 +54,7 @@
       <el-table-column align="center" header-align="center" prop="stuClass" label="班级"  width="160%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuDep" label="系部"  width="160%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="" label="操作"  width="180%"></el-table-column>
-    </el-table> -->
-
+    </el-table> 
 
     </el-main>
   
@@ -360,7 +359,7 @@
           let body = response.data;
           console.log(typeof (body));
          this.stuData=body
-          console.log(body)
+          console.log(JSON.stringify(body))
         }).catch(err=>{
           
           console.log("...err...",err)

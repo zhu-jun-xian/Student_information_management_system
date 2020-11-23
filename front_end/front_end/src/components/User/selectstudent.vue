@@ -139,127 +139,15 @@
         UpdateVisible:false,
         selectgendVisible:false,
         selectDatas: [{
-          id: '1',
-          stunum: '3217005359',
-          stuname:'李四',
-          stubirth:'2019-07-19',
-          stusex:'男',
-          stutel:'1578905433',
-          stuclass: '111111',
-          stugend:'智能制造'
-        },
-        {
-          id: '2',
-          stunum: '3217005355',
-          stuname:'张三',
-          stubirth:'2019-07-19',
-          stusex:'男',
-          stutel:'1578905433',
-          stuclass: '111111',
-          stugend:'金光'
-        },{
-          id: '3',
-          stunum: '3217005356',
-          stuname:'王五',
-          stubirth:'2019-07-19',
-          stusex:'女',
-          stutel:'1578905433',
-          stuclass: '111111',
-          stugend:'智能制造'
-        },{
-          id: '1',
-          stunum: '3217005359',
-          stuname:'李四',
-          stubirth:'2019-07-19',
-          stusex:'男',
-          stutel:'1578905433',
-          stuclass: '111111',
-          stugend:'智能制造'
-        },
-        {
-          id: '2',
-          stunum: '3217005355',
-          stuname:'张三',
-          stubirth:'2019-07-19',
-          stusex:'男',
-          stutel:'1578905433',
-          stuclass: '111111',
-          stugend:'金光'
-        },{
-          id: '3',
-          stunum: '3217005356',
-          stuname:'王五',
-          stubirth:'2019-07-19',
-          stusex:'女',
-          stutel:'1578905433',
-          stuclass: '111111',
-          stugend:'智能制造'
-        },{
-          id: '1',
-          stunum: '3217005359',
-          stuname:'李四',
-          stubirth:'2019-07-19',
-          stusex:'男',
-          stutel:'1578905433',
-          stuclass: '111111',
-          stugend:'智能制造'
-        },
-        {
-          id: '2',
-          stunum: '3217005355',
-          stuname:'张三',
-          stubirth:'2019-07-19',
-          stusex:'男',
-          stutel:'1578905433',
-          stuclass: '111111',
-          stugend:'金光'
-        },{
-          id: '3',
-          stunum: '3217005356',
-          stuname:'王五',
-          stubirth:'2019-07-19',
-          stusex:'女',
-          stutel:'1578905433',
-          stuclass: '111111',
-          stugend:'智能制造'
-        },{
-          id: '1',
-          stunum: '3217005359',
-          stuname:'李四',
-          stubirth:'2019-07-19',
-          stusex:'男',
-          stutel:'1578905433',
-          stuclass: '111111',
-          stugend:'智能制造'
-        },
-        {
-          id: '2',
-          stunum: '3217005355',
-          stuname:'张三',
-          stubirth:'2019-07-19',
-          stusex:'男',
-          stutel:'1578905433',
-          stuclass: '111111',
-          stugend:'金光'
-        },{
-          id: '3',
-          stunum: '3217005356',
-          stuname:'王五',
-          stubirth:'2019-07-19',
-          stusex:'女',
-          stutel:'1578905433',
-          stuclass: '111111',
-          stugend:'智能制造'
-        },{
-          id: '2',
-          stunum: '3217005355',
-          stuname:'张三',
-          stubirth:'2019-07-19',
-          stusex:'男',
-          stutel:'1578905433',
-          stuclass: '111111',
-          stugend:'金光'
-        }],
+            stunum: '',
+            id: '',
+            stuname: '',
+            stubrith:'',
+            stusex:'',
+            stutel:'',
+            stuclass:'',
+            stugend:'',
+          }],
         currentPage:1,
         pageSize:10,
          Updateform: {
@@ -312,7 +200,24 @@
 
     },
   
-
+created(){
+      var name = this.$route.query.username;
+      console.log(name)
+       this.username=name;
+       console.log(this.username)
+           axios({
+          method:"get",
+          url:"/api/findAll",
+        }).then(response=>{
+          let body = response.data;
+          console.log(typeof (body));
+         this.selectDatas=body
+          console.log(JSON.stringify(body))
+        }).catch(err=>{
+          
+          console.log("...err...",err)
+        });
+    },
     computed : { 
      selecttableDatas(){
         if(this.search) {
@@ -326,6 +231,7 @@
      }
     }
   }
+  
 </script>
 
 
