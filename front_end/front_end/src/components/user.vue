@@ -46,23 +46,15 @@
     <router-view> </router-view>
    <div>
     <el-table  border class="el-table-column" :data="stuData.slice((currentPage-1)*pageSize,currentPage*pageSize)" style="width: 100%">
-      <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column>
-      <el-table-column align="center" header-align="center" prop="stuID" label="学号"  width="170%"></el-table-column>
-      <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名"  width="160%"></el-table-column>
-      <el-table-column align="center" header-align="center" prop="stuBirth" label="出生年月日"  width="160%"></el-table-column>
+      <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="112%"></el-table-column>
+      <el-table-column align="center" header-align="center" prop="stuID" label="学号"  width="200%"></el-table-column>
+      <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名"  width="200%"></el-table-column>
+      <el-table-column align="center" header-align="center" prop="stuBirth" label="出生年月日"  width="200%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuSex" label="性别"  width="110%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuTel" label="手机号码"  width="160%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuClass" label="班级"  width="160%"></el-table-column>
-      <el-table-column align="center" header-align="center" prop="stuDep" label="系部"  width="160%"></el-table-column>
-      <el-table-column align="center" header-align="center" prop="" label="操作"  width="180%">
-      <el-button
-          size="mini"
-          @click.native="UpdateVisible = true">Edit</el-button>
-          
-        <el-button
-          size="mini"
-          type="danger"
-          @click.native.prevent="deleteRow(scope.$index, selecttableData)">Delete</el-button></el-table-column>
+      <el-table-column align="center" header-align="center" prop="stuDep" label="系部"  width="200%"></el-table-column>
+      
     </el-table> 
     <div class="block" style="margin-top:15px;">
             <el-pagination align='center' 
@@ -111,22 +103,34 @@
 <el-dialog title="修改用户信息" :visible.sync="UpdateVisible" width="35%">
       <span>
         <el-form ref="Updateform" :model="Updateform" label-width="100px">
-          <el-form-item label="登陆ID" prop="id">
-            <el-input v-model="Updateform.id" plain disabled></el-input>
+          <el-form-item label="学号" prop="studentnumber">
+            <el-input v-model="Updateform.studentnumber" plain></el-input>
           </el-form-item>
-          <el-form-item label="姓名" prop="name">
-            <el-input v-model="Updateform.name" ></el-input>
+          <el-form-item label="学生姓名" prop="name">
+            <el-input v-model="Updateform.name"></el-input>
           </el-form-item>
           
-          <el-form-item label="手机" prop="tel" >
-            <el-input v-model="Updateform.tel" ></el-input>
+          <el-form-item label="出生年月" prop="time" >
+            <el-date-picker type="date" placeholder="选择日期" v-model="Updateform.time" style="width: 100%;"></el-date-picker>
           </el-form-item>
-          <el-form-item label="修改密码" prop="pass">
-            <el-input v-model="Updateform.pass"></el-input>
+          <el-form-item label="性别" prop="sex">
+            <el-input v-model="Updateform.sex"></el-input>
           </el-form-item>
-         <el-form-item label="确认密码" prop="repass">
-            <el-input v-model="Updateform.repass"></el-input>
+         <el-form-item label="手机号码" prop="tel">
+            <el-input v-model="Updateform.tel"></el-input>
           </el-form-item>
+           <el-form-item label="班级" prop="classnumber">
+            <el-input v-model="Updateform.classnumber"></el-input>
+          </el-form-item>
+          <el-form-item label="系部" prop="department">
+          <el-select v-model="Updateform.department" placeholder="请选择" style="width:100%" >
+            <el-option label="智能制造学部" value="intelligent"></el-option>
+            <el-option label="土木工程学院" value="building"></el-option>
+            <el-option label="经济管理学院" value="economics"></el-option>
+            <el-option label="外国语学院" value="foreign"></el-option>
+            <el-option label="艺术设计学院" value="arting"></el-option>
+          </el-select>
+       </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit">确认</el-button>
             <el-button @click="resetForm('Updateform')">清空</el-button>
@@ -218,7 +222,7 @@
           <el-input v-model="addForm.addtel" style="width: 60%;"></el-input>
        </el-form-item>
        <el-form-item label="系统录入时间" >
-          <el-input disabled="false"  placeholder="系统自动生成" style="width:50%"></el-input>
+          <el-input disabled="false" v-model="addsystemtime" placeholder="系统自动生成" style="width:50%"></el-input>
        </el-form-item>
        <el-form-item label="系部" prop="adddepartment">
           <el-select v-model="addForm.adddepartment" placeholder="请选择">
@@ -230,7 +234,7 @@
           </el-select>
        </el-form-item>
         <el-form-item label="添加照片" prop="adddialogImageUrl">
-      <el-upload  action="#" list-type="picture-card" :auto-upload="false"  :limit=1 >
+      <el-upload  action="#" v-model="adddialogImageUrl" list-type="picture-card" :auto-upload="false"  :limit=1 >
            <i  slot="default" class="el-icon-plus" ></i>
            <div v-if="ifimg">
           <div  slot="file" slot-scope="{ file }">
@@ -292,12 +296,14 @@
         pass: "",
         repass: "",
       },
-        Updateform: {
-        id: "",
+      Updateform: {
+        studentnumber: "",
         name: "",
+        time: "",
+        sex: "",
         tel: "",
-        pass: "",
-        repass: "",
+        classnumber: "",
+        department: "",
       },
       // selectForm: {
       //     stuname: '',

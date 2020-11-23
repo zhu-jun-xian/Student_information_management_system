@@ -3,7 +3,7 @@
       <div>
        <el-row>
         <el-button round>学生信息查询</el-button>
-        <el-button round>班级查询</el-button>
+        <el-button round @click.native="selectclassVisible=true">班级查询</el-button>
         <el-button round @click.native="selectgendVisible=true">院系查询</el-button> <el-divider></el-divider>
       </el-row> 
       </div>
@@ -37,7 +37,7 @@
       </template>
     </el-table-column>
     <el-table-column label="手机号码"  width="150px" prop="stutel">
-      <template slot-scope="scope">
+      <template slot-scope="scope"></template>
         <span >{{ scope.row.stutel }}</span>
       </template>
     </el-table-column>
@@ -77,21 +77,27 @@
     <el-dialog title="修改用户信息" :visible.sync="UpdateVisible" width="35%">
       <span>
         <el-form ref="Updateform" :model="Updateform" label-width="100px">
-          <el-form-item label="登陆ID" prop="id">
-            <el-input v-model="Updateform.id" plain disabled></el-input>
+          <el-form-item label="学号" prop="studentnumber">
+            <el-input v-model="Updateform.studentnumber" plain disabled></el-input>
           </el-form-item>
-          <el-form-item label="姓名" prop="name">
+          <el-form-item label="学生姓名" prop="name">
             <el-input v-model="Updateform.name"></el-input>
           </el-form-item>
           
-          <el-form-item label="手机" prop="tel" >
-            <el-input v-model="Updateform.tel"></el-input>
+          <el-form-item label="出生年月" prop="time" >
+            <el-date-picker type="date" placeholder="选择日期" v-model="Updateform.time" style="width: 100%;"></el-date-picker>
           </el-form-item>
-          <el-form-item label="修改密码" prop="pass">
-            <el-input v-model="Updateform.pass"></el-input>
+          <el-form-item label="性别" prop="sex">
+            <el-input v-model="Updateform.sex"></el-input>
           </el-form-item>
-         <el-form-item label="确认密码" prop="repass">
+         <el-form-item label="手机号码" prop="tel">
             <el-input v-model="Updateform.repass"></el-input>
+          </el-form-item>
+           <el-form-item label="班级" prop="classnumber">
+            <el-input v-model="Updateform.classnumber"></el-input>
+          </el-form-item>
+          <el-form-item label="系部" prop="department">
+            <el-input v-model="Updateform.department"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit">确认</el-button>
@@ -103,17 +109,28 @@
 
     <el-dialog title="选择院系" :visible.sync="selectgendVisible" width="30%">
       <el-form :inline="true" :model="selectgendForm" class="selectgendForm_demo">
-        <el-form-item label="系部" prop="selectgendacademy">
+        <el-form-item label="系部：" prop="selectgendacademy">
           <el-select v-model="selectgendForm.selectgendacademy" placeholder="请选择">
             <el-option label="智能制造学部" value="intelligent"></el-option>
             <el-option label="土木工程学院" value="building"></el-option>
-            <el-option label="经济管理学  院" value="economics"></el-option>
+            <el-option label="经济管理学院" value="economics"></el-option>
             <el-option label="外国语学院" value="foreign"></el-option>
             <el-option label="艺术设计学院" value="arting"></el-option>
           </el-select>
        </el-form-item>
        <el-form-item>
           <el-button type="primary" @click="selectgendSubmit(this.selectgendacademy)">查询</el-button>
+      </el-form-item>
+</el-form>
+</el-dialog>
+
+    <el-dialog title="输入班级" :visible.sync="selectclassVisible" width="30%">
+      <el-form :inline="true" :model="selectclassForm" class="selectgendForm_demo">
+        <el-form-item label="班级：" prop="selectgendacademy">
+          <el-input v-model="selectclassForm.selectclass"></el-input>
+       </el-form-item>
+       <el-form-item>
+          <el-button type="primary" @click="selectclassSubmit(this.selectclass)">查询</el-button>
       </el-form-item>
 </el-form>
 </el-dialog>
@@ -128,10 +145,10 @@
         
         UpdateVisible:false,
         selectgendVisible:false,
+        selectclassVisible:false,
         selectDatas: [{
             id: '',
             stunum: '',
-            
             stuname: '',
             stubrith:'',
             stusex:'',
@@ -141,16 +158,31 @@
           }],
         currentPage:1,
         pageSize:10,
-         Updateform: {
+      passwordform: {
         id: "",
         name: "",
         tel: "",
         pass: "",
         repass: "",
       },
+      Updateform: {
+        studentnumber: "",
+        name: "",
+        time: "",
+        sex: "",
+        tel: "",
+        classnumber: "",
+        department: "",
+      },
       search: '',
+
       selectgendForm:{
         selectgendacademy:'',
+        
+      },
+       selectclassForm:{
+        selectclass:'',
+        
       }
 
       }
@@ -173,7 +205,7 @@
 
       this.UpdateVisible = false;
     },
-    resetForm(formName) {
+      resetForm(formName) {
         this.$refs[formName].resetFields();
       },
       selectgendSubmit(index){
