@@ -10,7 +10,7 @@
     <el-container>
       <!-- <router-link to="/selectstudent"></router-link> -->
     <div>
-   <el-table :data="selectDatas.slice((currentPage-1)*pageSize,currentPage*pageSize)"  :default-sort = "{prop: 'date', order: 'descending'}" style="width: 100%">
+   <!-- <el-table :data="selectDatas.slice((currentPage-1)*pageSize,currentPage*pageSize)"  :default-sort = "{prop: 'date', order: 'descending'}" style="width: 100%">
     <el-table-column label="序号"  width="100px" sortable prop="id">
       <template slot-scope="scope" >
         <span >{{ scope.row.id }}</span>
@@ -70,18 +70,8 @@
           @click.native.prevent="deleteRow(scope.$index, selecttableData)">Delete</el-button>
       </template>
     </el-table-column>
-  </el-table>
-        <div class="block" style="margin-top:15px;">
-            <el-pagination align='center' 
-            @size-change="handleSizeChange" 
-            @current-change="handleCurrentChange" 
-            :current-page="currentPage" 
-            :page-sizes="[5,10,20,50]" 
-            :page-size="pageSize" 
-            layout="total, sizes, prev, pager, next, jumper" 
-            :total="selectDatas.length">
-            </el-pagination>
-        </div>
+  </el-table> -->
+       
     </div>
     </el-container>
     <el-dialog title="修改用户信息" :visible.sync="UpdateVisible" width="35%">
@@ -139,8 +129,9 @@
         UpdateVisible:false,
         selectgendVisible:false,
         selectDatas: [{
-            stunum: '',
             id: '',
+            stunum: '',
+            
             stuname: '',
             stubrith:'',
             stusex:'',
@@ -188,15 +179,7 @@
       selectgendSubmit(index){
         this.selectgendVisible = false;
       },
-        //分页
-        handleSizeChange(val) {
-         console.log(`每页 ${val} 条`);
-         this.currentPage = 1;
-         this.pageSize = val;
-        },
-        handleCurrentChange: function(val) {
-            this.currentPage = val;
-        },
+
 
     },
   
