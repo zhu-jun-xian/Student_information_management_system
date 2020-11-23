@@ -11,10 +11,11 @@
       
     <el-container style="height:700px; border: 1px solid #eee">
   <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-    <el-menu :default-openeds="['1', '3']">
+    <el-menu :default-openeds="['1', '2','3']">
       <el-submenu index="1">
         <template slot="title"><i class="el-icon-message"></i>信息查询</template>
         <el-menu-item-group>
+        <el-menu-item index="1-0" @click="selectrouteruser">学生信息</el-menu-item>
           <el-menu-item index="1-1" @click.native="statisticsVisible = true">学生信息统计</el-menu-item>
           <!-- <el-menu-item index="1-2" @click.native="dialogVisible = true">学生信息查询</el-menu-item> -->
           <el-menu-item index="1-2" @click="selectuser1">学生信息查询</el-menu-item>
@@ -321,7 +322,9 @@
       };
     },
     methods: {
-     
+     selectrouteruser(){
+ this.$router.push({ path:'/user'}) 
+     },
       handleClose(key, keyPath) {
         console.log(key, keyPath);
       },
