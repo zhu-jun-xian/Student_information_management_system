@@ -266,12 +266,10 @@
      selectrouteruser(){
  this.$router.push({ path:'/inforstudent'}) 
      },
-
+     
       handleClose(key, keyPath) {
         console.log(key, keyPath);
       },
-
-      
       updatepasswordopen(){
         console.log("updatepasswordopen")
         let id = this.$route.query.username;

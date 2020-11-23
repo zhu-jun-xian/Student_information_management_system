@@ -262,16 +262,48 @@
           console.log("...err...",err)
         });
       },
-    
+      deleteRow(){
+ let stuid=this.rowID
+         console.log("deleteRow:"+stuid)
+axios({
+          method:"post",
+          url:"/api/deleteMessagesById",
+          data:{
+            stuID:stuid
+          }
+        }).then(response=>{
+          console.log(response.data)
+          if(response.data=="ok"){
+alert("删除成功")
+ axios({
+          method:"get",
+          url:"/api/findAll",
+        }).then(response=>{
+          let body = response.data;
+          
+          console.log(typeof (body));
+         this.stuData=body
+          console.log(JSON.stringify(body))
+        }).catch(err=>{
+          console.log("...err...",err)
+        });
+          }
+          
+        }).catch(err=>{
+          console.log("...err...",err)
+        });
+      },
+      rowclick(row){
+        this.rowID=row.stuID
+        console.log("rowclick:"+row.stuID)
+        return row.stuID
+      },
      selectrouteruser(){
  this.$router.push({ path:'/inforstudent'}) 
      },
-
       handleClose(key, keyPath) {
         console.log(key, keyPath);
       },
-
-      
       updatepasswordopen(){
         console.log("updatepasswordopen")
         let id = this.$route.query.username;

@@ -271,7 +271,7 @@
         console.log(key, keyPath);
       },
 
-      
+
       updatepasswordopen(){
         console.log("updatepasswordopen")
         let id = this.$route.query.username;
@@ -345,37 +345,37 @@ if(this.passwordform.pass===this.passwordform.repass){
      
   },
             //分页
-        handleSizeChange(val) {
-         console.log(`每页 ${val} 条`);
-         this.currentPage = 1;
-         this.pageSize = val;
-        },
-        handleCurrentChange: function(val) {
-            this.currentPage = val;
-        },
+        // handleSizeChange(val) {
+        //  console.log(`每页 ${val} 条`);
+        //  this.currentPage = 1;
+        //  this.pageSize = val;
+        // },
+        // handleCurrentChange: function(val) {
+        //     this.currentPage = val;
+        // },
         // handleUserList() {
         //     this.$http.get('http://localhost:8080/user').then(res => {  //这是从本地请求的数据接口，
         //         this.stuData = res.body
         //     })
         // }
-    },
-    created(){
-      var name = this.$route.query.username;
-      console.log(name)
-       this.username=name;
-       console.log(this.username)
-          axios({
-          method:"get",
-          url:"/api/findAll",
-        }).then(response=>{
-          let body = response.data;
+    // },
+    // created(){
+    //   var name = this.$route.query.username;
+    //   console.log(name)
+    //    this.username=name;
+    //    console.log(this.username)
+    //       axios({
+    //       method:"get",
+    //       url:"/api/findAll",
+    //     }).then(response=>{
+    //       let body = response.data;
           
-          console.log(typeof (body));
-         this.stuData=body
-          console.log(JSON.stringify(body))
-        }).catch(err=>{
-          console.log("...err...",err)
-        });
+    //       console.log(typeof (body));
+    //      this.stuData=body
+    //       console.log(JSON.stringify(body))
+    //     }).catch(err=>{
+    //       console.log("...err...",err)
+    //     });
     },
 
         mounted() {
@@ -428,4 +428,3 @@ if(this.passwordform.pass===this.passwordform.repass){
     display: block;
   }
 </style>
-

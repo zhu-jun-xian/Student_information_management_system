@@ -77,6 +77,49 @@
       </span> 
     </el-dialog> 
 
+<!-- <el-dialog title="修改学生信息" :visible.sync="UpdateVisible" width="35%">
+      <span>
+        <el-form ref="Updateform" :model="Updateform" label-width="100px">
+          <el-form-item label="学号" prop="studentnumber">
+            <el-input v-model="rowID" plain disabled></el-input>
+          </el-form-item>
+          <el-form-item label="学生姓名" prop="name">
+            <el-input v-model="Updateform.name"></el-input>
+          </el-form-item>
+          
+          <el-form-item label="出生年月" prop="time" >
+                       <el-input v-model="Updateform.time" placeholder="20200501"></el-input>
+          </el-form-item>
+           <el-form-item label="性别" prop="sex">
+          <el-select v-model="Updateform.sex" placeholder="请选择" style="width:100%" >
+            <el-option label="男" value="男"></el-option>
+            <el-option label="女" value="女"></el-option>
+          </el-select>
+          </el-form-item>
+         <el-form-item label="手机号码" prop="tel">
+            <el-input v-model="Updateform.tel"></el-input>
+          </el-form-item>
+           <el-form-item label="班级" prop="classnumber">
+            <el-input v-model="Updateform.classnumber"></el-input>
+          </el-form-item>
+          <el-form-item label="系部" prop="department">
+       <el-select v-model="Updateform.department" placeholder="请选择" style="width:100%" >
+            <el-option label="智能制造学部" value="智能制造学部"></el-option>
+            <el-option label="土木工程学院" value="土木工程学院"></el-option>
+            <el-option label="经济管理学院" value="经济管理学院"></el-option>
+            <el-option label="外国语学院" value="外国语学院"></el-option>
+            <el-option label="艺术设计学院" value="艺术设计学院"></el-option>
+       </el-select>
+       </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="updateusermessage">确认</el-button>
+            <el-button @click="resetForm('Updateform')">清空</el-button>
+          </el-form-item>
+        </el-form>
+      </span> 
+    </el-dialog>  -->
+  
+
     <el-dialog title="学生信息统计" :visible.sync="statisticsVisible" width="35%">
       <span>
         <el-form :model="statisticsForm" :rules="statisticsrules" ref="statisticsForm" label-width="100px" class="statisticsForm">
@@ -239,7 +282,44 @@
       };
     },
     methods: {
-     
+      updateusermessage(){
+         let stuid=this.rowID
+         console.log("updateusermessage:"+stuid)
+axios({
+          method:"post",
+          url:"/api/updateMessagesById",
+          data:{
+            stuID:stuid,
+            stuName:this.Updateform.name,
+            stuBirth:this.Updateform.time,
+            stuSex:this.Updateform.sex,
+            stuTel:this.Updateform.tel,
+            stuClass:this.Updateform.classnumber,
+            stuDep:this.Updateform.department,
+          }
+        }).then(response=>{
+          console.log(response.data)
+          this.UpdateVisible=false
+          if(response.data=="ok"){
+alert("修改成功")
+ axios({
+          method:"get",
+          url:"/api/findAll",
+        }).then(response=>{
+          let body = response.data;
+          
+          console.log(typeof (body));
+         this.stuData=body
+          console.log(JSON.stringify(body))
+        }).catch(err=>{
+          console.log("...err...",err)
+        });
+          }
+          
+        }).catch(err=>{
+          console.log("...err...",err)
+        });
+      },
       addstusubmitForm(){
          axios({
           method:"post",
@@ -262,16 +342,48 @@
           console.log("...err...",err)
         });
       },
-    
+      deleteRow(){
+ let stuid=this.rowID
+         console.log("deleteRow:"+stuid)
+axios({
+          method:"post",
+          url:"/api/deleteMessagesById",
+          data:{
+            stuID:stuid
+          }
+        }).then(response=>{
+          console.log(response.data)
+          if(response.data=="ok"){
+alert("删除成功")
+ axios({
+          method:"get",
+          url:"/api/findAll",
+        }).then(response=>{
+          let body = response.data;
+          
+          console.log(typeof (body));
+         this.stuData=body
+          console.log(JSON.stringify(body))
+        }).catch(err=>{
+          console.log("...err...",err)
+        });
+          }
+          
+        }).catch(err=>{
+          console.log("...err...",err)
+        });
+      },
+      rowclick(row){
+        this.rowID=row.stuID
+        console.log("rowclick:"+row.stuID)
+        return row.stuID
+      },
      selectrouteruser(){
  this.$router.push({ path:'/inforstudent'}) 
      },
-
       handleClose(key, keyPath) {
         console.log(key, keyPath);
       },
-
-      
       updatepasswordopen(){
         console.log("updatepasswordopen")
         let id = this.$route.query.username;
