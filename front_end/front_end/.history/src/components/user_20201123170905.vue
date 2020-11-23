@@ -442,7 +442,7 @@ alert("删除成功")
         return row.stuID
       },
      selectrouteruser(){
- this.$router.push({ path:'/inforstudent'}) 
+ this.$router.push({ path:'/user'}) 
      },
       handleClose(key, keyPath) {
         console.log(key, keyPath);

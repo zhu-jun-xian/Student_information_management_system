@@ -199,7 +199,7 @@ alert("删除成功")
         });
       },
 
-//获取一行的学号
+
       rowclick(row){
         this.rowID=row.stuID
         console.log("rowclick:"+row.stuID)
@@ -211,11 +211,26 @@ alert("删除成功")
         console.log(key, keyPath);
       },
 
-//清空表单
+
     resetForm(formName) {
         this.$refs[formName].resetFields();
       },
- 
+
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+
+    handleRemove(file){
+        this.ifimg=false;
+        file.url="";
+       this.dialogImageUrl = file.url;
+    },
+
+  exit(){
+      this.$router.push({ path:'/'})    
+  },
+
             //分页
         handleSizeChange(val) {
          console.log(`每页 ${val} 条`);
@@ -225,9 +240,12 @@ alert("删除成功")
         handleCurrentChange: function(val) {
             this.currentPage = val;
         },
-        
+        // handleUserList() {
+        //     this.$http.get('http://localhost:8080/user').then(res => {  //这是从本地请求的数据接口，
+        //         this.stuData = res.body
+        //     })
+        // }
     },
-    //获取表格数据
     created(){
       var name = this.$route.query.username;
       console.log(name)

@@ -44,7 +44,6 @@
    <el-main>
 
     <router-view> </router-view>
-  
     </el-main>
   
 </el-container>
@@ -442,7 +441,7 @@ alert("删除成功")
         return row.stuID
       },
      selectrouteruser(){
- this.$router.push({ path:'/inforstudent'}) 
+ this.$router.push({ path:'/info'}) 
      },
       handleClose(key, keyPath) {
         console.log(key, keyPath);

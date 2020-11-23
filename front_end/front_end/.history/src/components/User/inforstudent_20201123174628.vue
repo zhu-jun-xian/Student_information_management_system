@@ -216,6 +216,7 @@ alert("删除成功")
         this.$refs[formName].resetFields();
       },
  
+
             //分页
         handleSizeChange(val) {
          console.log(`每页 ${val} 条`);
@@ -225,9 +226,12 @@ alert("删除成功")
         handleCurrentChange: function(val) {
             this.currentPage = val;
         },
-        
+        // handleUserList() {
+        //     this.$http.get('http://localhost:8080/user').then(res => {  //这是从本地请求的数据接口，
+        //         this.stuData = res.body
+        //     })
+        // }
     },
-    //获取表格数据
     created(){
       var name = this.$route.query.username;
       console.log(name)

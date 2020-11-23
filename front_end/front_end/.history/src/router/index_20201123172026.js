@@ -21,8 +21,8 @@ const routes = [
         　　　　path: '/selectstudent', 
          　　　 component: selectstudent 
         　　  },{ 
-            　　　　path: '/inforstudent', 
-             　　　 component: inforstudent 
+            　　　　path: '/sectstudentle', 
+             　　　 component: selectstudent 
             　　  }
         　　]
 },

@@ -227,7 +227,7 @@ alert("删除成功")
         },
         
     },
-    //获取表格数据
+    
     created(){
       var name = this.$route.query.username;
       console.log(name)

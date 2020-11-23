@@ -22,7 +22,7 @@ const routes = [
          　　　 component: selectstudent 
         　　  },{ 
             　　　　path: '/inforstudent', 
-             　　　 component: inforstudent 
+             　　　 component: infstudent 
             　　  }
         　　]
 },
