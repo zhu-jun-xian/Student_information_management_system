@@ -34,7 +34,7 @@
       <el-submenu index="3">
         <template slot="title"><i class="el-icon-setting"></i>设置</template>
         <el-menu-item-group>
-          <el-menu-item index="3-1" @click.native="UpdateVisible = true" @click="updateuserpass()">修改密码</el-menu-item>
+          <el-menu-item index="3-1" @click.native="passwordVisible = true">修改密码</el-menu-item>
           <el-menu-item index="3-2" @click="exit">退出登陆</el-menu-item>
         </el-menu-item-group>  
       </el-submenu>
@@ -45,7 +45,7 @@
 
     <router-view> </router-view>
    <div>
-    <el-table  border class="el-table-column" :data="stuData" style="width: 100%">
+    <el-table  border class="el-table-column" :data="stuData.slice((currentPage-1)*pageSize,currentPage*pageSize)" style="width: 100%">
       <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuID" label="学号"  width="170%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名"  width="160%"></el-table-column>
@@ -81,6 +81,33 @@
 </el-container>
    </el-container>
 
+<el-dialog title="修改登录密码" :visible.sync="passwordVisible" width="35%">
+      <span>
+        <el-form ref="passwordform" :model="passwordform" label-width="100px">
+          <el-form-item label="登陆ID" prop="id">
+            <el-input v-model="passwordform.id" plain disabled></el-input>
+          </el-form-item>
+          <el-form-item label="姓名" prop="name">
+            <el-input v-model="passwordform.name" disabled></el-input>
+          </el-form-item>
+          
+          <el-form-item label="手机" prop="tel" >
+            <el-input v-model="passwordform.tel" disabled></el-input>
+          </el-form-item>
+          <el-form-item label="修改密码" prop="pass">
+            <el-input v-model="passwordform.pass"></el-input>
+          </el-form-item>
+         <el-form-item label="确认密码" prop="repass">
+            <el-input v-model="passwordform.repass"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit">确认</el-button>
+            <el-button @click="resetForm('passwordform')">清空</el-button>
+          </el-form-item>
+        </el-form>
+      </span> 
+    </el-dialog> 
+
 <el-dialog title="修改用户信息" :visible.sync="UpdateVisible" width="35%">
       <span>
         <el-form ref="Updateform" :model="Updateform" label-width="100px">
@@ -88,11 +115,11 @@
             <el-input v-model="Updateform.id" plain disabled></el-input>
           </el-form-item>
           <el-form-item label="姓名" prop="name">
-            <el-input v-model="Updateform.name" disabled></el-input>
+            <el-input v-model="Updateform.name" ></el-input>
           </el-form-item>
           
           <el-form-item label="手机" prop="tel" >
-            <el-input v-model="Updateform.tel" disabled></el-input>
+            <el-input v-model="Updateform.tel" ></el-input>
           </el-form-item>
           <el-form-item label="修改密码" prop="pass">
             <el-input v-model="Updateform.pass"></el-input>
@@ -107,7 +134,6 @@
         </el-form>
       </span> 
     </el-dialog> 
-
     <!-- <el-dialog title="学生信息查询" :visible.sync="dialogVisible" width="35%">
       <span>
         <el-form :model="selectForm" :rules="dialogrules" ref="selectForm" label-width="100px" class="selectForm">
@@ -247,15 +273,25 @@
             stuClass:'',
             stuDep:'',
           }],
-
+          currentPage:1,
+        pageSize:10,
         ifimg:true,
+        stuData:[],
         tabPosition: 'left',
-        // dialogVisible: false, //控制对话框的显示和隐藏
+        // dialogVisible: false,
+        passwordVisible: false,  //控制对话框的显示和隐藏
         UpdateVisible: false, //控制对话框的显示和隐藏
         statisticsVisible:false,
         dialog: false,
         addVisible:false,
          imageUrl: '',
+        passwordform: {
+        id: "",
+        name: "",
+        tel: "",
+        pass: "",
+        repass: "",
+      },
         Updateform: {
         id: "",
         name: "",
@@ -432,30 +468,39 @@ if(this.Updateform.pass===this.Updateform.repass){
         handleCurrentChange: function(val) {
             this.currentPage = val;
         },
-
+        // handleUserList() {
+        //     this.$http.get('http://localhost:8080/user').then(res => {  //这是从本地请求的数据接口，
+        //         this.stuData = res.body
+        //     })
+        // }
     },
     created(){
+       this.handleUserList();
       var name = this.$route.query.username;
       console.log(name)
        this.username=name;
        console.log(this.username)
-           axios({
+          axios({
           method:"get",
           url:"/api/findAll",
         }).then(response=>{
           let body = response.data;
+          this.stuData = response.data;
           console.log(typeof (body));
          this.stuData=body
           console.log(JSON.stringify(body))
         }).catch(err=>{
-          
           console.log("...err...",err)
         });
            
     },
 
         mounted() {
-          
+       
+
+        var d = new Date();
+        let mon=d.getMonth()+1;
+        this.addsystemtime=d.getFullYear()+"-"+mon+"-"+d.getDate()+"  "+d.getHours()+":"+d.getMinutes();
         //  document.querySelector("body").setAttribute("style", "background-color: #e5ffee");
   } ,//设置页面背景色
   }
