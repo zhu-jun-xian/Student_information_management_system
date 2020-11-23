@@ -34,7 +34,7 @@
       <el-submenu index="3">
         <template slot="title"><i class="el-icon-setting"></i>设置</template>
         <el-menu-item-group>
-          <el-menu-item index="3-1" @click.native="UpdateVisible = true">修改密码</el-menu-item>
+          <el-menu-item index="3-1" @click.native="passwordVisible = true">修改密码</el-menu-item>
           <el-menu-item index="3-2" @click="exit">退出登陆</el-menu-item>
         </el-menu-item-group>  
       </el-submenu>
@@ -81,7 +81,7 @@
 </el-container>
    </el-container>
 
-<el-dialog title="修改用户信息" :visible.sync="UpdateVisible" width="35%">
+<el-dialog title="修改登录密码" :visible.sync="passwordVisible" width="35%">
       <span>
         <el-form ref="Updateform" :model="Updateform" label-width="100px">
           <el-form-item label="登陆ID" prop="id">
@@ -108,6 +108,32 @@
       </span> 
     </el-dialog> 
 
+<el-dialog title="修改用户信息" :visible.sync="UpdateVisible" width="35%">
+      <span>
+        <el-form ref="Updateform" :model="Updateform" label-width="100px">
+          <el-form-item label="登陆ID" prop="id">
+            <el-input v-model="Updateform.id" plain disabled></el-input>
+          </el-form-item>
+          <el-form-item label="姓名" prop="name">
+            <el-input v-model="Updateform.name" ></el-input>
+          </el-form-item>
+          
+          <el-form-item label="手机" prop="tel" >
+            <el-input v-model="Updateform.tel" ></el-input>
+          </el-form-item>
+          <el-form-item label="修改密码" prop="pass">
+            <el-input v-model="Updateform.pass"></el-input>
+          </el-form-item>
+         <el-form-item label="确认密码" prop="repass">
+            <el-input v-model="Updateform.repass"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit">确认</el-button>
+            <el-button @click="resetForm('Updateform')">清空</el-button>
+          </el-form-item>
+        </el-form>
+      </span> 
+    </el-dialog> 
     <!-- <el-dialog title="学生信息查询" :visible.sync="dialogVisible" width="35%">
       <span>
         <el-form :model="selectForm" :rules="dialogrules" ref="selectForm" label-width="100px" class="selectForm">
@@ -251,7 +277,8 @@
         pageSize:10,
         ifimg:true,
         tabPosition: 'left',
-        // dialogVisible: false, //控制对话框的显示和隐藏
+        // dialogVisible: false,
+        passwordVisible: false,  //控制对话框的显示和隐藏
         UpdateVisible: false, //控制对话框的显示和隐藏
         statisticsVisible:false,
         dialog: false,
