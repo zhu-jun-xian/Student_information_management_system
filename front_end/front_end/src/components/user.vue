@@ -83,26 +83,26 @@
 
 <el-dialog title="修改登录密码" :visible.sync="passwordVisible" width="35%">
       <span>
-        <el-form ref="Updateform" :model="Updateform" label-width="100px">
+        <el-form ref="passwordform" :model="passwordform" label-width="100px">
           <el-form-item label="登陆ID" prop="id">
-            <el-input v-model="Updateform.id" plain disabled></el-input>
+            <el-input v-model="passwordform.id" plain disabled></el-input>
           </el-form-item>
           <el-form-item label="姓名" prop="name">
-            <el-input v-model="Updateform.name" disabled></el-input>
+            <el-input v-model="passwordform.name" disabled></el-input>
           </el-form-item>
           
           <el-form-item label="手机" prop="tel" >
-            <el-input v-model="Updateform.tel" disabled></el-input>
+            <el-input v-model="passwordform.tel" disabled></el-input>
           </el-form-item>
           <el-form-item label="修改密码" prop="pass">
-            <el-input v-model="Updateform.pass"></el-input>
+            <el-input v-model="passwordform.pass"></el-input>
           </el-form-item>
          <el-form-item label="确认密码" prop="repass">
-            <el-input v-model="Updateform.repass"></el-input>
+            <el-input v-model="passwordform.repass"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit">确认</el-button>
-            <el-button @click="resetForm('Updateform')">清空</el-button>
+            <el-button @click="resetForm('passwordform')">清空</el-button>
           </el-form-item>
         </el-form>
       </span> 
@@ -284,6 +284,13 @@
         dialog: false,
         addVisible:false,
          imageUrl: '',
+        passwordform: {
+        id: "",
+        name: "",
+        tel: "",
+        pass: "",
+        repass: "",
+      },
         Updateform: {
         id: "",
         name: "",
