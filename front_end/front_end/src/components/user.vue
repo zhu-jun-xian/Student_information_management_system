@@ -45,7 +45,7 @@
 
     <router-view> </router-view>
    <div>
-    <el-table  border class="el-table-column" :data="stuData.slice((currentPage-1)*pageSize,currentPage*pageSize)" style="width: 100%">
+    <el-table  border class="el-table-column" :data="stuData.slice((currentPage-1)*pageSize,currentPage*pageSize)" style="width: 100%" @row-click="rowclick(this.stuId)">
       <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuID" label="学号"  width="170%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名"  width="160%"></el-table-column>
@@ -372,6 +372,9 @@
       };
     },
     methods: {
+      rowclick(stuID){
+        console.log(stuID)
+      },
      selectrouteruser(){
  this.$router.push({ path:'/user'}) 
      },
