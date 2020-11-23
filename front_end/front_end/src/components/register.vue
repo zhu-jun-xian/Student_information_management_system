@@ -40,7 +40,8 @@ methods: {
   this.$router.push({ path: '/'})
 },
   registerUser(){
-     axios({
+    if(this.password===this.password1){
+axios({
           method:"post",
           url:"/api/register",
           data:{
@@ -71,7 +72,10 @@ methods: {
           
           console.log("...err...",err)
         });
+  }else{
+    alert("两次密码不一致")
   }
+    }
 
 },
    mounted(){
