@@ -43,8 +43,8 @@
    <el-main>
 
     <router-view> </router-view>
-
-      <el-table  border class="el-table-column" :data="stuData" style="width: 100%">
+   <div>
+    <el-table  border class="el-table-column" :data="stuData" style="width: 100%">
       <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuID" label="学号"  width="170%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名"  width="160%"></el-table-column>
@@ -53,9 +53,28 @@
       <el-table-column align="center" header-align="center" prop="stuTel" label="手机号码"  width="160%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuClass" label="班级"  width="160%"></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuDep" label="系部"  width="160%"></el-table-column>
-      <el-table-column align="center" header-align="center" prop="" label="操作"  width="180%"></el-table-column>
+      <el-table-column align="center" header-align="center" prop="" label="操作"  width="180%">
+      <el-button
+          size="mini"
+          @click.native="UpdateVisible = true">Edit</el-button>
+          
+        <el-button
+          size="mini"
+          type="danger"
+          @click.native.prevent="deleteRow(scope.$index, selecttableData)">Delete</el-button></el-table-column>
     </el-table> 
-
+    <div class="block" style="margin-top:15px;">
+            <el-pagination align='center' 
+            @size-change="handleSizeChange" 
+            @current-change="handleCurrentChange" 
+            :current-page="currentPage" 
+            :page-sizes="[5,10,20,50]" 
+            :page-size="pageSize" 
+            layout="total, sizes, prev, pager, next, jumper" 
+            :total="stuData.length">
+            </el-pagination>
+        </div>
+    </div>
     </el-main>
   
 </el-container>
@@ -343,8 +362,16 @@
 
     // this.dialogVisible= false;
      
-  }
-    
+  },
+            //分页
+        handleSizeChange(val) {
+         console.log(`每页 ${val} 条`);
+         this.currentPage = 1;
+         this.pageSize = val;
+        },
+        handleCurrentChange: function(val) {
+            this.currentPage = val;
+        },
 
     },
     created(){
