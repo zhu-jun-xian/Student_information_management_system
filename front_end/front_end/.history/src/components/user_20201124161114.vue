@@ -77,67 +77,90 @@
       </span> 
     </el-dialog> 
 
-    <el-dialog  :visible.sync="statisticsVisible" width="30%" @open="sumdialogopen">
-      <el-table :data="sumtableData" border style="width: 100%">
-    <el-table-column  align="center" prop="girls" label="女" width="118">
-    </el-table-column>
-    <el-table-column align="center" prop="boys" label="男" width="118">
-    </el-table-column>
-  </el-table>
-    </el-dialog>
+    <el-dialog title="学生信息统计" :visible.sync="statisticsVisible" width="35%">
+      <span>
+        <el-form :model="statisticsForm" :rules="statisticsrules" ref="statisticsForm" label-width="100px" class="statisticsForm">
+          
+       <el-form-item label="统计规则" prop="irule">
+          <el-select v-model="statisticsForm.irule" placeholder="请选择">
+            <el-option label="院系" value="iacademy"></el-option>
+            <el-option label="班级" value="isex" ></el-option>
+          </el-select>
+       </el-form-item>
+       <el-form-item  prop="imassage"  style="width: 61%;">
+          <el-input v-model="statisticsForm.imassage"></el-input>
+       </el-form-item>
+  <el-form-item >
+    <el-button type="primary" @click="submitForm('statisticsForm')">信息统计</el-button>
+    <el-button @click="resetForm('statisticsForm')">清空</el-button>
+  </el-form-item>
+ </el-form>
+      </span> 
+    </el-dialog> 
 
 
      <el-dialog title="学生信息录入" :visible.sync="addVisible" width="50%">
       <span>
-        <el-form :model="addForm" ref="addForm" label-width="100px" class="addForm">
-          <el-form-item label="学生姓名">
-            <el-input  v-model="addForm.addstudentname"  style="width: 60%" ></el-input>
-          </el-form-item>
-         <el-form-item label="学号">
-            <el-input  v-model="addForm.addstudentnumber"  style="width: 60%" ></el-input>
-          </el-form-item>
-           <el-form-item label="班级">
-            <el-input v-model="addForm.addclassnumber" style="width: 60%" ></el-input>
-          </el-form-item>
-        
-          <el-form-item label="出生年月">
-             <el-input style="width: 60%"  v-model="addForm.addtime"  placeholder="20200501" ></el-input>
-          </el-form-item>
-          <el-form-item label="性别">
-            <el-select v-model="addForm.addsex" placeholder="请选择">
-              <el-option label="女" value="女"></el-option>
-              <el-option label="男" value="男"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="电话">
-            <el-input v-model="addForm.addtel" style="width: 60%"></el-input>
-          </el-form-item>
-          <el-form-item label="系统录入时间">
-            <el-input  disabled  v-model="addsystemtime" placeholder="系统自动生成" style="width: 50%" ></el-input>
-          </el-form-item>
-      <el-form-item label="系部">
-            <el-select v-model="addForm.adddepartment" placeholder="请选择">
-              <el-option label="智能制造学部" value="智能制造学部"></el-option>
-              <el-option label="土木工程学院" value="土木工程学院"></el-option>
-              <el-option label="经济管理学院" value="经济管理学院"></el-option>
-              <el-option label="外国语学院" value="外国语学院"></el-option>
-              <el-option label="艺术设计学院" value="艺术设计学院"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="添加照片">
-           
-          <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" list-type="picture" limit:1>
-           <el-button size="small" type="primary">点击上传</el-button>
-            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-          </el-upload>
-            
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="addstusubmitForm" >信息录入</el-button >
-            <el-button @click="resetForm('addForm')">清空</el-button>
-          </el-form-item>
-        </el-form>
-      </span>
+        <el-form :model="addForm"  ref="addForm" label-width="100px" class="addForm">
+          <el-form-item label="学生姓名" prop="addstudentname">
+          <el-input v-model="addForm.addstudentname" style="width: 60%;"></el-input>
+       </el-form-item>
+        <el-form-item label="学号" prop="addstudentnumber">
+          <el-input v-model="addForm.addstudentnumber" style="width: 60%;"></el-input>
+       </el-form-item>
+        <el-form-item label="班级" prop="addclassnumber">
+          <el-input v-model="addForm.addclassnumber" style="width:60%;"></el-input>
+       </el-form-item>
+       <el-form-item label="出生日期" prop="addtime">
+         <el-col :span="11">
+            <el-date-picker type="date" placeholder="选择日期" v-model="addForm.addtime" style="width: 100%;"></el-date-picker>
+         </el-col>
+       </el-form-item>
+       <el-form-item label="性别" prop="addsex">
+          <el-select v-model="addForm.addsex" placeholder="请选择">
+            <el-option label="女" value="boy"></el-option>
+            <el-option label="男" value="girl"></el-option>
+          </el-select>
+       </el-form-item>
+        <el-form-item label="电话" prop="addtel">
+          <el-input v-model="addForm.addtel" style="width: 60%;"></el-input>
+       </el-form-item>
+       <el-form-item label="系统录入时间" >
+          <el-input disabled="false" v-model="addsystemtime" placeholder="系统自动生成" style="width:50%"></el-input>
+       </el-form-item>
+       <el-form-item label="系部" prop="adddepartment">
+          <el-select v-model="addForm.adddepartment" placeholder="请选择">
+            <el-option label="智能制造学部" value="intelligent"></el-option>
+            <el-option label="土木工程学院" value="building"></el-option>
+            <el-option label="经济管理学院" value="economics"></el-option>
+            <el-option label="外国语学院" value="foreign"></el-option>
+            <el-option label="艺术设计学院" value="arting"></el-option>
+          </el-select>
+       </el-form-item>
+        <el-form-item label="添加照片" prop="adddialogImageUrl">
+      <el-upload  action="#" v-model="adddialogImageUrl" list-type="picture-card" :auto-upload="false"  :limit=1 >
+           <i  slot="default" class="el-icon-plus" ></i>
+           <div v-if="ifimg">
+          <div  slot="file" slot-scope="{ file }">
+          <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" @load="onLoad"/>
+          <span   class="el-upload-list__item-actions">
+           <!-- <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)">
+           <i class="el-icon-zoom-in"></i></span> -->
+           <span class="el-upload-list__item-delete" @click="handleRemove(file)">
+            <i class="el-icon-delete"></i></span>
+        </span>
+      </div>
+      </div>
+ 
+    </el-upload>
+
+       </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="addstusubmitForm">信息录入</el-button>
+    <el-button @click="resetForm('addForm')">清空</el-button>
+  </el-form-item>
+ </el-form>
+      </span> 
     </el-dialog>
   </div> 
 </template>
@@ -163,11 +186,8 @@
         pass: "",
         repass: "",
       },
-      sumtableData: [{
-                    girls: "",
-                    boys: "",
-                }],
-       statisticsForm: {
+      
+        statisticsForm: {
           irule: '',
           imassage: '',
           
@@ -219,61 +239,29 @@
       };
     },
     methods: {
-      sumdialogopen() {
-                axios({
-                        method: "post",
-                        url: "/api/CountByStuSex",
-                        data: {
-                            stuSex: "男",
-                        },
-                    })
-                    .then((response) => {
-                        let body = response.data;
-                        this.sumtableData = [{
-                            boys: body,
-                            girls: body,
-                        }]
-                    })
-                    .catch((err) => {
-                        console.log("...err...", err);
-                    });
-            },
      
-     addstusubmitForm() {
-                axios({
-                        method: "post",
-                        url: "/api/addMessages",
-                        data: {
-                            stuID: this.addForm.addstudentnumber,
-                            stuName: this.addForm.addstudentname,
-                            stuBirth: this.addForm.addtime,
-                            stuSex: this.addForm.addsex,
-                            stuTel: this.addForm.addtel,
-                            stuClass: this.addForm.addclassnumber,
-                            stuDep: this.addForm.adddepartment,
-                            stuAddTimed: this.addsystemtime,
-                            stuImgUrl: this.addForm.adddialogImageUrl,
-                        },
-                    })
-                    .then((response) => {
-                        this.addVisible = false;
-                        alert("添加成功");
-                        axios({
-                                method: "get",
-                                url: "/api/findAll",
-                            })
-                            .then((response) => {
-                                let body = response.data;
-                                this.stuData = body;
-                            })
-                            .catch((err) => {
-                                console.log("...err...", err);
-                            });
-                    })
-                    .catch((err) => {
-                        console.log("...err...", err);
-                    });
-            },
+      addstusubmitForm(){
+         axios({
+          method:"post",
+          url:"/api/addMessages",
+          
+          data:{
+            stuID:this.addForm.addstudentnumber,
+            stuName:this.addForm.addstudentname,
+            stuBirth:this.addForm.addtime,
+            stuSex:this.addForm.addsex,
+            stuTel:this.addtel,
+            stuClass:this.addclassnumber,
+            stuDep:this.adddepartment,
+            stuAddTimed:addsystemtime,
+            stuImgUrl:this.addForm.adddialogImageUrl
+          }
+        }).then(response=>{
+ console.log("addstusubmitForm")
+        }).catch(err=>{
+          console.log("...err...",err)
+        });
+      },
     
      selectrouteruser(){
  this.$router.push({ path:'/inforstudent'}) 

@@ -133,7 +133,8 @@
             
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="addstusubmitForm" >信息录入</el-button >
+            <el-button type="primary" @click="addstusubmitForm" >信息录入</el-button
+            >
             <el-button @click="resetForm('addForm')">清空</el-button>
           </el-form-item>
         </el-form>
@@ -163,11 +164,8 @@
         pass: "",
         repass: "",
       },
-      sumtableData: [{
-                    girls: "",
-                    boys: "",
-                }],
-       statisticsForm: {
+      
+        statisticsForm: {
           irule: '',
           imassage: '',
           
@@ -219,61 +217,29 @@
       };
     },
     methods: {
-      sumdialogopen() {
-                axios({
-                        method: "post",
-                        url: "/api/CountByStuSex",
-                        data: {
-                            stuSex: "男",
-                        },
-                    })
-                    .then((response) => {
-                        let body = response.data;
-                        this.sumtableData = [{
-                            boys: body,
-                            girls: body,
-                        }]
-                    })
-                    .catch((err) => {
-                        console.log("...err...", err);
-                    });
-            },
      
-     addstusubmitForm() {
-                axios({
-                        method: "post",
-                        url: "/api/addMessages",
-                        data: {
-                            stuID: this.addForm.addstudentnumber,
-                            stuName: this.addForm.addstudentname,
-                            stuBirth: this.addForm.addtime,
-                            stuSex: this.addForm.addsex,
-                            stuTel: this.addForm.addtel,
-                            stuClass: this.addForm.addclassnumber,
-                            stuDep: this.addForm.adddepartment,
-                            stuAddTimed: this.addsystemtime,
-                            stuImgUrl: this.addForm.adddialogImageUrl,
-                        },
-                    })
-                    .then((response) => {
-                        this.addVisible = false;
-                        alert("添加成功");
-                        axios({
-                                method: "get",
-                                url: "/api/findAll",
-                            })
-                            .then((response) => {
-                                let body = response.data;
-                                this.stuData = body;
-                            })
-                            .catch((err) => {
-                                console.log("...err...", err);
-                            });
-                    })
-                    .catch((err) => {
-                        console.log("...err...", err);
-                    });
-            },
+      addstusubmitForm(){
+         axios({
+          method:"post",
+          url:"/api/addMessages",
+          
+          data:{
+            stuID:this.addForm.addstudentnumber,
+            stuName:this.addForm.addstudentname,
+            stuBirth:this.addForm.addtime,
+            stuSex:this.addForm.addsex,
+            stuTel:this.addtel,
+            stuClass:this.addclassnumber,
+            stuDep:this.adddepartment,
+            stuAddTimed:addsystemtime,
+            stuImgUrl:this.addForm.adddialogImageUrl
+          }
+        }).then(response=>{
+ console.log("addstusubmitForm")
+        }).catch(err=>{
+          console.log("...err...",err)
+        });
+      },
     
      selectrouteruser(){
  this.$router.push({ path:'/inforstudent'}) 

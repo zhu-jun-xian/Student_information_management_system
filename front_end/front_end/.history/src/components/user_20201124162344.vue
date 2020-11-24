@@ -113,7 +113,9 @@
             <el-input v-model="addForm.addtel" style="width: 60%"></el-input>
           </el-form-item>
           <el-form-item label="系统录入时间">
-            <el-input  disabled  v-model="addsystemtime" placeholder="系统自动生成" style="width: 50%" ></el-input>
+            <el-input  disabled  v-model="addsystemtime" placeholder="系统自动生成"
+              style="width: 50%"
+            ></el-input>
           </el-form-item>
       <el-form-item label="系部">
             <el-select v-model="addForm.adddepartment" placeholder="请选择">
@@ -126,14 +128,20 @@
           </el-form-item>
           <el-form-item label="添加照片">
            
-          <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" list-type="picture" limit:1>
-           <el-button size="small" type="primary">点击上传</el-button>
-            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-          </el-upload>
-            
+              <el-upload
+  class="upload-demo"
+  action="https://jsonplaceholder.typicode.com/posts/"
+  list-type="picture"
+  limit:1>
+  <el-button size="small" type="primary">点击上传</el-button>
+  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+</el-upload>
+            </el-upload>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="addstusubmitForm" >信息录入</el-button >
+            <el-button type="primary" @click="addstusubmitForm"
+              >信息录入</el-button
+            >
             <el-button @click="resetForm('addForm')">清空</el-button>
           </el-form-item>
         </el-form>
@@ -163,11 +171,8 @@
         pass: "",
         repass: "",
       },
-      sumtableData: [{
-                    girls: "",
-                    boys: "",
-                }],
-       statisticsForm: {
+      
+        statisticsForm: {
           irule: '',
           imassage: '',
           
@@ -219,61 +224,29 @@
       };
     },
     methods: {
-      sumdialogopen() {
-                axios({
-                        method: "post",
-                        url: "/api/CountByStuSex",
-                        data: {
-                            stuSex: "男",
-                        },
-                    })
-                    .then((response) => {
-                        let body = response.data;
-                        this.sumtableData = [{
-                            boys: body,
-                            girls: body,
-                        }]
-                    })
-                    .catch((err) => {
-                        console.log("...err...", err);
-                    });
-            },
      
-     addstusubmitForm() {
-                axios({
-                        method: "post",
-                        url: "/api/addMessages",
-                        data: {
-                            stuID: this.addForm.addstudentnumber,
-                            stuName: this.addForm.addstudentname,
-                            stuBirth: this.addForm.addtime,
-                            stuSex: this.addForm.addsex,
-                            stuTel: this.addForm.addtel,
-                            stuClass: this.addForm.addclassnumber,
-                            stuDep: this.addForm.adddepartment,
-                            stuAddTimed: this.addsystemtime,
-                            stuImgUrl: this.addForm.adddialogImageUrl,
-                        },
-                    })
-                    .then((response) => {
-                        this.addVisible = false;
-                        alert("添加成功");
-                        axios({
-                                method: "get",
-                                url: "/api/findAll",
-                            })
-                            .then((response) => {
-                                let body = response.data;
-                                this.stuData = body;
-                            })
-                            .catch((err) => {
-                                console.log("...err...", err);
-                            });
-                    })
-                    .catch((err) => {
-                        console.log("...err...", err);
-                    });
-            },
+      addstusubmitForm(){
+         axios({
+          method:"post",
+          url:"/api/addMessages",
+          
+          data:{
+            stuID:this.addForm.addstudentnumber,
+            stuName:this.addForm.addstudentname,
+            stuBirth:this.addForm.addtime,
+            stuSex:this.addForm.addsex,
+            stuTel:this.addtel,
+            stuClass:this.addclassnumber,
+            stuDep:this.adddepartment,
+            stuAddTimed:addsystemtime,
+            stuImgUrl:this.addForm.adddialogImageUrl
+          }
+        }).then(response=>{
+ console.log("addstusubmitForm")
+        }).catch(err=>{
+          console.log("...err...",err)
+        });
+      },
     
      selectrouteruser(){
  this.$router.push({ path:'/inforstudent'}) 
