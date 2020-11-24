@@ -38,7 +38,7 @@ export default {
       this.$router.push({ path: "/" });
     },
     registerUser() {
-      if ((this.ID.length === 0 || this.name.length === 0 || this.tel.length === 0 || this.password.length === 0 || this, this.password1.length == 0)) {
+      if ((this.ID.length === 0 || this.username.length === 0 || this.tel.length === 0 || this.password.length === 0 || this, this.password1.length == 0)) {
         alert("存在空输入框，注册失败");
       } else if (this.ID.length < 10 || this.ID.length > 30) {
         alert("用户ID应该要符合10位到30位");
