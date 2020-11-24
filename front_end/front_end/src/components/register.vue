@@ -40,8 +40,8 @@ export default {
     registerUser() {
       if ((this.ID.length === 0 || this.username.length === 0 || this.tel.length === 0 || this.password.length === 0 || this, this.password1.length == 0)) {
         alert("存在空输入框，注册失败");
-      } else if (this.username.length < 10 || this.username.length > 30) {
-        alert("用户名应该要符合10位到30位");
+      } else if (this.username.length <= 0 || this.username.length > 10) {
+        alert("用户名没有符合要求");
       } else if (this.ID.length < 10 || this.ID.length > 30) {
         alert("用户ID应该要符合10位到30位");
       } else if (this.tel.length < 10 || this.tel.length > 30) {
