@@ -318,15 +318,13 @@
               style="width: 60%"
             ></el-input>
           </el-form-item>
-          <el-form-item label="出生日期">
-            <el-col :span="11">
-              <el-date-picker
-                type="date"
-                placeholder="选择日期"
-                v-model="addForm.addtime"
-                style="width: 100%"
-              ></el-date-picker>
-            </el-col>
+        
+          <el-form-item label="出生年月">
+             <el-input
+            style="width: 60%"
+              v-model="addForm.addtime"
+              placeholder="20200501"
+            ></el-input>
           </el-form-item>
           <el-form-item label="性别">
             <el-select v-model="addForm.addsex" placeholder="请选择">
@@ -537,12 +535,11 @@
                         method: "post",
                         url: "/api/CountByStuSex",
                         data: {
-                            stuSex: "女",
+                            stuSex: "男",
                         },
                     })
                     .then((response) => {
                         let body = response.data;
-                        console.log(body)
                         this.sumtableData = [{
                             boys: body,
                             girls: body,
@@ -551,12 +548,9 @@
                     .catch((err) => {
                         console.log("...err...", err);
                     });
-
-                console.log("sumdialogopen")
             },
             updateusermessage() {
                 let stuid = this.rowID;
-                console.log("updateusermessage:" + stuid);
                 axios({
                         method: "post",
                         url: "/api/updateMessagesById",
@@ -571,7 +565,6 @@
                         },
                     })
                     .then((response) => {
-                        console.log(response.data);
                         this.UpdateVisible = false;
                         if (response.data == "ok") {
                             alert("修改成功");
@@ -581,8 +574,6 @@
                                 })
                                 .then((response) => {
                                     let body = response.data;
-
-                                    console.log(typeof body);
                                     this.stuData = body;
                                 })
                                 .catch((err) => {
@@ -619,14 +610,11 @@
                             })
                             .then((response) => {
                                 let body = response.data;
-
-                                console.log(typeof body);
                                 this.stuData = body;
                             })
                             .catch((err) => {
                                 console.log("...err...", err);
                             });
-                        console.log("addstusubmitForm");
                     })
                     .catch((err) => {
                         console.log("...err...", err);
@@ -634,7 +622,6 @@
             },
             deleteRow() {
                 let stuid = this.rowID;
-                console.log("deleteRow:" + stuid);
                 axios({
                         method: "post",
                         url: "/api/deleteMessagesById",
@@ -651,8 +638,6 @@
                                 })
                                 .then((response) => {
                                     let body = response.data;
-
-                                    console.log(typeof body);
                                     this.stuData = body;
                                 })
                                 .catch((err) => {
@@ -666,7 +651,6 @@
             },
             rowclick(row) {
                 this.rowID = row.stuID;
-                console.log("rowclick:" + row.stuID);
                 return row.stuID;
             },
             selectrouteruser() {
@@ -689,8 +673,7 @@
                     })
                     .then((response) => {
                         let body = response.data;
-                        console.log(typeof body);
-                        (this.passwordform.id = body.id),
+                        (this.passwordform.id = bod.id),
                         (this.passwordform.name = body.name),
                         (this.passwordform.tel = body.tel);
                     })
@@ -775,15 +758,12 @@
 
             var name = this.$route.query.username;
             this.username = name;
-            console.log(this.username);
             axios({
                     method: "get",
                     url: "/api/findAll",
                 })
                 .then((response) => {
                     let body = response.data;
-
-                    console.log(typeof body);
                     this.stuData = body;
                 })
                 .catch((err) => {
