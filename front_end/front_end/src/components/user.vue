@@ -534,12 +534,11 @@
                         method: "post",
                         url: "/api/CountByStuSex",
                         data: {
-                            stuSex: "女",
+                            stuSex: "男",
                         },
                     })
                     .then((response) => {
                         let body = response.data;
-                        console.log(body)
                         this.sumtableData = [{
                             boys: body,
                             girls: body,
@@ -548,13 +547,10 @@
                     .catch((err) => {
                         console.log("...err...", err);
                     });
-
-                console.log("sumdialogopen")
             },
             //修改学生信息方法
             updateusermessage() {
                 let stuid = this.rowID;
-                console.log("updateusermessage:" + stuid);
                 axios({
                         method: "post",
                         url: "/api/updateMessagesById",
@@ -569,7 +565,6 @@
                         },
                     })
                     .then((response) => {
-                        console.log(response.data);
                         this.UpdateVisible = false;
                         if (response.data == "ok") {
                             alert("修改成功");
@@ -579,8 +574,6 @@
                                 })
                                 .then((response) => {
                                     let body = response.data;
-
-                                    console.log(typeof body);
                                     this.stuData = body;
                                 })
                                 .catch((err) => {
@@ -618,14 +611,11 @@
                             })
                             .then((response) => {
                                 let body = response.data;
-
-                                console.log(typeof body);
                                 this.stuData = body;
                             })
                             .catch((err) => {
                                 console.log("...err...", err);
                             });
-                        console.log("addstusubmitForm");
                     })
                     .catch((err) => {
                         console.log("...err...", err);
@@ -634,7 +624,6 @@
             //删除学生
             deleteRow() {
                 let stuid = this.rowID;
-                console.log("deleteRow:" + stuid);
                 axios({
                         method: "post",
                         url: "/api/deleteMessagesById",
@@ -651,8 +640,6 @@
                                 })
                                 .then((response) => {
                                     let body = response.data;
-
-                                    console.log(typeof body);
                                     this.stuData = body;
                                 })
                                 .catch((err) => {
@@ -668,8 +655,7 @@
             rowclick(row) {
                 this.rowID = row.stuID;
                 console.log("rowclick:" + row.stuID);
-                return row.stuID; //获取指定行id
-
+                return row.stuID; //获取指定行id        
             },
             selectrouteruser() {
                 this.$router.push({
@@ -691,8 +677,7 @@
                     })
                     .then((response) => {
                         let body = response.data;
-                        console.log(typeof body);
-                        (this.passwordform.id = body.id),
+                        (this.passwordform.id = bod.id),
                         (this.passwordform.name = body.name),
                         (this.passwordform.tel = body.tel);
                     })
@@ -777,15 +762,12 @@
 
             var name = this.$route.query.username;
             this.username = name;
-            console.log(this.username);
             axios({
                     method: "get",
                     url: "/api/findAll",
                 })
                 .then((response) => {
                     let body = response.data;
-
-                    console.log(typeof body);
                     this.stuData = body;
                 })
                 .catch((err) => {
