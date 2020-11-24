@@ -35,60 +35,68 @@ export default {
       this.$router.push({ path: "/register" });
     },
     login() {
-      axios({
-        method: "post",
-        url: "/api/login",
-        data: {
-          id: this.ID,
-          password: this.password,
-        },
-      })
-        .then((response) => {
-          let body = response.data;
-          switch (body) {
-            case "success":
-              console.log(body);
-              axios({
-                method: "post",
-                url: "/api/getUserById1",
-                data: {
-                  id: this.ID,
-                },
-              })
-                .then((response) => {
-                  let body = response.data;
-                  this.$router.push({ path: "/user", query: { username: body.name, id: this.ID } });
-                })
-                .catch((err) => {
-                  console.log("...err...", err);
-                });
-
-              break;
-            case "fault":
-              console.log(body);
-              alert("没有登录成功");
-              break;
-          }
-
-          // console.log(JSON.stringify(response.data))
-          // if(JSON.stringify(response.data)=="success"){
-          //       this.$router.push({ path: '/user'})
-          //        console.log()
-          // }else if(JSON.stringify(response.data)=="false"){
-          //     alert("密码或id错误")
-          // } else if(this.ID=="admin"){
-          //    this.$router.push({ path: '/user',
-          //            query:
-          //                   {username:"zhu"}
-          //               })
-          // }
-          // else{
-          //       alert("密码 或 ID 错误")
-          // }
+      if (this.ID.length === 0 || this.password.length == 0) {
+        alert("密码和用户名不能为空");
+      } else if (this.ID.length < 10) {
+        alert("用户名应该要符合10位到30位");
+      } else if (this.password.length < 8 || this.password.length > 30) {
+        alert("密码应该要符合8位到30位");
+      } else {
+        axios({
+          method: "post",
+          url: "/api/login",
+          data: {
+            id: this.ID,
+            password: this.password,
+          },
         })
-        .catch((err) => {
-          console.log("...err...", err);
-        });
+          .then((response) => {
+            let body = response.data;
+            switch (body) {
+              case "success":
+                console.log(body);
+                axios({
+                  method: "post",
+                  url: "/api/getUserById1",
+                  data: {
+                    id: this.ID,
+                  },
+                })
+                  .then((response) => {
+                    let body = response.data;
+                    this.$router.push({ path: "/user", query: { username: body.name, id: this.ID } });
+                  })
+                  .catch((err) => {
+                    console.log("...err...", err);
+                  });
+
+                break;
+              case "fault":
+                console.log(body);
+                alert("没有登录成功");
+                break;
+            }
+            // console.log(JSON.stringify(response.data))
+            // if(JSON.stringify(response.data)=="success"){
+            //       this.$router.push({ path: '/user'})
+            //        console.log()
+            // }else if(JSON.stringify(response.data)=="false"){
+            //     alert("密码或id错误")
+            // } else if(this.ID=="admin"){
+            //    this.$router.push({ path: '/user',
+            //            query:
+            //                   {username:"zhu"}
+            //               })
+            // }
+            // else{
+            //       alert("密码 或 ID 错误")
+            // }
+          })
+          .catch((err) => {
+            console.log("...err...", err);
+          });
+      }
+
       // this.$router.push({ path: '/user'})
     },
   },
