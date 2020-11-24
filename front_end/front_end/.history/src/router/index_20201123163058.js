@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import login from '@/components/login'
 import user from '@/components/user'
 import selectstudent from '@/components/User/selectstudent'
-import inforstudent from '@/components/User/inforstudent'
+import information from '@/components/User/information'
 import register from '@/components/register'
 
 
@@ -21,8 +21,8 @@ const routes = [
         　　　　path: '/selectstudent', 
          　　　 component: selectstudent 
         　　  },{ 
-            　　　　path: '/inforstudent', 
-             　　　 component: inforstudent
+            　　　　path: '/selectstudent', 
+             　　　 component: selectstudent 
             　　  }
         　　]
 },
