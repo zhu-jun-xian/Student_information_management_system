@@ -384,9 +384,6 @@
               <el-upload
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
-  :on-preview="handlePreview"
-  :on-remove="handleRemove"
-  :file-list="fileList"
   list-type="picture"
   limit:1>
   <el-button size="small" type="primary">点击上传</el-button>
@@ -676,7 +673,7 @@
             },
             updatepasswordopen() {
                 console.log("updatepasswordopen");
-                let id = this.$route.query.username;
+                let id = this.$route.query.id;
                 axios({
                         method: "post",
                         url: "/api/getUserById1",
@@ -686,9 +683,9 @@
                     })
                     .then((response) => {
                         let body = response.data;
-                        (this.passwordform.id = bod.id),
-                        (this.passwordform.name = body.name),
-                        (this.passwordform.tel = body.tel);
+                        this.passwordform.id = body.id,
+                            this.passwordform.name = body.name,
+                            this.passwordform.tel = body.tel;
                     })
                     .catch((err) => {
                         console.log("...err...", err);

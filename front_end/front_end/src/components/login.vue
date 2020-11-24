@@ -57,7 +57,7 @@ export default {
               })
                 .then((response) => {
                   let body = response.data;
-                  this.$router.push({ path: "/user", query: { username: body.name } });
+                  this.$router.push({ path: "/user", query: { username: body.name, id: this.ID } });
                 })
                 .catch((err) => {
                   console.log("...err...", err);
