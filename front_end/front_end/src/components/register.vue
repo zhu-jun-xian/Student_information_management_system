@@ -43,7 +43,7 @@ export default {
       } else if (this.ID.length < 10 || this.ID.length > 30) {
         alert("用户ID应该要符合10位到30位");
       } else if (this.tel.length < 10 || this.tel.length > 30) {
-        alert("用户ID应该要符合11位到30位");
+        alert("用户电话应该要符合11位到30位");
       } else if (this.password.length < 8 || this.password.length > 30) {
         alert("密码应该要符合8位到30位");
       } else if (this.password1.length < 8 || this.password1.length > 30) {
