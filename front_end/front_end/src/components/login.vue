@@ -105,6 +105,6 @@ export default {
   width: 450px;
   height: 200px;
   margin-top: 9%;
-  margin-left: 30%;
+  margin-left: 35%;
 }
 </style>

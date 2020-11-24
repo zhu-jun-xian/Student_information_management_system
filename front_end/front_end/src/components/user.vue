@@ -2,7 +2,7 @@
   <div class="hello">
     <el-container>
       <el-header style="text-align: right; font-size: 12px">
-        <span id="user_name" style="font-size: 20px">{{ username }}</span>
+        <span id="user_name" style="font-size: 20px">欢迎您！！！{{ username }}</span>
         <!-- <el-button @click="selectuser1">查询</el-button> -->
         <el-button @click="exit">退出</el-button>
       </el-header>
@@ -58,7 +58,7 @@
         </el-aside>
 
         <el-main>
-          <router-view> </router-view>
+          <!-- <router-view> </router-view>
           <div>
             <el-table
               border
@@ -160,7 +160,7 @@
               >
               </el-pagination>
             </div>
-          </div>
+          </div> -->
         </el-main>
       </el-container>
     </el-container>
@@ -275,18 +275,18 @@
       <el-table
     :data="sumtableData"
     border 
-    style="width: 100%">
+    style="width: 500">
     <el-table-column 
     align="center"
       prop="girls"
       label="女"
-      width="118">
+      width="250">
     </el-table-column>
     <el-table-column
     align="center"
       prop="boys"
       label="男"
-      width="118">
+      width="250">
     </el-table-column>
   </el-table>
     </el-dialog>
