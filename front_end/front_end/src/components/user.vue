@@ -318,9 +318,8 @@
               style="width: 60%"
             ></el-input>
           </el-form-item>
-        
           <el-form-item label="出生年月">
-             <el-input
+                        <el-input
             style="width: 60%"
               v-model="addForm.addtime"
               placeholder="20200501"
@@ -538,7 +537,7 @@
             };
         },
         methods: {
-
+            //统计方法
             sumdialogopen() {
                 axios({
                         method: "post",
@@ -558,6 +557,7 @@
                         console.log("...err...", err);
                     });
             },
+            //修改学生信息方法
             updateusermessage() {
                 let stuid = this.rowID;
                 axios({
@@ -594,6 +594,7 @@
                         console.log("...err...", err);
                     });
             },
+            //新增学生信息
             addstusubmitForm() {
                 axios({
                         method: "post",
@@ -629,6 +630,7 @@
                         console.log("...err...", err);
                     });
             },
+            //删除学生
             deleteRow() {
                 let stuid = this.rowID;
                 axios({
@@ -661,7 +663,8 @@
 
             rowclick(row) {
                 this.rowID = row.stuID;
-                return row.stuID;
+                console.log("rowclick:" + row.stuID);
+                return row.stuID; //获取指定行id        
             },
             selectrouteruser() {
                 this.$router.push({
