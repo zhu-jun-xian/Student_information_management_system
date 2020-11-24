@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import login from '@/components/login'
 import user from '@/components/user'
 import selectstudent from '@/components/User/selectstudent'
+import inforstudent from '@/components/User/inforstudent'
 import register from '@/components/register'
 
 
@@ -12,16 +13,11 @@ const routes = [
 
 
     { path: '/', component: login },
-    { 
-        path: '/user', 
-        component: user , 
-        children: [ 
-        　　　{ 
-        　　　　path: '/selectstudent', 
-         　　　 component: selectstudent 
-        　　  }
-        　　]
-},
+    {
+        path: '/user',
+        component: user,
+        children: [　　　{　　　　 path: '/selectstudent', 　　　component: selectstudent　　 }, {　　　　 path: '/inforstudent', 　　　component: inforstudent　　 }　　]
+    },
     { path: '/register', component: register },
     // { path: '/selectstudent', component: selectstudent },
 

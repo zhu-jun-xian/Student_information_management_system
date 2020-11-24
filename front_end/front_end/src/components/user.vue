@@ -139,7 +139,6 @@
                   >Edit</el-button
                 >
 
-<<<<<<< HEAD
                 <el-button
                   size="mini"
                   type="danger"
@@ -272,38 +271,26 @@
         </el-form>
       </span>
     </el-dialog>
-
-    <el-dialog
-      title="学生信息统计"
-      :visible.sync="statisticsVisible"
-      width="35%"
-    >
-      <span>
-        <el-form
-          :model="statisticsForm"
-          :rules="statisticsrules"
-          ref="statisticsForm"
-          label-width="100px"
-          class="statisticsForm"
-        >
-          <el-form-item label="统计规则" prop="irule">
-            <el-select v-model="statisticsForm.irule" placeholder="请选择">
-              <el-option label="院系" value="iacademy"></el-option>
-              <el-option label="班级" value="isex"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item prop="imassage" style="width: 61%">
-            <el-input v-model="statisticsForm.imassage"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="submitForm('statisticsForm')"
-              >信息统计</el-button
-            >
-            <el-button @click="resetForm('statisticsForm')">清空</el-button>
-          </el-form-item>
-        </el-form>
-      </span>
+    <el-dialog  :visible.sync="statisticsVisible" width="30%" @open="sumdialogopen">
+      <el-table
+    :data="sumtableData"
+    border 
+    style="width: 100%">
+    <el-table-column 
+    align="center"
+      prop="girls"
+      label="女"
+      width="118">
+    </el-table-column>
+    <el-table-column
+    align="center"
+      prop="boys"
+      label="男"
+      width="118">
+    </el-table-column>
+  </el-table>
     </el-dialog>
+  
 <!-- 新增学生信息 -->
     <el-dialog title="学生信息录入" :visible.sync="addVisible" width="50%">
       <span>
@@ -445,6 +432,10 @@
                     pass: "",
                     repass: "",
                 },
+                sumtableData: [{
+                    girls: "",
+                    boys: "",
+                }],
                 Updateform: {
                     studentnumber: "",
                     name: "",
@@ -540,6 +531,29 @@
             };
         },
         methods: {
+
+            sumdialogopen() {
+                axios({
+                        method: "post",
+                        url: "/api/CountByStuSex",
+                        data: {
+                            stuSex: "女",
+                        },
+                    })
+                    .then((response) => {
+                        let body = response.data;
+                        console.log(body)
+                        this.sumtableData = [{
+                            boys: body,
+                            girls: body,
+                        }]
+                    })
+                    .catch((err) => {
+                        console.log("...err...", err);
+                    });
+
+                console.log("sumdialogopen")
+            },
             updateusermessage() {
                 let stuid = this.rowID;
                 console.log("updateusermessage:" + stuid);
@@ -758,8 +772,8 @@
             // }
         },
         created() {
+
             var name = this.$route.query.username;
-            console.log(name);
             this.username = name;
             console.log(this.username);
             axios({
@@ -778,8 +792,6 @@
         },
 
         mounted() {
-            console.log("mount");
-
             var d = new Date();
             let mon = d.getMonth() + 1;
             this.addsystemtime =
