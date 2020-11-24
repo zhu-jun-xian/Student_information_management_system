@@ -353,12 +353,13 @@
             </el-select>
           </el-form-item>
           <el-form-item label="添加照片">
-            <el-upload
-              action="#"
+            <!-- <el-upload
               v-model="addForm.adddialogImageUrl"
               list-type="picture-card"
+              :on-success="handleAvatarSuccess"
               :auto-upload="false"
               :limit="1"
+              action="http://localhost:8080/static"
             >
               <i slot="default" class="el-icon-plus"></i>
               <div v-if="ifimg">
@@ -367,7 +368,7 @@
                     class="el-upload-list__item-thumbnail"
                     :src="file.url"
                     alt=""
-                    @load="onLoad"
+
                   />
                   <span class="el-upload-list__item-actions">
                   
@@ -379,7 +380,18 @@
                     ></span>
                   </span>
                 </div>
-              </div>
+              </div> -->
+              <el-upload
+  class="upload-demo"
+  action="https://jsonplaceholder.typicode.com/posts/"
+  :on-preview="handlePreview"
+  :on-remove="handleRemove"
+  :file-list="fileList"
+  list-type="picture"
+  limit:1>
+  <el-button size="small" type="primary">点击上传</el-button>
+  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+</el-upload>
             </el-upload>
           </el-form-item>
           <el-form-item>
@@ -649,6 +661,7 @@
                         console.log("...err...", err);
                     });
             },
+
             rowclick(row) {
                 this.rowID = row.stuID;
                 return row.stuID;
@@ -754,8 +767,8 @@
             //     })
             // }
         },
-        created() {
 
+        created() {
             var name = this.$route.query.username;
             this.username = name;
             axios({
