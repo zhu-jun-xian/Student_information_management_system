@@ -36,9 +36,9 @@ export default {
     },
     login() {
       if (this.ID.length === 0 || this.password.length == 0) {
-        alert("密码和用户名不能为空");
-      } else if (this.ID.length < 10) {
-        alert("用户名应该要符合10位到30位");
+        alert("密码和用户ID不能为空");
+      } else if (this.ID.length < 10 || this.ID.length > 30) {
+        alert("用户ID应该要符合10位到30位");
       } else if (this.password.length < 8 || this.password.length > 30) {
         alert("密码应该要符合8位到30位");
       } else {
@@ -64,7 +64,7 @@ export default {
                 })
                   .then((response) => {
                     let body = response.data;
-                    this.$router.push({ path: "/user", query: { username: body.name, id: this.ID } });
+                    this.$router.push({ path: "/inforstudent", query: { username: body.name, id: this.ID } });
                   })
                   .catch((err) => {
                     console.log("...err...", err);
