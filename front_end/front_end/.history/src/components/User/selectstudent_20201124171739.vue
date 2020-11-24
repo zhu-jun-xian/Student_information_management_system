@@ -5,7 +5,6 @@
         <el-button round  @click.native="selectstuVisible=true" >学生信息查询</el-button>
         <el-button round  @click.native="selectclassVisible=true">班级查询</el-button>
         <el-button round  @click.native="selectgendVisible=true">院系查询</el-button>
-        <el-input v-model="input" placeholder="请输入内容"  style="width:30%;padding-left:400px"></el-input>
         
       <el-divider></el-divider>
     </div>
@@ -290,7 +289,7 @@ alert("删除成功")
         handleCurrentChange: function(val) {
             this.currentPage = val;
         },
-
+        
         selectAll(){
             axios({
           method:"get",
