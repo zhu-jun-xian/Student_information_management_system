@@ -122,7 +122,7 @@
             <el-input v-model="selectstuForm.selectstunum"></el-input>
            </el-form-item>
            <el-form-item>
-          <el-button type="primary" @click="selectstuSubmit">查询</el-button>
+          <el-button type="primary" @click="selectstuSubmit()">查询</el-button>
       </el-form-item>
       </el-form>
   </el-dialog>

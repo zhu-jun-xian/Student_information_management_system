@@ -320,8 +320,8 @@ alert("删除成功")
             }
           }).then(response=>{
             console.log(response.data)
-            alert("查询成功")
             this.selectclassVisible=false
+             alert("查询成功")
               let body = response.data;
                 console.log(typeof (body));
                 this.stuData=[]
@@ -330,25 +330,7 @@ alert("删除成功")
           })
         },
 
-       selectstuSubmit(){
-          console.log(this.selectstuForm.selectstunum)
-          axios({
-            method:"post",
-            url:"/api/getMessagesById",
-            data:{
-              stuID:this.selectstuForm.selectstunum,
-            }
-          }).then(response=>{
-            console.log(response.data)
-            alert("查询成功")
-            this.selectstuVisible=false
-              let body = response.data;
-                console.log(typeof (body));
-                this.stuData=[]
-                this.stuData=body
-                console.log(JSON.stringify(body))        
-          })  
-       }
+       
     },
     //获取表格数据
     created(){
