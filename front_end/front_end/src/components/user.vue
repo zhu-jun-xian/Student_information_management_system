@@ -3,7 +3,7 @@
     <el-container>
     <el-header style="text-align: right; font-size: 12px">
 
-      <span id="user_name" v-bind="username" style="font-size:20px">{{username}}</span>
+      <span id="user_name"  style="font-size:20px">{{username}}</span>
       <!-- <el-button @click="selectuser1">查询</el-button> -->
        <el-button @click="exit">退出</el-button>
        
@@ -251,18 +251,18 @@
         methods: {
             sumdialogopen() {
                 axios({
-                        method: "post",
-                        url: "/api/CountByStuSex",
-                        data: {
-                            stuSex: "男",
-                        },
+                        method: "get",
+                        url: "/api/CountStuInfo",
                     })
                     .then((response) => {
                         let body = response.data;
+                        console.log('统计' + body)
+                        console.log(typeof(body))
                         this.sumtableData = [{
                             boys: body,
                             girls: body,
                         }]
+                        console.log(JSON.stringify(body));
                     })
                     .catch((err) => {
                         console.log("...err...", err);
@@ -422,10 +422,8 @@
                 url: "/api/findAll",
             }).then(response => {
                 let body = response.data;
-
-                console.log(typeof(body));
                 this.stuData = body
-                console.log(JSON.stringify(body))
+
             }).catch(err => {
                 console.log("...err...", err)
             });
