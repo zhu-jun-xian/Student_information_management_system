@@ -3,7 +3,7 @@
     <el-container>
       <div>
         <el-table border class="el-table-column" :data="stuData.slice((currentPage - 1) * pageSize, currentPage * pageSize)" style="width: 100%" @row-click="rowclick">
-          <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column>
+          <!-- <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column> -->
           <el-table-column align="center" header-align="center" prop="stuID" label="学号" width="170%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名" width="160%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="stuBirth" label="出生年月日" width="160%"></el-table-column>
@@ -14,7 +14,8 @@
           <el-table-column align="center" header-align="center" prop="" label="操作" width="180%">
             <el-button size="mini" @click.native="UpdateVisible = true">Edit</el-button>
 
-            <el-button size="mini" type="danger" @click.native.prevent="deleteRow()">Delete</el-button></el-table-column>
+            <el-button size="mini" type="danger" @click.native.prevent="deleteRow()">Delete</el-button></el-table-column
+          >
         </el-table>
         <div class="block" style="margin-top: 15px">
           <el-pagination align="center" @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 20, 50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="stuData.length"> </el-pagination>
@@ -25,22 +26,18 @@
     <el-dialog title="修改学生信息" :visible.sync="UpdateVisible" width="35%">
       <span>
         <el-form ref="Updateform" :model="Updateform" label-width="100px">
-          <el-form-item label="学号" prop="studentnumber">             
-              <el-input v-model="rowID" plain disabled></el-input>           
-              </el-form-item>
+          <el-form-item label="学号" prop="studentnumber">              <el-input v-model="rowID" plain disabled></el-input>            </el-form-item>
           <el-form-item label="学生姓名" prop="name">
             <el-input v-model="Updateform.name"></el-input>
           </el-form-item>
 
-          <el-form-item label="出生年月" prop="time">             
-              <el-input v-model="Updateform.time" placeholder="20200501"></el-input> 
-              </el-form-item>
+          <el-form-item label="出生年月" prop="time">
+                        
+            <el-input v-model="Updateform.time" placeholder="20200501"></el-input>
+          </el-form-item>
             <el-form-item label="性别" prop="sex">
-           <el-select v-model="Updateform.sex" placeholder="请选择" style="width: 100%">             
-                <el-option label="男" value="男"></el-option>              
-               <el-option label="女" value="女"></el-option>           
-                </el-select>           
-               </el-form-item>
+            <el-select v-model="Updateform.sex" placeholder="请选择" style="width: 100%">              <el-option label="男" value="男"></el-option>               <el-option label="女" value="女"></el-option>            </el-select>           
+          </el-form-item>
           <el-form-item label="手机号码" prop="tel">
             <el-input v-model="Updateform.tel"></el-input>
           </el-form-item>
@@ -49,10 +46,7 @@
           </el-form-item>
           <el-form-item label="系部" prop="department">
             <el-select v-model="Updateform.department" placeholder="请选择" style="width: 100%">
-              <el-option label="智能制造学部" value="智能制造学部"></el-option>            
-               <el-option label="土木工程学院" value="土木工程学院"></el-option>            
-               <el-option label="经济管理学院" value="经济管理学院"></el-option>            
-               <el-option label="外国语学院" value="外国语学院"></el-option>
+              <el-option label="智能制造学部" value="智能制造学部"></el-option>              <el-option label="土木工程学院" value="土木工程学院"></el-option>              <el-option label="经济管理学院" value="经济管理学院"></el-option>              <el-option label="外国语学院" value="外国语学院"></el-option>
                           <el-option label="艺术设计学院" value="艺术设计学院"></el-option>
             </el-select>
           </el-form-item>
