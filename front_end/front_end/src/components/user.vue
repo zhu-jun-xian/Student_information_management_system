@@ -601,17 +601,13 @@
                                 case "success":
                                     this.$message({
                                         type: 'success',
-                                        message: '修改用户信息成功!',
-
-                                    });
-                                    break
-                                    this.$message({
-                                        type: 'success',
                                         message: '注销成功!'
                                     });
                                     this.$router.push({
                                         path: "/",
                                     });
+                                    break
+
                             }
                         })
                         .catch((err) => {
