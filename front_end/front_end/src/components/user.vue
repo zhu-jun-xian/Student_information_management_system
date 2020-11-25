@@ -316,7 +316,12 @@
                     })
                     .then((response) => {
                         this.addVisible = false;
-                        alert("添加成功");
+                        this.$message({
+                            message: "恭喜你，添加成功",
+                            type: "success",
+                            center: true,
+                            offset: 50,
+                        });
                         axios({
                                 method: "get",
                                 url: "/api/findAll",
@@ -509,9 +514,19 @@
             // 将表单数据添加到表格中去
             updatepassonSubmit() {
                 if (this.passwordfrom.pass.length == 0 || this.password.repass.length == 0) {
-                    alert("存在空输入框，修改失败");
+                    this.$message({
+                        message: "错误:存在空输入框，修改失败",
+                        center: true,
+                        offset: 50,
+                        type: "warning",
+                    });
                 } else if (this.passwordfrom.pass.length < 8 || this.password.repass.length > 30) {
-                    alert("密码要符合8到30 位，修改失败");
+                    this.$message({
+                        message: "错误:密码要符合8到30 位，修改失败",
+                        center: true,
+                        offset: 50,
+                        type: "warning",
+                    });
                 } else if (this.passwordform.pass === this.passwordform.repass) {
                     axios({
                             method: "post",
@@ -523,7 +538,12 @@
                             },
                         })
                         .then((response) => {
-                            alert("密码修改成功，请重新登录");
+                            this.$message({
+                                message: "恭喜你，密码修改成功，请重新登录",
+                                type: "success",
+                                center: true,
+                                offset: 50,
+                            });
                             this.$router.push({
                                 path: "/",
                             });
@@ -532,7 +552,12 @@
                             console.log("...err...", err);
                         });
                 } else {
-                    alert("两次密码不一致");
+                    this.$message({
+                        message: "错误:两次密码不一致",
+                        center: true,
+                        offset: 50,
+                        type: "warning",
+                    });
                 }
                 this.UpdateVisible = false;
             },
