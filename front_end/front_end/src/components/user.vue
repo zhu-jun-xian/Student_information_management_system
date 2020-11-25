@@ -789,6 +789,7 @@
     #systemname {
         font-size: 30px;
         color: white;
+        text-shadow: 5px 5px 5px cyan;
     }
     
     input::-webkit-outer-spin-button,
