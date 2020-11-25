@@ -497,11 +497,4 @@ export default {
 .input-with-select .el-input-group__prepend {
   background-color: #fff;
 }
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-}
-input[type="number"] {
-  -moz-appearance: textfield;
-}
 </style>
