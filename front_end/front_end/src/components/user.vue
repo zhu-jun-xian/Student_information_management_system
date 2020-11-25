@@ -304,7 +304,6 @@
                     })
                     .then((response) => {
                         let body = response.data;
-                        console.log("统计" + body);
                         console.log(typeof body);
                         this.sumtableData = [{
 
@@ -315,7 +314,7 @@
                             intell: '65',
                             boys: 435,
                             girls: 45,
-                            IBM1: '6',
+                            IBM1: body[1].totalClass,
                             IBM2: '5',
                             IBM3: '6',
                             IBM4: '5',
@@ -339,7 +338,6 @@
                         },
                     })
                     .then((response) => {
-                        console.log('updateuserclose' + body.name)
                         let body = response.data;
                         this.username = body.name
 
@@ -391,7 +389,6 @@
                                             url: "/api/findAll",
                                         })
                                         .then((response) => {
-                                            console.log("新增成功")
                                             let body = response.data;
                                             this.stuData = body;
                                         })
@@ -431,7 +428,6 @@
                     })
                     .then((response) => {
                         let body = response.data;
-                        console.log(body)
                         this.passwordform.id = body.id
                         this.nameplaceholaer = body.name
                         this.telplaceholaer = body.tel
@@ -527,9 +523,9 @@
                                     break
                             }
                             this.userVisible = false
-                                // this.$router.push({
-                                //     path: "/",
-                                // });
+                            this.$router.push({
+                                path: "/",
+                            });
                         })
                         .catch((err) => {
                             console.log("...err...", err);
@@ -548,7 +544,6 @@
                     })
                     .then((response) => {
                         let body = response.data;
-                        console.log(body)
                         this.passwordform.id = body.id
                         this.nameplaceholaer = body.name
                         this.telplaceholaer = body.tel
@@ -572,12 +567,10 @@
                     })
                     .then((response) => {
                         let body = response.data;
-                        console.log(body);
                         (this.passwordform.id = body.id), (this.passwordform.name = body.name), (this.passwordform.tel = body.tel);
                         this.nameplaceholaer = body.name
                         this.telplaceholaer = body.tel
                         this.IDplaceholaer = body.id
-                        console.log(JSON.stringify(body));
                     })
                     .catch((err) => {
                         console.log("...err...", err);
@@ -677,7 +670,6 @@
                         })
                         .then((response) => {
                             let body = response.data;
-                            console.log(body)
                             switch (body) {
                                 case "success":
                                     this.$message({
@@ -718,7 +710,6 @@
             },
             //分页
             handleSizeChange(val) {
-                console.log("每页 ${val} 条");
                 this.currentPage = 1;
                 this.pageSize = val;
             },
@@ -733,9 +724,7 @@
         },
         created() {
             var name = this.$route.query.username;
-            console.log(name);
             this.username = name;
-            console.log(this.username);
             axios({
                     method: "get",
                     url: "/api/findAll",
@@ -750,8 +739,6 @@
         },
 
         mounted() {
-            console.log("mount");
-
             var d = new Date();
             let mon = d.getMonth() + 1;
             this.addsystemtime = d.getFullYear() + "-" + mon + "-" + d.getDate() + "  " + d.getHours() + ":" + d.getMinutes();
@@ -802,6 +789,16 @@
     #systemname {
         font-size: 30px;
         color: white;
+        text-shadow: 5px 5px 5px cyan;
+    }
+    
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+    
+    input[type="number"] {
+        -moz-appearance: textfield;
     }
     
     #user_name {
