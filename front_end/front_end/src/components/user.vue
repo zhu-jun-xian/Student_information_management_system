@@ -113,7 +113,12 @@
             <el-input v-model="addForm.addclassnumber" style="width: 60%"></el-input>
           </el-form-item>
 
-          <el-form-item label="出生年月">  <el-input style="width: 60%" v-model="addForm.addtime" placeholder="20200501"></el-input> </el-form-item>
+          <el-form-item label="出生年月">  
+            <!-- <el-input style="width: 60%" v-model="addForm.addtime" placeholder="20200501"></el-input>  -->
+            <el-col :span="11">
+              <el-date-picker type="date" v-model="addForm.addtime" placeholder="选择日期"  style="width: 100%;"></el-date-picker>
+            </el-col>
+          </el-form-item>
           <el-form-item label="性别">
             <el-select v-model="addForm.addsex" placeholder="请选择">
               <el-option label="女" value="女"></el-option>
@@ -328,7 +333,7 @@
                         })
                         .then((response) => {
 
-
+                            console.log(response.data)
                             this.$message({
                                 type: 'success',
                                 message: '新增学生信息成功!',
@@ -638,7 +643,7 @@
                         type: 'info',
                         message: '已取消删除注销'
                     });
-                    location.reload();
+
                 });
             },
             exit() {
