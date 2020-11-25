@@ -155,7 +155,7 @@
           </el-select>
         </el-form-item>
         <el-form-item align="center">
-          <el-button type="primary" align="center" @click="updateusermessage">查询</el-button>
+          <el-button type="primary"align="center" @click="updateusermessage">查询</el-button>
           <el-button align="center" @click="resetForm('selectfuzzyForm')">清空</el-button>
         </el-form-item>
       </el-form>
