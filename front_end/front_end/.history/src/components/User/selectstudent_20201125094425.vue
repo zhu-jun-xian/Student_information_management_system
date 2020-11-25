@@ -5,7 +5,7 @@
         <el-button round  @click.native="selectnumVisible=true" >学生信息查询</el-button>
         <el-button round  @click.native="selectclassVisible=true">班级查询</el-button>
         <el-button round  @click.native="selectgendVisible=true">院系查询</el-button>
-        <el-input v-model="search1" placeholder="请输入学生姓名"  style="width:30%;padding-left:400px" @keydown.enter.native="validateCounts"></el-input>
+        <el-input v-model="search" placeholder="请输入内容"  style="width:30%;padding-left:400px" @input="searchChange1"></el-input>
         
       <el-divider></el-divider>
     </div>
@@ -141,7 +141,6 @@
       return {
         rowID:'',
         search:'',
-        search1:'',
          stuData: [{
             stuNum: '',
             stuID: '',
@@ -190,24 +189,6 @@
 
 
     methods: {
-      validateCounts(){
-        console.log(this.search1)
-        axios({
-          method:"post",
-          url:"/api/SelectByStuName",
-          data:{
-            stuName:this.search1
-          }
-        }).then(response=>{
-          console.log(response.data)
-          let body = response.data;
-          console.log(typeof (body));
-          this.stuData=[]
-          this.stuData=body
-          console.log(JSON.stringify(body)) 
-
-        })
-      },
 
       updateusermessage(){
          let stuid=this.rowID
@@ -383,6 +364,20 @@ alert("删除成功")
                 console.log(JSON.stringify(body))        
           })  
        },
+        searchChange1() {
+                var arr = this.stuData.filter(data => !this.search || data.stuName.toLowerCase().includes(this.search.toLowerCase()));
+                this.tableData.splice(0,this.tableData.length);
+                Array.prototype.push.apply(this.tableData, arr); // 不改变tableData 数组的引用地址。保持其响应式。
+
+                this.$nextTick(() => {
+                    this.searchFlag = true // 手动选中前 禁止多选事件响应
+                    this.tableData.forEach(item => {
+                        if (item.checked)
+                            this.$refs.multipleTable.toggleRowSelection(item, true);
+                    })
+                    this.searchFlag = false; // 放开多选事件响应
+                })
+            }
     },
     //获取表格数据
     created(){
@@ -403,6 +398,18 @@ alert("删除成功")
           console.log("...err...",err)
         });
     },
+    computed: {
+      NewItems() {
+         var _this = this;
+         var NewItems = [];
+        this.items.map(function(item) {
+        if (item.name.search(_this.searchVal) != -1) {
+        NewItems.push(item);
+          }
+   });
+   return NewItems;
+  }
+ }
   }
  
 </script>

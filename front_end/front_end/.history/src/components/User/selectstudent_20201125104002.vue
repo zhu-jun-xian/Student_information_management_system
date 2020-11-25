@@ -22,6 +22,12 @@
       <el-table-column align="center" header-align="center" prop="stuClass" label="班级"  width="160%" sortable></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuDep" label="系部"  width="160%" sortable></el-table-column>
       <el-table-column align="center" header-align="center" prop="" label="操作"  width="180%">
+        <template slot="header" slot-scope="scope">
+        <el-input
+          v-model="search"
+          size="mini"
+          placeholder="输入关键字搜索"/>
+      </template>
       <el-button
           size="mini"
           @click.native="UpdateVisible = true">Edit</el-button>

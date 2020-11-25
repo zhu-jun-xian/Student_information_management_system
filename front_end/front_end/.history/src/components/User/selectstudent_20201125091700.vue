@@ -5,7 +5,7 @@
         <el-button round  @click.native="selectnumVisible=true" >学生信息查询</el-button>
         <el-button round  @click.native="selectclassVisible=true">班级查询</el-button>
         <el-button round  @click.native="selectgendVisible=true">院系查询</el-button>
-        <el-input v-model="search1" placeholder="请输入学生姓名"  style="width:30%;padding-left:400px" @keydown.enter.native="validateCounts"></el-input>
+        <el-input v-model="search" placeholder="请输入内容"  style="width:30%;padding-left:400px"></el-input>
         
       <el-divider></el-divider>
     </div>
@@ -141,7 +141,6 @@
       return {
         rowID:'',
         search:'',
-        search1:'',
          stuData: [{
             stuNum: '',
             stuID: '',
@@ -190,24 +189,6 @@
 
 
     methods: {
-      validateCounts(){
-        console.log(this.search1)
-        axios({
-          method:"post",
-          url:"/api/SelectByStuName",
-          data:{
-            stuName:this.search1
-          }
-        }).then(response=>{
-          console.log(response.data)
-          let body = response.data;
-          console.log(typeof (body));
-          this.stuData=[]
-          this.stuData=body
-          console.log(JSON.stringify(body)) 
-
-        })
-      },
 
       updateusermessage(){
          let stuid=this.rowID
@@ -382,7 +363,7 @@ alert("删除成功")
                 this.stuData=body
                 console.log(JSON.stringify(body))        
           })  
-       },
+       }
     },
     //获取表格数据
     created(){
@@ -403,6 +384,18 @@ alert("删除成功")
           console.log("...err...",err)
         });
     },
+    computed: {
+      NewItems() {
+         var _this = this;
+         var NewItems = [];
+        this.items.map(function(item) {
+        if (item.name.search(_this.searchVal) != -1) {
+        NewItems.push(item);
+          }
+   });
+   return NewItems;
+  }
+ }
   }
  
 </script>
