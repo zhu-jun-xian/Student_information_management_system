@@ -523,9 +523,9 @@
                                     break
                             }
                             this.userVisible = false
-                                // this.$router.push({
-                                //     path: "/",
-                                // });
+                            this.$router.push({
+                                path: "/",
+                            });
                         })
                         .catch((err) => {
                             console.log("...err...", err);
