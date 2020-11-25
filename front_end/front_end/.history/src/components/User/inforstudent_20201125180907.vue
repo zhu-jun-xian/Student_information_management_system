@@ -15,7 +15,6 @@
              <el-button size="mini" type="primary" icon="el-icon-edit" circle @click.native="UpdateVisible = true"></el-button>
 
             <el-button size="mini" type="danger" icon="el-icon-delete" circle @click.native.prevent="deleteRow()"></el-button>
-            </el-table-column>
         </el-table>
         <div class="block" style="margin-top: 15px">
           <el-pagination align="center" @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 20, 50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="stuData.length"> </el-pagination>

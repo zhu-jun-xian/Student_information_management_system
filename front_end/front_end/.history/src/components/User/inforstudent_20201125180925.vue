@@ -12,9 +12,9 @@
           <el-table-column align="center" header-align="center" prop="stuClass" label="班级" width="160%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="stuDep" label="系部" width="160%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="" label="操作" width="180%">
-             <el-button size="mini" type="primary" icon="el-icon-edit" circle @click.native="UpdateVisible = true"></el-button>
+            <el-button size="mini" @click.native="UpdateVisible = true">Edit</el-button>
 
-            <el-button size="mini" type="danger" icon="el-icon-delete" circle @click.native.prevent="deleteRow()"></el-button>
+            <el-button size="mini" type="danger" @click.native.prevent="deleteRow()">Delete</el-button>
             </el-table-column>
         </el-table>
         <div class="block" style="margin-top: 15px">
