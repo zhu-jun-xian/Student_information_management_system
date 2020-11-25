@@ -268,9 +268,9 @@ export default {
   color: #fff;
   background: #03a9f4;
   padding: 15px 20px;
-  cursor: pointer;
-  /*光标呈现为指示链接的指针（一只手）*/
-  border-radius: 10px;
+  /*cursor: pointer;
+  光标呈现为指示链接的指针（一只手）
+  border-radius: 10px;*/
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
