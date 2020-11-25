@@ -2,7 +2,7 @@
   <div class="hello">
     <el-container>
       <el-header style="text-align: right; font-size: 12px">
-        <span id="user_name" style="font-size: 20px">{{ username }}</span>
+        <span id="user_name" style="font-size: 20px" >{{ username }}</span>
         <!-- <el-button @click="selectuser1">查询</el-button> -->
         <el-button @click="exit">退出</el-button>
       </el-header>
@@ -44,7 +44,7 @@
 </el-main>
 </el-container>
 </el-container>
-<el-dialog title="修改用户信息" :visible.sync="userVisible" width="35%" @open="updateuseropen">
+<el-dialog title="修改用户信息" :visible.sync="userVisible" width="35%" @open="updateuseropen" @close="updateuserclose">
     <span>
       <el-form ref="passwordform" :model="passwordform" label-width="100px">
         <el-form-item label="登陆ID" prop="id">
@@ -275,7 +275,26 @@
                         console.log("...err...", err);
                     });
             },
+            updateuserclose() {
+                let id = this.$route.query.id;
+                axios({
+                        method: "post",
+                        url: "/api/getUserById1",
+                        data: {
+                            id: id,
+                        },
+                    })
+                    .then((response) => {
+                        console.log('updateuserclose' + body.name)
+                        let body = response.data;
+                        this.username = body.name
 
+
+                    })
+                    .catch((err) => {
+                        console.log("...err...", err);
+                    });
+            },
             addstusubmitForm() {
                 axios({
                         method: "post",
@@ -325,32 +344,118 @@
                 let id = this.$route.query.id;
                 axios({
                         method: "post",
-                        url: "/api/updateUserTableByID",
+                        url: "/api/getUserById1",
                         data: {
                             id: id,
-                            name: this.passwordform.name,
-                            tel: this.passwordform.tel
                         },
                     })
                     .then((response) => {
                         let body = response.data;
-                        switch (body) {
-                            case "success":
-                                this.$message({
-                                    type: 'success',
-                                    message: '修改用户信息成功!',
+                        console.log(body)
+                        this.passwordform.id = body.id
+                        this.nameplaceholaer = body.name
+                        this.telplaceholaer = body.tel
 
-                                });
-                                break
-                        }
-                        this.userVisible = false
-                        this.$router.push({
-                            path: "/",
-                        });
                     })
                     .catch((err) => {
                         console.log("...err...", err);
                     });
+                if (this.passwordform.name.length == 0 && this.passwordform.tel.length == 0) {
+                    this.$message({
+                        message: "错误:存在空输入框，不能修改",
+                        center: true,
+                        offset: 50,
+                        type: "warning",
+                    });
+                } else if (this.passwordform.name.length == 0) {
+                    axios({
+                            method: "post",
+                            url: "/api/updateUserTableByID",
+                            data: {
+                                id: id,
+                                name: this.nameplaceholaer,
+                                tel: this.passwordform.tel
+                            },
+                        })
+                        .then((response) => {
+                            let body = response.data;
+                            switch (body) {
+                                case "success":
+                                    this.$message({
+                                        type: 'success',
+                                        message: '修改用户信息成功!',
+
+                                    });
+                                    break
+                            }
+                            this.userVisible = false
+                                // this.$router.push({
+                                //     path: "/",
+                                // });
+                        })
+                        .catch((err) => {
+                            console.log("...err...", err);
+                        });
+                } else if (this.passwordform.tel.length == 0) {
+                    axios({
+                            method: "post",
+                            url: "/api/updateUserTableByID",
+                            data: {
+                                id: id,
+                                name: this.passwordform.name,
+                                tel: this.telplaceholaer
+                            },
+                        })
+                        .then((response) => {
+                            let body = response.data;
+                            switch (body) {
+                                case "success":
+                                    this.$message({
+                                        type: 'success',
+                                        message: '修改用户信息成功!',
+
+                                    });
+                                    break
+                            }
+                            this.userVisible = false
+                                // this.$router.push({
+                                //     path: "/",
+                                // });
+                        })
+                        .catch((err) => {
+                            console.log("...err...", err);
+                        });
+                } else {
+                    axios({
+                            method: "post",
+                            url: "/api/updateUserTableByID",
+                            data: {
+                                id: id,
+                                name: this.passwordform.name,
+                                tel: this.passwordform.tel
+                            },
+                        })
+                        .then((response) => {
+                            let body = response.data;
+                            switch (body) {
+                                case "success":
+                                    this.$message({
+                                        type: 'success',
+                                        message: '修改用户信息成功!',
+
+                                    });
+                                    break
+                            }
+                            this.userVisible = false
+                                // this.$router.push({
+                                //     path: "/",
+                                // });
+                        })
+                        .catch((err) => {
+                            console.log("...err...", err);
+                        });
+                }
+
             },
             updateuseropen() {
                 let id = this.$route.query.id;
@@ -459,7 +564,7 @@
                         .then((response) => {
                             let body = response.data;
                             switch (body) {
-                                case "删除成功":
+                                case "success":
                                     this.$message({
                                         type: 'success',
                                         message: '修改用户信息成功!',
