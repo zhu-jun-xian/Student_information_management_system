@@ -132,8 +132,7 @@
                 <el-option label="6" value="6"></el-option>
                 <el-option label="7" value="7"></el-option>
               </el-select>
-            </el-form-item>
-            </el-form-item>
+            </el-form-item></el-form-item>
 
           <el-form-item label="出生年月">  
             <el-input type="number" style="width: 60%" v-model="addForm.addtime" placeholder="20200501"></el-input> 
