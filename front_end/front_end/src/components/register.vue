@@ -39,7 +39,7 @@
           <label>Password</label>
         </div>
         <div class="inputbox">
-          <input type=" password" v-model="password1" maxlength="30" minlength="8" name="" required="" />
+          <input type="password" v-model="password1" maxlength="30" minlength="8" name="" required="" />
           <label>Confirm Password</label>
         </div>
         <el-button class="button" @click="registerUser" type="primary" round icon="el-icon-check">Register</el-button>
