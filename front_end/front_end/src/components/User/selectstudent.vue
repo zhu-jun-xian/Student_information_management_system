@@ -206,6 +206,16 @@
       updateusermessage() {
         let stuid = this.rowID
         console.log("updateusermessage:" + stuid)
+        if (this.Updateform.name.length == 0 || this.Updateform.time.length == 0 || this.Updateform.sex.length == 0 ||
+          this.Updateform.tel.length == 0 || this.Updateform.classnumber.length == 0 || this.Updateform.department.length == 0 ) 
+        {
+        this.$message({
+              message: "错误:存在空输入框，修改失败",
+              center: true,
+              offset: 50,
+              type: "warning",
+        });
+  } else {
         axios({
           method: "post",
           url: "/api/updateMessagesById",
@@ -235,6 +245,7 @@
         }).catch(err => {
           console.log("...err...", err)
         });
+  }
       },
 
 
