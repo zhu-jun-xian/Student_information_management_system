@@ -50,14 +50,14 @@
     <span>
       <el-form ref="passwordform" :model="passwordform" label-width="100px">
         <el-form-item label="登陆ID" prop="id">
-          <el-input v-model="passwordform.id" plain disabled :placeholder="IDplaceholaer"></el-input>
+          <el-input type="number" v-model="passwordform.id" plain disabled :placeholder="IDplaceholaer"></el-input>
         </el-form-item>
         <el-form-item label="姓名" prop="name">
           <el-input v-model="passwordform.name" :placeholder="nameplaceholaer" ></el-input>
         </el-form-item>
 
         <el-form-item label="手机" prop="tel">
-          <el-input v-model="passwordform.tel" :placeholder="telplaceholaer"></el-input>
+          <el-input type="number" v-model="passwordform.tel" :placeholder="telplaceholaer"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="updateuseronSubmit">确认</el-button>
@@ -77,7 +77,7 @@
           </el-form-item>
 
           <el-form-item label="手机" prop="tel">
-            <el-input v-model="passwordform.tel" disabled :placeholder="telplaceholaer"></el-input>
+            <el-input type="number" v-model="passwordform.tel" disabled :placeholder="telplaceholaer"></el-input>
           </el-form-item>
           <el-form-item   label="修改密码" prop="pass">
             <el-input v-model="passwordform.pass"></el-input>
@@ -107,7 +107,7 @@
             <el-input v-model="addForm.addstudentname" style="width: 60%"></el-input>
           </el-form-item>
           <el-form-item label="学号">
-            <el-input v-model="addForm.addstudentnumber" style="width: 60%"></el-input>
+            <el-input type="number" v-model="addForm.addstudentnumber" style="width: 60%"></el-input>
           </el-form-item>
           <el-form-item label="班级">
             <!-- <el-input v-model="addForm.addclassnumber" style="width: 60%"></el-input> -->
@@ -124,7 +124,7 @@
           </el-form-item>
 
           <el-form-item label="出生年月">  
-            <el-input style="width: 60%" v-model="addForm.addtime" placeholder="20200501"></el-input> 
+            <el-input type="number" style="width: 60%" v-model="addForm.addtime" placeholder="20200501"></el-input> 
             
             <!-- <el-date-picker type="date" v-model="addForm.addtime" placeholder="选择日期"  style="width: 100%;"></el-date-picker> -->
             
@@ -136,7 +136,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="电话">
-            <el-input v-model="addForm.addtel" style="width: 60%"></el-input>
+            <el-input type="number" v-model="addForm.addtel" style="width: 60%"></el-input>
           </el-form-item>
           <el-form-item label="系统录入时间">
             <el-input disabled v-model="addsystemtime" placeholder="系统自动生成" style="width: 50%"></el-input>
@@ -347,6 +347,7 @@
                                     this.$message({
                                         type: 'success',
                                         message: '新增学生信息成功!',
+                                        duration: 1000
                                     });
                                     this.addVisible = false;
                                     axios({
@@ -369,7 +370,7 @@
                             console.log("...err...", err);
                         });
 
-                    location.reload();
+                    // location.reload();
 
                 }
             },
@@ -403,7 +404,7 @@
                     .catch((err) => {
                         console.log("...err...", err);
                     });
-                if (this.passwordform.name.length == 0 || this.passwordform.tel.length == 0) {
+                if (this.passwordform.name.length == 0 && this.passwordform.tel.length == 0) {
                     this.$message({
                         message: "错误:空输入，不能修改",
                         center: true,
@@ -432,9 +433,9 @@
                                     break
                             }
                             this.userVisible = false
-                                // this.$router.push({
-                                //     path: "/",
-                                // });
+                            this.$router.push({
+                                path: "/",
+                            });
                         })
                         .catch((err) => {
                             console.log("...err...", err);
@@ -461,9 +462,9 @@
                                     break
                             }
                             this.userVisible = false
-                                // this.$router.push({
-                                //     path: "/",
-                                // });
+                            this.$router.push({
+                                path: "/",
+                            });
                         })
                         .catch((err) => {
                             console.log("...err...", err);
@@ -548,9 +549,17 @@
             },
             // 将表单数据添加到表格中去
             updatepassonSubmit() {
+                var reg = new RegExp("(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0-9]).{8,30}");
                 if (this.passwordform.pass.length == 0 || this.passwordform.repass.length == 0) {
                     this.$message({
                         message: "错误:存在空输入框，修改失败",
+                        center: true,
+                        offset: 50,
+                        type: "warning",
+                    });
+                } else if (!reg.test(this.passwordform.pass) || !reg.test(this.passwordform.repass)) {
+                    this.$message({
+                        message: "错误:密码应由大小写字母+特殊字符组合,长度控制在8-30",
                         center: true,
                         offset: 50,
                         type: "warning",
@@ -761,6 +770,6 @@
     
     #user_name {
         font-size: 20px;
-        margin-left: 67%;
+        margin-left: 65%;
     }
 </style>
