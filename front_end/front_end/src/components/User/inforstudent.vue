@@ -12,10 +12,10 @@
           <el-table-column align="center" header-align="center" prop="stuClass" label="班级" width="160%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="stuDep" label="系部" width="160%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="" label="操作" width="180%">
-             <el-button size="mini" type="primary" icon="el-icon-edit" circle @click.native="UpdateVisible = true"></el-button>
+            <el-button size="mini" type="primary" icon="el-icon-edit" circle @click.native="UpdateVisible = true"></el-button>
 
             <el-button size="mini" type="danger" icon="el-icon-delete" circle @click.native.prevent="deleteRow()"></el-button>
-            </el-table-column>
+          </el-table-column>
         </el-table>
         <div class="block" style="margin-top: 15px">
           <el-pagination align="center" @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 20, 50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="stuData.length"> </el-pagination>
@@ -31,7 +31,7 @@
             <el-input v-model="Updateform.name"></el-input>
           </el-form-item>
 
-          <el-form-item label="出生年月" prop="time">
+          <el-form-item type="number" label="出生年月" prop="time">
                         
             <el-input v-model="Updateform.time" placeholder="20200501"></el-input>
           </el-form-item>
@@ -39,15 +39,25 @@
             <el-select v-model="Updateform.sex" placeholder="请选择" style="width: 100%">              <el-option label="男" value="男"></el-option>               <el-option label="女" value="女"></el-option>            </el-select>           
           </el-form-item>
           <el-form-item label="手机号码" prop="tel">
-            <el-input v-model="Updateform.tel"></el-input>
+            <el-input type="number" v-model="Updateform.tel"></el-input>
           </el-form-item>
-          <el-form-item label="班级" prop="classnumber">
-            <el-input v-model="Updateform.classnumber"></el-input>
+          <el-form-item label="班级" prop="classnumber" type="number">
+            <!-- <el-input v-model="Updateform.classnumber"></el-input> -->
+            <el-select v-model="Updateform.classnumber" placeholder="请选择班别">
+              <el-option label="1" value="1"></el-option>
+              <el-option label="2" value="2"></el-option>
+              <el-option label="3" value="3"></el-option>
+              <el-option label="4" value="4"></el-option>
+              <el-option label="5" value="5"></el-option>
+              <el-option label="6" value="6"></el-option>
+              <el-option label="7" value="7"></el-option>
+            </el-select>
           </el-form-item>
           <el-form-item label="系部" prop="department">
             <el-select v-model="Updateform.department" placeholder="请选择" style="width: 100%">
-              <el-option label="智能制造学部" value="智能制造学部"></el-option>              <el-option label="土木工程学院" value="土木工程学院"></el-option>              <el-option label="经济管理学院" value="经济管理学院"></el-option>              <el-option label="外国语学院" value="外国语学院"></el-option>
-                          <el-option label="艺术设计学院" value="艺术设计学院"></el-option>
+              <el-option label="智能制造学部" value="智能制造学部"></el-option>               <el-option label="土木工程学院" value="土木工程学院"></el-option>               <el-option label="经济管理学院" value="经济管理学院"></el-option>              
+              <el-option label="外国语学院" value="外国语学院"></el-option>
+              <el-option label="艺术设计学院" value="艺术设计学院"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item>

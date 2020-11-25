@@ -50,14 +50,14 @@
     <span>
       <el-form ref="passwordform" :model="passwordform" label-width="100px">
         <el-form-item label="登陆ID" prop="id">
-          <el-input v-model="passwordform.id" plain disabled :placeholder="IDplaceholaer"></el-input>
+          <el-input type="number" v-model="passwordform.id" plain disabled :placeholder="IDplaceholaer"></el-input>
         </el-form-item>
         <el-form-item label="姓名" prop="name">
           <el-input v-model="passwordform.name" :placeholder="nameplaceholaer" ></el-input>
         </el-form-item>
 
         <el-form-item label="手机" prop="tel">
-          <el-input v-model="passwordform.tel" :placeholder="telplaceholaer"></el-input>
+          <el-input type="number" v-model="passwordform.tel" :placeholder="telplaceholaer"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="updateuseronSubmit">确认</el-button>
@@ -77,7 +77,7 @@
           </el-form-item>
 
           <el-form-item label="手机" prop="tel">
-            <el-input v-model="passwordform.tel" disabled :placeholder="telplaceholaer"></el-input>
+            <el-input type="number" v-model="passwordform.tel" disabled :placeholder="telplaceholaer"></el-input>
           </el-form-item>
           <el-form-item   label="修改密码" prop="pass">
             <el-input v-model="passwordform.pass"></el-input>
@@ -93,10 +93,22 @@
       </span>
 </el-dialog>
 
-<el-dialog :visible.sync="statisticsVisible" width="30%" @open="sumdialogopen">
+<el-dialog :visible.sync="statisticsVisible" width="83.8%" @open="sumdialogopen">
     <el-table :data="sumtableData" border style="width: 100%">
-        <el-table-column align="center" prop="girls" label="女" width="118"> </el-table-column>
-        <el-table-column align="center" prop="boys" label="男" width="118"> </el-table-column>
+        <el-table-column align="center" prop="artdesign" label="艺术设计学院" width="100"> </el-table-column>
+        <el-table-column align="center" prop="foreign" label="外国语学院" width="100"> </el-table-column>
+        <el-table-column align="center" prop="tumu" label="土木工程学院" width="100"> </el-table-column>
+        <el-table-column align="center" prop="economic" label="经济管理学院" width="100"> </el-table-column>
+        <el-table-column align="center" prop="intell" label="智能制造学部" width="100"> </el-table-column>
+        <el-table-column align="center" prop="girls" label="男" width="100"> </el-table-column>
+        <el-table-column align="center" prop="boys" label="女" width="100"> </el-table-column>
+        <el-table-column align="center" prop="IBM1" label="IBM1班" width="100"> </el-table-column>
+        <el-table-column align="center" prop="IBM2" label="IBM2班" width="100"> </el-table-column>
+        <el-table-column align="center" prop="IBM3" label="IBM3班" width="100"> </el-table-column>
+        100
+        <el-table-column align="center" prop="IBM5" label="IBM5班" width="100"> </el-table-column>
+        <el-table-column align="center" prop="IBM6" label="IBM6班" width="100"> </el-table-column>
+        <el-table-column align="center" prop="IBM7" label="IBM7班" width="100"> </el-table-column>
     </el-table>
 </el-dialog>
 
@@ -107,13 +119,28 @@
             <el-input v-model="addForm.addstudentname" style="width: 60%"></el-input>
           </el-form-item>
           <el-form-item label="学号">
-            <el-input v-model="addForm.addstudentnumber" style="width: 60%"></el-input>
+            <el-input type="number" v-model="addForm.addstudentnumber" style="width: 60%"></el-input>
           </el-form-item>
           <el-form-item label="班级">
-            <el-input v-model="addForm.addclassnumber" style="width: 60%"></el-input>
+            <!-- <el-input v-model="addForm.addclassnumber" style="width: 60%"></el-input> -->
+              <el-select v-model="addForm.addclassnumber" placeholder="请选择">
+                <el-option label="1" value="1"></el-option>
+                <el-option label="2" value="2"></el-option>
+                <el-option label="3" value="3"></el-option>
+                <el-option label="4" value="4"></el-option>
+                <el-option label="5" value="5"></el-option>
+                <el-option label="6" value="6"></el-option>
+                <el-option label="7" value="7"></el-option>
+              </el-select>
+            </el-form-item>
           </el-form-item>
 
-          <el-form-item label="出生年月">  <el-input style="width: 60%" v-model="addForm.addtime" placeholder="20200501"></el-input> </el-form-item>
+          <el-form-item label="出生年月">  
+            <el-input type="number" style="width: 60%" v-model="addForm.addtime" placeholder="20200501"></el-input> 
+            
+            <!-- <el-date-picker type="date" v-model="addForm.addtime" placeholder="选择日期"  style="width: 100%;"></el-date-picker> -->
+            
+          </el-form-item>
           <el-form-item label="性别">
             <el-select v-model="addForm.addsex" placeholder="请选择">
               <el-option label="女" value="女"></el-option>
@@ -121,7 +148,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="电话">
-            <el-input v-model="addForm.addtel" style="width: 60%"></el-input>
+            <el-input type="number" v-model="addForm.addtel" style="width: 60%"></el-input>
           </el-form-item>
           <el-form-item label="系统录入时间">
             <el-input disabled v-model="addsystemtime" placeholder="系统自动生成" style="width: 50%"></el-input>
@@ -177,8 +204,20 @@
                     repass: "",
                 },
                 sumtableData: [{
+                    artdesign: '',
+                    foreign: '',
+                    tumu: '',
+                    economic: "",
+                    intell: '',
                     girls: "",
                     boys: "",
+                    IBM1: '',
+                    IBM2: '',
+                    IBM3: '',
+                    IBM4: '',
+                    IBM5: '',
+                    IBM6: '',
+                    IBM7: '',
                 }, ],
                 statisticsForm: {
                     irule: "",
@@ -269,8 +308,21 @@
                         console.log("统计" + body);
                         console.log(typeof body);
                         this.sumtableData = [{
-                            boys: body,
-                            girls: body,
+
+                            artdesign: '65',
+                            foreign: '65',
+                            tumu: '6',
+                            economic: "5",
+                            intell: '65',
+                            boys: 435,
+                            girls: 45,
+                            IBM1: '6',
+                            IBM2: '5',
+                            IBM3: '6',
+                            IBM4: '5',
+                            IBM5: '33',
+                            IBM6: '456',
+                            IBM7: '54',
                         }, ];
                         console.log(JSON.stringify(body));
                     })
@@ -327,31 +379,35 @@
                             },
                         })
                         .then((response) => {
+                            switch (response.data) {
+                                case "ok":
+                                    this.$message({
+                                        type: 'success',
+                                        message: '新增学生信息成功!',
+                                        duration: 1000
+                                    });
+                                    this.addVisible = false;
+                                    axios({
+                                            method: "get",
+                                            url: "/api/findAll",
+                                        })
+                                        .then((response) => {
+                                            console.log("新增成功")
+                                            let body = response.data;
+                                            this.stuData = body;
+                                        })
+                                        .catch((err) => {
+                                            console.log("...err...", err);
+                                        });
+                            }
 
 
-                            this.$message({
-                                type: 'success',
-                                message: '新增学生信息成功!',
-                            });
-
-                            this.addVisible = false;
                         })
                         .catch((err) => {
                             console.log("...err...", err);
                         });
-                    axios({
-                            method: "get",
-                            url: "/api/findAll",
-                        })
-                        .then((response) => {
-                            console.log("新增成功")
-                            let body = response.data;
-                            this.stuData = body;
-                        })
-                        .catch((err) => {
-                            console.log("...err...", err);
-                        });
-                    location.reload();
+
+                    // location.reload();
 
                 }
             },
@@ -385,7 +441,7 @@
                     .catch((err) => {
                         console.log("...err...", err);
                     });
-                if (this.passwordform.name.length == 0 || this.passwordform.tel.length == 0) {
+                if (this.passwordform.name.length == 0 && this.passwordform.tel.length == 0) {
                     this.$message({
                         message: "错误:空输入，不能修改",
                         center: true,
@@ -414,9 +470,9 @@
                                     break
                             }
                             this.userVisible = false
-                                // this.$router.push({
-                                //     path: "/",
-                                // });
+                            this.$router.push({
+                                path: "/",
+                            });
                         })
                         .catch((err) => {
                             console.log("...err...", err);
@@ -443,9 +499,9 @@
                                     break
                             }
                             this.userVisible = false
-                                // this.$router.push({
-                                //     path: "/",
-                                // });
+                            this.$router.push({
+                                path: "/",
+                            });
                         })
                         .catch((err) => {
                             console.log("...err...", err);
@@ -530,9 +586,17 @@
             },
             // 将表单数据添加到表格中去
             updatepassonSubmit() {
+                var reg = new RegExp("(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0-9]).{8,30}");
                 if (this.passwordform.pass.length == 0 || this.passwordform.repass.length == 0) {
                     this.$message({
                         message: "错误:存在空输入框，修改失败",
+                        center: true,
+                        offset: 50,
+                        type: "warning",
+                    });
+                } else if (!reg.test(this.passwordform.pass) || !reg.test(this.passwordform.repass)) {
+                    this.$message({
+                        message: "错误:密码应由大小写字母+特殊字符组合,长度控制在8-30",
                         center: true,
                         offset: 50,
                         type: "warning",
@@ -638,7 +702,7 @@
                         type: 'info',
                         message: '已取消删除注销'
                     });
-                    location.reload();
+
                 });
             },
             exit() {
@@ -743,6 +807,6 @@
     
     #user_name {
         font-size: 20px;
-        margin-left: 67%;
+        margin-left: 65%;
     }
 </style>
