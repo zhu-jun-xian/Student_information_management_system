@@ -27,19 +27,19 @@
           <label>ID</label>
         </div>
         <div class="inputbox">
-          <input type="text" v-model="username" minlength="10" maxlength="30" show-word-limit />
+          <input type="text" v-model="username" maxlength="30" show-word-limit />
           <label>Username</label>
         </div>
         <div class="inputbox">
-          <input type="number" v-model="tel" maxlength="30" minlength="11" show-word-limit />
+          <input type="number" v-model="tel" maxlength="30" show-word-limit />
           <label>Telephone</label>
         </div>
         <div class="inputbox">
-          <input type="password" v-model="password" maxlength="30" minlength="8" />
+          <input type="password" v-model="tel" maxlength="30" show-word-limit />
           <label>Password</label>
         </div>
         <div class="inputbox">
-          <input type="password" v-model="password1" maxlength="30" minlength="8" />
+          <input type="password1" v-model="tel" maxlength="30" show-word-limit />
           <label>Confirm Password</label>
         </div>
         <el-button class="button" @click="registerUser" type="primary" round icon="el-icon-check">Register</el-button>
