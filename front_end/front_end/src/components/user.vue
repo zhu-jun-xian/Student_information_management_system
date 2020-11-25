@@ -51,11 +51,11 @@
           <el-input v-model="passwordform.id" plain disabled></el-input>
         </el-form-item>
         <el-form-item label="姓名" prop="name">
-          <el-input v-model="passwordform.name" placeholder="nameplaceholaer" ></el-input>
+          <el-input v-model="passwordform.name" :placeholder="nameplaceholaer" ></el-input>
         </el-form-item>
 
         <el-form-item label="手机" prop="tel">
-          <el-input v-model="passwordform.tel" placeholder="telplaceholaer"></el-input>
+          <el-input v-model="passwordform.tel" :placeholder="telplaceholaer"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="updateuseronSubmit">确认</el-button>
@@ -154,8 +154,8 @@
     export default {
         data() {
             return {
-                nameplaceholaer: '',
-                telplaceholaer: '',
+                nameplaceholaer: '张三',
+                telplaceholaer: '13440213456',
                 userVisible: false,
                 addsystemtime: '',
                 ifimg: true,
@@ -343,6 +343,7 @@
                                 });
                                 break
                         }
+                        this.userVisible = false
                     })
                     .catch((err) => {
                         console.log("...err...", err);
