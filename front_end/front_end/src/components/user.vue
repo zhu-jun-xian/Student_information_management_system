@@ -370,7 +370,7 @@
                     });
                 if (this.passwordform.name.length == 0 && this.passwordform.tel.length == 0) {
                     this.$message({
-                        message: "错误:存在空输入框，不能修改",
+                        message: "错误:空输入，不能修改",
                         center: true,
                         offset: 50,
                         type: "warning",
@@ -513,7 +513,7 @@
             },
             // 将表单数据添加到表格中去
             updatepassonSubmit() {
-                if (this.passwordfrom.pass.length == 0 || this.password.repass.length == 0) {
+                if (this.passwordform.pass.length == 0 || this.passwordform.repass.length == 0) {
                     this.$message({
                         message: "错误:存在空输入框，修改失败",
                         center: true,
