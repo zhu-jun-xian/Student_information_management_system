@@ -135,6 +135,7 @@
     export default {
         data() {
             return {
+                addsystemtime: '',
                 ifimg: true,
                 tabPosition: "left",
                 // dialogVisible: false,
@@ -368,8 +369,24 @@
                 file.url = "";
                 this.dialogImageUrl = file.url;
             },
-
             exituser() {
+                this.$confirm('此操作将注销该账户, 是否继续?', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$message({
+                        type: 'success',
+                        message: '注销成功!'
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除注销'
+                    });
+                });
+            },
+            exit() {
                 this.$router.push({
                     path: "/",
                 });
