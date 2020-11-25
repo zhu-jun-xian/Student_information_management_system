@@ -68,9 +68,17 @@ export default {
       this.$router.push({ path: "/register" });
     },
     login() {
+      var reg = /^(?![^a-zA-Z]+$)(?!\D+$).{8,30}$/;
       if (this.ID.length === 0 || this.password.length == 0) {
         this.$message({
           message: "错误:密码和用户ID不能为空",
+          center: true,
+          offset: 50,
+          type: "warning",
+        });
+      } else if (!reg.test(this.password)) {
+        this.$message({
+          message: "错误:字母+数字组合,至少包含一个字母和数字,长度控制在8-30",
           center: true,
           offset: 50,
           type: "warning",

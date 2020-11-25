@@ -68,7 +68,7 @@ export default {
       this.$router.push({ path: "/" });
     },
     registerUser() {
-      console.log(typeof this.tel);
+      var reg = /^(?![^a-zA-Z]+$)(?!\D+$).{8,30}$/;
       if ((this.ID.length === 0 || this.username.length === 0 || this.tel.length === 0 || this.password.length === 0 || this, this.password1.length == 0)) {
         this.$message({
           message: "错误:存在空输入框，注册失败",
@@ -97,9 +97,23 @@ export default {
           offset: 50,
           type: "warning",
         });
+      } else if (!reg.test(this.password)) {
+        this.$message({
+          message: "错误:字母+数字组合,至少包含一个字母和数字,长度控制在8-30",
+          center: true,
+          offset: 50,
+          type: "warning",
+        });
       } else if (this.password.length < 8 || this.password.length > 30) {
         this.$message({
           message: "错误:密码应该要符合8位到30位",
+          center: true,
+          offset: 50,
+          type: "warning",
+        });
+      } else if (!reg.test(this.password1)) {
+        this.$message({
+          message: "错误:字母+数字组合,至少包含一个字母和数字,长度控制在8-30",
           center: true,
           offset: 50,
           type: "warning",
