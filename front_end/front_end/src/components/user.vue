@@ -299,44 +299,55 @@
                     });
             },
             addstusubmitForm() {
-                axios({
-                        method: "post",
-                        url: "/api/addMessages",
-                        data: {
-                            stuID: this.addForm.addstudentnumber,
-                            stuName: this.addForm.addstudentname,
-                            stuBirth: this.addForm.addtime,
-                            stuSex: this.addForm.addsex,
-                            stuTel: this.addForm.addtel,
-                            stuClass: this.addForm.addclassnumber,
-                            stuDep: this.addForm.adddepartment,
-                            stuAddTimed: this.addsystemtime,
-                            stuImgUrl: this.addForm.adddialogImageUrl,
-                        },
-                    })
-                    .then((response) => {
-                        this.addVisible = false;
-                        this.$message({
-                            message: "恭喜你，添加成功",
-                            type: "success",
-                            center: true,
-                            offset: 50,
-                        });
-                        axios({
-                                method: "get",
-                                url: "/api/findAll",
-                            })
-                            .then((response) => {
-                                let body = response.data;
-                                this.stuData = body;
-                            })
-                            .catch((err) => {
-                                console.log("...err...", err);
-                            });
-                    })
-                    .catch((err) => {
-                        console.log("...err...", err);
+                if (this.addForm.addstudentnumber.length == 0 && this.addForm.addstudentname.length == 0 && this.addForm.addtime.length == 0 &&
+                    this.addForm.addsex.length == 0 && this.addForm.addtel.length == 0 && this.addForm.addclassnumber.length == 0 &&
+                    this.addForm.adddepartment.length == 0) {
+                    this.$message({
+                        message: "错误:存在空输入框，注册失败",
+                        center: true,
+                        offset: 50,
+                        type: "warning",
                     });
+                } else {
+                    axios({
+                            method: "post",
+                            url: "/api/addMessages",
+                            data: {
+                                stuID: this.addForm.addstudentnumber,
+                                stuName: this.addForm.addstudentname,
+                                stuBirth: this.addForm.addtime,
+                                stuSex: this.addForm.addsex,
+                                stuTel: this.addForm.addtel,
+                                stuClass: this.addForm.addclassnumber,
+                                stuDep: this.addForm.adddepartment,
+                                stuAddTimed: this.addsystemtime,
+                                stuImgUrl: this.addForm.adddialogImageUrl,
+                            },
+                        })
+                        .then((response) => {
+                            this.addVisible = false;
+                            this.$message({
+                                message: "恭喜你，学生添加成功",
+                                type: "success",
+                                center: true,
+                                offset: 50,
+                            });
+                            axios({
+                                    method: "get",
+                                    url: "/api/findAll",
+                                })
+                                .then((response) => {
+                                    let body = response.data;
+                                    this.stuData = body;
+                                })
+                                .catch((err) => {
+                                    console.log("...err...", err);
+                                });
+                        })
+                        .catch((err) => {
+                            console.log("...err...", err);
+                        });
+                }
             },
 
             selectrouteruser() {
@@ -602,7 +613,8 @@
                                 case "success":
                                     this.$message({
                                         type: 'success',
-                                        message: '注销成功!'
+                                        message: '注销成功!',
+                                        duration: 1000
                                     });
                                     this.$router.push({
                                         path: "/",
