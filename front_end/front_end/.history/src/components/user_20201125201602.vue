@@ -105,6 +105,7 @@
         <el-table-column align="center" prop="IBM1" label="IBM1班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM2" label="IBM2班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM3" label="IBM3班" width="100"> </el-table-column>
+        100
         <el-table-column align="center" prop="IBM5" label="IBM5班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM6" label="IBM6班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM7" label="IBM7班" width="100"> </el-table-column>
@@ -131,8 +132,7 @@
                 <el-option label="6" value="6"></el-option>
                 <el-option label="7" value="7"></el-option>
               </el-select>
-            </el-form-item>
-            </el-form-item>
+            </el-form-item></el-form-item>
 
           <el-form-item label="出生年月">  
             <el-input type="number" style="width: 60%" v-model="addForm.addtime" placeholder="20200501"></el-input> 
@@ -304,6 +304,7 @@
                     })
                     .then((response) => {
                         let body = response.data;
+                        console.log("统计" + body);
                         console.log(typeof body);
                         this.sumtableData = [{
 
@@ -314,7 +315,7 @@
                             intell: '65',
                             boys: 435,
                             girls: 45,
-                            IBM1: body[1].totalClass,
+                            IBM1: '6',
                             IBM2: '5',
                             IBM3: '6',
                             IBM4: '5',
@@ -338,6 +339,7 @@
                         },
                     })
                     .then((response) => {
+                        console.log('updateuserclose' + body.name)
                         let body = response.data;
                         this.username = body.name
 
@@ -389,6 +391,7 @@
                                             url: "/api/findAll",
                                         })
                                         .then((response) => {
+                                            console.log("新增成功")
                                             let body = response.data;
                                             this.stuData = body;
                                         })
@@ -428,6 +431,7 @@
                     })
                     .then((response) => {
                         let body = response.data;
+                        console.log(body)
                         this.passwordform.id = body.id
                         this.nameplaceholaer = body.name
                         this.telplaceholaer = body.tel
@@ -544,6 +548,7 @@
                     })
                     .then((response) => {
                         let body = response.data;
+                        console.log(body)
                         this.passwordform.id = body.id
                         this.nameplaceholaer = body.name
                         this.telplaceholaer = body.tel
@@ -567,10 +572,12 @@
                     })
                     .then((response) => {
                         let body = response.data;
+                        console.log(body);
                         (this.passwordform.id = body.id), (this.passwordform.name = body.name), (this.passwordform.tel = body.tel);
                         this.nameplaceholaer = body.name
                         this.telplaceholaer = body.tel
                         this.IDplaceholaer = body.id
+                        console.log(JSON.stringify(body));
                     })
                     .catch((err) => {
                         console.log("...err...", err);
@@ -670,6 +677,7 @@
                         })
                         .then((response) => {
                             let body = response.data;
+                            console.log(body)
                             switch (body) {
                                 case "success":
                                     this.$message({
@@ -710,6 +718,7 @@
             },
             //分页
             handleSizeChange(val) {
+                console.log("每页 ${val} 条");
                 this.currentPage = 1;
                 this.pageSize = val;
             },
@@ -724,7 +733,9 @@
         },
         created() {
             var name = this.$route.query.username;
+            console.log(name);
             this.username = name;
+            console.log(this.username);
             axios({
                     method: "get",
                     url: "/api/findAll",
@@ -739,6 +750,8 @@
         },
 
         mounted() {
+            console.log("mount");
+
             var d = new Date();
             let mon = d.getMonth() + 1;
             this.addsystemtime = d.getFullYear() + "-" + mon + "-" + d.getDate() + "  " + d.getHours() + ":" + d.getMinutes();

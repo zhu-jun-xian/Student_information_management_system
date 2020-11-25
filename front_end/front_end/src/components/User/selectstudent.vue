@@ -64,7 +64,7 @@
       </el-form>
     </el-dialog>
 
-    <el-dialog title="选择院系" :visible.sync="selectgendVisible" width="30%">
+    <el-dialog title="选择院系" :visible.sync="selectgendVisible" width="20%">
       <el-form :inline="true" :model="selectgendForm" class="selectgendForm_demo">
         <el-form-item label="系部：" prop="selectgendacademy">
           <el-select v-model="selectgendForm.selectgendacademy" placeholder="请选择">
