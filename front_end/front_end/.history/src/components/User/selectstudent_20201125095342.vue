@@ -5,14 +5,14 @@
         <el-button round  @click.native="selectnumVisible=true" >学生信息查询</el-button>
         <el-button round  @click.native="selectclassVisible=true">班级查询</el-button>
         <el-button round  @click.native="selectgendVisible=true">院系查询</el-button>
-        <el-input v-model="search1" placeholder="请输入学生姓名"  style="width:30%;padding-left:400px" @keydown.enter.native="validateCounts"></el-input>
+        <el-input v-model="search1" placeholder="请输入内容"  style="width:30%;padding-left:400px" ></el-input>
         
       <el-divider></el-divider>
     </div>
     <el-container>  
  
    <div>
-    <el-table border class="el-table-column" :data="stuData.slice((currentPage-1)*pageSize,currentPage*pageSize)" :default-sort = "{prop: 'date', order: 'descending'}" style="width: 100%" @row-click="rowclick">
+    <el-table border class="el-table-column" :data="stuData.slice((currentPage-1)*pageSize,currentPage*pageSize)||stuData.filter(data => !search || data.stuname.toLowerCase().includes(search.toLowerCase()))" :default-sort = "{prop: 'date', order: 'descending'}" style="width: 100%" @row-click="rowclick">
       <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%" sortable></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuID" label="学号"  width="170%" sortable></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名"  width="160%"></el-table-column>
@@ -22,6 +22,12 @@
       <el-table-column align="center" header-align="center" prop="stuClass" label="班级"  width="160%" sortable></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuDep" label="系部"  width="160%" sortable></el-table-column>
       <el-table-column align="center" header-align="center" prop="" label="操作"  width="180%">
+        <template slot="header" slot-scope="scope">
+        <el-input
+          v-model="search"
+          size="mini"
+          placeholder="输入关键字搜索"/>
+      </template>
       <el-button
           size="mini"
           @click.native="UpdateVisible = true">Edit</el-button>
@@ -141,7 +147,6 @@
       return {
         rowID:'',
         search:'',
-        search1:'',
          stuData: [{
             stuNum: '',
             stuID: '',
@@ -190,24 +195,6 @@
 
 
     methods: {
-      validateCounts(){
-        console.log(this.search1)
-        axios({
-          method:"post",
-          url:"/api/SelectByStuName",
-          data:{
-            stuName:this.search1
-          }
-        }).then(response=>{
-          console.log(response.data)
-          let body = response.data;
-          console.log(typeof (body));
-          this.stuData=[]
-          this.stuData=body
-          console.log(JSON.stringify(body)) 
-
-        })
-      },
 
       updateusermessage(){
          let stuid=this.rowID
@@ -403,6 +390,18 @@ alert("删除成功")
           console.log("...err...",err)
         });
     },
+    computed: {
+      NewItems() {
+         var _this = this;
+         var NewItems = [];
+        this.items.map(function(item) {
+        if (item.name.search(_this.searchVal) != -1) {
+        NewItems.push(item);
+          }
+   });
+   return NewItems;
+  }
+ }
   }
  
 </script>

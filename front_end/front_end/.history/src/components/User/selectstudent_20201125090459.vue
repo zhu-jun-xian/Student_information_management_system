@@ -2,10 +2,10 @@
   <div class="hello">
     <div>
         <el-button round  @click="selectAll" >查询全部信息</el-button>
-        <el-button round  @click.native="selectnumVisible=true" >学生信息查询</el-button>
+        <el-button round  @click.native="selectstuVisible=true" >学生信息查询</el-button>
         <el-button round  @click.native="selectclassVisible=true">班级查询</el-button>
         <el-button round  @click.native="selectgendVisible=true">院系查询</el-button>
-        <el-input v-model="search1" placeholder="请输入学生姓名"  style="width:30%;padding-left:400px" @keydown.enter.native="validateCounts"></el-input>
+        <el-input v-model="input" placeholder="请输入内容"  style="width:30%;padding-left:400px"></el-input>
         
       <el-divider></el-divider>
     </div>
@@ -141,7 +141,6 @@
       return {
         rowID:'',
         search:'',
-        search1:'',
          stuData: [{
             stuNum: '',
             stuID: '',
@@ -190,24 +189,6 @@
 
 
     methods: {
-      validateCounts(){
-        console.log(this.search1)
-        axios({
-          method:"post",
-          url:"/api/SelectByStuName",
-          data:{
-            stuName:this.search1
-          }
-        }).then(response=>{
-          console.log(response.data)
-          let body = response.data;
-          console.log(typeof (body));
-          this.stuData=[]
-          this.stuData=body
-          console.log(JSON.stringify(body)) 
-
-        })
-      },
 
       updateusermessage(){
          let stuid=this.rowID
@@ -365,24 +346,24 @@ alert("删除成功")
           })
         },
 
-       selectnumSubmit(){
-          console.log(this.selectnumForm.selectnum)
+       selectstuSubmit(){
+          console.log(this.selectstuForm.selectstunum)
           axios({
             method:"post",
             url:"/api/getMessagesById",
             data:{
-              stuID:this.selectnumForm.selectnum,
+              stuID:this.selectstuForm.selectstunum,
             }
           }).then(response=>{
             console.log(response.data)
             alert("查询成功")
-            this.selectnumVisible=false
+            this.selectstuVisible=false
               let body = response.data;
                 console.log(typeof (body));
                 this.stuData=body
                 console.log(JSON.stringify(body))        
           })  
-       },
+       }
     },
     //获取表格数据
     created(){

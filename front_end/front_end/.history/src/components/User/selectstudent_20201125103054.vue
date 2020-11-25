@@ -5,7 +5,7 @@
         <el-button round  @click.native="selectnumVisible=true" >学生信息查询</el-button>
         <el-button round  @click.native="selectclassVisible=true">班级查询</el-button>
         <el-button round  @click.native="selectgendVisible=true">院系查询</el-button>
-        <el-input v-model="search1" placeholder="请输入学生姓名"  style="width:30%;padding-left:400px" @keydown.enter.native="validateCounts"></el-input>
+        <el-input v-model="search1" placeholder="请输入内容"  style="width:30%;padding-left:400px"  @blur="validateCounts"></el-input>
         
       <el-divider></el-divider>
     </div>
@@ -22,6 +22,12 @@
       <el-table-column align="center" header-align="center" prop="stuClass" label="班级"  width="160%" sortable></el-table-column>
       <el-table-column align="center" header-align="center" prop="stuDep" label="系部"  width="160%" sortable></el-table-column>
       <el-table-column align="center" header-align="center" prop="" label="操作"  width="180%">
+        <template slot="header" slot-scope="scope">
+        <el-input
+          v-model="search"
+          size="mini"
+          placeholder="输入关键字搜索"/>
+      </template>
       <el-button
           size="mini"
           @click.native="UpdateVisible = true">Edit</el-button>
@@ -200,12 +206,8 @@
           }
         }).then(response=>{
           console.log(response.data)
-          let body = response.data;
-          console.log(typeof (body));
-          this.stuData=[]
-          this.stuData=body
-          console.log(JSON.stringify(body)) 
-
+          alert("搜索成功")
+          this.stuDat
         })
       },
 
