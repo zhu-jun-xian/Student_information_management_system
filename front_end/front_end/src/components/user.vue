@@ -344,6 +344,9 @@
                                 break
                         }
                         this.userVisible = false
+                        this.$router.push({
+                            path: "/",
+                        });
                     })
                     .catch((err) => {
                         console.log("...err...", err);
@@ -445,10 +448,37 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.$message({
-                        type: 'success',
-                        message: '注销成功!'
-                    });
+                    let id = this.$route.query.id;
+                    axios({
+                            method: "post",
+                            url: "/api/deleteUser",
+                            data: {
+                                id: id,
+                            },
+                        })
+                        .then((response) => {
+                            let body = response.data;
+                            switch (body) {
+                                case "删除成功":
+                                    this.$message({
+                                        type: 'success',
+                                        message: '修改用户信息成功!',
+
+                                    });
+                                    break
+                                    this.$message({
+                                        type: 'success',
+                                        message: '注销成功!'
+                                    });
+                                    this.$router.push({
+                                        path: "/",
+                                    });
+                            }
+                        })
+                        .catch((err) => {
+                            console.log("...err...", err);
+                        });
+
                 }).catch(() => {
                     this.$message({
                         type: 'info',
