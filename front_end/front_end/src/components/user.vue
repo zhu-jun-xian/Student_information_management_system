@@ -93,10 +93,22 @@
       </span>
 </el-dialog>
 
-<el-dialog :visible.sync="statisticsVisible" width="30%" @open="sumdialogopen">
+<el-dialog :visible.sync="statisticsVisible" width="83.8%" @open="sumdialogopen">
     <el-table :data="sumtableData" border style="width: 100%">
-        <el-table-column align="center" prop="girls" label="女" width="118"> </el-table-column>
-        <el-table-column align="center" prop="boys" label="男" width="118"> </el-table-column>
+        <el-table-column align="center" prop="artdesign" label="艺术设计学院" width="100"> </el-table-column>
+        <el-table-column align="center" prop="foreign" label="外国语学院" width="100"> </el-table-column>
+        <el-table-column align="center" prop="tumu" label="土木工程学院" width="100"> </el-table-column>
+        <el-table-column align="center" prop="economic" label="经济管理学院" width="100"> </el-table-column>
+        <el-table-column align="center" prop="intell" label="智能制造学部" width="100"> </el-table-column>
+        <el-table-column align="center" prop="girls" label="男" width="100"> </el-table-column>
+        <el-table-column align="center" prop="boys" label="女" width="100"> </el-table-column>
+        <el-table-column align="center" prop="IBM1" label="IBM1班" width="100"> </el-table-column>
+        <el-table-column align="center" prop="IBM2" label="IBM2班" width="100"> </el-table-column>
+        <el-table-column align="center" prop="IBM3" label="IBM3班" width="100"> </el-table-column>
+        100
+        <el-table-column align="center" prop="IBM5" label="IBM5班" width="100"> </el-table-column>
+        <el-table-column align="center" prop="IBM6" label="IBM6班" width="100"> </el-table-column>
+        <el-table-column align="center" prop="IBM7" label="IBM7班" width="100"> </el-table-column>
     </el-table>
 </el-dialog>
 
@@ -192,8 +204,20 @@
                     repass: "",
                 },
                 sumtableData: [{
+                    artdesign: '',
+                    foreign: '',
+                    tumu: '',
+                    economic: "",
+                    intell: '',
                     girls: "",
                     boys: "",
+                    IBM1: '',
+                    IBM2: '',
+                    IBM3: '',
+                    IBM4: '',
+                    IBM5: '',
+                    IBM6: '',
+                    IBM7: '',
                 }, ],
                 statisticsForm: {
                     irule: "",
@@ -284,8 +308,21 @@
                         console.log("统计" + body);
                         console.log(typeof body);
                         this.sumtableData = [{
-                            boys: body,
-                            girls: body,
+
+                            artdesign: '65',
+                            foreign: '65',
+                            tumu: '6',
+                            economic: "5",
+                            intell: '65',
+                            boys: 435,
+                            girls: 45,
+                            IBM1: '6',
+                            IBM2: '5',
+                            IBM3: '6',
+                            IBM4: '5',
+                            IBM5: '33',
+                            IBM6: '456',
+                            IBM7: '54',
                         }, ];
                         console.log(JSON.stringify(body));
                     })
