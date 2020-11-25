@@ -597,6 +597,7 @@
                         })
                         .then((response) => {
                             let body = response.data;
+                            console.log(body)
                             switch (body) {
                                 case "success":
                                     this.$message({
