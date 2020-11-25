@@ -31,7 +31,7 @@
 <el-submenu index="3">
     <template slot="title"><i class="el-icon-setting"></i>设置</template>
     <el-menu-item-group>
-        <el-menu-item index="3-1" @click.native="UpdateVisible = true">修改用户信息</el-menu-item>
+        <el-menu-item index="3-1" @click.native="userVisible = true">修改用户信息</el-menu-item>
         <el-menu-item index="3-2" @click.native="passwordVisible = true">修改密码</el-menu-item>
         <el-menu-item index="3-3" @click="exituser">注销账户</el-menu-item>
     </el-menu-item-group>
@@ -44,7 +44,26 @@
 </el-main>
 </el-container>
 </el-container>
+<el-dialog title="修改用户信息" :visible.sync="userVisible" width="35%" @open="updateuseropen">
+    <span>
+      <el-form ref="passwordform" :model="passwordform" label-width="100px">
+        <el-form-item label="登陆ID" prop="id">
+          <el-input v-model="passwordform.id" plain disabled></el-input>
+        </el-form-item>
+        <el-form-item label="姓名" prop="name">
+          <el-input v-model="passwordform.name" placeholder="nameplaceholaer" ></el-input>
+        </el-form-item>
 
+        <el-form-item label="手机" prop="tel">
+          <el-input v-model="passwordform.tel" placeholder="telplaceholaer"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="updateuseronSubmit">确认</el-button>
+          <el-button @click="resetForm('passwordform')">清空</el-button>
+        </el-form-item>
+      </el-form>
+    </span>
+</el-dialog>
 <el-dialog title="修改登录密码" :visible.sync="passwordVisible" width="35%" @open="updatepasswordopen">
     <span>
         <el-form ref="passwordform" :model="passwordform" label-width="100px">
@@ -52,16 +71,16 @@
             <el-input v-model="passwordform.id" plain disabled></el-input>
           </el-form-item>
           <el-form-item label="姓名" prop="name">
-            <el-input v-model="passwordform.name" :disabled="namedisable"></el-input>
+            <el-input v-model="passwordform.name" disabled></el-input>
           </el-form-item>
 
           <el-form-item label="手机" prop="tel">
-            <el-input v-model="passwordform.tel" :disabled="teldisable"></el-input>
+            <el-input v-model="passwordform.tel" disabled></el-input>
           </el-form-item>
-          <el-form-item label="修改密码" prop="pass">
+          <el-form-item   label="修改密码" prop="pass">
             <el-input v-model="passwordform.pass"></el-input>
           </el-form-item>
-          <el-form-item label="确认密码" prop="repass">
+          <el-form-item  label="确认密码" prop="repass">
             <el-input v-model="passwordform.repass"></el-input>
           </el-form-item>
           <el-form-item>
@@ -135,6 +154,9 @@
     export default {
         data() {
             return {
+                nameplaceholaer: '',
+                telplaceholaer: '',
+                userVisible: false,
                 addsystemtime: '',
                 ifimg: true,
                 tabPosition: "left",
@@ -299,10 +321,56 @@
             handleClose(key, keyPath) {
                 console.log(key, keyPath);
             },
+            updateuseronSubmit() {
+                let id = this.$route.query.id;
+                axios({
+                        method: "post",
+                        url: "/api/updateUserTableByID",
+                        data: {
+                            id: id,
+                            name: this.passwordform.name,
+                            tel: this.passwordform.tel
+                        },
+                    })
+                    .then((response) => {
+                        let body = response.data;
+                        switch (body) {
+                            case "success":
+                                this.$message({
+                                    type: 'success',
+                                    message: '修改用户信息成功!',
 
+                                });
+                                break
+                        }
+                    })
+                    .catch((err) => {
+                        console.log("...err...", err);
+                    });
+            },
+            updateuseropen() {
+                let id = this.$route.query.id;
+                axios({
+                        method: "post",
+                        url: "/api/getUserById1",
+                        data: {
+                            id: id,
+                        },
+                    })
+                    .then((response) => {
+                        let body = response.data;
+                        console.log(body)
+                        this.passwordform.id = body.id
+                        this.nameplaceholaer = body.name
+                        this.telplaceholaer = body.tel
+
+                    })
+                    .catch((err) => {
+                        console.log("...err...", err);
+                    });
+            },
             updatepasswordopen() {
-                this.namedisable = true;
-                this.teldisable = true;
+
                 let id = this.$route.query.id;
                 axios({
                         method: "post",
