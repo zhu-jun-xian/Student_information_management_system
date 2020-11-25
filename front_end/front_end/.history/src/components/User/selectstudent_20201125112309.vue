@@ -356,18 +356,22 @@
           this.stuData = [body]
         })
       },
-    },
+    },\
     //获取表格数据
     created() {
       var name = this.$route.query.username;
       console.log(name)
       this.username = name;
+      console.log(this.username)
       axios({
         method: "get",
         url: "/api/findAll",
       }).then(response => {
         let body = response.data;
+
+        console.log(typeof (body));
         this.stuData = body
+        console.log(JSON.stringify(body))
       }).catch(err => {
         console.log("...err...", err)
       });

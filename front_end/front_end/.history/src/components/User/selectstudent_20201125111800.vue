@@ -191,8 +191,8 @@
       validateCounts() {
         console.log("搜索内容...",this.search1)
         axios({
-          method: "post",
-          url: "/api/SelectByStuName",
+          method: "get",
+          url: "/api/SelectByStuAll",
           data: {
             stuName: this.search1
           }
@@ -227,11 +227,13 @@
               url: "/api/findAll",
             }).then(response => {
               let body = response.data;
+
               this.stuData = body
             }).catch(err => {
               console.log("...err...", err)
             });
           }
+
         }).catch(err => {
           console.log("...err...", err)
         });
@@ -250,6 +252,7 @@
             stuID: stuid
           }
         }).then(response => {
+          console.log(response.data)
           if (response.data == "ok") {
             alert("删除成功")
             axios({
@@ -257,6 +260,8 @@
               url: "/api/findAll",
             }).then(response => {
               let body = response.data;
+
+              console.log(typeof (body));
               this.stuData = body
             }).catch(err => {
               console.log("...err...", err)
@@ -301,6 +306,7 @@
           url: "/api/findAll",
         }).then(response => {
           let body = response.data;
+          console.log(typeof (body));
           this.stuData = body
         }).catch(err => {
           console.log("...err...", err)
@@ -309,7 +315,7 @@
 
 
       selectgendSubmit() {
-        console.log("院系...",this.selectgendForm.selectgendacademy)
+        console.log(this.selectgendForm.selectgendacademy)
         axios({
           method: "post",
           url: "/api/SelectByStuDep",
@@ -317,15 +323,19 @@
             stuDep: this.selectgendForm.selectgendacademy,
           }
         }).then(response => {
+          console.log(response.data)
+          alert("查询成功")
           this.selectgendVisible = false
-          let body = response.data   
+          let body = response.data;
+          console.log(typeof (body));
           this.stuData = []
           this.stuData = body
+          console.log(JSON.stringify(body))
         })
       },
 
       selectclassSubmit() {
-        console.log("班级...",this.selectclassForm.selectclass)
+        console.log(this.selectclassForm.selectclass)
         axios({
           method: "post",
           url: "/api/SelectByStuClass",
@@ -333,17 +343,21 @@
             stuClass: this.selectclassForm.selectclass,
           }
         }).then(response => {
+          console.log(response.data)
+          alert("查询成功")
           this.selectclassVisible = false
           let body = response.data;
+          console.log(typeof (body));
           this.stuData = []
           this.stuData = body
+          console.log(JSON.stringify(body))
         })
       },
 
       //按照学号查询
       selectnumSubmit() {
         //
-        console.log('学号...',this.selectnumForm.selectnum)
+        console.log('学号。。。',this.selectnumForm.selectnum)
         axios({
           method: "post",
           url: "/api/getMessagesById",
@@ -362,12 +376,16 @@
       var name = this.$route.query.username;
       console.log(name)
       this.username = name;
+      console.log(this.username)
       axios({
         method: "get",
         url: "/api/findAll",
       }).then(response => {
         let body = response.data;
+
+        console.log(typeof (body));
         this.stuData = body
+        console.log(JSON.stringify(body))
       }).catch(err => {
         console.log("...err...", err)
       });
