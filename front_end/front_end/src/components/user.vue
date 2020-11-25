@@ -52,11 +52,11 @@
             <el-input v-model="passwordform.id" plain disabled></el-input>
           </el-form-item>
           <el-form-item label="姓名" prop="name">
-            <el-input v-model="passwordform.name" disabled></el-input>
+            <el-input v-model="passwordform.name" :disabled="namedisable"></el-input>
           </el-form-item>
 
           <el-form-item label="手机" prop="tel">
-            <el-input v-model="passwordform.tel" disabled></el-input>
+            <el-input v-model="passwordform.tel" :disabled="teldisable"></el-input>
           </el-form-item>
           <el-form-item label="修改密码" prop="pass">
             <el-input v-model="passwordform.pass"></el-input>
@@ -301,8 +301,9 @@
             },
 
             updatepasswordopen() {
-                console.log("updatepasswordopen");
-                let id = this.$route.query.username;
+                this.namedisable = true;
+                this.teldisable = true;
+                let id = this.$route.query.id;
                 axios({
                         method: "post",
                         url: "/api/getUserById1",
