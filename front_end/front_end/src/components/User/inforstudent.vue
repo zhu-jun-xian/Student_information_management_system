@@ -274,4 +274,11 @@ export default {
   height: 178px;
   display: block;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 </style>
