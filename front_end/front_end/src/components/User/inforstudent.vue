@@ -12,9 +12,10 @@
           <el-table-column align="center" header-align="center" prop="stuClass" label="班级" width="160%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="stuDep" label="系部" width="160%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="" label="操作" width="180%">
-            <el-button size="mini" type="primary" icon="el-icon-edit" circle @click.native="UpdateVisible = true"></el-button>
-
-            <el-button size="mini" type="danger" icon="el-icon-delete" circle @click.native.prevent="deleteRow()"></el-button>
+            <template slot-scope="scope">
+              <el-button size="mini" type="primary" icon="el-icon-edit" circle @click.native="UpdateVisible = true"></el-button>
+              <el-button size="mini" type="danger" icon="el-icon-delete" circle @click.native.prevent="deleteRow(scope.$index, stuData)"></el-button>
+            </template>
           </el-table-column>
         </el-table>
         <div class="block" style="margin-top: 15px">
@@ -110,6 +111,11 @@ export default {
   },
 
   methods: {
+    //获取一行的学号
+    rowclick(row) {
+      this.rowID = row.stuID;
+      return row.stuID;
+    },
     updateusermessage() {
       let stuid = this.rowID;
       if (this.Updateform.name.length == 0 || this.Updateform.time.length == 0 || this.Updateform.sex.length == 0 || this.Updateform.tel.length == 0 || this.Updateform.classnumber.length == 0 || this.Updateform.department.length == 0) {
@@ -160,46 +166,60 @@ export default {
       }
     },
     //删除学生信息
-    deleteRow() {
-      let stuid = this.rowID;
-
-      axios({
-        method: "post",
-        url: "/api/deleteMessagesById",
-        data: {
-          stuID: stuid,
-        },
+    deleteRow(index, rows) {
+      // let stuid = this.rowID;
+      // rows.splice(index, 1);
+      // console.log(index);
+      // console.log(rows[index].stuID);
+      let stuid = rows[index].stuID;
+      this.$confirm("信息删除不可恢复,请确认是否删除学号为:" + rows[index].stuID + ",姓名为：" + rows[index].stuName + "的学生吗？, 是否继续?", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
-        .then((response) => {
-          if (response.data == "ok") {
-            axios({
-              method: "get",
-              url: "/api/findAll",
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "删除成功!",
+          });
+          axios({
+            method: "post",
+            url: "/api/deleteMessagesById",
+            data: {
+              stuID: stuid,
+            },
+          })
+            .then((response) => {
+              if (response.data == "ok") {
+                axios({
+                  method: "get",
+                  url: "/api/findAll",
+                })
+                  .then((response) => {
+                    let body = response.data;
+                    this.stuData = body;
+                  })
+                  .catch((err) => {
+                    console.log("...err...", err);
+                  });
+                this.$message({
+                  type: "success",
+                  message: "删除成功!",
+                  duration: 1000,
+                });
+                // location.reload();
+              }
             })
-              .then((response) => {
-                let body = response.data;
-                this.stuData = body;
-              })
-              .catch((err) => {
-                console.log("...err...", err);
-              });
-            this.$message({
-              type: "success",
-              message: "删除成功!",
-              duration: 1000,
+            .catch((err) => {
+              console.log("...err...", err);
             });
-            // location.reload();
-          }
         })
-        .catch((err) => {
-          console.log("...err...", err);
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
         });
-    },
-
-    //获取一行的学号
-    rowclick(row) {
-      this.rowID = row.stuID;
-      return row.stuID;
     },
 
     handleClose(key, keyPath) {
