@@ -298,9 +298,11 @@
                         console.log("...err...", err);
                     });
             },
+
+            //添加学生信息
             addstusubmitForm() {
-                if (this.addForm.addstudentnumber.length == 0 && this.addForm.addstudentname.length == 0 && this.addForm.addtime.length == 0 &&
-                    this.addForm.addsex.length == 0 && this.addForm.addtel.length == 0 && this.addForm.addclassnumber.length == 0 &&
+                if (this.addForm.addstudentnumber.length == 0 || this.addForm.addstudentname.length == 0 || this.addForm.addtime.length == 0 ||
+                    this.addForm.addsex.length == 0 || this.addForm.addtel.length == 0 || this.addForm.addclassnumber.length == 0 ||
                     this.addForm.adddepartment.length == 0) {
                     this.$message({
                         message: "错误:存在空输入框，注册失败",
@@ -326,12 +328,6 @@
                         })
                         .then((response) => {
                             this.addVisible = false;
-                            this.$message({
-                                message: "恭喜你，学生添加成功",
-                                type: "success",
-                                center: true,
-                                offset: 50,
-                            });
                             axios({
                                     method: "get",
                                     url: "/api/findAll",
@@ -343,6 +339,12 @@
                                 .catch((err) => {
                                     console.log("...err...", err);
                                 });
+                            this.$message({
+                                type: 'success',
+                                message: '新增学生信息成功!',
+                            });
+
+
                         })
                         .catch((err) => {
                             console.log("...err...", err);
