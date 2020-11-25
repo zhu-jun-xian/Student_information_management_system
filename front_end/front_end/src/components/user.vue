@@ -638,6 +638,7 @@
                         type: 'info',
                         message: '已取消删除注销'
                     });
+                    location.reload();
                 });
             },
             exit() {
