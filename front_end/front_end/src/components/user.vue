@@ -312,7 +312,7 @@
                     })
                     .then((response) => {
                         let body = response.data;
-                        console.log(typeof body);
+                        console.log(body);
                         (this.passwordform.id = body.id), (this.passwordform.name = body.name), (this.passwordform.tel = body.tel);
                         console.log(JSON.stringify(body));
                     })

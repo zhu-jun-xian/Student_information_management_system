@@ -35,11 +35,11 @@
           <label>Telephone</label>
         </div>
         <div class="inputbox">
-          <input type="password" v-model="tel" maxlength="30" show-word-limit />
+          <input type="password" v-model="password" maxlength="30" show-word-limit />
           <label>Password</label>
         </div>
         <div class="inputbox">
-          <input type="password1" v-model="tel" maxlength="30" show-word-limit />
+          <input type="password" v-model="password1" maxlength="30" show-word-limit />
           <label>Confirm Password</label>
         </div>
         <el-button class="button" @click="registerUser" type="primary" round icon="el-icon-check">Register</el-button>
