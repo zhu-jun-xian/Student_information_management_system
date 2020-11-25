@@ -112,7 +112,6 @@ export default {
   methods: {
     updateusermessage() {
       let stuid = this.rowID;
-      console.log("updateusermessage:" + stuid);
       if (this.Updateform.name.length == 0 || this.Updateform.time.length == 0 || this.Updateform.sex.length == 0 || this.Updateform.tel.length == 0 || this.Updateform.classnumber.length == 0 || this.Updateform.department.length == 0) {
         this.$message({
           message: "错误:存在空输入框，修改失败",
@@ -135,7 +134,6 @@ export default {
           },
         })
           .then((response) => {
-            console.log(response.data);
             this.UpdateVisible = false;
             if (response.data == "ok") {
               this.$message({
@@ -173,7 +171,6 @@ export default {
         },
       })
         .then((response) => {
-          console.log(response.data);
           if (response.data == "ok") {
             axios({
               method: "get",
@@ -181,10 +178,7 @@ export default {
             })
               .then((response) => {
                 let body = response.data;
-
-                console.log(typeof body);
                 this.stuData = body;
-                console.log(JSON.stringify(body));
               })
               .catch((err) => {
                 console.log("...err...", err);
@@ -205,7 +199,6 @@ export default {
     //获取一行的学号
     rowclick(row) {
       this.rowID = row.stuID;
-      console.log("rowclick:" + row.stuID);
       return row.stuID;
     },
 
@@ -220,7 +213,6 @@ export default {
 
     //分页
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.currentPage = 1;
       this.pageSize = val;
     },
@@ -231,9 +223,7 @@ export default {
   //获取表格数据
   created() {
     var name = this.$route.query.username;
-    console.log(name);
     this.username = name;
-    console.log(this.username);
     axios({
       method: "get",
       url: "/api/findAll",

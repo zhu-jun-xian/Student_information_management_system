@@ -304,7 +304,6 @@
                     })
                     .then((response) => {
                         let body = response.data;
-                        console.log("统计" + body);
                         console.log(typeof body);
                         this.sumtableData = [{
 
@@ -315,7 +314,7 @@
                             intell: '65',
                             boys: 435,
                             girls: 45,
-                            IBM1: '6',
+                            IBM1: body[1].totalClass,
                             IBM2: '5',
                             IBM3: '6',
                             IBM4: '5',

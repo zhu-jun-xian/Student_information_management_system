@@ -110,7 +110,6 @@ export default {
             let body = response.data;
             switch (body) {
               case "success":
-                console.log(body);
                 axios({
                   method: "post",
                   url: "/api/getUserById1",
@@ -137,7 +136,6 @@ export default {
 
                 break;
               case "fault":
-                console.log(body);
                 this.$message({
                   message: "错误:没有登录成功",
                   center: true,
