@@ -130,7 +130,7 @@
             <el-option label="女" value="女"></el-option> </el-select>
         </el-form-item>
         <el-form-item label="系部：" prop="fuzzyacademy">
-          <el-select v-model="selectfuzzyForm.fuzzyacademy" placeholder="请选择院系">
+          <el-select v-model="selectfuzzyForm.fuzzyacademy" placeholder="请选择">
             <el-option label="智能制造学部" value="智能制造学部"></el-option>
             <el-option label="土木工程学院" value="土木工程学院"></el-option>
             <el-option label="经济管理学院" value="经济管理学院"></el-option>
