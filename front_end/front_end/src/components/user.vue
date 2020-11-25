@@ -327,28 +327,32 @@
                             },
                         })
                         .then((response) => {
-                            this.addVisible = false;
-                            axios({
-                                    method: "get",
-                                    url: "/api/findAll",
-                                })
-                                .then((response) => {
-                                    let body = response.data;
-                                    this.stuData = body;
-                                })
-                                .catch((err) => {
-                                    console.log("...err...", err);
-                                });
+
+
                             this.$message({
                                 type: 'success',
                                 message: '新增学生信息成功!',
                             });
 
-
+                            this.addVisible = false;
                         })
                         .catch((err) => {
                             console.log("...err...", err);
                         });
+                    axios({
+                            method: "get",
+                            url: "/api/findAll",
+                        })
+                        .then((response) => {
+                            console.log("新增成功")
+                            let body = response.data;
+                            this.stuData = body;
+                        })
+                        .catch((err) => {
+                            console.log("...err...", err);
+                        });
+                    location.reload();
+
                 }
             },
 
