@@ -68,14 +68,14 @@
     <span>
         <el-form ref="passwordform" :model="passwordform" label-width="100px">
           <el-form-item label="登陆ID" prop="id">
-            <el-input v-model="passwordform.id" plain disabled></el-input>
+            <el-input v-model="passwordform.id" plain disabled :placeholder="IDplaceholaer"></el-input>
           </el-form-item>
           <el-form-item label="姓名" prop="name">
-            <el-input v-model="passwordform.name" disabled></el-input>
+            <el-input v-model="passwordform.name" disabled :placeholder="nameplaceholaer"></el-input>
           </el-form-item>
 
           <el-form-item label="手机" prop="tel">
-            <el-input v-model="passwordform.tel" disabled></el-input>
+            <el-input v-model="passwordform.tel" disabled :placeholder="telplaceholaer"></el-input>
           </el-form-item>
           <el-form-item   label="修改密码" prop="pass">
             <el-input v-model="passwordform.pass"></el-input>
@@ -495,6 +495,9 @@
                         let body = response.data;
                         console.log(body);
                         (this.passwordform.id = body.id), (this.passwordform.name = body.name), (this.passwordform.tel = body.tel);
+                        this.nameplaceholaer = body.name
+                        this.telplaceholaer = body.tel
+                        this.IDplaceholaer = body.id
                         console.log(JSON.stringify(body));
                     })
                     .catch((err) => {
@@ -503,7 +506,7 @@
             },
             // 将表单数据添加到表格中去
             updatepassonSubmit() {
-                if (this.passwordfrom.pass.length === 0 || this.password.repass.length === 0) {
+                if (this.passwordfrom.pass.length == 0 || this.password.repass.length == 0) {
                     alert("存在空输入框，修改失败");
                 } else if (this.passwordfrom.pass.length < 8 || this.password.repass.length > 30) {
                     alert("密码要符合8到30 位，修改失败");
@@ -514,6 +517,7 @@
                             data: {
                                 id: this.passwordform.id,
                                 password: this.passwordform.pass,
+
                             },
                         })
                         .then((response) => {
