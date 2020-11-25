@@ -48,7 +48,7 @@
     <span>
       <el-form ref="passwordform" :model="passwordform" label-width="100px">
         <el-form-item label="登陆ID" prop="id">
-          <el-input v-model="passwordform.id" plain disabled></el-input>
+          <el-input v-model="passwordform.id" plain disabled :placeholder="IDplaceholaer"></el-input>
         </el-form-item>
         <el-form-item label="姓名" prop="name">
           <el-input v-model="passwordform.name" :placeholder="nameplaceholaer" ></el-input>
@@ -154,6 +154,7 @@
     export default {
         data() {
             return {
+                IDplaceholaer: '',
                 nameplaceholaer: '张三',
                 telplaceholaer: '13440213456',
                 userVisible: false,
@@ -472,6 +473,8 @@
                         this.passwordform.id = body.id
                         this.nameplaceholaer = body.name
                         this.telplaceholaer = body.tel
+                        this.IDplaceholaer = body.id
+
 
                     })
                     .catch((err) => {
