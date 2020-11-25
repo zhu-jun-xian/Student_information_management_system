@@ -262,7 +262,11 @@
           }
         }).then(response => {
           if (response.data == "ok") {
-            alert("删除成功")
+            this.$message({
+                  type: "success",
+                  message: "删除成功!",
+                  duration: 1000,
+                });
             axios({
               method: "get",
               url: "/api/findAll",
