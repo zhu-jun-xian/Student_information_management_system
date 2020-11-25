@@ -68,7 +68,7 @@ export default {
       this.$router.push({ path: "/" });
     },
     registerUser() {
-      var reg = /^(?![^a-zA-Z]+$)(?!\D+$).{8,30}$/;
+      var reg = new RegExp("(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0-9]).{8,30}");
       if ((this.ID.length === 0 || this.username.length === 0 || this.tel.length === 0 || this.password.length === 0 || this, this.password1.length == 0)) {
         this.$message({
           message: "错误:存在空输入框，注册失败",

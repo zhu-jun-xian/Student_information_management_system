@@ -68,7 +68,7 @@ export default {
       this.$router.push({ path: "/register" });
     },
     login() {
-      var reg = /^(?![^a-zA-Z]+$)(?!\D+$).{8,30}$/;
+      var reg = new RegExp('(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0-9]).{8,30}');
       if (this.ID.length === 0 || this.password.length == 0) {
         this.$message({
           message: "错误:密码和用户ID不能为空",
