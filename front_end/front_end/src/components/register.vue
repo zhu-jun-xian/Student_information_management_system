@@ -23,23 +23,23 @@
       <h2>Register</h2>
       <form>
         <div class="inputbox">
-          <input type="number" v-model="ID" maxlength="30" show-word-limit name="" required="" />
+          <input type="number" v-model="ID" maxlength="30" show-word-limit />
           <label>ID</label>
         </div>
         <div class="inputbox">
-          <input type="text" v-model="username" minlength="10" show-word-limit name="" required="" />
+          <input type="text" v-model="username" maxlength="30" show-word-limit />
           <label>Username</label>
         </div>
         <div class="inputbox">
-          <input type="number" v-model="tel" maxlength="11" minlength="11" show-word-limit name=" " required="" />
+          <input type="number" v-model="tel" maxlength="30" show-word-limit />
           <label>Telephone</label>
         </div>
         <div class="inputbox">
-          <input type="password" v-model="password" maxlength="30" minlength="8" name="" required="" />
+          <input type="password" v-model="password" maxlength="30" show-word-limit />
           <label>Password</label>
         </div>
         <div class="inputbox">
-          <input type="password" v-model="password1" maxlength="30" minlength="8" name="" required="" />
+          <input type="password" v-model="password1" maxlength="30" show-word-limit />
           <label>Confirm Password</label>
         </div>
         <el-button class="button" @click="registerUser" type="primary" round icon="el-icon-check">Register</el-button>
@@ -68,7 +68,7 @@ export default {
       this.$router.push({ path: "/" });
     },
     registerUser() {
-      console.log(typeof this.tel);
+      var reg = new RegExp("(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0-9]).{8,30}");
       if ((this.ID.length === 0 || this.username.length === 0 || this.tel.length === 0 || this.password.length === 0 || this, this.password1.length == 0)) {
         this.$message({
           message: "错误:存在空输入框，注册失败",
@@ -76,9 +76,9 @@ export default {
           offset: 50,
           type: "warning",
         });
-      } else if (this.username.length <= 0 || this.username.length > 10) {
+      } else if (this.username.length <= 0 || this.username.length > 30) {
         this.$message({
-          message: "错误:用户名没有符合要求",
+          message: "错误:用户名应该要符合1位到30位",
           center: true,
           offset: 50,
           type: "warning",
@@ -97,9 +97,23 @@ export default {
           offset: 50,
           type: "warning",
         });
+      } else if (!reg.test(this.password)) {
+        this.$message({
+          message: "错误:密码应由大小写字母+特殊字符组合,长度控制在8-30",
+          center: true,
+          offset: 50,
+          type: "warning",
+        });
       } else if (this.password.length < 8 || this.password.length > 30) {
         this.$message({
           message: "错误:密码应该要符合8位到30位",
+          center: true,
+          offset: 50,
+          type: "warning",
+        });
+      } else if (!reg.test(this.password1)) {
+        this.$message({
+          message: "错误:字母+数字组合,至少包含一个字母和数字,长度控制在8-30",
           center: true,
           offset: 50,
           type: "warning",
@@ -225,7 +239,7 @@ export default {
   border: none;
   border-bottom: 1px solid #fff;
   outline: none;
-  /*outline用于绘制元素周围的线
+  /* outline用于绘制元素周围的线
     outline：none在这里用途是将输入框的边框的线条使其消失*/
   background: transparent;
   /*背景颜色为透明*/
@@ -238,14 +252,11 @@ export default {
   padding: 10px 0;
   font-size: 16px;
   color: #fff;
-  pointer-events: none;
-  /*鼠标事件消失，比如说选中文字，光标定位，超链接下划线*/
-  transition: 0.5s;
-  /*过渡时间5s*/
 }
 .box .inputbox input:focus ~ label,
 .box .inputbox input:valid ~ label {
-  top: -18px;
+  position: absolute;
+  top: -30px;
   left: 0;
   color: #03a9f4;
   font-size: 14px;
@@ -258,9 +269,9 @@ export default {
   color: #fff;
   background: #03a9f4;
   padding: 15px 20px;
-  cursor: pointer;
-  /*光标呈现为指示链接的指针（一只手）*/
-  border-radius: 10px;
+  /*cursor: pointer;
+  光标呈现为指示链接的指针（一只手）
+  border-radius: 10px;*/
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

@@ -34,11 +34,11 @@
       <form>
         <div class="inputbox">
           <input type="number" v-model="ID" maxlength="30" show-word-limit name="" required="" />
-          <label>ID</label>
+          <label v-if="ID.length == 0">ID</label>
         </div>
         <div class="inputbox">
           <input type="password" v-model="password" maxlength="30" minlength="8" name=" " required="" />
-          <label>Password</label>
+          <label v-if="password.length == 0">Password</label>
         </div>
         <div>
           <el-button class="button" @click="login" type="primary" round icon="el-icon-check">Login</el-button>
@@ -68,9 +68,17 @@ export default {
       this.$router.push({ path: "/register" });
     },
     login() {
+      var reg = new RegExp("(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0-9]).{8,30}");
       if (this.ID.length === 0 || this.password.length == 0) {
         this.$message({
           message: "错误:密码和用户ID不能为空",
+          center: true,
+          offset: 50,
+          type: "warning",
+        });
+      } else if (!reg.test(this.password)) {
+        this.$message({
+          message: "错误:密码应由大小写字母+特殊字符组合,长度控制在8-30",
           center: true,
           offset: 50,
           type: "warning",
@@ -242,7 +250,7 @@ export default {
 }
 .box .inputbox input:focus ~ label,
 .box .inputbox input:valid ~ label {
-  top: -18px;
+  top: -30px;
   left: 0;
   color: #03a9f4;
   font-size: 14px;
