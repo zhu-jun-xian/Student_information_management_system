@@ -369,7 +369,7 @@
                 this.dialogImageUrl = file.url;
             },
 
-            exit() {
+            exituser() {
                 this.$router.push({
                     path: "/",
                 });
