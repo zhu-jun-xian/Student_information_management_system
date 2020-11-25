@@ -26,7 +26,7 @@
     <el-dialog title="修改学生信息" :visible.sync="UpdateVisible" width="35%">
       <span>
         <el-form ref="Updateform" :model="Updateform" label-width="100px">
-          <el-form-item label="学号" prop="studentnumber">             <el-input v-model="rowID" plain disabled></el-input>           </el-form-item>
+          <el-form-item label="学号" prop="studentnumber">    <el-input v-model="rowID" plain disabled></el-input>           </el-form-item>
           <el-form-item label="学生姓名" prop="name">
             <el-input v-model="Updateform.name"></el-input>
           </el-form-item>
@@ -103,6 +103,16 @@ export default {
     updateusermessage() {
       let stuid = this.rowID;
       console.log("updateusermessage:" + stuid);
+      if (this.Updateform.name.length == 0 || this.Updateform.time.length == 0 || this.Updateform.sex.length == 0 ||
+          this.Updateform.tel.length == 0 || this.Updateform.classnumber.length == 0 || this.Updateform.department.length == 0 ) 
+        {
+        this.$message({
+              message: "错误:存在空输入框，修改失败",
+              center: true,
+              offset: 50,
+              type: "warning",
+        });
+  } else {
       axios({
         method: "post",
         url: "/api/updateMessagesById",
@@ -141,8 +151,8 @@ export default {
         .catch((err) => {
           console.log("...err...", err);
         });
+    }
     },
-
     //删除学生信息
     deleteRow() {
       let stuid = this.rowID;

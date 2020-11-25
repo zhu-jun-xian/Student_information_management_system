@@ -305,7 +305,7 @@
                     this.addForm.addsex.length == 0 || this.addForm.addtel.length == 0 || this.addForm.addclassnumber.length == 0 ||
                     this.addForm.adddepartment.length == 0) {
                     this.$message({
-                        message: "错误:存在空输入框，注册失败",
+                        message: "错误:存在空输入框，添加失败",
                         center: true,
                         offset: 50,
                         type: "warning",
@@ -381,7 +381,7 @@
                     .catch((err) => {
                         console.log("...err...", err);
                     });
-                if (this.passwordform.name.length == 0 && this.passwordform.tel.length == 0) {
+                if (this.passwordform.name.length == 0 || this.passwordform.tel.length == 0) {
                     this.$message({
                         message: "错误:空输入，不能修改",
                         center: true,
