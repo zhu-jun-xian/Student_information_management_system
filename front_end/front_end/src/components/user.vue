@@ -110,14 +110,24 @@
             <el-input v-model="addForm.addstudentnumber" style="width: 60%"></el-input>
           </el-form-item>
           <el-form-item label="班级">
-            <el-input v-model="addForm.addclassnumber" style="width: 60%"></el-input>
+            <!-- <el-input v-model="addForm.addclassnumber" style="width: 60%"></el-input> -->
+              <el-select v-model="addForm.addclassnumber" placeholder="请选择">
+                <el-option label="1" value="1"></el-option>
+                <el-option label="2" value="2"></el-option>
+                <el-option label="3" value="3"></el-option>
+                <el-option label="4" value="4"></el-option>
+                <el-option label="5" value="5"></el-option>
+                <el-option label="6" value="6"></el-option>
+                <el-option label="7" value="7"></el-option>
+              </el-select>
+            </el-form-item>
           </el-form-item>
 
           <el-form-item label="出生年月">  
-            <!-- <el-input style="width: 60%" v-model="addForm.addtime" placeholder="20200501"></el-input>  -->
-            <el-col :span="11">
-              <el-date-picker type="date" v-model="addForm.addtime" placeholder="选择日期"  style="width: 100%;"></el-date-picker>
-            </el-col>
+            <el-input style="width: 60%" v-model="addForm.addtime" placeholder="20200501"></el-input> 
+            
+            <!-- <el-date-picker type="date" v-model="addForm.addtime" placeholder="选择日期"  style="width: 100%;"></el-date-picker> -->
+            
           </el-form-item>
           <el-form-item label="性别">
             <el-select v-model="addForm.addsex" placeholder="请选择">
@@ -332,30 +342,33 @@
                             },
                         })
                         .then((response) => {
+                            switch (response.data) {
+                                case "ok":
+                                    this.$message({
+                                        type: 'success',
+                                        message: '新增学生信息成功!',
+                                    });
+                                    this.addVisible = false;
+                                    axios({
+                                            method: "get",
+                                            url: "/api/findAll",
+                                        })
+                                        .then((response) => {
+                                            console.log("新增成功")
+                                            let body = response.data;
+                                            this.stuData = body;
+                                        })
+                                        .catch((err) => {
+                                            console.log("...err...", err);
+                                        });
+                            }
 
-                            console.log(response.data)
-                            this.$message({
-                                type: 'success',
-                                message: '新增学生信息成功!',
-                            });
 
-                            this.addVisible = false;
                         })
                         .catch((err) => {
                             console.log("...err...", err);
                         });
-                    axios({
-                            method: "get",
-                            url: "/api/findAll",
-                        })
-                        .then((response) => {
-                            console.log("新增成功")
-                            let body = response.data;
-                            this.stuData = body;
-                        })
-                        .catch((err) => {
-                            console.log("...err...", err);
-                        });
+
                     location.reload();
 
                 }

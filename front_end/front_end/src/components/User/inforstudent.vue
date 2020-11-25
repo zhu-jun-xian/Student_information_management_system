@@ -42,7 +42,16 @@
             <el-input v-model="Updateform.tel"></el-input>
           </el-form-item>
           <el-form-item label="班级" prop="classnumber">
-            <el-input v-model="Updateform.classnumber"></el-input>
+            <!-- <el-input v-model="Updateform.classnumber"></el-input> -->
+            <el-select v-model="Updateform.classnumber" placeholder="请选择">
+              <el-option label="1" value="1"></el-option>
+              <el-option label="2" value="2"></el-option>
+              <el-option label="3" value="3"></el-option>
+              <el-option label="4" value="4"></el-option>
+              <el-option label="5" value="5"></el-option>
+              <el-option label="6" value="6"></el-option>
+              <el-option label="7" value="7"></el-option>
+            </el-select>
           </el-form-item>
           <el-form-item label="系部" prop="department">
             <el-select v-model="Updateform.department" placeholder="请选择" style="width: 100%">
