@@ -3,7 +3,7 @@
     <el-container>
       <div>
         <el-table border class="el-table-column" :data="stuData.slice((currentPage - 1) * pageSize, currentPage * pageSize)" style="width: 100%" @row-click="rowclick">
-          <!-- <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column> -->
+          <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="stuID" label="学号" width="170%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名" width="160%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="stuBirth" label="出生年月日" width="160%"></el-table-column>
@@ -12,10 +12,9 @@
           <el-table-column align="center" header-align="center" prop="stuClass" label="班级" width="160%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="stuDep" label="系部" width="160%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="" label="操作" width="180%">
-             <el-button size="mini" type="primary" icon="el-icon-edit" circle @click.native="UpdateVisible = true"></el-button>
+            <el-button size="mini" @click.native="UpdateVisible = true">Edit</el-button>
 
-            <el-button size="mini" type="danger" icon="el-icon-delete" circle @click.native.prevent="deleteRow()"></el-button>
-            </el-table-column>
+            <el-button size="mini" type="danger" @click.native.prevent="deleteRow()">Delete</el-button></el-table-column>
         </el-table>
         <div class="block" style="margin-top: 15px">
           <el-pagination align="center" @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5, 10, 20, 50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="stuData.length"> </el-pagination>
@@ -26,36 +25,34 @@
     <el-dialog title="修改学生信息" :visible.sync="UpdateVisible" width="35%">
       <span>
         <el-form ref="Updateform" :model="Updateform" label-width="100px">
-          <el-form-item label="学号" prop="studentnumber">              <el-input v-model="rowID" plain disabled></el-input>            </el-form-item>
+          <el-form-item label="学号" prop="studentnumber">             
+              <el-input v-model="rowID" plain disabled></el-input>           
+              </el-form-item>
           <el-form-item label="学生姓名" prop="name">
             <el-input v-model="Updateform.name"></el-input>
           </el-form-item>
 
-          <el-form-item label="出生年月" prop="time">
-                        
-            <el-input v-model="Updateform.time" placeholder="20200501"></el-input>
-          </el-form-item>
+          <el-form-item label="出生年月" prop="time">             
+              <el-input v-model="Updateform.time" placeholder="20200501"></el-input> 
+              </el-form-item>
             <el-form-item label="性别" prop="sex">
-            <el-select v-model="Updateform.sex" placeholder="请选择" style="width: 100%">              <el-option label="男" value="男"></el-option>               <el-option label="女" value="女"></el-option>            </el-select>           
-          </el-form-item>
+           <el-select v-model="Updateform.sex" placeholder="请选择" style="width: 100%">             
+                <el-option label="男" value="男"></el-option>              
+               <el-option label="女" value="女"></el-option>           
+                </el-select>           
+               </el-form-item>
           <el-form-item label="手机号码" prop="tel">
             <el-input v-model="Updateform.tel"></el-input>
           </el-form-item>
           <el-form-item label="班级" prop="classnumber">
-            <!-- <el-input v-model="Updateform.classnumber"></el-input> -->
-            <el-select v-model="Updateform.classnumber" placeholder="请选择">
-              <el-option label="1" value="1"></el-option>
-              <el-option label="2" value="2"></el-option>
-              <el-option label="3" value="3"></el-option>
-              <el-option label="4" value="4"></el-option>
-              <el-option label="5" value="5"></el-option>
-              <el-option label="6" value="6"></el-option>
-              <el-option label="7" value="7"></el-option>
-            </el-select>
+            <el-input v-model="Updateform.classnumber"></el-input>
           </el-form-item>
           <el-form-item label="系部" prop="department">
             <el-select v-model="Updateform.department" placeholder="请选择" style="width: 100%">
-              <el-option label="智能制造学部" value="智能制造学部"></el-option>              <el-option label="土木工程学院" value="土木工程学院"></el-option>              <el-option label="经济管理学院" value="经济管理学院"></el-option>              <el-option label="外国语学院" value="外国语学院"></el-option>
+              <el-option label="智能制造学部" value="智能制造学部"></el-option>            
+               <el-option label="土木工程学院" value="土木工程学院"></el-option>            
+               <el-option label="经济管理学院" value="经济管理学院"></el-option>            
+               <el-option label="外国语学院" value="外国语学院"></el-option>
                           <el-option label="艺术设计学院" value="艺术设计学院"></el-option>
             </el-select>
           </el-form-item>
@@ -112,93 +109,99 @@ export default {
     updateusermessage() {
       let stuid = this.rowID;
       console.log("updateusermessage:" + stuid);
-      if (this.Updateform.name.length == 0 || this.Updateform.time.length == 0 || this.Updateform.sex.length == 0 || this.Updateform.tel.length == 0 || this.Updateform.classnumber.length == 0 || this.Updateform.department.length == 0) {
+      if (this.Updateform.name.length == 0 || this.Updateform.time.length == 0 || this.Updateform.sex.length == 0 ||
+          this.Updateform.tel.length == 0 || this.Updateform.classnumber.length == 0 || this.Updateform.department.length == 0 ) 
+        {
         this.$message({
-          message: "错误:存在空输入框，修改失败",
-          center: true,
-          offset: 50,
-          type: "warning",
+              message: "错误:存在空输入框，修改失败",
+              center: true,
+              offset: 50,
+              type: "warning",
         });
-      } else {
-        axios({
-          method: "post",
-          url: "/api/updateMessagesById",
-          data: {
-            stuID: stuid,
-            stuName: this.Updateform.name,
-            stuBirth: this.Updateform.time,
-            stuSex: this.Updateform.sex,
-            stuTel: this.Updateform.tel,
-            stuClass: this.Updateform.classnumber,
-            stuDep: this.Updateform.department,
-          },
-        })
-          .then((response) => {
-            console.log(response.data);
-            this.UpdateVisible = false;
-            if (response.data == "ok") {
-              this.$message({
-                type: "success",
-                message: "修改成功!",
-                duration: 1000,
-              });
-              axios({
-                method: "get",
-                url: "/api/findAll",
-              })
-                .then((response) => {
-                  let body = response.data;
-                  this.stuData = body;
-                })
-                .catch((err) => {
-                  console.log("...err...", err);
-                });
-            }
-          })
-          .catch((err) => {
-            console.log("...err...", err);
-          });
-      }
-    },
-    //删除学生信息
-    deleteRow() {
-      let stuid = this.rowID;
-
+  } else {
       axios({
         method: "post",
-        url: "/api/deleteMessagesById",
+        url: "/api/updateMessagesById",
         data: {
           stuID: stuid,
+          stuName: this.Updateform.name,
+          stuBirth: this.Updateform.time,
+          stuSex: this.Updateform.sex,
+          stuTel: this.Updateform.tel,
+          stuClass: this.Updateform.classnumber,
+          stuDep: this.Updateform.department,
         },
       })
         .then((response) => {
           console.log(response.data);
+          this.UpdateVisible = false;
           if (response.data == "ok") {
+            this.$message({
+              type: "success",
+              message: "修改成功!",
+              duration: 1000,
+            });
             axios({
               method: "get",
               url: "/api/findAll",
             })
               .then((response) => {
                 let body = response.data;
-
-                console.log(typeof body);
                 this.stuData = body;
-                console.log(JSON.stringify(body));
               })
               .catch((err) => {
                 console.log("...err...", err);
               });
-            this.$message({
-              type: "success",
-              message: "删除成功!",
-              duration: 1000,
-            });
-            // location.reload();
           }
         })
         .catch((err) => {
           console.log("...err...", err);
         });
+    }
+    },
+    //删除学生信息
+    deleteRow() {
+      let stuid = this.rowID;
+      
+
+        
+          axios({
+            method: "post",
+            url: "/api/deleteMessagesById",
+            data: {
+              stuID: stuid,
+            },
+          })
+            .then((response) => {
+              console.log(response.data);
+              if (response.data == "ok") {
+                axios({
+                  method: "get",
+                  url: "/api/findAll",
+                })
+                  .then((response) => {
+                    let body = response.data;
+
+                    console.log(typeof body);
+                    this.stuData = body;
+                    console.log(JSON.stringify(body));
+                  })
+                  .catch((err) => {
+                    console.log("...err...", err);
+                  });
+                this.$message({
+                  type: "success",
+                  message: "删除成功!",
+                  duration: 1000,
+                });
+              }
+            })
+            .catch((err) => {
+              console.log("...err...", err);
+            });
+         
+      
+
     },
 
     //获取一行的学号
