@@ -23,23 +23,23 @@
       <h2>Register</h2>
       <form>
         <div class="inputbox">
-          <input type="number" v-model="ID" maxlength="30" show-word-limit name="" required="" />
+          <input type="number" v-model="ID" maxlength="30" show-word-limit />
           <label>ID</label>
         </div>
         <div class="inputbox">
-          <input type="text" v-model="username" minlength="10" show-word-limit name="" required="" />
+          <input type="text" v-model="username" minlength="10" show-word-limit />
           <label>Username</label>
         </div>
         <div class="inputbox">
-          <input type="number" v-model="tel" maxlength="11" minlength="11" show-word-limit name=" " required="" />
+          <input type="number" v-model="tel" maxlength="11" minlength="11" show-word-limit />
           <label>Telephone</label>
         </div>
         <div class="inputbox">
-          <input type="password" v-model="password" maxlength="30" minlength="8" name="" required="" />
+          <input type="password" v-model="password" maxlength="30" minlength="8" />
           <label>Password</label>
         </div>
         <div class="inputbox">
-          <input type="password" v-model="password1" maxlength="30" minlength="8" name="" required="" />
+          <input type="password" v-model="password1" maxlength="30" minlength="8" />
           <label>Confirm Password</label>
         </div>
         <el-button class="button" @click="registerUser" type="primary" round icon="el-icon-check">Register</el-button>
@@ -78,7 +78,7 @@ export default {
         });
       } else if (this.username.length <= 0 || this.username.length > 10) {
         this.$message({
-          message: "错误:用户名没有符合要求",
+          message: "错误:用户名应该要符合1位到10位",
           center: true,
           offset: 50,
           type: "warning",
@@ -245,7 +245,7 @@ export default {
 }
 .box .inputbox input:focus ~ label,
 .box .inputbox input:valid ~ label {
-  top: -18px;
+  top: -30px;
   left: 0;
   color: #03a9f4;
   font-size: 14px;
