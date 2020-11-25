@@ -203,8 +203,8 @@
             stuName:this.search1,
           }
         }).then(response => {
+          currentPage =1
           console.log(response.data)
-          this.currentPage = 1;
           let body = response.data;
           this.stuData = []
           this.stuData = body

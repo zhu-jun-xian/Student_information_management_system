@@ -204,9 +204,8 @@
           }
         }).then(response => {
           console.log(response.data)
-          this.currentPage = 1;
           let body = response.data;
-          this.stuData = []
+          this.stu
           this.stuData = body
           console.log(JSON.stringify(body));
         })

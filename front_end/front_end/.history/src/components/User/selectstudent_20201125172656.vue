@@ -203,12 +203,9 @@
             stuName:this.search1,
           }
         }).then(response => {
-          console.log(response.data)
-          this.currentPage = 1;
+          console.
           let body = response.data;
-          this.stuData = []
           this.stuData = body
-          console.log(JSON.stringify(body));
         })
       },
 
@@ -374,7 +371,6 @@
           this.selectnumVisible = false
           let body = response.data;
           this.stuData = [body]
-          
         })
       },
     },
