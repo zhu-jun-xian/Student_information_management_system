@@ -6,7 +6,7 @@
       <el-button round @click.native="selectnumVisible=true">学生查询</el-button>
       <el-button round @click.native="selectclassVisible=true">班级查询</el-button>
       <el-button round @click.native="selectgendVisible=true">院系查询</el-button>
-      <!-- <el-button round @click.native="selectgendVisible=true">模糊查询</el-button> -->
+      <el-button round @click.native="selectgendVisible=true">院系查询</el-button>
       <el-input v-model="search1" placeholder="请输入学生姓名" style="width:30%;padding-left:400px"  @keydown.enter.native="validateCounts">
       </el-input>
       <el-divider></el-divider>
