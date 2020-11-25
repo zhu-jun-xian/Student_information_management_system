@@ -27,11 +27,11 @@
           <label>ID</label>
         </div>
         <div class="inputbox">
-          <input type="text" v-model="username" minlength="10" show-word-limit />
+          <input type="text" v-model="username" minlength="10" maxlength="30" show-word-limit />
           <label>Username</label>
         </div>
         <div class="inputbox">
-          <input type="number" v-model="tel" maxlength="11" minlength="11" show-word-limit />
+          <input type="number" v-model="tel" maxlength="30" minlength="11" show-word-limit />
           <label>Telephone</label>
         </div>
         <div class="inputbox">
@@ -99,7 +99,7 @@ export default {
         });
       } else if (!reg.test(this.password)) {
         this.$message({
-          message: "错误:字母+数字组合,至少包含一个字母和数字,长度控制在8-30",
+          message: "错误:密码应由大小写字母+数字+特殊字符组合,长度控制在8-30",
           center: true,
           offset: 50,
           type: "warning",
@@ -252,10 +252,6 @@ export default {
   padding: 10px 0;
   font-size: 16px;
   color: #fff;
-  pointer-events: none;
-  /*鼠标事件消失，比如说选中文字，光标定位，超链接下划线*/
-  transition: 0.5s;
-  /*过渡时间5s*/
 }
 .box .inputbox input:focus ~ label,
 .box .inputbox input:valid ~ label {
