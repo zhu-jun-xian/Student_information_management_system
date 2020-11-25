@@ -1,6 +1,7 @@
 <template>
    <el-table ref="multipleTable" :data="rolelist" border stripe tooltip-effect="dark" :height='tableHeight' v-loading="loading"
 		 element-loading-text="拼命加载中">
+			<el-table-column type="index" label="序号" width="70" align="center"></el-table-column>
 		       <el-table-column :label="item.propName" :property="item.prop" :width='item.width' v-for="item in rolelisttop" :key="item.prop" align="center">
 		             <template slot-scope="scope">
 		                   <span>{{scope.row[scope.column.property]}}</span>

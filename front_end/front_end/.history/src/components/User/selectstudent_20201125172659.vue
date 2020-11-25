@@ -203,12 +203,9 @@
             stuName:this.search1,
           }
         }).then(response => {
-          console.log(response.data)
-          this.currentPage = 1;
+          console.log
           let body = response.data;
-          this.stuData = []
           this.stuData = body
-          console.log(JSON.stringify(body));
         })
       },
 
@@ -271,11 +268,7 @@
           }
         }).then(response => {
           if (response.data == "ok") {
-            this.$message({
-                  type: "success",
-                  message: "删除成功!",
-                  duration: 1000,
-                });
+            alert("删除成功")
             axios({
               method: "get",
               url: "/api/findAll",
@@ -378,7 +371,6 @@
           this.selectnumVisible = false
           let body = response.data;
           this.stuData = [body]
-          
         })
       },
     },

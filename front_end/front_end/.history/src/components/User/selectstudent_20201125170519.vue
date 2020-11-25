@@ -203,28 +203,14 @@
             stuName:this.search1,
           }
         }).then(response => {
-          console.log(response.data)
-          this.currentPage = 1;
           let body = response.data;
-          this.stuData = []
           this.stuData = body
-          console.log(JSON.stringify(body));
         })
       },
 
       updateusermessage() {
         let stuid = this.rowID
         console.log("updateusermessage:" + stuid)
-        if (this.Updateform.name.length == 0 || this.Updateform.time.length == 0 || this.Updateform.sex.length == 0 ||
-          this.Updateform.tel.length == 0 || this.Updateform.classnumber.length == 0 || this.Updateform.department.length == 0 ) 
-        {
-        this.$message({
-              message: "错误:存在空输入框，修改失败",
-              center: true,
-              offset: 50,
-              type: "warning",
-        });
-  } else {
         axios({
           method: "post",
           url: "/api/updateMessagesById",
@@ -254,7 +240,6 @@
         }).catch(err => {
           console.log("...err...", err)
         });
-  }
       },
 
 
@@ -271,11 +256,7 @@
           }
         }).then(response => {
           if (response.data == "ok") {
-            this.$message({
-                  type: "success",
-                  message: "删除成功!",
-                  duration: 1000,
-                });
+            alert("删除成功")
             axios({
               method: "get",
               url: "/api/findAll",
@@ -378,7 +359,6 @@
           this.selectnumVisible = false
           let body = response.data;
           this.stuData = [body]
-          
         })
       },
     },

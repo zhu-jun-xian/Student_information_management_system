@@ -109,93 +109,99 @@ export default {
     updateusermessage() {
       let stuid = this.rowID;
       console.log("updateusermessage:" + stuid);
-      if (this.Updateform.name.length == 0 || this.Updateform.time.length == 0 || this.Updateform.sex.length == 0 || this.Updateform.tel.length == 0 || this.Updateform.classnumber.length == 0 || this.Updateform.department.length == 0) {
+      if (this.Updateform.name.length == 0 || this.Updateform.time.length == 0 || this.Updateform.sex.length == 0 ||
+          this.Updateform.tel.length == 0 || this.Updateform.classnumber.length == 0 || this.Updateform.department.length == 0 ) 
+        {
         this.$message({
-          message: "错误:存在空输入框，修改失败",
-          center: true,
-          offset: 50,
-          type: "warning",
+              message: "错误:存在空输入框，修改失败",
+              center: true,
+              offset: 50,
+              type: "warning",
         });
-      } else {
-        axios({
-          method: "post",
-          url: "/api/updateMessagesById",
-          data: {
-            stuID: stuid,
-            stuName: this.Updateform.name,
-            stuBirth: this.Updateform.time,
-            stuSex: this.Updateform.sex,
-            stuTel: this.Updateform.tel,
-            stuClass: this.Updateform.classnumber,
-            stuDep: this.Updateform.department,
-          },
-        })
-          .then((response) => {
-            console.log(response.data);
-            this.UpdateVisible = false;
-            if (response.data == "ok") {
-              this.$message({
-                type: "success",
-                message: "修改成功!",
-                duration: 1000,
-              });
-              axios({
-                method: "get",
-                url: "/api/findAll",
-              })
-                .then((response) => {
-                  let body = response.data;
-                  this.stuData = body;
-                })
-                .catch((err) => {
-                  console.log("...err...", err);
-                });
-            }
-          })
-          .catch((err) => {
-            console.log("...err...", err);
-          });
-      }
-    },
-    //删除学生信息
-    deleteRow() {
-      let stuid = this.rowID;
-
+  } else {
       axios({
         method: "post",
-        url: "/api/deleteMessagesById",
+        url: "/api/updateMessagesById",
         data: {
           stuID: stuid,
+          stuName: this.Updateform.name,
+          stuBirth: this.Updateform.time,
+          stuSex: this.Updateform.sex,
+          stuTel: this.Updateform.tel,
+          stuClass: this.Updateform.classnumber,
+          stuDep: this.Updateform.department,
         },
       })
         .then((response) => {
           console.log(response.data);
+          this.UpdateVisible = false;
           if (response.data == "ok") {
+            this.$message({
+              type: "success",
+              message: "修改成功!",
+              duration: 1000,
+            });
             axios({
               method: "get",
               url: "/api/findAll",
             })
               .then((response) => {
                 let body = response.data;
-
-                console.log(typeof body);
                 this.stuData = body;
-                console.log(JSON.stringify(body));
               })
               .catch((err) => {
                 console.log("...err...", err);
               });
-            this.$message({
-              type: "success",
-              message: "删除成功!",
-              duration: 1000,
-            });
-            // location.reload();
           }
         })
         .catch((err) => {
           console.log("...err...", err);
         });
+    }
+    },
+    //删除学生信息
+    deleteRow() {
+      let stuid = this.rowID;
+      
+
+        
+          axios({
+            method: "post",
+            url: "/api/deleteMessagesById",
+            data: {
+              stuID: stuid,
+            },
+          })
+            .then((response) => {
+              console.log(response.data);
+              if (response.data == "ok") {
+                axios({
+                  method: "get",
+                  url: "/api/findAll",
+                })
+                  .then((response) => {
+                    let body = response.data;
+
+                    console.log(typeof body);
+                    this.stuData = body;
+                    console.log(JSON.stringify(body));
+                  })
+                  .catch((err) => {
+                    console.log("...err...", err);
+                  });
+                this.$message({
+                  type: "success",
+                  message: "删除成功!",
+                  duration: 1000,
+                });
+              }
+            })
+            .catch((err) => {
+              console.log("...err...", err);
+            });
+         
+      
+
     },
 
     //获取一行的学号
