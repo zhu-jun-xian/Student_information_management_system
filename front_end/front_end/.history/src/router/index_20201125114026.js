@@ -4,7 +4,7 @@ import login from '@/components/login'
 import user from '@/components/user'
 import selectstudent from '@/components/User/selectstudent'
 import inforstudent from '@/components/User/inforstudent'
-import Sumstudent from '@/components/User/Sumstudent'
+import /Sumstudent from '@/components/User/Sumstudent'
 import register from '@/components/register'
 
 

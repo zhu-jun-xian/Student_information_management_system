@@ -1,8 +1,10 @@
 <template>
   <div class="hello">
     <el-container>
-      <el-header style="text-align: right; font-size: 12px">
-        <span id="user_name" style="font-size: 20px" >{{ username }}</span>
+      
+      <el-header>
+        <span id="systemname" >学生信息管理系统</span>
+        <span id="user_name" >{{ username }}</span>
         <!-- <el-button @click="selectuser1">查询</el-button> -->
         <el-button @click="exit">退出</el-button>
       </el-header>
@@ -691,5 +693,15 @@
         width: 178px;
         height: 178px;
         display: block;
+    }
+    
+    #systemname {
+        font-size: 40px;
+        color: white;
+    }
+    
+    #user_name {
+        font-size: 20px;
+        margin-left: 68%;
     }
 </style>

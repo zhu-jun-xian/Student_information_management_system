@@ -29,7 +29,7 @@ const routes = [
             },
             {
                 path:'/Sumstudent',
-                component: Sumstudent
+                component: /Sumstudent
             }
         　　]
     },
