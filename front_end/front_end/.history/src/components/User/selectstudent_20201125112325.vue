@@ -368,6 +368,7 @@
       }).then(response => {
         let body = response.data;
         this.stuData = body
+        console.log(JSON.stringify(body))
       }).catch(err => {
         console.log("...err...", err)
       });
