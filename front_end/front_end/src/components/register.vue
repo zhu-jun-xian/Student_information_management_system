@@ -68,7 +68,7 @@ export default {
       this.$router.push({ path: "/" });
     },
     registerUser() {
-      var reg = new RegExp("(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0-9]).{8,30}");
+      var reg = new RegExp("(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0-9]).{8,30}");
       if ((this.ID.length === 0 || this.username.length === 0 || this.tel.length === 0 || this.password.length === 0 || this, this.password1.length == 0)) {
         this.$message({
           message: "错误:存在空输入框，注册失败",
@@ -99,7 +99,7 @@ export default {
         });
       } else if (!reg.test(this.password)) {
         this.$message({
-          message: "错误:密码应由大小写字母+数字+特殊字符组合,长度控制在8-30",
+          message: "错误:密码应由大小写字母+特殊字符组合,长度控制在8-30",
           center: true,
           offset: 50,
           type: "warning",

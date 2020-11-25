@@ -68,7 +68,7 @@ export default {
       this.$router.push({ path: "/register" });
     },
     login() {
-      var reg = new RegExp('(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0-9]).{8,30}');
+      var reg = new RegExp("(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0-9]).{8,30}");
       if (this.ID.length === 0 || this.password.length == 0) {
         this.$message({
           message: "错误:密码和用户ID不能为空",
@@ -78,7 +78,7 @@ export default {
         });
       } else if (!reg.test(this.password)) {
         this.$message({
-          message: "错误:字母+数字组合,至少包含一个字母和数字,长度控制在8-30",
+          message: "错误:密码应由大小写字母+特殊字符组合,长度控制在8-30",
           center: true,
           offset: 50,
           type: "warning",
