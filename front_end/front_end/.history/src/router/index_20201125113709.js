@@ -4,9 +4,8 @@ import login from '@/components/login'
 import user from '@/components/user'
 import selectstudent from '@/components/User/selectstudent'
 import inforstudent from '@/components/User/inforstudent'
-import Sumstudent from '@/components/User/Sumstudent'
+import Sumstudent from '@'
 import register from '@/components/register'
-
 
 
 Vue.use(VueRouter)
@@ -18,20 +17,7 @@ const routes = [
     {
         path: '/user',
         component: user,
-        children: [　　　
-            {
-               path: '/selectstudent',
-               component: selectstudent　　 
-             },
-            {
-              path: '/inforstudent', 　　　
-              component: inforstudent　　 
-            },
-            {
-                path:'/Sumstudent',
-                component: Sumstudent
-            }
-        　　]
+        children: [　　　{　　　　 path: '/selectstudent', 　　　component: selectstudent　　 }, {　　　　 path: '/inforstudent', 　　　component: inforstudent　　 }　　]
     },
     { path: '/register', component: register },
     // { path: '/selectstudent', component: selectstudent },

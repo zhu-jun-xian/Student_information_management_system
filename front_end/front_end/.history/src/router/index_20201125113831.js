@@ -8,7 +8,6 @@ import Sumstudent from '@/components/User/Sumstudent'
 import register from '@/components/register'
 
 
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -24,14 +23,7 @@ const routes = [
                component: selectstudent　　 
              },
             {
-              path: '/inforstudent', 　　　
-              component: inforstudent　　 
-            },
-            {
-                path:'/Sumstudent',
-                component: Sumstudent
-            }
-        　　]
+              path: '/inforstudent', 　　　component: inforstudent　　 }　　]
     },
     { path: '/register', component: register },
     // { path: '/selectstudent', component: selectstudent },
