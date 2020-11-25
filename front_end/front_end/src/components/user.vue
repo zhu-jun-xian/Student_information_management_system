@@ -105,7 +105,6 @@
         <el-table-column align="center" prop="IBM1" label="IBM1班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM2" label="IBM2班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM3" label="IBM3班" width="100"> </el-table-column>
-        100
         <el-table-column align="center" prop="IBM5" label="IBM5班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM6" label="IBM6班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM7" label="IBM7班" width="100"> </el-table-column>
