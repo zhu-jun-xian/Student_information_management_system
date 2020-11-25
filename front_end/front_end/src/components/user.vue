@@ -1,8 +1,10 @@
 <template>
   <div class="hello">
     <el-container>
-      <el-header style="text-align: right; font-size: 12px">
-        <span id="user_name" style="font-size: 20px" >{{ username }}</span>
+      
+      <el-header>
+        <span id="systemname" >学生信息管理系统</span>
+        <span id="user_name" >{{ username }}</span>
         <!-- <el-button @click="selectuser1">查询</el-button> -->
         <el-button @click="exit">退出</el-button>
       </el-header>
@@ -48,7 +50,7 @@
     <span>
       <el-form ref="passwordform" :model="passwordform" label-width="100px">
         <el-form-item label="登陆ID" prop="id">
-          <el-input v-model="passwordform.id" plain disabled></el-input>
+          <el-input v-model="passwordform.id" plain disabled :placeholder="IDplaceholaer"></el-input>
         </el-form-item>
         <el-form-item label="姓名" prop="name">
           <el-input v-model="passwordform.name" :placeholder="nameplaceholaer" ></el-input>
@@ -68,14 +70,14 @@
     <span>
         <el-form ref="passwordform" :model="passwordform" label-width="100px">
           <el-form-item label="登陆ID" prop="id">
-            <el-input v-model="passwordform.id" plain disabled></el-input>
+            <el-input v-model="passwordform.id" plain disabled :placeholder="IDplaceholaer"></el-input>
           </el-form-item>
           <el-form-item label="姓名" prop="name">
-            <el-input v-model="passwordform.name" disabled></el-input>
+            <el-input v-model="passwordform.name" disabled :placeholder="nameplaceholaer"></el-input>
           </el-form-item>
 
           <el-form-item label="手机" prop="tel">
-            <el-input v-model="passwordform.tel" disabled></el-input>
+            <el-input v-model="passwordform.tel" disabled :placeholder="telplaceholaer"></el-input>
           </el-form-item>
           <el-form-item   label="修改密码" prop="pass">
             <el-input v-model="passwordform.pass"></el-input>
@@ -154,6 +156,7 @@
     export default {
         data() {
             return {
+                IDplaceholaer: '',
                 nameplaceholaer: '张三',
                 telplaceholaer: '13440213456',
                 userVisible: false,
@@ -472,6 +475,8 @@
                         this.passwordform.id = body.id
                         this.nameplaceholaer = body.name
                         this.telplaceholaer = body.tel
+                        this.IDplaceholaer = body.id
+
 
                     })
                     .catch((err) => {
@@ -492,6 +497,9 @@
                         let body = response.data;
                         console.log(body);
                         (this.passwordform.id = body.id), (this.passwordform.name = body.name), (this.passwordform.tel = body.tel);
+                        this.nameplaceholaer = body.name
+                        this.telplaceholaer = body.tel
+                        this.IDplaceholaer = body.id
                         console.log(JSON.stringify(body));
                     })
                     .catch((err) => {
@@ -500,7 +508,7 @@
             },
             // 将表单数据添加到表格中去
             updatepassonSubmit() {
-                if (this.passwordfrom.pass.length === 0 || this.password.repass.length === 0) {
+                if (this.passwordfrom.pass.length == 0 || this.password.repass.length == 0) {
                     alert("存在空输入框，修改失败");
                 } else if (this.passwordfrom.pass.length < 8 || this.password.repass.length > 30) {
                     alert("密码要符合8到30 位，修改失败");
@@ -511,6 +519,7 @@
                             data: {
                                 id: this.passwordform.id,
                                 password: this.passwordform.pass,
+
                             },
                         })
                         .then((response) => {
@@ -684,5 +693,15 @@
         width: 178px;
         height: 178px;
         display: block;
+    }
+    
+    #systemname {
+        font-size: 40px;
+        color: white;
+    }
+    
+    #user_name {
+        font-size: 20px;
+        margin-left: 68%;
     }
 </style>
