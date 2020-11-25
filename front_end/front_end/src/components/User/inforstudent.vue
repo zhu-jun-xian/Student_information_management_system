@@ -120,7 +120,11 @@ export default {
           console.log(response.data);
           this.UpdateVisible = false;
           if (response.data == "ok") {
-            alert("修改成功");
+            this.$message({
+              type: "success",
+              message: "修改成功!",
+              duration: 1000,
+            });
             axios({
               method: "get",
               url: "/api/findAll",
@@ -142,36 +146,56 @@ export default {
     //删除学生信息
     deleteRow() {
       let stuid = this.rowID;
-      console.log("deleteRow:" + stuid);
-      axios({
-        method: "post",
-        url: "/api/deleteMessagesById",
-        data: {
-          stuID: stuid,
-        },
+      this.$confirm("此操作将删除学生信息, 是否继续?", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
-        .then((response) => {
-          console.log(response.data);
-          if (response.data == "ok") {
-            alert("删除成功");
-            axios({
-              method: "get",
-              url: "/api/findAll",
-            })
-              .then((response) => {
-                let body = response.data;
+        .then(() => {
+          axios({
+            method: "post",
+            url: "/api/deleteMessagesById",
+            data: {
+              stuID: stuid,
+            },
+          })
+            .then((response) => {
+              console.log(response.data);
+              if (response.data == "ok") {
+                axios({
+                  method: "get",
+                  url: "/api/findAll",
+                })
+                  .then((response) => {
+                    let body = response.data;
 
-                console.log(typeof body);
-                this.stuData = body;
-                console.log(JSON.stringify(body));
-              })
-              .catch((err) => {
-                console.log("...err...", err);
-              });
-          }
+                    console.log(typeof body);
+                    this.stuData = body;
+                    console.log(JSON.stringify(body));
+                  })
+                  .catch((err) => {
+                    console.log("...err...", err);
+                  });
+                this.$message({
+                  type: "success",
+                  message: "删除成功!",
+                  duration: 3000,
+                });
+              }
+            })
+            .catch((err) => {
+              console.log("...err...", err);
+            });
+          this.$message({
+            type: "success",
+            message: "删除成功!",
+          });
         })
-        .catch((err) => {
-          console.log("...err...", err);
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
         });
     },
 
