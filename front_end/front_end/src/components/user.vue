@@ -4,7 +4,7 @@
       
       <el-header>
         <span id="systemname" >学生信息管理系统</span>
-        <span id="user_name" >{{ username }}</span>
+        <span id="user_name" >欢迎您！！！{{ username }}</span>
         <!-- <el-button @click="selectuser1">查询</el-button> -->
         <el-button @click="exit">退出</el-button>
       </el-header>
@@ -702,6 +702,6 @@
     
     #user_name {
         font-size: 20px;
-        margin-left: 68%;
+        margin-left: 67%;
     }
 </style>
