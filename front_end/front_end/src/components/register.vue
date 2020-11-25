@@ -78,7 +78,7 @@ export default {
         });
       } else if (this.username.length <= 0 || this.username.length > 30) {
         this.$message({
-          message: "错误:用户名应该要符合1位到10位",
+          message: "错误:用户名应该要符合1位到30位",
           center: true,
           offset: 50,
           type: "warning",
