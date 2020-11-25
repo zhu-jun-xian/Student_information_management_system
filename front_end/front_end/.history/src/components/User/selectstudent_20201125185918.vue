@@ -201,12 +201,10 @@
           data: {
             stuID:this.search1,
             stuName:this.search1,
+            stuNum:this.search1,
             stuSex:this.search1,
             stuTel:this.search1,
-            stuBirth:this.search1,
-            stuClass:this.search1,
-            stuDep:this.search1
-
+            stuBirth:this.s
           }
         }).then(response => {
           console.log(response.data)

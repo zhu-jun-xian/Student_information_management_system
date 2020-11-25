@@ -7,6 +7,11 @@
       <el-button round @click.native="selectclassVisible=true">班级查询</el-button>
       <el-button round @click.native="selectgendVisible=true">院系查询</el-button>
       <el-input v-model="search1" placeholder="请输入学生姓名" style="width:30%;padding-left:400px"  @keydown.enter.native="validateCounts">
+        <el-select v-model="select" slot="prepend" placeholder="请选择">
+          <el-option label="姓名" value="姓名"></el-option>
+          <el-option label="学号" value="学号"></el-option>
+          <el-option label="班级" value="班级"></el-option>
+        </el-select>
       </el-input>
       <el-divider></el-divider>
     </div>
@@ -141,6 +146,7 @@
         rowID: '',
         search: '',
         search1: '',
+        select:'',
         stuData: [{
           stuNum: '',
           stuID: '',
@@ -200,13 +206,7 @@
           url: "/api/SelectByStuAll",
           data: {
             stuID:this.search1,
-            stuName:this.search1,
-            stuSex:this.search1,
-            stuTel:this.search1,
-            stuBirth:this.search1,
-            stuClass:this.search1,
-            stuDep:this.search1
-
+            
           }
         }).then(response => {
           console.log(response.data)
