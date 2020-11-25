@@ -239,7 +239,7 @@ export default {
   border: none;
   border-bottom: 1px solid #fff;
   outline: none;
-  /*outline用于绘制元素周围的线
+  /* outline用于绘制元素周围的线
     outline：none在这里用途是将输入框的边框的线条使其消失*/
   background: transparent;
   /*背景颜色为透明*/
@@ -255,6 +255,7 @@ export default {
 }
 .box .inputbox input:focus ~ label,
 .box .inputbox input:valid ~ label {
+  position: absolute;
   top: -30px;
   left: 0;
   color: #03a9f4;
