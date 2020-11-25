@@ -23,7 +23,7 @@
 <el-submenu index="2">
     <template slot="title"><i class="el-icon-menu"></i>信息修改</template>
     <el-menu-item-group>
-        <!-- <el-menu-item index="2-1" @click.native="UpdateVisible = true">修改学生信息</el-menu-item> -->
+        <el-menu-item index="2-1" @click.native="UpdateVisible = true">修改用户信息</el-menu-item>
         <el-menu-item index="2-2" @click.native="addVisible = true">新增学生信息</el-menu-item>
         <!-- <el-menu-item index="2-3">删除学生信息</el-menu-item> -->
     </el-menu-item-group>
