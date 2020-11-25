@@ -16,8 +16,8 @@
       <div>
         <el-table border class="el-table-column" :data="stuData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
           :default-sort="{prop: 'date', order: 'descending'}" style="width: 100%" @row-click="rowclick">
-          <!-- <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%" sortable>
-          </el-table-column> -->
+          <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%" sortable>
+          </el-table-column>
           <el-table-column align="center" header-align="center" prop="stuID" label="学号" width="170%" sortable>
           </el-table-column>
           <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名" width="160%">
@@ -128,7 +128,7 @@
       </el-form>
     </el-dialog>
 
-    <el-dialog title="模糊查询" :visible.sync="selectfuzzyVisible" width="40%">
+    <el-dialog title="模糊查询" :visible.sync="selectfuzzyVisible" width="30%">
       <el-form :inline="true" :model="selectfuzzyForm" class="selectfuzzyForm_demo">
         <el-form-item label="姓名">
           <el-input v-model="selectfuzzyForm.fuzzyname"></el-input>
@@ -145,6 +145,7 @@
                 <el-option label="女" value="女"></el-option>
             </el-select>
           </el-form-item>
+
         <el-form-item label="系部：" prop="fuzzyacademy">
           <el-select v-model="selectfuzzyForm.fuzzyacademy" placeholder="请选择">
             <el-option label="智能制造学部" value="智能制造学部"></el-option>
@@ -154,9 +155,8 @@
             <el-option label="艺术设计学院" value="艺术设计学院"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item align="center">
-          <el-button type="primary" align="center" @click="updateusermessage">查询</el-button>
-          <el-button align="center" @click="resetForm('selectfuzzyForm')">清空</el-button>
+        <el-form-item>
+          <el-button type="primary" @click="selectgendSubmit">查询</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -221,7 +221,7 @@
           fuzzyname:"",
           fuzzyclass:"",
           fuzzysex:"",
-          fuzzyacademy:"",
+          fuzzyacademy:""
         },
 
 

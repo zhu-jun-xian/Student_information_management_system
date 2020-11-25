@@ -154,9 +154,9 @@
             <el-option label="艺术设计学院" value="艺术设计学院"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item align="center">
-          <el-button type="primary" align="center" @click="updateusermessage">查询</el-button>
-          <el-button align="center" @click="resetForm('selectfuzzyForm')">清空</el-button>
+        <el-form-item>
+          <el-button type="primary"align="center" @click="updateusermessage">查询</el-button>
+          <el-button  @click="resetForm('selectfuzzyForm')">清空</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
