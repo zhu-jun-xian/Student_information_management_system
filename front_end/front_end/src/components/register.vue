@@ -76,7 +76,7 @@ export default {
           offset: 50,
           type: "warning",
         });
-      } else if (this.username.length <= 0 || this.username.length > 10) {
+      } else if (this.username.length <= 0 || this.username.length > 30) {
         this.$message({
           message: "错误:用户名应该要符合1位到10位",
           center: true,
