@@ -146,12 +146,9 @@ export default {
     //删除学生信息
     deleteRow() {
       let stuid = this.rowID;
-      this.$confirm("此操作将删除学生信息, 是否继续?", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then(() => {
+      
+
+        
           axios({
             method: "post",
             url: "/api/deleteMessagesById",
@@ -179,24 +176,16 @@ export default {
                 this.$message({
                   type: "success",
                   message: "删除成功!",
-                  duration: 3000,
+                  duration: 1000,
                 });
               }
             })
             .catch((err) => {
               console.log("...err...", err);
             });
-          this.$message({
-            type: "success",
-            message: "删除成功!",
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除",
-          });
-        });
+         
+      
+
     },
 
     //获取一行的学号
