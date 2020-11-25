@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <div>
-      <!-- <el-button round @click="sumstudent">合计</el-button> -->
+      <el-button round @click="sumstudent">合计</el-button>
       <el-button round @click="selectAll">全部信息</el-button>
       <el-button round @click.native="selectnumVisible=true">学生查询</el-button>
       <el-button round @click.native="selectclassVisible=true">班级查询</el-button>
