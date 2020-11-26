@@ -94,7 +94,7 @@
 </el-dialog>
 
 <el-dialog :visible.sync="statisticsVisible" width="90.1%" @open="sumdialogopen">
-    <el-tag class="eltagclass">统计</el-tag>
+    <el-tag class="eltagclass">人数统计</el-tag>
     <el-table :data="sumtableData" border style="width: 100%">
         <el-table-column align="center" prop="artdesign" label="艺术设计学院" width="100"> </el-table-column>
         <el-table-column align="center" prop="foreign" label="外国语学院" width="100"> </el-table-column>
