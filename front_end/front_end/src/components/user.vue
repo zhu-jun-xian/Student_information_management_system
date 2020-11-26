@@ -93,7 +93,8 @@
       </span>
 </el-dialog>
 
-<el-dialog :visible.sync="statisticsVisible" width="83.8%" @open="sumdialogopen">
+<el-dialog :visible.sync="statisticsVisible" width="90.1%" @open="sumdialogopen">
+    <el-tag class="eltagclass">统计</el-tag>
     <el-table :data="sumtableData" border style="width: 100%">
         <el-table-column align="center" prop="artdesign" label="艺术设计学院" width="100"> </el-table-column>
         <el-table-column align="center" prop="foreign" label="外国语学院" width="100"> </el-table-column>
@@ -108,6 +109,7 @@
         <el-table-column align="center" prop="IBM5" label="IBM5班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM6" label="IBM6班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM7" label="IBM7班" width="100"> </el-table-column>
+        <el-table-column align="center" prop="allSchoolstu" label="全校统计" width="100"> </el-table-column>
     </el-table>
 </el-dialog>
 
@@ -122,15 +124,15 @@
           </el-form-item>
           <el-form-item label="班级">
             <!-- <el-input v-model="addForm.addclassnumber" style="width: 60%"></el-input> -->
-              <el-select v-model="addForm.addclassnumber" placeholder="请选择">
-                <el-option label="1" value="1"></el-option>
-                <el-option label="2" value="2"></el-option>
-                <el-option label="3" value="3"></el-option>
-                <el-option label="4" value="4"></el-option>
-                <el-option label="5" value="5"></el-option>
-                <el-option label="6" value="6"></el-option>
-                <el-option label="7" value="7"></el-option>
-              </el-select>
+             <el-select v-model="addForm.classnumber" placeholder="请选择班别">
+                              <el-option label="IBM1班" value="IBM1"></el-option>
+                              <el-option label="IBM2班" value="IBM2"></el-option>
+                              <el-option label="IBM3班" value="IBM3"></el-option>
+                              <el-option label="IBM4班" value="IBM4"></el-option>
+                              <el-option label="IBM5班" value="IBM5"></el-option>
+                              <el-option label="IBM6班" value="IBM6"></el-option>
+                              <el-option label="IBM7班" value="IBM7"></el-option>
+            </el-select>
             </el-form-item>
             </el-form-item>
 
@@ -217,6 +219,7 @@
                     IBM5: '',
                     IBM6: '',
                     IBM7: '',
+                    allSchoolstu: ''
                 }, ],
                 statisticsForm: {
                     irule: "",
@@ -304,25 +307,26 @@
                     })
                     .then((response) => {
                         let body = response.data;
-                        console.log(typeof body);
+                        let sumallSchoolstu = parseInt(body[13].totalSex) + parseInt(body[12].totalSex)
+                            // console.log(typeof body);
                         this.sumtableData = [{
-
-                            artdesign: '65',
-                            foreign: '65',
-                            tumu: '6',
-                            economic: "5",
-                            intell: '65',
-                            boys: 435,
-                            girls: 45,
-                            IBM1: body[1].totalClass,
-                            IBM2: '5',
-                            IBM3: '6',
-                            IBM4: '5',
-                            IBM5: '33',
-                            IBM6: '456',
-                            IBM7: '54',
+                            artdesign: body[11].totalDep,
+                            foreign: body[8].totalDep,
+                            tumu: body[7].totalDep,
+                            economic: body[10].totalDep,
+                            intell: body[9].totalDep,
+                            boys: body[13].totalSex,
+                            girls: body[12].totalSex,
+                            IBM1: body[0].totalClass,
+                            IBM2: body[1].totalClass,
+                            IBM3: body[2].totalClass,
+                            IBM4: body[3].totalClass,
+                            IBM5: body[4].totalClass,
+                            IBM6: body[5].totalClass,
+                            IBM7: body[6].totalClass,
+                            allSchoolstu: sumallSchoolstu
                         }, ];
-                        console.log(JSON.stringify(body));
+                        // console.log(JSON.stringify(body));
                     })
                     .catch((err) => {
                         console.log("...err...", err);
@@ -804,5 +808,9 @@
     #user_name {
         font-size: 20px;
         margin-left: 65%;
+    }
+    
+    .eltagclass {
+        margin-bottom: 10px;
     }
 </style>
