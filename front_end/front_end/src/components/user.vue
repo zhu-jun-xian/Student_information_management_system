@@ -495,7 +495,7 @@
                             console.log("...err...", err);
                         });
 
-                    // location.reload();
+                    location.reload();
 
                 }
             },
