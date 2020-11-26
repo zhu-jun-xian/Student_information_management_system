@@ -11,6 +11,11 @@ public class Messages {
 	private String stuDep;
 	private String stuAddTimed;
 	private String stuImgUrl;
+	private String stu;
+	
+	private String totalClass;
+	 private String totalSex;
+	 private String totalDep;
 	public int getStuNum() {
 		return stuNum;
 	}
@@ -93,6 +98,30 @@ public class Messages {
 		return "Messages [stuNum=" + stuNum + ", stuID=" + stuID + ", stuName=" + stuName + ", stuBirth=" + stuBirth
 				+ ", stuSex=" + stuSex + ", stuTel=" + stuTel + ", stuClass=" + stuClass + ", stuDep=" + stuDep
 				+ ", stuAddTimed=" + stuAddTimed + ", stuImgUrl=" + stuImgUrl + "]";
+	}
+	public String getStu() {
+		return stu;
+	}
+	public void setStu(String stu) {
+		this.stu = stu;
+	}
+	public String getTotalClass() {
+		return totalClass;
+	}
+	public void setTotalClass(String totalClass) {
+		this.totalClass = totalClass;
+	}
+	public String getTotalSex() {
+		return totalSex;
+	}
+	public void setTotalSex(String totalSex) {
+		this.totalSex = totalSex;
+	}
+	public String getTotalDep() {
+		return totalDep;
+	}
+	public void setTotalDep(String totalDep) {
+		this.totalDep = totalDep;
 	}
 	
 	
