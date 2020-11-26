@@ -42,6 +42,7 @@
         </div>
         <div>
           <el-button class="button" @click="login" type="primary" round icon="el-icon-check">Login</el-button>
+          <el-link type="danger">忘记密码</el-link>
           <el-button class="button buttonclass" @click="register" type="primary" round icon="el-icon-right">Register</el-button>
         </div>
       </form>
