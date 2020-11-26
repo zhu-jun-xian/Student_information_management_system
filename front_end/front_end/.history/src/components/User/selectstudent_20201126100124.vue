@@ -162,7 +162,7 @@
           </el-select>
         </el-form-item><br/>
        
-        <el-form-item style="margin-left:30%;">
+        <el-form-item style="margin-left:25%;">
           <el-button type="primary" @click="selectfuzzySubmit"  >查询</el-button>
           <el-button @click="resetForm('selectfuzzyForm')">清空</el-button>
         </el-form-item>
