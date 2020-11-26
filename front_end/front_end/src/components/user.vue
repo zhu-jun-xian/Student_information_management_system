@@ -812,5 +812,6 @@
     
     .eltagclass {
         margin-bottom: 10px;
+        font-size: 20px;
     }
 </style>
