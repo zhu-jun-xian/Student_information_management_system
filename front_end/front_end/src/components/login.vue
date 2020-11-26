@@ -30,6 +30,7 @@
   </div>-->
   <div>
     <div class="box">
+      <h2 class="titlestu">学生信息管理系统</h2>
       <h2>Login</h2>
       <form>
         <div class="inputbox">
@@ -431,5 +432,9 @@ input[type="number"] {
 }
 .ellinkclass {
   margin-left: 30px;
+}
+.titlestu{
+  font-size: 40px;
+  font-family: monospace;
 }
 </style>
