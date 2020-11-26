@@ -443,7 +443,6 @@ export default {
         },
       }).then((response) => {
         this.selectgendVisible = false;
-        this.currentPage = 1;
         let body = response.data;
         this.stuData = [];
         this.stuData = body;
@@ -456,11 +455,10 @@ export default {
         method: "post",
         url: "/api/SelectByStuClass",
         data: {
-          stuClass:this.selectclassForm.selectclass,
+          stuClass: this.selectclassForm.selectclass,
         },
       }).then((response) => {
         this.selectclassVisible = false;
-        this.currentPage = 1;
         let body = response.data;
         this.stuData = [];
         this.stuData = body;
@@ -479,7 +477,6 @@ export default {
         },
       }).then((response) => {
         this.selectnumVisible = false;
-        this.currentPage = 1;
         let body = response.data;
         this.stuData = [body];
       });

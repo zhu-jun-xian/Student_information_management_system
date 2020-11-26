@@ -479,7 +479,6 @@ export default {
         },
       }).then((response) => {
         this.selectnumVisible = false;
-        this.currentPage = 1;
         let body = response.data;
         this.stuData = [body];
       });

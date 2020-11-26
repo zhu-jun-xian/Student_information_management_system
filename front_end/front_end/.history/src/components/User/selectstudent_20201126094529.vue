@@ -106,9 +106,9 @@
               <el-option label="IBM2班" value="IBM2班"></el-option>
               <el-option label="IBM3班" value="IBM3班"></el-option>
               <el-option label="IBM4班" value="IBM4班"></el-option>
-              <el-option label="IBM5班" value="IBM5班"></el-option>
-              <el-option label="IBM6班" value="IBM6班"></el-option>
-              <el-option label="IBM7班" value="IBM7班"></el-option>
+              <el-option label="IBM5班" value="IBM5"></el-option>
+              <el-option label="IBM6班" value="IBM6"></el-option>
+              <el-option label="IBM7班" value="IBM7"></el-option>
             </el-select> 
         </el-form-item>
         <el-form-item>
@@ -443,7 +443,6 @@ export default {
         },
       }).then((response) => {
         this.selectgendVisible = false;
-        this.currentPage = 1;
         let body = response.data;
         this.stuData = [];
         this.stuData = body;
@@ -456,11 +455,10 @@ export default {
         method: "post",
         url: "/api/SelectByStuClass",
         data: {
-          stuClass:this.selectclassForm.selectclass,
+          stuClass: this.selectclassForm.selectclass,
         },
       }).then((response) => {
         this.selectclassVisible = false;
-        this.currentPage = 1;
         let body = response.data;
         this.stuData = [];
         this.stuData = body;
@@ -479,7 +477,6 @@ export default {
         },
       }).then((response) => {
         this.selectnumVisible = false;
-        this.currentPage = 1;
         let body = response.data;
         this.stuData = [body];
       });

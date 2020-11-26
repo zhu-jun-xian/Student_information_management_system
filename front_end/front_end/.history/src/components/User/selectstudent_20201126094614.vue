@@ -443,7 +443,6 @@ export default {
         },
       }).then((response) => {
         this.selectgendVisible = false;
-        this.currentPage = 1;
         let body = response.data;
         this.stuData = [];
         this.stuData = body;
@@ -460,7 +459,6 @@ export default {
         },
       }).then((response) => {
         this.selectclassVisible = false;
-        this.currentPage = 1;
         let body = response.data;
         this.stuData = [];
         this.stuData = body;
@@ -479,7 +477,6 @@ export default {
         },
       }).then((response) => {
         this.selectnumVisible = false;
-        this.currentPage = 1;
         let body = response.data;
         this.stuData = [body];
       });
