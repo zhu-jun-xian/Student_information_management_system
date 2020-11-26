@@ -134,7 +134,7 @@
           <el-input v-model="selectfuzzyForm.fuzzyname"></el-input>
         </el-form-item>
         <el-form-item label="学号：" prop="fuzzynum">
-          <el-input v-model="selectfuzzyForm.fuzzynum"  maxlength="30"></el-input>
+          <el-input v-model="selectfuzzyForm.fuzzynum" ></el-input>
         </el-form-item>
          <el-form-item label="班级：" prop="fuzzynclass">
          <el-select v-model="selectfuzzyForm.fuzzyclass" placeholder="请选择班别" >
