@@ -7,7 +7,7 @@
       <el-button round @click.native="selectclassVisible = true">班级查询</el-button>
       <el-button round @click.native="selectgendVisible = true">院系查询</el-button>
       <el-button round @click.native="selectfuzzyVisible = true">模糊查询</el-button>
-      <el-input v-model="search1" placeholder="请输入" style="width: 20%; margin-left: 20%" @keydown.enter.native="validateCounts"> </el-input>
+      <el-input v-model="search1" placeholder="请输入" style="width: 30%; padding-left: 300px" @keydown.enter.native="validateCounts"> </el-input>
       <el-divider></el-divider>
     </div>
     <el-container>
@@ -160,10 +160,10 @@
             <el-option label="外国语学院" value="外国语学院"></el-option>
             <el-option label="艺术设计学院" value="艺术设计学院"></el-option>
           </el-select>
-        </el-form-item><br/>
+        </el-form-item>
        
-        <el-form-item style="margin-left:25%;">
-          <el-button type="primary" @click="selectfuzzySubmit"  >查询</el-button>
+        <el-form-item>
+          <el-button type="primary" @click="selectfuzzySubmit" >查询</el-button>
           <el-button @click="resetForm('selectfuzzyForm')">清空</el-button>
         </el-form-item>
       </el-form>

@@ -7,7 +7,7 @@
       <el-button round @click.native="selectclassVisible = true">班级查询</el-button>
       <el-button round @click.native="selectgendVisible = true">院系查询</el-button>
       <el-button round @click.native="selectfuzzyVisible = true">模糊查询</el-button>
-      <el-input v-model="search1" placeholder="请输入" style="width: 20%; margin-left: 20%" @keydown.enter.native="validateCounts"> </el-input>
+      <el-input v-model="search1" placeholder="请输入" style="width: 30%; padding-left: 300px" @keydown.enter.native="validateCounts"> </el-input>
       <el-divider></el-divider>
     </div>
     <el-container>
@@ -137,7 +137,7 @@
           <el-input v-model="selectfuzzyForm.fuzzynum" ></el-input>
         </el-form-item>
          <el-form-item label="班级：" prop="fuzzynclass">
-         <el-select v-model="selectfuzzyForm.fuzzyclass" placeholder="请选择班别" >
+         <el-select v-model="selectfuzzyForm.fuzzyclass" placeholder="请选择班别" style="width: 140%">
               <el-option label="IBM1班" value="IBM1"></el-option>
               <el-option label="IBM2班" value="IBM2"></el-option>
               <el-option label="IBM3班" value="IBM3"></el-option>
@@ -148,11 +148,11 @@
             </el-select>           
         </el-form-item>
           <el-form-item label="性别：" prop="fuzzysex">
-            <el-select v-model="selectfuzzyForm.fuzzysex" placeholder="请选择" >     
+            <el-select v-model="selectfuzzyForm.fuzzysex" placeholder="请选择" style="width: 100%">     
             <el-option label="男" value="男"></el-option>     
             <el-option label="女" value="女"></el-option> </el-select>
         </el-form-item>
-        <el-form-item label="系部：" prop="fuzzyacademy" >
+        <el-form-item label="系部：" prop="fuzzyacademy">
           <el-select v-model="selectfuzzyForm.fuzzyacademy" placeholder="请选择院系">
             <el-option label="智能制造学部" value="智能制造学部"></el-option>
             <el-option label="土木工程学院" value="土木工程学院"></el-option>
@@ -160,10 +160,10 @@
             <el-option label="外国语学院" value="外国语学院"></el-option>
             <el-option label="艺术设计学院" value="艺术设计学院"></el-option>
           </el-select>
-        </el-form-item><br/>
+        </el-form-item>
        
-        <el-form-item style="margin-left:25%;">
-          <el-button type="primary" @click="selectfuzzySubmit"  >查询</el-button>
+        <el-form-item>
+          <el-button type="primary" @click="selectfuzzySubmit" style="margin-left: 100px;">查询</el-button>
           <el-button @click="resetForm('selectfuzzyForm')">清空</el-button>
         </el-form-item>
       </el-form>

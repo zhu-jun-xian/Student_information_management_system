@@ -7,7 +7,7 @@
       <el-button round @click.native="selectclassVisible = true">班级查询</el-button>
       <el-button round @click.native="selectgendVisible = true">院系查询</el-button>
       <el-button round @click.native="selectfuzzyVisible = true">模糊查询</el-button>
-      <el-input v-model="search1" placeholder="请输入" style="width: 20%; margin-left: 20%" @keydown.enter.native="validateCounts"> </el-input>
+      <el-input v-model="search1" placeholder="请输入" style="width: 30%; margin-left: 20%" @keydown.enter.native="validateCounts"> </el-input>
       <el-divider></el-divider>
     </div>
     <el-container>
