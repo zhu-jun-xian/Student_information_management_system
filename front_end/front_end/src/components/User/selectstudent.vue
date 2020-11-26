@@ -12,7 +12,7 @@
     </div>
     <el-container>
       <div>
-        <el-table border class="el-table-column" :data="stuData.slice((currentPage - 1) * pageSize, currentPage * pageSize)" style="width: 100%" >
+        <el-table border class="el-table-column" :data="stuData.slice((currentPage - 1) * pageSize, currentPage * pageSize)" style="width: 100%">
           <!-- <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column> -->
           <el-table-column align="center" header-align="center" prop="stuID" label="学号" width="170%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名" width="160%"></el-table-column>
@@ -23,8 +23,8 @@
           <el-table-column align="center" header-align="center" prop="stuDep" label="系部" width="160%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="" label="操作" width="180%">
             <template slot-scope="scope">
-              <el-button size="mini" type="primary" icon="el-icon-edit" circle @click.native.prevent="handleEdit(scope.$index,stuData)"></el-button>
-              <el-button size="mini" type="danger" icon="el-icon-delete" circle @click.native.prevent="deleteRow(scope.$index,stuData)"></el-button>
+              <el-button size="mini" type="primary" icon="el-icon-edit" circle @click="handleEdit(scope.$index, stuData)"></el-button>
+              <el-button size="mini" type="danger" icon="el-icon-delete" circle @click.native.prevent="deleteRow(scope.$index, stuData)"></el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -36,8 +36,7 @@
 
     <el-dialog title="修改学生信息" :visible.sync="UpdateVisible" width="35%">
       <el-form ref="Updateform" :model="Updateform" label-width="100px">
-        <el-form-item label="学号">              
-        <el-input v-model="Updateform.studentnumber" plain disabled placeholder="studentnumberplaceholder"></el-input>            </el-form-item>
+        <el-form-item label="学号">              <el-input v-model="Updateform.studentnumber" plain disabled placeholder="studentnumberplaceholder"></el-input>            </el-form-item>
         <el-form-item label="学生姓名" prop="name">
           <el-input v-model="Updateform.name"></el-input>
         </el-form-item>
@@ -82,7 +81,7 @@
         <el-form-item label="学号：" prop="fuzzynum">
           <el-input v-model="selectfuzzyForm.fuzzynum"></el-input>
         </el-form-item>
-        <br>
+        <br />
         <el-form-item label="班级：" prop="fuzzyclass">
           <el-select v-model="selectfuzzyForm.fuzzyclass" placeholder="请选择" style="width: 140%">
             <el-option label="IBM1班" value="IBM1班"></el-option>
@@ -94,11 +93,11 @@
             <el-option label="IBM7班" value="IBM7班"></el-option>
           </el-select>
         </el-form-item>
-        
+
           <el-form-item label="性别：" prop="fuzzysex">
             <el-select v-model="selectfuzzyForm.fuzzysex" placeholder="请选择" width="40%">       <el-option label="男" value="男"></el-option>       <el-option label="女" value="女"></el-option> </el-select>
         </el-form-item>
-        <br>
+        <br />
         <el-form-item label="系部：" prop="fuzzyacademy">
           <el-select v-model="selectfuzzyForm.fuzzyacademy" placeholder="请选择" style="width: 240%">
             <el-option label="智能制造学部" value="智能制造学部"></el-option>
@@ -123,12 +122,13 @@
 export default {
   data() {
     return {
-      rowstuid1:'',
+      indexcurr: "",
+      rowstuid1: "",
       search: "",
       search1: "",
       stuData: [
         {
-          studentnumberplaceholder:'',
+          studentnumberplaceholder: "",
           stuNum: "",
           stuID: "",
           stuName: "",
@@ -180,30 +180,30 @@ export default {
   },
 
   methods: {
-     handleEdit(index, rows){
-      this.rowstuid1= rows[index].stuID;
-       axios({
+    handleEdit(index, rows) {
+      if (this.currentPage > 1) {
+        this.indexcurr = (this.currentPage - 1) * this.pageSize + index;
+      } else {
+        this.indexcurr = index;
+      }
+      this.rowstuid1 = rows[this.indexcurr].stuID;
+      axios({
         method: "post",
         url: "/api/getMessagesById",
         data: {
-          stuID: this.rowstuid1
+          stuID: this.rowstuid1,
         },
       })
         .then((response) => {
           let body = response.data;
-          this.studentnumberplaceholder=this.rowstuid1
-          this.Updateform.studentnumber=this.rowstuid1
-          this.Updateform.name = body.stuName, 
-          this.Updateform.time = body.stuBirth, 
-          this.Updateform.sex = body.stuSex,
-          this.Updateform.tel = body.stuTel,
-           this.Updateform.classnumber = body.stuClass, 
-           this.Updateform.department = body.stuDep
+          this.studentnumberplaceholder = this.rowstuid1;
+          this.Updateform.studentnumber = this.rowstuid1;
+          (this.Updateform.name = body.stuName), (this.Updateform.time = body.stuBirth), (this.Updateform.sex = body.stuSex), (this.Updateform.tel = body.stuTel), (this.Updateform.classnumber = body.stuClass), (this.Updateform.department = body.stuDep);
         })
         .catch((err) => {
           console.log("猪...err...", err);
         });
-        this.UpdateVisible=true;
+      this.UpdateVisible = true;
     },
     sumstudent() {
       this.$router.push({
@@ -223,18 +223,16 @@ export default {
           stuDep: this.selectfuzzyForm.fuzzyacademy,
         },
       }).then((response) => {
-  
         this.currentPage = 1;
         let body = response.data;
         this.stuData = [];
         this.stuData = body;
-        this.selectfuzzyVisible = false
+        this.selectfuzzyVisible = false;
       });
     },
 
     //模糊搜索，基于搜索框
     validateCounts() {
-    
       axios({
         method: "post",
         url: "/api/SelectByStuAll",
@@ -248,18 +246,16 @@ export default {
           stuDep: this.search1,
         },
       }).then((response) => {
-     
         this.currentPage = 1;
         let body = response.data;
         this.stuData = [];
         this.stuData = body;
-    
       });
     },
 
     updateusermessage() {
-      let stuid = this.rowstuid1
-      console.log(this.rowstuid1)
+      let stuid = this.rowstuid1;
+      console.log(this.rowstuid1);
       if (this.Updateform.name.length == 0 || this.Updateform.time.length == 0 || this.Updateform.sex.length == 0 || this.Updateform.tel.length == 0 || this.Updateform.classnumber.length == 0 || this.Updateform.department.length == 0) {
         this.$message({
           message: "错误:存在空输入框，修改失败",
@@ -308,24 +304,26 @@ export default {
       }
     },
 
-
     //删除学生信息
     deleteRow(index, rows) {
-      let stuid = rows[index].stuID;
-      console.log('H股'+stuid)
-       console.log('H股'+rows[index].stuID)
-      this.$confirm("信息删除不可恢复,请确认是否删除学号为:" + rows[index].stuID + ",姓名为：" + rows[index].stuName + "的学生吗？, 是否继续?", {
+      if (this.currentPage > 1) {
+        this.indexcurr = (this.currentPage - 1) * this.pageSize + index;
+      } else {
+        this.indexcurr = index;
+      }
+      this.rowstuid1 = rows[this.indexcurr].stuID;
+
+      this.$confirm("信息删除不可恢复,请确认是否删除学号为:" + rows[this.indexcurr].stuID + ",姓名为：" + rows[this.indexcurr].stuName + "的学生吗？", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
-       
           axios({
             method: "post",
             url: "/api/deleteMessagesById",
             data: {
-              stuID: stuid,
+              stuID: this.rowstuid1,
             },
           })
             .then((response) => {
@@ -374,9 +372,11 @@ export default {
     handleSizeChange(val) {
       this.currentPage = 1;
       this.pageSize = val;
+      console.log(this.pageSize);
     },
     handleCurrentChange: function (val) {
       this.currentPage = val;
+      console.log(val);
     },
 
     selectAll() {
@@ -392,7 +392,6 @@ export default {
           console.log("...err...", err);
         });
     },
-
   },
   //获取表格数据
   created() {

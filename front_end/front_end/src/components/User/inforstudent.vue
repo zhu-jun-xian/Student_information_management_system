@@ -2,7 +2,7 @@
   <div class="hello">
     <el-container>
       <div>
-        <el-table border class="el-table-column" :data="stuData.slice((currentPage - 1) * pageSize, currentPage * pageSize)" style="width: 100%" >
+        <el-table border class="el-table-column" :data="stuData.slice((currentPage - 1) * pageSize, currentPage * pageSize)" style="width: 100%">
           <!-- <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column> -->
           <el-table-column align="center" header-align="center" prop="stuID" label="学号" width="170%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名" width="160%"></el-table-column>
@@ -13,7 +13,7 @@
           <el-table-column align="center" header-align="center" prop="stuDep" label="系部" width="160%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="" label="操作" width="180%">
             <template slot-scope="scope">
-              <el-button size="mini" type="primary" icon="el-icon-edit" circle @click.native.prevent="handleEdit(scope.$index,stuData)"></el-button>
+              <el-button size="mini" type="primary" icon="el-icon-edit" circle @click.native.prevent="handleEdit(scope.$index, stuData)"></el-button>
               <el-button size="mini" type="danger" icon="el-icon-delete" circle @click.native.prevent="deleteRow(scope.$index, stuData)"></el-button>
             </template>
           </el-table-column>
@@ -24,7 +24,7 @@
       </div>
     </el-container>
 
-    <el-dialog title="修改学生信息" :visible.sync="UpdateVisible" width="35%" >
+    <el-dialog title="修改学生信息" :visible.sync="UpdateVisible" width="35%">
       <span>
         <el-form ref="Updateform" :model="Updateform" label-width="100px">
           <el-form-item label="学号" prop="studentnumber">              <el-input v-model="studentnumberplaceholder" plain disabled placeholder="studentnumberplaceholder"></el-input>            </el-form-item>
@@ -73,7 +73,8 @@
 export default {
   data() {
     return {
-      rowstuid:'',
+      indexcurr: "",
+      rowstuid: "",
       studentnumberplaceholder: "",
       stuData: [
         {
@@ -109,9 +110,14 @@ export default {
   },
 
   methods: {
-    handleEdit(index, rows){
-      this.rowstuid = rows[index].stuID;
-       axios({
+    handleEdit(index, rows) {
+      if (this.currentPage > 1) {
+        this.indexcurr = (this.currentPage - 1) * this.pageSize + index;
+      } else {
+        this.indexcurr = index;
+      }
+      this.rowstuid = rows[this.indexcurr].stuID;
+      axios({
         method: "post",
         url: "/api/getMessagesById",
         data: {
@@ -120,24 +126,19 @@ export default {
       })
         .then((response) => {
           let body = response.data;
-           this.studentnumberplaceholder=this.rowstuid
-          this.Updateform.studentnumber=this.rowstuid
-          this.Updateform.name = body.stuName, 
-          this.Updateform.time = body.stuBirth, 
-          this.Updateform.sex = body.stuSex,
-          this.Updateform.tel = body.stuTel,
-           this.Updateform.classnumber = body.stuClass, 
-           this.Updateform.department = body.stuDep
+          this.studentnumberplaceholder = this.rowstuid;
+          this.Updateform.studentnumber = this.rowstuid;
+          (this.Updateform.name = body.stuName), (this.Updateform.time = body.stuBirth), (this.Updateform.sex = body.stuSex), (this.Updateform.tel = body.stuTel), (this.Updateform.classnumber = body.stuClass), (this.Updateform.department = body.stuDep);
         })
         .catch((err) => {
           console.log("猪...err...", err);
         });
-        this.UpdateVisible=true;
+      this.UpdateVisible = true;
     },
 
     updateusermessage() {
       let stuid = this.rowstuid;
-      console.log('zhu'+stuid)
+      console.log("zhu" + stuid);
       if (this.Updateform.name.length == 0 || this.Updateform.time.length == 0 || this.Updateform.sex.length == 0 || this.Updateform.tel.length == 0 || this.Updateform.classnumber.length == 0 || this.Updateform.department.length == 0) {
         this.$message({
           message: "错误:存在空输入框，修改失败",
@@ -187,8 +188,13 @@ export default {
     },
     //删除学生信息
     deleteRow(index, rows) {
-      let stuid = rows[index].stuID;
-      this.$confirm("信息删除不可恢复,请确认是否删除学号为:" + rows[index].stuID + ",姓名为：" + rows[index].stuName + "的学生吗？, 是否继续?", {
+      if (this.currentPage > 1) {
+        this.indexcurr = (this.currentPage - 1) * this.pageSize + index;
+      } else {
+        this.indexcurr = index;
+      }
+      this.rowstuid1 = rows[this.indexcurr].stuID;
+      this.$confirm("信息删除不可恢复,请确认是否删除学号为:" + rows[this.indexcurr].stuID + ",姓名为：" + rows[this.indexcurr].stuName + "的学生吗？, 是否继续?", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
@@ -198,7 +204,7 @@ export default {
             method: "post",
             url: "/api/deleteMessagesById",
             data: {
-              stuID: stuid,
+              stuID: this.rowstuid1,
             },
           })
             .then((response) => {
