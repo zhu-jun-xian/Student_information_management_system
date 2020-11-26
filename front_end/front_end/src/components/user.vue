@@ -140,7 +140,7 @@
             <el-form-item label="出生年月" prop="addtime" >  
             <!-- <el-input type="number" style="width: 60%" v-model="addForm.addtime" placeholder="例如:20200501" maxlength="6" show-word-limit></el-input>  -->
      
-            <el-date-picker type="date" v-model="addForm.addtime " placeholder="选择日期"  style="width: 100%;" value-format="yyyyMMdd"></el-date-picker>
+            <el-date-picker type="date" v-model="addForm.addtime " placeholder="选择日期"  style="width: 60%;" value-format="yyyyMMdd"></el-date-picker>
             
           </el-form-item>
           <el-form-item label="性别" prop="addsex">
