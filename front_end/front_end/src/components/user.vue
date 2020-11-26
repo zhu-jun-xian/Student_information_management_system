@@ -116,7 +116,14 @@
         <el-table-column align="center" prop="boys" label="女" width="100"> </el-table-column>
         <el-table-column align="center" prop="allSchoolstu" label="全校统计" width="100"> </el-table-column>
     </el-table>
-    <div id="main" style="width: 600px;height:400px;"></div>
+    <div>
+        <div id="main" style="width: 550px;height:400px;display: inline-block;"></div>
+        <!--  柱形图容器 -->
+        <div id="main1" style="width: 500px;height:400px;display: inline-block;"></div>
+        <!--  饼状图容器 -->
+        <div id="main2" style="width: 300px;height:400px;display: inline-block;"></div>
+    </div>
+
 </el-dialog>
 
 <el-dialog title="学生信息录入" :visible.sync="addVisible" width="50%">
@@ -358,6 +365,56 @@
                         };
                         // 使用刚指定的配置项和数据显示图表。
                         myChart.setOption(option);
+                        var myChart = this.$echarts.init(document.getElementById('main1'));
+                        myChart.setOption({
+                            series: [{
+                                name: '系部人数饼状图',
+                                type: 'pie', // 设置图表类型为饼图
+                                radius: '55%', // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
+                                data: [ // 数据数组，name 为数据项名称，value 为数据项值
+                                    {
+                                        value: body[9].totalDep,
+                                        name: '智能制造学部'
+                                    }, {
+                                        value: body[11].totalDep,
+                                        name: '艺术设计学院'
+                                    }, {
+                                        value: body[10].totalDep,
+                                        name: '经济管理学院'
+                                    }, {
+                                        value: body[7].totalDep,
+                                        name: '土木工程学院'
+                                    }, {
+                                        value: body[8].totalDep,
+                                        name: '外国语学院'
+                                    }
+                                ]
+                            }]
+                        })
+                        var myChart = this.$echarts.init(document.getElementById('main2'));
+                        var option1 = {
+                            title: {
+                                text: '男女人数'
+                            },
+                            tooltip: {},
+                            legend: {
+                                data: ['人数']
+                            },
+                            xAxis: {
+                                data: ["男", "女", ]
+                            },
+                            yAxis: {},
+                            series: [{
+                                name: '人数',
+                                type: 'bar',
+                                data: [body[13].totalSex, body[12].totalSex]
+                            }]
+                        };
+                        // 使用刚指定的配置项和数据显示图表。
+                        myChart.setOption(option1);
+
+
+
                     })
                     .catch((err) => {
                         console.log("...err...", err);
