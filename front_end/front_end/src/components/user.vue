@@ -116,45 +116,46 @@
 <el-dialog title="学生信息录入" :visible.sync="addVisible" width="50%">
     <span>
         <el-form :model="addForm" ref="addForm" label-width="100px" class="addForm">
-          <el-form-item label="学生姓名">
+          <el-form-item label="学生姓名" prop="addstudentname">
             <el-input v-model="addForm.addstudentname" style="width: 60%"></el-input>
           </el-form-item>
-          <el-form-item label="学号">
+          <el-form-item label="学号" prop="addstudentnumber">
             <el-input type="number" v-model="addForm.addstudentnumber" style="width: 60%"></el-input>
           </el-form-item>
-          <el-form-item label="班级">
+          <el-form-item label="班级" prop="addclassnumber">
             <!-- <el-input v-model="addForm.addclassnumber" style="width: 60%"></el-input> -->
-             <el-select v-model="addForm.classnumber" placeholder="请选择">
-                              <el-option label="IBM1班" value="IBM1"></el-option>
-                              <el-option label="IBM2班" value="IBM2"></el-option>
-                              <el-option label="IBM3班" value="IBM3"></el-option>
-                              <el-option label="IBM4班" value="IBM4"></el-option>
-                              <el-option label="IBM5班" value="IBM5"></el-option>
-                              <el-option label="IBM6班" value="IBM6"></el-option>
-                              <el-option label="IBM7班" value="IBM7"></el-option>
+             <el-select v-model="addForm.addclassnumber" placeholder="请选择">
+                              <el-option label="IBM1班" value="IBM1班"></el-option>
+                              <el-option label="IBM2班" value="IBM2班"></el-option>
+                              <el-option label="IBM3班" value="IBM3班"></el-option>
+                              <el-option label="IBM4班" value="IBM4班"></el-option>
+                              <el-option label="IBM5班" value="IBM5班"></el-option>
+                              <el-option label="IBM6班" value="IBM6班"></el-option>
+                              <el-option label="IBM7班" value="IBM7班"></el-option>
             </el-select>
             </el-form-item>
             </el-form-item>
-
-          <el-form-item label="出生年月">  
-            <el-input type="number" style="width: 60%" v-model="addForm.addtime" placeholder="例如:20200501" maxlength="6" show-word-limit></el-input> 
+<!-- 
+          <el-form-item label="班级" prop="addclassnumber"> -->
+            <el-form-item label="出生年月" prop="addtime" >  
+            <!-- <el-input type="number" style="width: 60%" v-model="addForm.addtime" placeholder="例如:20200501" maxlength="6" show-word-limit></el-input>  -->
      
-            <!-- <el-date-picker type="date" v-model="addForm.addtime" placeholder="选择日期"  style="width: 100%;"></el-date-picker> -->
+            <el-date-picker type="date" v-model="addForm.addtime " placeholder="选择日期"  style="width: 100%;" value-format="yyyyMMdd"></el-date-picker>
             
           </el-form-item>
-          <el-form-item label="性别">
+          <el-form-item label="性别" prop="addsex">
             <el-select v-model="addForm.addsex" placeholder="请选择">
               <el-option label="女" value="女"></el-option>
               <el-option label="男" value="男"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="电话">
+          <el-form-item label="电话" prop="addtel">
             <el-input type="number" v-model="addForm.addtel" style="width: 60%"></el-input>
           </el-form-item>
           <el-form-item label="系统录入时间">
             <el-input disabled v-model="addsystemtime" placeholder="系统自动生成" style="width: 50%"></el-input>
           </el-form-item>
-          <el-form-item label="系部">
+          <el-form-item label="系部" prop="adddepartment">
             <el-select v-model="addForm.adddepartment" placeholder="请选择">
               <el-option label="智能制造学部" value="智能制造学部"></el-option>
               <el-option label="土木工程学院" value="土木工程学院"></el-option>
@@ -205,21 +206,21 @@
                     repass: "",
                 },
                 sumtableData: [{
-                    artdesign: '',
-                    foreign: '',
-                    tumu: '',
-                    economic: "",
-                    intell: '',
-                    girls: "",
-                    boys: "",
-                    IBM1: '',
-                    IBM2: '',
-                    IBM3: '',
-                    IBM4: '',
-                    IBM5: '',
-                    IBM6: '',
-                    IBM7: '',
-                    allSchoolstu: ''
+                    artdesign: '0',
+                    foreign: '0',
+                    tumu: '0',
+                    economic: "0",
+                    intell: '0',
+                    girls: "0",
+                    boys: "0",
+                    IBM1: '0',
+                    IBM2: '0',
+                    IBM3: '0',
+                    IBM4: '0',
+                    IBM5: '0',
+                    IBM6: '0',
+                    IBM7: '0',
+                    allSchoolstu: '0'
                 }, ],
                 statisticsForm: {
                     irule: "",
@@ -639,6 +640,7 @@
                 this.UpdateVisible = false;
             },
             resetForm(formName) {
+                console.log(this.$refs[formName].resetFields())
                 this.$refs[formName].resetFields();
             },
             //设置页面背景色
