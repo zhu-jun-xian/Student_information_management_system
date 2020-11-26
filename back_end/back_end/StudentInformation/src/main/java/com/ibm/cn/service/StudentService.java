@@ -24,6 +24,10 @@ public class StudentService {
 	  return studentMapper.getUserById(id);
 	 }
 	 
+	 public Student getUserById(Student student) {
+		return studentMapper.getUserById(student);
+	 }
+	 
 	 public Student getUserByName(String name) {
 		  return studentMapper.getUserByName(name);
 	}
@@ -57,5 +61,17 @@ public class StudentService {
 	 public int updateUser(Student student) {
 		  return studentMapper.updateUser(student);
 	}
+	 
+	 public int updateUserTableByID(Student student) {
+		   return studentMapper.updateUserTableByID(student);
+		  }
+	 
+	 public int deleteUserById(String id) {
+		   return studentMapper.deleteUserById(id);
+		  }
+	 
+	 public List<Student> teacherinfor(){
+		    return studentMapper.teacherinfor();
+	 }
 
 }

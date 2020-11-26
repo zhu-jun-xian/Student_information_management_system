@@ -4,9 +4,10 @@
 		INSERT INTO usertable(ID,Name,Tel,Password) VALUES (#{id},#{name},#{tel},#{password})
 	</insert>
 	
-	<delete id="deleteUserById" parameterType="int">
-		DELETE FROM student WHERE id=#{id}
-	</delete>
+<delete id="deleteUserById" parameterType="String">
+  DELETE FROM usertable WHERE id=#{id}
+ </delete>
+
 	<select id="countstudent" parameterType="String">
 		select count(stuClass) from studentinformationtable where stuClass=#{stuclass};
 	</select>
@@ -43,5 +44,10 @@
   		UPDATE usertable SET password=#{password}
  		 WHERE id=#{id}
  	</update>
+ 	
+ 	<update id="updateUserTableByID"
+  parameterType="com.ibm.cn.model.Student">
+  UPDATE usertable SET name=#{name},tel=#{tel} WHERE id=#{id}
+ </update>
 
 </mapper>

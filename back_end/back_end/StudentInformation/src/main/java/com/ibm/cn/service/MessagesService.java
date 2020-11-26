@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ibm.cn.mapper.MessagesMapper;
 import com.ibm.cn.model.Messages;
+import com.ibm.cn.model.Sex;
 
 @Service
 public class MessagesService {
@@ -23,11 +24,11 @@ public class MessagesService {
 		return messagesMapper.getAllMessages();
 	}
 	
-	public Messages getMessagesById(String stuID) {
+	public Messages getMessagesById(Messages stuID) {
 		return messagesMapper.getMessagesById(stuID);
 	}
 	
-	public Messages getMessagesByName(String stuName) {
+	public Messages getMessagesByName(Messages stuName) {
 		return messagesMapper.getMessagesByName(stuName);
 	}
 	
@@ -55,15 +56,15 @@ public class MessagesService {
 		return messagesMapper.getByStuID(stuID);
 	}
 	
-	public List<Messages> SelectByStuName(String stuName) {		
+	public List<Messages> SelectByStuName(Messages stuName) {		
 		return messagesMapper.SelectByStuName(stuName);
 	}
 	
-	public List<Messages> SelectByStuClass(String stuClass) {		
+	public List<Messages> SelectByStuClass(Messages stuClass) {		
 		return messagesMapper.SelectByStuClass(stuClass);
 	}
 	
-	public List<Messages> SelectByStuDep(String stuDep) {		
+	public List<Messages> SelectByStuDep(Messages stuDep) {		
 		return messagesMapper.SelectByStuDep(stuDep);
 	}
 	
@@ -71,15 +72,39 @@ public class MessagesService {
 		return messagesMapper.SelectByStuSex(stuSex);
 	}
 
-	//统计
-	public List<Messages> CountByStuSex(String stuSex) {
-		return messagesMapper.CountByStuSex(stuSex);
+
+	
+	public List<Sex> getCountBySex(){
+		return messagesMapper.getCountBySex();
 	}
-	public List<Messages> CountByStuClass(String stuClass) {
-		return messagesMapper.CountByStuClass(stuClass);
-	}
-	public List<Messages> CountByStuDep(String stuDep) {
-		return messagesMapper.CountByStuDep(stuDep);
+
+	public List<Messages> SelectByStuAll(Messages stu) {  
+		  return messagesMapper.SelectByStuAll(stu);
 	}
 	
+	public List<Messages> SelectMessagesByStuAll(Messages messages){
+		
+		return messagesMapper.SelectMessagesByStuAll(messages);
+	}
+	
+	//汇总统计
+	public List<Messages> CountByStuSex() {
+		  return messagesMapper.CountByStuSex();
+		 }
+		 
+		 public List<Messages> CountByStuClass() {
+		  List<Messages> list=messagesMapper.CountByStuClass();
+		//  return messagesMapper.CountByStuClass();
+		  return list;
+		 }
+		 public List<Messages> CountByStuDep() {
+		  return messagesMapper.CountByStuDep();
+		 }
+		 
+		 
+		 
+	//导出
+	public List<Messages> teacherinfor(){
+	    return messagesMapper.teacherinfor();
+	 }
 }

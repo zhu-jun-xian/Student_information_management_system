@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ibm.cn.model.Student;
@@ -12,6 +13,8 @@ public interface StudentMapper {
 	public int addUser(Student book);
 	
 	public Student getUserById(String id);
+	
+	public Student getUserById(Student student);
 	
 	public List<Student> getAllUsers();
 	
@@ -27,5 +30,13 @@ public interface StudentMapper {
 	
 	public String countstudent(String stuClass);
 	
-	 public int updateUser(Student student);
+	public int updateUser(Student student);
+	
+	public int updateUserTableByID(Student student);
+	
+	public int deleteUserById(String id);
+	
+	@Select("select * from usertable")
+	public List<Student> teacherinfor();
+
 }

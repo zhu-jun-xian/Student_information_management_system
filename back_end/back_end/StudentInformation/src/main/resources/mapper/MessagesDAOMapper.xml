@@ -8,12 +8,12 @@
 		SELECT * FROM studentinformationtable
 	</select>
 	
-	<select id="getMessagesById" parameterType="String"
+	<select id="getMessagesById" parameterType="com.ibm.cn.model.Messages"
 		resultType="com.ibm.cn.model.Messages">
 		SELECT * FROM studentinformationtable WHERE stuID=#{stuID}
 	</select>
 	
-	<select id="getMessagesByName" parameterType="String"
+	<select id="getMessagesByName" parameterType="com.ibm.cn.model.Messages"
 		resultType="com.ibm.cn.model.Messages">
 		SELECT * FROM studentinformationtable WHERE stuName=#{stuName}
 	</select>
@@ -44,15 +44,15 @@
 		SELECT * FROM  studentinformationtable WHERE stuID=#{stuID}
 	</select>
 	
-	<select id="SelectByStuName" resultType="com.ibm.cn.model.Messages"  parameterType="String">
-		SELECT * FROM  studentinformationtable WHERE stuName=#{stuName}
+	<select id="SelectByStuName" resultType="com.ibm.cn.model.Messages"  parameterType="com.ibm.cn.model.Messages">
+		select * from studentinformationtable where stuName like concat('%' ,#{stuName},'%') 
 	</select>
 	
-	<select id="SelectByStuClass" resultType="com.ibm.cn.model.Messages"  parameterType="String">
+	<select id="SelectByStuClass" resultType="com.ibm.cn.model.Messages"  parameterType="com.ibm.cn.model.Messages">
 		SELECT * FROM  studentinformationtable WHERE stuClass=#{stuClass}
 	</select>
 	
-	<select id="SelectByStuDep" resultType="com.ibm.cn.model.Messages"  parameterType="String">
+	<select id="SelectByStuDep" resultType="com.ibm.cn.model.Messages"  parameterType="com.ibm.cn.model.Messages">
 		SELECT * FROM  studentinformationtable WHERE stuDep=#{stuDep}
 	</select>
 	
@@ -60,20 +60,64 @@
 		SELECT * FROM  studentinformationtable WHERE stuSex=#{stuSex}
 	</select>
 	
-	<select id="CountByStuSex"  parameterType="String"
-		resultType="com.ibm.cn.model.Messages">
-		SELECT * FROM  studentinformationtable WHERE stuSex=#{stuSex}
+	
+	<select id="getCountBySex" resultType="com.ibm.cn.model.Sex">
+		select stuSex sex,Count(stuSex) count from studentinformationtable where stuSex in(select distinct stuSex from studentinformationtable) group by stuSex
 	</select>
 	
-	<select id="CountByStuClass"  parameterType="String"
-		resultType="com.ibm.cn.model.Messages">
-		SELECT * FROM  studentinformationtable WHERE stuClass=#{stuClass}
-	</select>
 	
-	<select id="CountByStuDep"  parameterType="String"
-		resultType="com.ibm.cn.model.Messages">
-		SELECT * FROM  studentinformationtable WHERE stuDep=#{stuDep}
-	</select>
+	<select id="SelectByStuAll"  parameterType="com.ibm.cn.model.Messages"  resultType="com.ibm.cn.model.Messages"  >
+  select * from studentinformationtable 
+   WHERE stuID like concat('%' ,#{stuID},'%') 
+       or stuName like concat('%' ,#{stuName},'%') 
+      or stuBirth like concat('%' ,#{stuBirth},'%')
+      or stuSex like concat('%' ,#{stuSex},'%')
+      or stuTel like concat('%' ,#{stuTel},'%')
+      or stuClass like concat('%' ,#{stuClass},'%')
+      or stuDep like concat('%' ,#{stuDep},'%')
+ </select> 
+	
+<select id="SelectMessagesByStuAll"  parameterType="com.ibm.cn.model.Messages"  resultType="com.ibm.cn.model.Messages"  >	
+	select * from studentinformationtable 
+ 	 WHERE 1=1
+ 	  <if test="stuID != null and stuID != ''">
+            and stuID like concat('%' ,#{stuID},'%') 
+      </if>
+ 	 <if test="stuName != null and stuName != ''">
+            and stuName like concat('%' ,#{stuName},'%') 
+      </if>
+       <if test="stuBirth != null and stuBirth != ''">
+            and stuBirth like concat('%' ,#{stuBirth},'%')
+      </if>
+ 	 <if test="stuSex != null and stuSex != ''">
+            and stuSex like concat('%' ,#{stuSex},'%')
+      </if>
+       <if test="stuTel != null and stuTel != ''">
+            and stuTel like concat('%' ,#{stuTel},'%') 
+      </if>
+       <if test="stuClass != null and stuClass != ''">
+            and stuClass like concat('%' ,#{stuClass},'%')
+      </if>
+ 	 <if test="stuDep != null and stuDep != ''">
+            and stuDep like concat('%' ,#{stuDep},'%')
+      </if>
 
-
+	 </select> 
+	
+	
+ <select id="CountByStuSex"  
+  resultType="com.ibm.cn.model.Messages">
+  SELECT Count(*) as totalSex ,stuSex  FROM  studentinformationtable GROUP BY stuSex
+ </select>
+    
+    <select id="CountByStuDep"  
+  resultType="com.ibm.cn.model.Messages">
+  SELECT Count(*) as totalDep,stuDep FROM  studentinformationtable GROUP BY stuDep
+ </select>
+    
+    
+ <select id="CountByStuClass"  
+  resultType="com.ibm.cn.model.Messages">
+  SELECT  Count(*) as   totalClass , stuClass  FROM  studentinformationtable GROUP BY stuClass
+ </select>
 </mapper>
