@@ -122,16 +122,25 @@
 
     <el-dialog title="模糊查询" :visible.sync="selectfuzzyVisible" width="25%">
       <el-form ref="selectfuzzyForm" :inline="true" :model="selectfuzzyForm" class="selectfuzzyForm_demo">
-        <el-form-item label="姓名" prop="fuzzyname">
+        <el-form-item label="姓名：" prop="fuzzyname">
           <el-input v-model="selectfuzzyForm.fuzzyname" style="width: 140%"></el-input>
         </el-form-item>
-        <el-form-item label="学号" prop="fuzzynum">
+        <el-form-item label="学号：" prop="fuzzynum">
           <el-input v-model="selectfuzzyForm.fuzzynum" style="width: 140%"></el-input>
         </el-form-item>
-         <el-form-item label="班级" prop="fuzzynclass">
-          <el-input v-model="selectfuzzyForm.fuzzyclass" style="width: 140%"></el-input>
+         <el-form-item label="班级：" prop="fuzzynclass">
+         <el-select v-model="selectfuzzyForm.fuzzyclass" placeholder="请选择班别" style="width: 140%">
+              <el-option label="IBM1班" value="IBM1"></el-option>
+              <el-option label="IBM2班" value="IBM2"></el-option>
+              <el-option label="IBM3班" value="IBM3"></el-option>
+              <el-option label="IBM4班" value="IBM4"></el-option>
+              <el-option label="IBM5班" value="IBM5"></el-option>
+              <el-option label="IBM6班" value="IBM6"></el-option>
+              <el-option label="IBM7班" value="IBM7"></el-option>
+            </el-select>  
+          
         </el-form-item>
-          <el-form-item label="性别" prop="fuzzysex">
+          <el-form-item label="性别：" prop="fuzzysex">
             <el-select v-model="selectfuzzyForm.fuzzysex" placeholder="请选择" style="width: 100%">     
             <el-option label="男" value="男"></el-option>     
             <el-option label="女" value="女"></el-option> </el-select>
