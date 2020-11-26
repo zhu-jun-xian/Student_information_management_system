@@ -3,29 +3,29 @@
     <div>
       <!-- <el-button round @click="sumstudent">合计</el-button> -->
       <el-button round @click="selectAll">全部信息</el-button>
-      <!-- <el-button round @click.native="selectnumVisible = true">学生查询</el-button>
+      <el-button round @click.native="selectnumVisible = true">学生查询</el-button>
       <el-button round @click.native="selectclassVisible = true">班级查询</el-button>
-      <el-button round @click.native="selectgendVisible = true">院系查询</el-button> -->
+      <el-button round @click.native="selectgendVisible = true">院系查询</el-button>
       <el-button round @click.native="selectfuzzyVisible = true">模糊查询</el-button>
-      <el-input v-model="search1" placeholder="请输入" style="width: 20%; float:right;" @keydown.enter.native="validateCounts"> </el-input>
+      <el-input v-model="search1" placeholder="请输入" style="width: 20%; margin-left: 20%" @keydown.enter.native="validateCounts"> </el-input>
       <el-divider></el-divider>
     </div>
     <el-container>
       <div>
-        <el-table border class="el-table-column" :data="stuData.slice((currentPage - 1) * pageSize, currentPage * pageSize)" style="width: 100%" @row-click="rowclick">
-          <!-- <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column> -->
-          <el-table-column align="center" header-align="center" prop="stuID" label="学号" width="170%"></el-table-column>
-          <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名" width="160%"></el-table-column>
-          <el-table-column align="center" header-align="center" prop="stuBirth" label="出生年月日" width="160%"></el-table-column>
+        <el-table border class="el-table-column" :data="stuData.slice((currentPage - 1) * pageSize, currentPage * pageSize)" :default-sort="{ prop: 'date', order: 'descending' }" style="width: 100%" @row-click="rowclick">
+          <!-- <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%" sortable>
+          </el-table-column> -->
+          <el-table-column align="center" header-align="center" prop="stuID" label="学号" width="170%" sortable> </el-table-column>
+          <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名" width="160%"> </el-table-column>
+          <el-table-column align="center" header-align="center" prop="stuBirth" label="出生年月日" width="160%"> </el-table-column>
           <el-table-column align="center" header-align="center" prop="stuSex" label="性别" width="110%"></el-table-column>
-          <el-table-column align="center" header-align="center" prop="stuTel" label="手机号码" width="160%"></el-table-column>
-          <el-table-column align="center" header-align="center" prop="stuClass" label="班级" width="160%"></el-table-column>
-          <el-table-column align="center" header-align="center" prop="stuDep" label="系部" width="160%"></el-table-column>
-          <el-table-column align="center" header-align="center" prop="" label="操作" width="180%">
-            <template slot-scope="scope">
-              <el-button size="mini" type="primary" icon="el-icon-edit" circle @click.native="UpdateVisible = true"></el-button>
-              <el-button size="mini" type="danger" icon="el-icon-delete" circle @click.native.prevent="deleteRow(scope.$index, stuData)"></el-button>
-            </template>
+          <el-table-column align="center" header-align="center" prop="stuTel" label="手机号码" width="160%"> </el-table-column>
+          <el-table-column align="center" header-align="center" prop="stuClass" label="班级" width="160%" sortable> </el-table-column>
+          <el-table-column align="center" header-align="center" prop="stuDep" label="系部" width="160%" sortable> </el-table-column>
+          <el-table-column align="center" header-align="center" label="操作" width="180%">
+            <el-button size="mini" type="primary" icon="el-icon-edit" circle @click.native="UpdateVisible = true"></el-button>
+
+            <el-button size="mini" type="danger" icon="el-icon-delete" circle @click.native.prevent="deleteRow()"></el-button>
           </el-table-column>
         </el-table>
         <div class="block" style="margin-top: 15px">
@@ -81,7 +81,7 @@
       </el-form>
     </el-dialog>
 
-    <!-- <el-dialog title="选择院系" :visible.sync="selectgendVisible" width="20%">
+    <el-dialog title="选择院系" :visible.sync="selectgendVisible" width="20%">
       <el-form :inline="true" :model="selectgendForm" class="selectgendForm_demo">
         <el-form-item label="系部：" prop="selectgendacademy">
           <el-select v-model="selectgendForm.selectgendacademy" placeholder="请选择" style="width: 160%">
@@ -96,9 +96,9 @@
           <el-button type="primary" @click="selectgendSubmit">查询</el-button>
         </el-form-item>
       </el-form>
-    </el-dialog> -->
+    </el-dialog>
 
-    <!-- <el-dialog title="输入班级" :visible.sync="selectclassVisible" width="25%">
+    <el-dialog title="输入班级" :visible.sync="selectclassVisible" width="25%">
       <el-form :inline="true" :model="selectclassForm" class="selectclassForm_demo">
         <el-form-item label="班级">
             <el-select v-model="selectclassForm.selectclass" placeholder="请选择班别" style="width: 160%">
@@ -115,37 +115,37 @@
           <el-button type="primary" @click="selectclassSubmit">查询</el-button>
         </el-form-item>
       </el-form>
-    </el-dialog> -->
+    </el-dialog>
 
-    <!-- <el-dialog title="输入学号" :visible.sync="selectnumVisible" width="30%">
+    <el-dialog title="输入学号" :visible.sync="selectnumVisible" width="30%">
       <el-form :inline="true" :model="selectnumForm" class="selectnumForm_demo">
         <el-form-item label="学号">
-          <el-input v-model="selectnumForm.selectnum" maxlength="30"></el-input>
+          <el-input v-model="selectnumForm.selectnum"  maxlength="30"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="selectnumSubmit">查询</el-button>
         </el-form-item>
       </el-form>
-    </el-dialog> -->
+    </el-dialog>
 
-    <el-dialog title="模糊查询" :visible.sync="selectfuzzyVisible" width="40%">
+    <el-dialog title="模糊查询" :visible.sync="selectfuzzyVisible" width="25%">
       <el-form ref="selectfuzzyForm" :inline="true" :model="selectfuzzyForm" class="selectfuzzyForm_demo">
         <el-form-item label="姓名：" prop="fuzzyname">
           <el-input v-model="selectfuzzyForm.fuzzyname"  maxlength="30"></el-input>
         </el-form-item>
         <el-form-item label="学号：" prop="fuzzynum">
-          <el-input v-model="selectfuzzyForm.fuzzynum"></el-input>
+          <el-input v-model="selectfuzzyForm.fuzzynum"  maxlength="30"></el-input>
         </el-form-item>
-        <el-form-item label="班级：" prop="fuzzyclass">
-          <el-select v-model="selectfuzzyForm.fuzzyclass" placeholder="请选择班别" style="width: 140%">
-            <el-option label="IBM1班" value="IBM1班"></el-option>
-            <el-option label="IBM2班" value="IBM2班"></el-option>
-            <el-option label="IBM3班" value="IBM3班"></el-option>
-            <el-option label="IBM4班" value="IBM4班"></el-option>
-            <el-option label="IBM5班" value="IBM5班"></el-option>
-            <el-option label="IBM6班" value="IBM6班"></el-option>
-            <el-option label="IBM7班" value="IBM7班"></el-option>
-          </el-select>
+         <el-form-item label="班级：" prop="fuzzynclass">
+         <el-select v-model="selectfuzzyForm.fuzzyclass" placeholder="请选择班别" >
+              <el-option label="IBM1班" value="IBM1班"></el-option>
+              <el-option label="IBM2班" value="IBM2班"></el-option>
+              <el-option label="IBM3班" value="IBM3班"></el-option>
+              <el-option label="IBM4班" value="IBM4班"></el-option>
+              <el-option label="IBM5班" value="IBM5班"></el-option>
+              <el-option label="IBM6班" value="IBM6班"></el-option>
+              <el-option label="IBM7班" value="IBM7班"></el-option>
+            </el-select>           
         </el-form-item>
           <el-form-item label="性别：" prop="fuzzysex">
             <el-select v-model="selectfuzzyForm.fuzzysex" placeholder="请选择" >     
@@ -162,7 +162,7 @@
           </el-select>
         </el-form-item><br/>
        
-        <el-form-item style="margin-left:30%;">
+        <el-form-item style="margin-left:25%;">
           <el-button type="primary" @click="selectfuzzySubmit"  >查询</el-button>
           <el-button @click="resetForm('selectfuzzyForm')">清空</el-button>
         </el-form-item>
@@ -335,15 +335,9 @@ export default {
           });
       }
     },
-    //获取一行的学号
-    rowclick(row) {
-      this.rowID = row.stuID;
-      console.log("rowclick:" + row.stuID);
-      return row.stuID;
-    },
 
      //删除学生信息
-    deleteRow(index, rows) {
+     deleteRow(index, rows) {
       // let stuid = this.rowID;
       // rows.splice(index, 1);
       // console.log(index);
@@ -399,7 +393,12 @@ export default {
         });
     },
 
-    
+    //获取一行的学号
+    rowclick(row) {
+      this.rowID = row.stuID;
+      console.log("rowclick:" + row.stuID);
+      return row.stuID;
+    },
 
     handleClose(key, keyPath) {
       console.log(key, keyPath);
@@ -434,57 +433,57 @@ export default {
         });
     },
 
-    // selectgendSubmit() {
-    //   console.log("院系...", this.selectgendForm.selectgendacademy);
-    //   axios({
-    //     method: "post",
-    //     url: "/api/SelectByStuDep",
-    //     data: {
-    //       stuDep: this.selectgendForm.selectgendacademy,
-    //     },
-    //   }).then((response) => {
-    //     this.selectgendVisible = false;
-    //     this.currentPage = 1;
-    //     let body = response.data;
-    //     this.stuData = [];
-    //     this.stuData = body;
-    //   });
-    // },
+    selectgendSubmit() {
+      console.log("院系...", this.selectgendForm.selectgendacademy);
+      axios({
+        method: "post",
+        url: "/api/SelectByStuDep",
+        data: {
+          stuDep: this.selectgendForm.selectgendacademy,
+        },
+      }).then((response) => {
+        this.selectgendVisible = false;
+        this.currentPage = 1;
+        let body = response.data;
+        this.stuData = [];
+        this.stuData = body;
+      });
+    },
 
-    // selectclassSubmit() {
-    //   console.log("班级...", this.selectclassForm.selectclass);
-    //   axios({
-    //     method: "post",
-    //     url: "/api/SelectByStuClass",
-    //     data: {
-    //       stuClass:this.selectclassForm.selectclass,
-    //     },
-    //   }).then((response) => {
-    //     this.selectclassVisible = false;
-    //     this.currentPage = 1;
-    //     let body = response.data;
-    //     this.stuData = [];
-    //     this.stuData = body;
-    //   });
-    // },
+    selectclassSubmit() {
+      console.log("班级...", this.selectclassForm.selectclass);
+      axios({
+        method: "post",
+        url: "/api/SelectByStuClass",
+        data: {
+          stuClass:this.selectclassForm.selectclass,
+        },
+      }).then((response) => {
+        this.selectclassVisible = false;
+        this.currentPage = 1;
+        let body = response.data;
+        this.stuData = [];
+        this.stuData = body;
+      });
+    },
 
     //按照学号查询
-  //   selectnumSubmit() {
-  //     //
-  //     console.log("学号...", this.selectnumForm.selectnum);
-  //     axios({
-  //       method: "post",
-  //       url: "/api/getMessagesById",
-  //       data: {
-  //         stuID: this.selectnumForm.selectnum,
-  //       },
-  //     }).then((response) => {
-  //       this.selectnumVisible = false;
-  //       this.currentPage = 1;
-  //       let body = response.data;
-  //       this.stuData = [body];
-  //     });
-  //   },
+    selectnumSubmit() {
+      //
+      console.log("学号...", this.selectnumForm.selectnum);
+      axios({
+        method: "post",
+        url: "/api/getMessagesById",
+        data: {
+          stuID: this.selectnumForm.selectnum,
+        },
+      }).then((response) => {
+        this.selectnumVisible = false;
+        this.currentPage = 1;
+        let body = response.data;
+        this.stuData = [body];
+      });
+    },
   },
   //获取表格数据
   created() {
