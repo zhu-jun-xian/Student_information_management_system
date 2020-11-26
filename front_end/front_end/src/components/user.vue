@@ -124,7 +124,7 @@
           </el-form-item>
           <el-form-item label="班级">
             <!-- <el-input v-model="addForm.addclassnumber" style="width: 60%"></el-input> -->
-             <el-select v-model="addForm.classnumber" placeholder="请选择班别">
+             <el-select v-model="addForm.classnumber" placeholder="请选择">
                               <el-option label="IBM1班" value="IBM1"></el-option>
                               <el-option label="IBM2班" value="IBM2"></el-option>
                               <el-option label="IBM3班" value="IBM3"></el-option>
@@ -137,8 +137,8 @@
             </el-form-item>
 
           <el-form-item label="出生年月">  
-            <el-input type="number" style="width: 60%" v-model="addForm.addtime" placeholder="20200501"></el-input> 
-            
+            <el-input type="number" style="width: 60%" v-model="addForm.addtime" placeholder="例如:20200501" maxlength="6" show-word-limit></el-input> 
+     
             <!-- <el-date-picker type="date" v-model="addForm.addtime" placeholder="选择日期"  style="width: 100%;"></el-date-picker> -->
             
           </el-form-item>
