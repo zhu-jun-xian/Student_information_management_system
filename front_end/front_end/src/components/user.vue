@@ -1,14 +1,13 @@
 <template>
   <div class="hello">
     <el-container>
-      
       <el-header>
         <span id="systemname" >学生信息管理系统</span>
         <span id="user_name" >欢迎您！！！{{ username }}</span>
         <!-- <el-button @click="selectuser1">查询</el-button> -->
         <el-button @click="exit">退出</el-button>
       </el-header>
-
+          
       <el-container style="height: 700px; border: 1px solid #eee">
         <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
           <el-menu :default-openeds="['1', '2', '3']">
@@ -111,6 +110,7 @@
         <el-table-column align="center" prop="boys" label="女" width="100"> </el-table-column>
         <el-table-column align="center" prop="allSchoolstu" label="全校统计" width="100"> </el-table-column>
     </el-table>
+    <div id="main" style="width: 600px;height:400px;"></div>
 </el-dialog>
 
 <el-dialog title="学生信息录入" :visible.sync="addVisible" width="50%">
@@ -301,6 +301,7 @@
             };
         },
         methods: {
+
             sumdialogopen() {
                 axios({
                         method: "get",
@@ -328,6 +329,28 @@
                             allSchoolstu: sumallSchoolstu
                         }, ];
                         // console.log(JSON.stringify(body));
+                        var myChart = this.$echarts.init(document.getElementById('main'));
+                        // 指定图表的配置项和数据
+                        var option = {
+                            title: {
+                                text: '各班人数柱状图'
+                            },
+                            tooltip: {},
+                            legend: {
+                                data: ['人数']
+                            },
+                            xAxis: {
+                                data: ["IBM1班", "IBM2班", "IBM3班", "IBM4班", "IBM5班", "IBM6班", "IBM7班"]
+                            },
+                            yAxis: {},
+                            series: [{
+                                name: '人数',
+                                type: 'bar',
+                                data: [body[0].totalClass, body[1].totalClass, body[2].totalClass, body[3].totalClass, body[4].totalClass, body[5].totalClass, body[6].totalClass]
+                            }]
+                        };
+                        // 使用刚指定的配置项和数据显示图表。
+                        myChart.setOption(option);
                     })
                     .catch((err) => {
                         console.log("...err...", err);
@@ -815,4 +838,5 @@
         margin-bottom: 10px;
         font-size: 20px;
     }
+</style>
 </style>
