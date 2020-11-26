@@ -84,7 +84,7 @@
     <el-dialog title="选择院系" :visible.sync="selectgendVisible" width="20%">
       <el-form :inline="true" :model="selectgendForm" class="selectgendForm_demo">
         <el-form-item label="系部：" prop="selectgendacademy">
-          <el-select v-model="selectgendForm.selectgendacademy" placeholder="请选择" style="width: 160%">
+          <el-select v-model="selectgendForm.selectgendacademy" placeholder="请选择">
             <el-option label="智能制造学部" value="智能制造学部"></el-option>
             <el-option label="土木工程学院" value="土木工程学院"></el-option>
             <el-option label="经济管理学院" value="经济管理学院"></el-option>
@@ -98,18 +98,10 @@
       </el-form>
     </el-dialog>
 
-    <el-dialog title="输入班级" :visible.sync="selectclassVisible" width="25%">
+    <el-dialog title="输入班级" :visible.sync="selectclassVisible" width="30%">
       <el-form :inline="true" :model="selectclassForm" class="selectclassForm_demo">
         <el-form-item label="班级">
-            <el-select v-model="selectclassForm.selectclass" placeholder="请选择班别" style="width: 160%">
-              <el-option label="IBM1班" value="IBM1"></el-option>
-              <el-option label="IBM2班" value="IBM2"></el-option>
-              <el-option label="IBM3班" value="IBM3"></el-option>
-              <el-option label="IBM4班" value="IBM4"></el-option>
-              <el-option label="IBM5班" value="IBM5"></el-option>
-              <el-option label="IBM6班" value="IBM6"></el-option>
-              <el-option label="IBM7班" value="IBM7"></el-option>
-            </el-select> 
+          <el-input v-model="selectclassForm.selectclass"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="selectclassSubmit">查询</el-button>
@@ -137,7 +129,7 @@
           <el-input v-model="selectfuzzyForm.fuzzynum" style="width: 140%"></el-input>
         </el-form-item>
          <el-form-item label="班级：" prop="fuzzynclass">
-         <el-select v-model="selectfuzzyForm.fuzzyclass" placeholder="请选择班别" style="width: 140%">
+         <el-select v-model="selectfuzzyForm.fuzzyclass" style="width: 140%">
               <el-option label="IBM1班" value="IBM1"></el-option>
               <el-option label="IBM2班" value="IBM2"></el-option>
               <el-option label="IBM3班" value="IBM3"></el-option>
@@ -288,6 +280,7 @@ export default {
 
     updateusermessage() {
       let stuid = this.rowID;
+      console.log("updateusermessage:" + stuid);
       if (this.Updateform.name.length == 0 || this.Updateform.time.length == 0 || this.Updateform.sex.length == 0 || this.Updateform.tel.length == 0 || this.Updateform.classnumber.length == 0 || this.Updateform.department.length == 0) {
         this.$message({
           message: "错误:存在空输入框，修改失败",
@@ -312,11 +305,7 @@ export default {
           .then((response) => {
             this.UpdateVisible = false;
             if (response.data == "ok") {
-              this.$message({
-                type: "success",
-                message: "修改成功!",
-                duration: 1000,
-              });
+              alert("修改成功");
               axios({
                 method: "get",
                 url: "/api/findAll",
@@ -336,60 +325,39 @@ export default {
       }
     },
 
-     //删除学生信息
-     deleteRow(index, rows) {
-      // let stuid = this.rowID;
-      // rows.splice(index, 1);
-      // console.log(index);
-      // console.log(rows[index].stuID);
-      let stuid = rows[index].stuID;
-      this.$confirm("信息删除不可恢复,请确认是否删除学号为:" + rows[index].stuID + ",姓名为：" + rows[index].stuName + "的学生吗？, 是否继续?", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
+    //删除学生信息
+    deleteRow() {
+      let stuid = this.rowID;
+      console.log("deleteRow:" + stuid);
+      axios({
+        method: "post",
+        url: "/api/deleteMessagesById",
+        data: {
+          stuID: stuid,
+        },
       })
-        .then(() => {
-          this.$message({
-            type: "success",
-            message: "删除成功!",
-          });
-          axios({
-            method: "post",
-            url: "/api/deleteMessagesById",
-            data: {
-              stuID: stuid,
-            },
-          })
-            .then((response) => {
-              if (response.data == "ok") {
-                axios({
-                  method: "get",
-                  url: "/api/findAll",
-                })
-                  .then((response) => {
-                    let body = response.data;
-                    this.stuData = body;
-                  })
-                  .catch((err) => {
-                    console.log("...err...", err);
-                  });
-                this.$message({
-                  type: "success",
-                  message: "删除成功!",
-                  duration: 1000,
-                });
-                // location.reload();
-              }
-            })
-            .catch((err) => {
-              console.log("...err...", err);
+        .then((response) => {
+          if (response.data == "ok") {
+            this.$message({
+              type: "success",
+              message: "删除成功!",
+              duration: 1000,
             });
+            axios({
+              method: "get",
+              url: "/api/findAll",
+            })
+              .then((response) => {
+                let body = response.data;
+                this.stuData = body;
+              })
+              .catch((err) => {
+                console.log("...err...", err);
+              });
+          }
         })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除",
-          });
+        .catch((err) => {
+          console.log("...err...", err);
         });
     },
 

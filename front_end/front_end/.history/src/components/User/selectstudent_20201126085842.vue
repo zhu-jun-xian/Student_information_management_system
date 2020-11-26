@@ -84,7 +84,7 @@
     <el-dialog title="选择院系" :visible.sync="selectgendVisible" width="20%">
       <el-form :inline="true" :model="selectgendForm" class="selectgendForm_demo">
         <el-form-item label="系部：" prop="selectgendacademy">
-          <el-select v-model="selectgendForm.selectgendacademy" placeholder="请选择" style="width: 160%">
+          <el-select v-model="selectgendForm.selectgendacademy" placeholder="请选择" style="width: %">
             <el-option label="智能制造学部" value="智能制造学部"></el-option>
             <el-option label="土木工程学院" value="土木工程学院"></el-option>
             <el-option label="经济管理学院" value="经济管理学院"></el-option>
