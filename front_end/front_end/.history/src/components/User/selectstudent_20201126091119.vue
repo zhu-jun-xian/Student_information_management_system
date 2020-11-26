@@ -246,7 +246,7 @@ export default {
         url:"/api/SelectMessagesByStuAll",
         data:{
           stuName:this.selectfuzzyForm.fuzzyname,
-          stuID:this.selectfuzzyForm.fuzzynum,
+          stuNum:this.selectfuzzyForm.fuzzynum,
           stuClass:this.selectfuzzyForm.fuzzyclass,
           stuSex:this.selectfuzzyForm.fuzzysex,
           stuDep:this.selectfuzzyForm.fuzzyacademy,
@@ -257,7 +257,7 @@ export default {
         let body = response.data;
         this.stuData = [];
         this.stuData = body;
-        this.selectfuzzyVisible=false;
+        this.selec
         console.log(JSON.stringify(body));
       });
     },
