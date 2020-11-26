@@ -101,14 +101,14 @@
         <el-table-column align="center" prop="tumu" label="土木工程学院" width="100"> </el-table-column>
         <el-table-column align="center" prop="economic" label="经济管理学院" width="100"> </el-table-column>
         <el-table-column align="center" prop="intell" label="智能制造学部" width="100"> </el-table-column>
-        <el-table-column align="center" prop="girls" label="男" width="100"> </el-table-column>
-        <el-table-column align="center" prop="boys" label="女" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM1" label="IBM1班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM2" label="IBM2班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM3" label="IBM3班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM5" label="IBM5班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM6" label="IBM6班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM7" label="IBM7班" width="100"> </el-table-column>
+        <el-table-column align="center" prop="girls" label="男" width="100"> </el-table-column>
+        <el-table-column align="center" prop="boys" label="女" width="100"> </el-table-column>
         <el-table-column align="center" prop="allSchoolstu" label="全校统计" width="100"> </el-table-column>
     </el-table>
 </el-dialog>
