@@ -640,7 +640,6 @@
                 this.UpdateVisible = false;
             },
             resetForm(formName) {
-                console.log(this.$refs[formName].resetFields())
                 this.$refs[formName].resetFields();
             },
             //设置页面背景色
