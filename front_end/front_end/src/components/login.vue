@@ -42,11 +42,38 @@
         </div>
         <div>
           <el-button class="button" @click="login" type="primary" round icon="el-icon-check">Login</el-button>
-          <el-link type="danger">忘记密码</el-link>
+          <el-link class="ellinkclass" type="danger" @click="forgetpass">忘记密码</el-link>
           <el-button class="button buttonclass" @click="register" type="primary" round icon="el-icon-right">Register</el-button>
         </div>
       </form>
     </div>
+    <el-dialog title="修改登录密码" :visible.sync="passwordVisible" width="35%">
+      <span>
+        <el-form ref="passwordform" :model="passwordform" label-width="100px">
+          <el-form-item label="登陆ID" prop="id">
+            <el-input v-model="passwordform.id" plain :disabled="iddisabled"></el-input>
+          </el-form-item>
+          <el-form-item label="姓名" prop="name">
+            <el-input v-model="passwordform.name" :disabled="namedisabled"></el-input>
+          </el-form-item>
+
+          <el-form-item label="手机" prop="tel">
+            <el-input type="number" v-model="passwordform.tel" :disabled="teldisabled"></el-input>
+          </el-form-item>
+          <el-form-item label="修改密码" prop="repass1" v-if="passif">
+            <el-input v-model="passwordform.repass1" placeholder="大小写字母特殊字符"></el-input>
+          </el-form-item>
+          <el-form-item label="确认密码" prop="repass" v-if="repassif">
+            <el-input v-model="passwordform.repass" placeholder="大小写字母特殊字符"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="success" v-if="checkpassonSubmitif" @click="checkpassonSubmit">检查</el-button>
+            <el-button type="success" v-if="updatepassonSubmitif" @click="updatepassonSubmit1">修改</el-button>
+            <el-button @click="resetForm('passwordform')">清空</el-button>
+          </el-form-item>
+        </el-form>
+      </span>
+    </el-dialog>
     <vue-particles color="#dedede" :particleOpacity="0.7" :particlesNumber="80" shapeType="star" :particleSize="4" linesColor="#FFFFFF" :linesWidth="2" :lineLinked="true" :lineOpacity="0.4" :linesDistance="150" :moveSpeed="4" :hoverEffect="true" hoverMode="grab" :clickEffect="true" clickMode="push"> </vue-particles>
   </div>
 </template>
@@ -56,6 +83,22 @@ import axios from "axios";
 export default {
   data() {
     return {
+      passwordform: {
+        id: "",
+        name: "",
+        tel: "",
+        repass1: "",
+        repass: "",
+      },
+      checkpassonSubmitif: "true",
+      updatepassonSubmitif: "false",
+      passif: "false",
+      repassif: "false",
+      namedisabled: "false",
+      iddisabled: "false",
+      teldisabled: "false",
+
+      passwordVisible: false,
       msg: "登录",
       ID: "",
       username: "",
@@ -65,6 +108,108 @@ export default {
     };
   },
   methods: {
+    checkpassonSubmit() {
+      axios({
+        method: "post",
+        url: "/api/getUserById1",
+        data: {
+          id: this.passwordform.id,
+        },
+      })
+        .then((response) => {
+          let body = response.data;
+          console.log(body);
+          this.username = body.name;
+          if (this.passwordform.name === body.name && this.passwordform.tel === body.tel) {
+            this.namedisabled = true;
+            this.iddisabled = true;
+            this.teldisabled = true;
+            this.passif = true;
+            this.repassif = true;
+            this.checkpassonSubmitif = false;
+            this.updatepassonSubmitif = true;
+          } else {
+            this.$message.error("错了哦，无法进行修改页面");
+          }
+        })
+        .catch((err) => {
+          console.log("...err...", err);
+        });
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+    },
+    forgetpass() {
+      this.$confirm("此操作请先确认信息是否一致, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          this.checkpassonSubmitif = true;
+          this.updatepassonSubmitif = false;
+          this.passwordVisible = true;
+          this.namedisabled = false;
+          this.iddisabled = false;
+          this.teldisabled = false;
+          this.passif = false;
+          this.repassif = false;
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
+        });
+    },
+    // 将表单数据添加到表格中去
+    updatepassonSubmit1() {
+      console.log(this.passwordform.repass1);
+      var reg = new RegExp("(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0-9]).{8,30}");
+      if (!reg.test(this.passwordform.repass1) || !reg.test(this.passwordform.repass)) {
+        this.$message({
+          message: "错误:密码应由大小写字母+特殊字符组合,长度控制在8-30",
+          center: true,
+          offset: 50,
+          type: "warning",
+        });
+      } else if (this.passwordform.repass === 0 || this.passwordform.repass1 === 0) {
+        this.$message({
+          message: "错误:存在空输入框，修改失败",
+          center: true,
+          offset: 50,
+          type: "warning",
+        });
+      } else if (this.passwordform.repass1.length === this.passwordform.repass.length) {
+        axios({
+          method: "post",
+          url: "/api/updateUserPassword",
+          data: {
+            id: this.passwordform.id,
+            password: this.passwordform.repass1,
+          },
+        })
+          .then((response) => {
+            this.$message({
+              message: "恭喜你，密码修改成功，请重新登录",
+              type: "success",
+              center: true,
+              offset: 50,
+            });
+            this.passwordVisible = false;
+          })
+          .catch((err) => {
+            console.log("...err...", err);
+          });
+      } else {
+        this.$message({
+          message: "错误:两次密码不一致",
+          center: true,
+          offset: 50,
+          type: "warning",
+        });
+      }
+    },
     register() {
       this.$router.push({ path: "/register" });
     },
@@ -273,7 +418,18 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 .buttonclass {
   margin-top: 50px;
+}
+.ellinkclass {
+  margin-left: 30px;
 }
 </style>
