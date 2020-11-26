@@ -112,7 +112,7 @@
     <el-dialog title="输入学号" :visible.sync="selectnumVisible" width="30%">
       <el-form :inline="true" :model="selectnumForm" class="selectnumForm_demo">
         <el-form-item label="学号">
-          <el-input v-model="selectnumForm.selectnum"  maxlength="30"></el-input>
+          <el-input v-model="selectnumForm.selectnum" maxlength="30"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="selectnumSubmit">查询</el-button>
@@ -126,7 +126,11 @@
           <el-input v-model="selectfuzzyForm.fuzzyname"></el-input>
         </el-form-item>
         <el-form-item label="学号：" prop="fuzzynum">
+          <el-input v-model="selectfuzzyForm.fuzzynum"></el-input>
         </el-form-item>
+        <el-form-item label="班级：" prop="fuzzyclass">
+          <el-select v-model="selectfuzzyForm.fuzzyclass" placeholder="请选择班别" style="width: 140%">
+            <el-option label="IBM1班" value="IBM1班"></el-option>
             <el-option label="IBM2班" value="IBM2班"></el-option>
             <el-option label="IBM3班" value="IBM3班"></el-option>
             <el-option label="IBM4班" value="IBM4班"></el-option>
