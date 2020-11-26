@@ -32,10 +32,7 @@
             <el-input v-model="Updateform.name"></el-input>
           </el-form-item>
 
-          <el-form-item type="number" label="出生年月" prop="time">
-                        
-            <el-input v-model="Updateform.time" placeholder="20200501"></el-input>
-          </el-form-item>
+          <el-form-item type="number" label="出生年月" prop="time">         <el-date-picker type="date" v-model="Updateform.time" placeholder="选择日期" style="width: 30%" value-format="yyyyMMdd"></el-date-picker>       </el-form-item>
             <el-form-item label="性别" prop="sex">
             <el-select v-model="Updateform.sex" placeholder="请选择" style="width: 100%">              <el-option label="男" value="男"></el-option>               <el-option label="女" value="女"></el-option>            </el-select>           
           </el-form-item>

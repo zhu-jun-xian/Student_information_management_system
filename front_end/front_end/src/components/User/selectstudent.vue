@@ -7,7 +7,7 @@
       <el-button round @click.native="selectclassVisible = true">班级查询</el-button>
       <el-button round @click.native="selectgendVisible = true">院系查询</el-button> -->
       <el-button round @click.native="selectfuzzyVisible = true">模糊查询</el-button>
-      <el-input v-model="search1" placeholder="请输入" style="width: 20%; float:right;" @keydown.enter.native="validateCounts"> </el-input>
+      <el-input v-model="search1" placeholder="请输入" style="width: 20%; float: right" @keydown.enter.native="validateCounts"> </el-input>
       <el-divider></el-divider>
     </div>
     <el-container>
@@ -36,40 +36,32 @@
 
     <el-dialog title="修改学生信息" :visible.sync="UpdateVisible" width="35%">
       <el-form ref="Updateform" :model="Updateform" label-width="100px">
-        <el-form-item label="学号">             
-          <el-input v-model="rowID" plain disabled></el-input>          
-         </el-form-item>
+        <el-form-item label="学号">              <el-input v-model="rowID" plain disabled></el-input>            </el-form-item>
         <el-form-item label="学生姓名" prop="name">
           <el-input v-model="Updateform.name"></el-input>
         </el-form-item>
 
-        <el-form-item label="出生年月" prop="time">            
-           <el-input v-model="Updateform.time" placeholder="20200501"></el-input> 
-        </el-form-item>
+        <el-form-item label="出生年月" prop="time">              <el-date-picker type="date" v-model="Updateform.time" placeholder="选择日期" style="width: 30%" value-format="yyyyMMdd"></el-date-picker>       </el-form-item>
           <el-form-item label="性别" prop="sex">
-              <el-select v-model="Updateform.sex" placeholder="请选择" style="width: 100%">              
-            <el-option label="男" value="男"></el-option>              
-            <el-option label="女" value="女"></el-option>            
-          </el-select>           
+              <el-select v-model="Updateform.sex" placeholder="请选择" style="width: 100%">               <el-option label="男" value="男"></el-option>               <el-option label="女" value="女"></el-option>             </el-select>           
         </el-form-item>
         <el-form-item label="手机号码" prop="tel">
           <el-input v-model="Updateform.tel"></el-input>
         </el-form-item>
         <el-form-item label="班级" prop="classnumber">
-           <el-select v-model="Updateform.classnumber" placeholder="请选择班别">
-              <el-option label="IBM1班" value="IBM1班"></el-option>
-              <el-option label="IBM2班" value="IBM2班"></el-option>
-              <el-option label="IBM3班" value="IBM3班"></el-option>
-              <el-option label="IBM4班" value="IBM4班"></el-option>
-              <el-option label="IBM5班" value="IBM5班"></el-option>
-              <el-option label="IBM6班" value="IBM6班"></el-option>
-              <el-option label="IBM7班" value="IBM7班"></el-option>
-            </el-select>        </el-form-item>
+          <el-select v-model="Updateform.classnumber" placeholder="请选择班别">
+            <el-option label="IBM1班" value="IBM1班"></el-option>
+            <el-option label="IBM2班" value="IBM2班"></el-option>
+            <el-option label="IBM3班" value="IBM3班"></el-option>
+            <el-option label="IBM4班" value="IBM4班"></el-option>
+            <el-option label="IBM5班" value="IBM5班"></el-option>
+            <el-option label="IBM6班" value="IBM6班"></el-option>
+            <el-option label="IBM7班" value="IBM7班"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="系部" prop="department">
           <el-select v-model="Updateform.department" placeholder="请选择" style="width: 100%">
-                <el-option label="智能制造学部" value="智能制造学部"></el-option>           
-            <el-option label="土木工程学院" value="土木工程学院"></el-option>            
-             <el-option label="经济管理学院" value="经济管理学院"></el-option>             
+                <el-option label="智能制造学部" value="智能制造学部"></el-option>            <el-option label="土木工程学院" value="土木工程学院"></el-option>              <el-option label="经济管理学院" value="经济管理学院"></el-option>             
             <el-option label="外国语学院" value="外国语学院"></el-option>
                 <el-option label="艺术设计学院" value="艺术设计学院"></el-option>
           </el-select>
@@ -131,13 +123,13 @@
     <el-dialog title="模糊查询" :visible.sync="selectfuzzyVisible" width="40%">
       <el-form ref="selectfuzzyForm" :inline="true" :model="selectfuzzyForm" class="selectfuzzyForm_demo">
         <el-form-item label="姓名：" prop="fuzzyname">
-          <el-input v-model="selectfuzzyForm.fuzzyname"  maxlength="30"></el-input>
+          <el-input v-model="selectfuzzyForm.fuzzyname" maxlength="30"></el-input>
         </el-form-item>
         <el-form-item label="学号：" prop="fuzzynum">
           <el-input v-model="selectfuzzyForm.fuzzynum"></el-input>
         </el-form-item>
         <el-form-item label="班级：" prop="fuzzyclass">
-          <el-select v-model="selectfuzzyForm.fuzzyclass" placeholder="请选择班别" style="width: 140%">
+          <el-select v-model="selectfuzzyForm.fuzzyclass" placeholder="请选择" style="width: 140%">
             <el-option label="IBM1班" value="IBM1班"></el-option>
             <el-option label="IBM2班" value="IBM2班"></el-option>
             <el-option label="IBM3班" value="IBM3班"></el-option>
@@ -148,22 +140,20 @@
           </el-select>
         </el-form-item>
           <el-form-item label="性别：" prop="fuzzysex">
-            <el-select v-model="selectfuzzyForm.fuzzysex" placeholder="请选择" >     
-            <el-option label="男" value="男"></el-option>     
-            <el-option label="女" value="女"></el-option> </el-select>
+            <el-select v-model="selectfuzzyForm.fuzzysex" placeholder="请选择" width="40%">       <el-option label="男" value="男"></el-option>       <el-option label="女" value="女"></el-option> </el-select>
         </el-form-item>
-        <el-form-item label="系部：" prop="fuzzyacademy" >
-          <el-select v-model="selectfuzzyForm.fuzzyacademy" placeholder="请选择院系">
+        <el-form-item label="系部：" prop="fuzzyacademy">
+          <el-select v-model="selectfuzzyForm.fuzzyacademy" placeholder="请选择" style="width: 240%">
             <el-option label="智能制造学部" value="智能制造学部"></el-option>
             <el-option label="土木工程学院" value="土木工程学院"></el-option>
             <el-option label="经济管理学院" value="经济管理学院"></el-option>
             <el-option label="外国语学院" value="外国语学院"></el-option>
             <el-option label="艺术设计学院" value="艺术设计学院"></el-option>
-          </el-select>
-        </el-form-item><br/>
-       
-        <el-form-item style="margin-left:30%;">
-          <el-button type="primary" @click="selectfuzzySubmit"  >查询</el-button>
+          </el-select> </el-form-item
+        ><br />
+
+        <el-form-item style="margin-left: 30%">
+          <el-button type="primary" @click="selectfuzzySubmit">查询</el-button>
           <el-button @click="resetForm('selectfuzzyForm')">清空</el-button>
         </el-form-item>
       </el-form>
@@ -224,7 +214,7 @@ export default {
       selectfuzzyForm: {
         fuzzynum: "",
         fuzzyname: "",
-        fuzzyclass:"",
+        fuzzyclass: "",
         fuzzysex: "",
         fuzzyacademy: "",
       },
@@ -238,25 +228,25 @@ export default {
       });
     },
     //基于表单的模糊搜索
-    selectfuzzySubmit(){
+    selectfuzzySubmit() {
       console.log("查询中...");
       axios({
-        method:"post",
-        url:"/api/SelectMessagesByStuAll",
-        data:{
-          stuName:this.selectfuzzyForm.fuzzyname,
-          stuID:this.selectfuzzyForm.fuzzynum,
-          stuClass:this.selectfuzzyForm.fuzzyclass,
-          stuSex:this.selectfuzzyForm.fuzzysex,
-          stuDep:this.selectfuzzyForm.fuzzyacademy,
-        }
+        method: "post",
+        url: "/api/SelectMessagesByStuAll",
+        data: {
+          stuName: this.selectfuzzyForm.fuzzyname,
+          stuID: this.selectfuzzyForm.fuzzynum,
+          stuClass: this.selectfuzzyForm.fuzzyclass,
+          stuSex: this.selectfuzzyForm.fuzzysex,
+          stuDep: this.selectfuzzyForm.fuzzyacademy,
+        },
       }).then((response) => {
         console.log(response.data);
         this.currentPage = 1;
         let body = response.data;
         this.stuData = [];
         this.stuData = body;
-        this.selectfuzzyVisible=false;
+        this.selectfuzzyVisible = false;
         console.log(JSON.stringify(body));
       });
     },
@@ -342,7 +332,7 @@ export default {
       return row.stuID;
     },
 
-     //删除学生信息
+    //删除学生信息
     deleteRow(index, rows) {
       // let stuid = this.rowID;
       // rows.splice(index, 1);
@@ -398,8 +388,6 @@ export default {
           });
         });
     },
-
-    
 
     handleClose(key, keyPath) {
       console.log(key, keyPath);
@@ -469,28 +457,33 @@ export default {
     // },
 
     //按照学号查询
-  //   selectnumSubmit() {
-  //     //
-  //     console.log("学号...", this.selectnumForm.selectnum);
-  //     axios({
-  //       method: "post",
-  //       url: "/api/getMessagesById",
-  //       data: {
-  //         stuID: this.selectnumForm.selectnum,
-  //       },
-  //     }).then((response) => {
-  //       this.selectnumVisible = false;
-  //       this.currentPage = 1;
-  //       let body = response.data;
-  //       this.stuData = [body];
-  //     });
-  //   },
+    //   selectnumSubmit() {
+    //     //
+    //     console.log("学号...", this.selectnumForm.selectnum);
+    //     axios({
+    //       method: "post",
+    //       url: "/api/getMessagesById",
+    //       data: {
+    //         stuID: this.selectnumForm.selectnum,
+    //       },
+    //     }).then((response) => {
+    //       this.selectnumVisible = false;
+    //       this.currentPage = 1;
+    //       let body = response.data;
+    //       this.stuData = [body];
+    //     });
+    //   },
   },
   //获取表格数据
   created() {
     var name = this.$route.query.username;
     console.log(name);
     this.username = name;
+    if (this.username === "admin") {
+      this.admin = true;
+    } else {
+      this.admin = false;
+    }
     axios({
       method: "get",
       url: "/api/findAll",

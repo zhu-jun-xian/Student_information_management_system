@@ -4,9 +4,15 @@
       
       <el-header>
         <span id="systemname" >学生信息管理系统</span>
+        <el-button-group>
+            <el-button type="primary"  class="downclass"><a href="/api/MessagesExcelDownloads" download="学生信息汇总表.docx">导出学生信息</a></el-button>
+            <el-button type="primary"  class="downclass" v-if="admin"><a href="/apiUserExcelDownloads" download="用户信息汇总表.docx">导出用户信息</a></el-button>
+          </el-button-group>
         <span id="user_name" >欢迎您！！！{{ username }}</span>
         <!-- <el-button @click="selectuser1">查询</el-button> -->
-        <el-button @click="exit">退出</el-button>
+        <el-button type="primary" icon="el-icon-delete" @click="exit">退出</el-button>
+        
+        
       </el-header>
 
       <el-container style="height: 700px; border: 1px solid #eee">
@@ -15,7 +21,7 @@
             <el-submenu index="1">
               <template slot="title"><i class="el-icon-message"></i>信息查询</template>
 <el-menu-item-group>
-    <el-menu-item index="1-0" @click="selectrouteruser">学生信息</el-menu-item>
+    <el-menu-item index="1-0" @click="selectrouteruser">学生信息汇总</el-menu-item>
     <el-menu-item index="1-1" @click.native="statisticsVisible = true">学生信息统计</el-menu-item>
     <!-- <el-menu-item index="1-2" @click.native="dialogVisible = true">学生信息查询</el-menu-item> -->
     <el-menu-item index="1-2" @click="selectuser1">学生信息查询</el-menu-item>
@@ -140,7 +146,7 @@
             <el-form-item label="出生年月" prop="addtime" >  
             <!-- <el-input type="number" style="width: 60%" v-model="addForm.addtime" placeholder="例如:20200501" maxlength="6" show-word-limit></el-input>  -->
      
-            <el-date-picker type="date" v-model="addForm.addtime " placeholder="选择日期"  style="width: 60%;" value-format="yyyyMMdd"></el-date-picker>
+            <el-date-picker type="date" v-model="addForm.addtime " placeholder="选择日期"  style="width: 30%;" value-format="yyyyMMdd"></el-date-picker>
             
           </el-form-item>
           <el-form-item label="性别" prop="addsex">
@@ -185,6 +191,7 @@
     export default {
         data() {
             return {
+                admin: '',
                 IDplaceholaer: '',
                 nameplaceholaer: '张三',
                 telplaceholaer: '13440213456',
@@ -301,6 +308,7 @@
             };
         },
         methods: {
+
             sumdialogopen() {
                 axios({
                         method: "get",
@@ -730,6 +738,11 @@
         created() {
             var name = this.$route.query.username;
             this.username = name;
+            if (this.username == "admin") {
+                this.admin = true
+            } else {
+                this.admin = false
+            }
             axios({
                     method: "get",
                     url: "/api/findAll",
@@ -744,6 +757,13 @@
         },
 
         mounted() {
+            var name = this.$route.query.username;
+            this.username = name;
+            if (this.username == "admin") {
+                this.admin = true
+            } else {
+                this.admin = false
+            }
             var d = new Date();
             let mon = d.getMonth() + 1;
             this.addsystemtime = d.getFullYear() + "-" + mon + "-" + d.getDate() + "  " + d.getHours() + ":" + d.getMinutes();
@@ -808,7 +828,11 @@
     
     #user_name {
         font-size: 20px;
-        margin-left: 65%;
+        margin-left: 45%;
+    }
+    
+    .downclass {
+        margin-left: 50px;
     }
     
     .eltagclass {
