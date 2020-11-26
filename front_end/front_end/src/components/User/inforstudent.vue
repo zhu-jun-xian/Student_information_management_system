@@ -2,7 +2,7 @@
   <div class="hello">
     <el-container>
       <div>
-        <el-table border class="el-table-column" :data="stuData.slice((currentPage - 1) * pageSize, currentPage * pageSize)" style="width: 100%" @row-click="rowclick">
+        <el-table border class="el-table-column" :data="stuData.slice((currentPage - 1) * pageSize, currentPage * pageSize)" style="width: 100%" >
           <!-- <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column> -->
           <el-table-column align="center" header-align="center" prop="stuID" label="学号" width="170%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名" width="160%"></el-table-column>
@@ -24,10 +24,10 @@
       </div>
     </el-container>
 
-    <el-dialog title="修改学生信息" :visible.sync="UpdateVisible" width="35%" @open="updateusermessageopen">
+    <el-dialog title="修改学生信息" :visible.sync="UpdateVisible" width="35%" >
       <span>
         <el-form ref="Updateform" :model="Updateform" label-width="100px">
-          <el-form-item label="学号" prop="studentnumber">              <el-input v-model="rowID" plain disabled></el-input>            </el-form-item>
+          <el-form-item label="学号" prop="studentnumber">              <el-input v-model="studentnumberplaceholder" plain disabled placeholder="studentnumberplaceholder"></el-input>            </el-form-item>
           <el-form-item label="学生姓名" prop="name">
             <el-input v-model="Updateform.name"></el-input>
           </el-form-item>
@@ -42,13 +42,13 @@
           <el-form-item label="班级" prop="classnumber" type="number">
             <!-- <el-input v-model="Updateform.classnumber"></el-input> -->
             <el-select v-model="Updateform.classnumber" placeholder="请选择班别">
-              <el-option label="IBM1班" value="IBM1"></el-option>
-              <el-option label="IBM2班" value="IBM2"></el-option>
-              <el-option label="IBM3班" value="IBM3"></el-option>
-              <el-option label="IBM4班" value="IBM4"></el-option>
-              <el-option label="IBM5班" value="IBM5"></el-option>
-              <el-option label="IBM6班" value="IBM6"></el-option>
-              <el-option label="IBM7班" value="IBM7"></el-option>
+              <el-option label="IBM1班" value="IBM1班"></el-option>
+              <el-option label="IBM2班" value="IBM2班"></el-option>
+              <el-option label="IBM3班" value="IBM3班"></el-option>
+              <el-option label="IBM4班" value="IBM4班"></el-option>
+              <el-option label="IBM5班" value="IBM5班"></el-option>
+              <el-option label="IBM6班" value="IBM6班"></el-option>
+              <el-option label="IBM7班" value="IBM7班"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="系部" prop="department">
@@ -73,7 +73,8 @@
 export default {
   data() {
     return {
-      rowID: "",
+      rowstuid:'',
+      studentnumberplaceholder: "",
       stuData: [
         {
           stuNum: "",
@@ -109,18 +110,18 @@ export default {
 
   methods: {
     handleEdit(index, rows){
-      var rowstuid = rows[index].stuID;
-      console.log(rowstuid)
+      this.rowstuid = rows[index].stuID;
        axios({
         method: "post",
         url: "/api/getMessagesById",
         data: {
-          stuID: rowstuid,
+          stuID: this.rowstuid,
         },
       })
         .then((response) => {
           let body = response.data;
-          console.log(body)
+           this.studentnumberplaceholder=this.rowstuid
+          this.Updateform.studentnumber=this.rowstuid
           this.Updateform.name = body.stuName, 
           this.Updateform.time = body.stuBirth, 
           this.Updateform.sex = body.stuSex,
@@ -133,18 +134,10 @@ export default {
         });
         this.UpdateVisible=true;
     },
-    updateusermessageopen() {
-      // let stuid = this.rowID;
-      // console.log('猪'+stuid);
-     
-    },
-    //获取一行的学号
-    rowclick(row) {
-      this.rowID = row.stuID;
-      return row.stuID;
-    },
+
     updateusermessage() {
-      let stuid = this.rowID;
+      let stuid = this.rowstuid;
+      console.log('zhu'+stuid)
       if (this.Updateform.name.length == 0 || this.Updateform.time.length == 0 || this.Updateform.sex.length == 0 || this.Updateform.tel.length == 0 || this.Updateform.classnumber.length == 0 || this.Updateform.department.length == 0) {
         this.$message({
           message: "错误:存在空输入框，修改失败",
@@ -194,10 +187,6 @@ export default {
     },
     //删除学生信息
     deleteRow(index, rows) {
-      // let stuid = this.rowID;
-      // rows.splice(index, 1);
-      // console.log(index);
-      // console.log(rows[index].stuID);
       let stuid = rows[index].stuID;
       this.$confirm("信息删除不可恢复,请确认是否删除学号为:" + rows[index].stuID + ",姓名为：" + rows[index].stuName + "的学生吗？, 是否继续?", {
         confirmButtonText: "确定",
@@ -205,10 +194,6 @@ export default {
         type: "warning",
       })
         .then(() => {
-          this.$message({
-            type: "success",
-            message: "删除成功!",
-          });
           axios({
             method: "post",
             url: "/api/deleteMessagesById",

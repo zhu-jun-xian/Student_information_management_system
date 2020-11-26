@@ -148,11 +148,7 @@
             </el-select>
             </el-form-item>
             </el-form-item>
-<!-- 
-          <el-form-item label="班级" prop="addclassnumber"> -->
             <el-form-item label="出生年月" prop="addtime" >  
-            <!-- <el-input type="number" style="width: 60%" v-model="addForm.addtime" placeholder="例如:20200501" maxlength="6" show-word-limit></el-input>  -->
-     
             <el-date-picker type="date" v-model="addForm.addtime " placeholder="选择日期"  style="width: 60%;" value-format="yyyyMMdd"></el-date-picker>
             
           </el-form-item>
@@ -324,7 +320,6 @@
                     .then((response) => {
                         let body = response.data;
                         let sumallSchoolstu = parseInt(body[13].totalSex) + parseInt(body[12].totalSex)
-                            // console.log(typeof body);
                         this.sumtableData = [{
                             artdesign: body[11].totalDep,
                             foreign: body[8].totalDep,
@@ -342,7 +337,6 @@
                             IBM7: body[6].totalClass,
                             allSchoolstu: sumallSchoolstu
                         }, ];
-                        // console.log(JSON.stringify(body));
                         var myChart = this.$echarts.init(document.getElementById('main'));
                         // 指定图表的配置项和数据
                         var option = {
@@ -731,13 +725,6 @@
             resetForm(formName) {
                 this.$refs[formName].resetFields();
             },
-            //设置页面背景色
-
-            // handlePictureCardPreview(file) {
-            //   this.dialogImageUrl = file.url;
-            //   this.dialogVisible = true;
-            // },
-
             handlePictureCardPreview(file) {
                 this.dialogImageUrl = file.url;
                 this.dialogVisible = true;
@@ -810,11 +797,6 @@
             handleCurrentChange: function(val) {
                 this.currentPage = val;
             },
-            // handleUserList() {
-            //     this.$http.get('http://localhost:8080/user').then(res => {  //这是从本地请求的数据接口，
-            //         this.stuData = res.body
-            //     })
-            // }
         },
         created() {
             var name = this.$route.query.username;
@@ -840,6 +822,7 @@
         mounted() {
             var name = this.$route.query.username;
             this.username = name;
+
             if (this.username == "admin") {
                 this.admin = true
             } else {
@@ -848,7 +831,6 @@
             var d = new Date();
             let mon = d.getMonth() + 1;
             this.addsystemtime = d.getFullYear() + "-" + mon + "-" + d.getDate() + "  " + d.getHours() + ":" + d.getMinutes();
-            //  document.querySelector("body").setAttribute("style", "background-color: #e5ffee");
         }, //设置页面背景色
     };
 </script>

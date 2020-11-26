@@ -12,7 +12,7 @@
     </div>
     <el-container>
       <div>
-        <el-table border class="el-table-column" :data="stuData.slice((currentPage - 1) * pageSize, currentPage * pageSize)" style="width: 100%" @row-click="rowclick">
+        <el-table border class="el-table-column" :data="stuData.slice((currentPage - 1) * pageSize, currentPage * pageSize)" style="width: 100%" >
           <!-- <el-table-column align="center" header-align="center" prop="stuNum" label="序号" width="80%"></el-table-column> -->
           <el-table-column align="center" header-align="center" prop="stuID" label="学号" width="170%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="stuName" label="学生姓名" width="160%"></el-table-column>
@@ -23,8 +23,8 @@
           <el-table-column align="center" header-align="center" prop="stuDep" label="系部" width="160%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="" label="操作" width="180%">
             <template slot-scope="scope">
-              <el-button size="mini" type="primary" icon="el-icon-edit" circle @click.native="UpdateVisible = true"></el-button>
-              <el-button size="mini" type="danger" icon="el-icon-delete" circle @click.native.prevent="deleteRow(scope.$index, stuData)"></el-button>
+              <el-button size="mini" type="primary" icon="el-icon-edit" circle @click.native.prevent="handleEdit(scope.$index,stuData)"></el-button>
+              <el-button size="mini" type="danger" icon="el-icon-delete" circle @click.native.prevent="deleteRow(scope.$index,stuData)"></el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -36,7 +36,8 @@
 
     <el-dialog title="修改学生信息" :visible.sync="UpdateVisible" width="35%">
       <el-form ref="Updateform" :model="Updateform" label-width="100px">
-        <el-form-item label="学号">              <el-input v-model="rowID" plain disabled></el-input>            </el-form-item>
+        <el-form-item label="学号">              
+        <el-input v-model="Updateform.studentnumber" plain disabled placeholder="studentnumberplaceholder"></el-input>            </el-form-item>
         <el-form-item label="学生姓名" prop="name">
           <el-input v-model="Updateform.name"></el-input>
         </el-form-item>
@@ -72,53 +73,6 @@
         </el-form-item>
       </el-form>
     </el-dialog>
-
-    <!-- <el-dialog title="选择院系" :visible.sync="selectgendVisible" width="20%">
-      <el-form :inline="true" :model="selectgendForm" class="selectgendForm_demo">
-        <el-form-item label="系部：" prop="selectgendacademy">
-          <el-select v-model="selectgendForm.selectgendacademy" placeholder="请选择" style="width: 160%">
-            <el-option label="智能制造学部" value="智能制造学部"></el-option>
-            <el-option label="土木工程学院" value="土木工程学院"></el-option>
-            <el-option label="经济管理学院" value="经济管理学院"></el-option>
-            <el-option label="外国语学院" value="外国语学院"></el-option>
-            <el-option label="艺术设计学院" value="艺术设计学院"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="selectgendSubmit">查询</el-button>
-        </el-form-item>
-      </el-form>
-    </el-dialog> -->
-
-    <!-- <el-dialog title="输入班级" :visible.sync="selectclassVisible" width="25%">
-      <el-form :inline="true" :model="selectclassForm" class="selectclassForm_demo">
-        <el-form-item label="班级">
-            <el-select v-model="selectclassForm.selectclass" placeholder="请选择班别" style="width: 160%">
-              <el-option label="IBM1班" value="IBM1班"></el-option>
-              <el-option label="IBM2班" value="IBM2班"></el-option>
-              <el-option label="IBM3班" value="IBM3班"></el-option>
-              <el-option label="IBM4班" value="IBM4班"></el-option>
-              <el-option label="IBM5班" value="IBM5班"></el-option>
-              <el-option label="IBM6班" value="IBM6班"></el-option>
-              <el-option label="IBM7班" value="IBM7班"></el-option>
-            </el-select> 
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="selectclassSubmit">查询</el-button>
-        </el-form-item>
-      </el-form>
-    </el-dialog> -->
-
-    <!-- <el-dialog title="输入学号" :visible.sync="selectnumVisible" width="30%">
-      <el-form :inline="true" :model="selectnumForm" class="selectnumForm_demo">
-        <el-form-item label="学号">
-          <el-input v-model="selectnumForm.selectnum" maxlength="30"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="selectnumSubmit">查询</el-button>
-        </el-form-item>
-      </el-form>
-    </el-dialog> -->
 
     <el-dialog title="模糊查询" :visible.sync="selectfuzzyVisible" width="40%">
       <el-form ref="selectfuzzyForm" :inline="true" :model="selectfuzzyForm" class="selectfuzzyForm_demo">
@@ -166,11 +120,12 @@
 export default {
   data() {
     return {
-      rowID: "",
+      rowstuid1:'',
       search: "",
       search1: "",
       stuData: [
         {
+          studentnumberplaceholder:'',
           stuNum: "",
           stuID: "",
           stuName: "",
@@ -222,6 +177,31 @@ export default {
   },
 
   methods: {
+     handleEdit(index, rows){
+      this.rowstuid1= rows[index].stuID;
+       axios({
+        method: "post",
+        url: "/api/getMessagesById",
+        data: {
+          stuID: this.rowstuid1
+        },
+      })
+        .then((response) => {
+          let body = response.data;
+          this.studentnumberplaceholder=this.rowstuid1
+          this.Updateform.studentnumber=this.rowstuid1
+          this.Updateform.name = body.stuName, 
+          this.Updateform.time = body.stuBirth, 
+          this.Updateform.sex = body.stuSex,
+          this.Updateform.tel = body.stuTel,
+           this.Updateform.classnumber = body.stuClass, 
+           this.Updateform.department = body.stuDep
+        })
+        .catch((err) => {
+          console.log("猪...err...", err);
+        });
+        this.UpdateVisible=true;
+    },
     sumstudent() {
       this.$router.push({
         path: "/Sumstudent",
@@ -229,7 +209,6 @@ export default {
     },
     //基于表单的模糊搜索
     selectfuzzySubmit() {
-      console.log("查询中...");
       axios({
         method: "post",
         url: "/api/SelectMessagesByStuAll",
@@ -241,19 +220,18 @@ export default {
           stuDep: this.selectfuzzyForm.fuzzyacademy,
         },
       }).then((response) => {
-        console.log(response.data);
+  
         this.currentPage = 1;
         let body = response.data;
         this.stuData = [];
         this.stuData = body;
-        this.selectfuzzyVisible = false;
-        console.log(JSON.stringify(body));
+        this.selectfuzzyVisible = false
       });
     },
 
     //模糊搜索，基于搜索框
     validateCounts() {
-      console.log("搜索内容...", this.search1);
+    
       axios({
         method: "post",
         url: "/api/SelectByStuAll",
@@ -267,17 +245,18 @@ export default {
           stuDep: this.search1,
         },
       }).then((response) => {
-        console.log(response.data);
+     
         this.currentPage = 1;
         let body = response.data;
         this.stuData = [];
         this.stuData = body;
-        console.log(JSON.stringify(body));
+    
       });
     },
 
     updateusermessage() {
-      let stuid = this.rowID;
+      let stuid = this.rowstuid1
+      console.log(this.rowstuid1)
       if (this.Updateform.name.length == 0 || this.Updateform.time.length == 0 || this.Updateform.sex.length == 0 || this.Updateform.tel.length == 0 || this.Updateform.classnumber.length == 0 || this.Updateform.department.length == 0) {
         this.$message({
           message: "错误:存在空输入框，修改失败",
@@ -290,7 +269,7 @@ export default {
           method: "post",
           url: "/api/updateMessagesById",
           data: {
-            stuID: stuid,
+            stuID: this.rowstuid1,
             stuName: this.Updateform.name,
             stuBirth: this.Updateform.time,
             stuSex: this.Updateform.sex,
@@ -325,30 +304,20 @@ export default {
           });
       }
     },
-    //获取一行的学号
-    rowclick(row) {
-      this.rowID = row.stuID;
-      console.log("rowclick:" + row.stuID);
-      return row.stuID;
-    },
+
 
     //删除学生信息
     deleteRow(index, rows) {
-      // let stuid = this.rowID;
-      // rows.splice(index, 1);
-      // console.log(index);
-      // console.log(rows[index].stuID);
       let stuid = rows[index].stuID;
+      console.log('H股'+stuid)
+       console.log('H股'+rows[index].stuID)
       this.$confirm("信息删除不可恢复,请确认是否删除学号为:" + rows[index].stuID + ",姓名为：" + rows[index].stuName + "的学生吗？, 是否继续?", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
-          this.$message({
-            type: "success",
-            message: "删除成功!",
-          });
+       
           axios({
             method: "post",
             url: "/api/deleteMessagesById",
@@ -400,7 +369,6 @@ export default {
 
     //分页
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.currentPage = 1;
       this.pageSize = val;
     },
@@ -422,62 +390,10 @@ export default {
         });
     },
 
-    // selectgendSubmit() {
-    //   console.log("院系...", this.selectgendForm.selectgendacademy);
-    //   axios({
-    //     method: "post",
-    //     url: "/api/SelectByStuDep",
-    //     data: {
-    //       stuDep: this.selectgendForm.selectgendacademy,
-    //     },
-    //   }).then((response) => {
-    //     this.selectgendVisible = false;
-    //     this.currentPage = 1;
-    //     let body = response.data;
-    //     this.stuData = [];
-    //     this.stuData = body;
-    //   });
-    // },
-
-    // selectclassSubmit() {
-    //   console.log("班级...", this.selectclassForm.selectclass);
-    //   axios({
-    //     method: "post",
-    //     url: "/api/SelectByStuClass",
-    //     data: {
-    //       stuClass:this.selectclassForm.selectclass,
-    //     },
-    //   }).then((response) => {
-    //     this.selectclassVisible = false;
-    //     this.currentPage = 1;
-    //     let body = response.data;
-    //     this.stuData = [];
-    //     this.stuData = body;
-    //   });
-    // },
-
-    //按照学号查询
-    //   selectnumSubmit() {
-    //     //
-    //     console.log("学号...", this.selectnumForm.selectnum);
-    //     axios({
-    //       method: "post",
-    //       url: "/api/getMessagesById",
-    //       data: {
-    //         stuID: this.selectnumForm.selectnum,
-    //       },
-    //     }).then((response) => {
-    //       this.selectnumVisible = false;
-    //       this.currentPage = 1;
-    //       let body = response.data;
-    //       this.stuData = [body];
-    //     });
-    //   },
   },
   //获取表格数据
   created() {
     var name = this.$route.query.username;
-    console.log(name);
     this.username = name;
     if (this.username === "admin") {
       this.admin = true;
