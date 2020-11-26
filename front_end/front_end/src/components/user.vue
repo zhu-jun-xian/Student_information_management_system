@@ -153,7 +153,7 @@
             <el-form-item label="出生年月" prop="addtime" >  
             <!-- <el-input type="number" style="width: 60%" v-model="addForm.addtime" placeholder="例如:20200501" maxlength="6" show-word-limit></el-input>  -->
      
-            <el-date-picker type="date" v-model="addForm.addtime " placeholder="选择日期"  style="width: 30%;" value-format="yyyyMMdd"></el-date-picker>
+            <el-date-picker type="date" v-model="addForm.addtime " placeholder="选择日期"  style="width: 60%;" value-format="yyyyMMdd"></el-date-picker>
             
           </el-form-item>
           <el-form-item label="性别" prop="addsex">
@@ -315,27 +315,7 @@
             };
         },
         methods: {
-            updateusermessageopen() {
-                console.log('猪' + rows[index].stuID)
 
-                let stuid = rows[index].stuID;
-                axios({
-                        method: "post",
-                        url: "/api/getMessagesById",
-                        data: {
-                            id: stuid,
-                        },
-                    })
-                    .then((response) => {
-                        let body = response.data;
-                        console.log(body)
-
-
-                    })
-                    .catch((err) => {
-                        console.log("...err...", err);
-                    });
-            },
             sumdialogopen() {
                 axios({
                         method: "get",
