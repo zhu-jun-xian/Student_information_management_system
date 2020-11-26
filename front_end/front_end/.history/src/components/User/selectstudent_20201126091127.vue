@@ -246,7 +246,7 @@ export default {
         url:"/api/SelectMessagesByStuAll",
         data:{
           stuName:this.selectfuzzyForm.fuzzyname,
-          stuID:this.selectfuzzyForm.fuzzynum,
+          stuNum:this.selectfuzzyForm.fuzzynum,
           stuClass:this.selectfuzzyForm.fuzzyclass,
           stuSex:this.selectfuzzyForm.fuzzysex,
           stuDep:this.selectfuzzyForm.fuzzyacademy,
