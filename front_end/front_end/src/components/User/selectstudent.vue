@@ -128,6 +128,7 @@
         <el-form-item label="学号：" prop="fuzzynum">
           <el-input v-model="selectfuzzyForm.fuzzynum"></el-input>
         </el-form-item>
+        <br>
         <el-form-item label="班级：" prop="fuzzyclass">
           <el-select v-model="selectfuzzyForm.fuzzyclass" placeholder="请选择" style="width: 140%">
             <el-option label="IBM1班" value="IBM1班"></el-option>
@@ -139,9 +140,11 @@
             <el-option label="IBM7班" value="IBM7班"></el-option>
           </el-select>
         </el-form-item>
+        
           <el-form-item label="性别：" prop="fuzzysex">
             <el-select v-model="selectfuzzyForm.fuzzysex" placeholder="请选择" width="40%">       <el-option label="男" value="男"></el-option>       <el-option label="女" value="女"></el-option> </el-select>
         </el-form-item>
+        <br>
         <el-form-item label="系部：" prop="fuzzyacademy">
           <el-select v-model="selectfuzzyForm.fuzzyacademy" placeholder="请选择" style="width: 240%">
             <el-option label="智能制造学部" value="智能制造学部"></el-option>
