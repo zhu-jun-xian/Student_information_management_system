@@ -35,7 +35,7 @@
           <label>Telephone</label>
         </div>
         <div class="inputbox">
-          <input type="password" v-model="password" maxlength="30"/>
+          <input type="password" v-model="password" maxlength="30" />
           <label>Password</label>
         </div>
         <div class="inputbox">

@@ -315,7 +315,27 @@
             };
         },
         methods: {
+            updateusermessageopen() {
+                console.log('猪' + rows[index].stuID)
 
+                let stuid = rows[index].stuID;
+                axios({
+                        method: "post",
+                        url: "/api/getMessagesById",
+                        data: {
+                            id: stuid,
+                        },
+                    })
+                    .then((response) => {
+                        let body = response.data;
+                        console.log(body)
+
+
+                    })
+                    .catch((err) => {
+                        console.log("...err...", err);
+                    });
+            },
             sumdialogopen() {
                 axios({
                         method: "get",

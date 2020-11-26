@@ -13,7 +13,7 @@
           <el-table-column align="center" header-align="center" prop="stuDep" label="系部" width="160%"></el-table-column>
           <el-table-column align="center" header-align="center" prop="" label="操作" width="180%">
             <template slot-scope="scope">
-              <el-button size="mini" type="primary" icon="el-icon-edit" circle @click.native="UpdateVisible = true"></el-button>
+              <el-button size="mini" type="primary" icon="el-icon-edit" circle @click.native.prevent="handleEdit(scope.$index,stuData)"></el-button>
               <el-button size="mini" type="danger" icon="el-icon-delete" circle @click.native.prevent="deleteRow(scope.$index, stuData)"></el-button>
             </template>
           </el-table-column>
@@ -24,7 +24,7 @@
       </div>
     </el-container>
 
-    <el-dialog title="修改学生信息" :visible.sync="UpdateVisible" width="35%">
+    <el-dialog title="修改学生信息" :visible.sync="UpdateVisible" width="35%" @open="updateusermessageopen">
       <span>
         <el-form ref="Updateform" :model="Updateform" label-width="100px">
           <el-form-item label="学号" prop="studentnumber">              <el-input v-model="rowID" plain disabled></el-input>            </el-form-item>
@@ -32,7 +32,7 @@
             <el-input v-model="Updateform.name"></el-input>
           </el-form-item>
 
-          <el-form-item type="number" label="出生年月" prop="time">         <el-date-picker type="date" v-model="Updateform.time" placeholder="选择日期" style="width: 30%" value-format="yyyyMMdd"></el-date-picker>       </el-form-item>
+          <el-form-item type="number" label="出生年月" prop="time">         <el-date-picker type="date" v-model="Updateform.time" placeholder="选择日期" style="width: 60%" value-format="yyyyMMdd"></el-date-picker>       </el-form-item>
             <el-form-item label="性别" prop="sex">
             <el-select v-model="Updateform.sex" placeholder="请选择" style="width: 100%">              <el-option label="男" value="男"></el-option>               <el-option label="女" value="女"></el-option>            </el-select>           
           </el-form-item>
@@ -108,6 +108,36 @@ export default {
   },
 
   methods: {
+    handleEdit(index, rows){
+      var rowstuid = rows[index].stuID;
+      console.log(rowstuid)
+       axios({
+        method: "post",
+        url: "/api/getMessagesById",
+        data: {
+          stuID: rowstuid,
+        },
+      })
+        .then((response) => {
+          let body = response.data;
+          console.log(body)
+          this.Updateform.name = body.stuName, 
+          this.Updateform.time = body.stuBirth, 
+          this.Updateform.sex = body.stuSex,
+          this.Updateform.tel = body.stuTel,
+           this.Updateform.classnumber = body.stuClass, 
+           this.Updateform.department = body.stuDep
+        })
+        .catch((err) => {
+          console.log("猪...err...", err);
+        });
+        this.UpdateVisible=true;
+    },
+    updateusermessageopen() {
+      // let stuid = this.rowID;
+      // console.log('猪'+stuid);
+     
+    },
     //获取一行的学号
     rowclick(row) {
       this.rowID = row.stuID;
