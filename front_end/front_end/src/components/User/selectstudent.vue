@@ -56,8 +56,15 @@
           <el-input v-model="Updateform.tel"></el-input>
         </el-form-item>
         <el-form-item label="班级" prop="classnumber">
-          <el-input v-model="Updateform.classnumber"></el-input>
-        </el-form-item>
+           <el-select v-model="Updateform.classnumber" placeholder="请选择班别">
+              <el-option label="IBM1班" value="IBM1"></el-option>
+              <el-option label="IBM2班" value="IBM2"></el-option>
+              <el-option label="IBM3班" value="IBM3"></el-option>
+              <el-option label="IBM4班" value="IBM4"></el-option>
+              <el-option label="IBM5班" value="IBM5"></el-option>
+              <el-option label="IBM6班" value="IBM6"></el-option>
+              <el-option label="IBM7班" value="IBM7"></el-option>
+            </el-select>        </el-form-item>
         <el-form-item label="系部" prop="department">
           <el-select v-model="Updateform.department" placeholder="请选择" style="width: 100%">
                 <el-option label="智能制造学部" value="智能制造学部"></el-option>           
@@ -121,7 +128,7 @@
         <el-form-item label="学号" prop="fuzzynum">
           <el-input v-model="selectfuzzyForm.fuzzynum" style="width: 140%"></el-input>
         </el-form-item>
-        <el-form-item label="班级" prop="fuzzynclass">
+         <el-form-item label="班级" prop="fuzzynclass">
           <el-input v-model="selectfuzzyForm.fuzzyclass" style="width: 140%"></el-input>
         </el-form-item>
           <el-form-item label="性别" prop="fuzzysex">
@@ -138,6 +145,7 @@
             <el-option label="艺术设计学院" value="艺术设计学院"></el-option>
           </el-select>
         </el-form-item>
+       
         <el-form-item>
           <el-button type="primary" @click="selectfuzzySubmit" style="margin-left: 100px;">查询</el-button>
           <el-button @click="resetForm('selectfuzzyForm')">清空</el-button>
@@ -200,7 +208,7 @@ export default {
       selectfuzzyForm: {
         fuzzynum: "",
         fuzzyname: "",
-        fuzzyclass: "",
+        fuzzyclass:"",
         fuzzysex: "",
         fuzzyacademy: "",
       },

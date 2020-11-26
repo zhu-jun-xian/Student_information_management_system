@@ -44,13 +44,13 @@
           <el-form-item label="班级" prop="classnumber" type="number">
             <!-- <el-input v-model="Updateform.classnumber"></el-input> -->
             <el-select v-model="Updateform.classnumber" placeholder="请选择班别">
-              <el-option label="1" value="1"></el-option>
-              <el-option label="2" value="2"></el-option>
-              <el-option label="3" value="3"></el-option>
-              <el-option label="4" value="4"></el-option>
-              <el-option label="5" value="5"></el-option>
-              <el-option label="6" value="6"></el-option>
-              <el-option label="7" value="7"></el-option>
+              <el-option label="IBM1班" value="IBM1"></el-option>
+              <el-option label="IBM2班" value="IBM2"></el-option>
+              <el-option label="IBM3班" value="IBM3"></el-option>
+              <el-option label="IBM4班" value="IBM4"></el-option>
+              <el-option label="IBM5班" value="IBM5"></el-option>
+              <el-option label="IBM6班" value="IBM6"></el-option>
+              <el-option label="IBM7班" value="IBM7"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="系部" prop="department">
