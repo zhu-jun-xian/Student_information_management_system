@@ -20,7 +20,7 @@
             <el-submenu index="1">
               <template slot="title"><i class="el-icon-message"></i>信息查询</template>
 <el-menu-item-group>
-    <el-menu-item index="1-0" @click="selectrouteruser">学生信息汇总</el-menu-item>
+    <el-menu-item index="1-0" @click="selectrouteruser">学生信息总表</el-menu-item>
     <el-menu-item index="1-1" @click.native="statisticsVisible = true">学生信息统计</el-menu-item>
     <!-- <el-menu-item index="1-2" @click.native="dialogVisible = true">学生信息查询</el-menu-item> -->
     <el-menu-item index="1-2" @click="selectuser1">学生信息查询</el-menu-item>
