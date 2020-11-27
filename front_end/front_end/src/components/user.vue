@@ -111,11 +111,12 @@
         <el-table-column align="center" prop="IBM1" label="IBM1班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM2" label="IBM2班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM3" label="IBM3班" width="100"> </el-table-column>
+        <el-table-column align="center" prop="IBM4" label="IBM4班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM5" label="IBM5班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM6" label="IBM6班" width="100"> </el-table-column>
         <el-table-column align="center" prop="IBM7" label="IBM7班" width="100"> </el-table-column>
-        <el-table-column align="center" prop="girls" label="男" width="100"> </el-table-column>
-        <el-table-column align="center" prop="boys" label="女" width="100"> </el-table-column>
+        <el-table-column align="center" prop="boys" label="男" width="100"> </el-table-column>
+        <el-table-column align="center" prop="girls" label="女" width="100"> </el-table-column>
         <el-table-column align="center" prop="allSchoolstu" label="全校统计" width="100"> </el-table-column>
     </el-table>
     <div>
@@ -314,7 +315,7 @@
             };
         },
         methods: {
-//统计学生信息
+            //统计学生信息
             sumdialogopen() {
                 axios({
                         method: "get",
@@ -322,7 +323,7 @@
                     })
                     .then((response) => {
                         let body = response.data;
-                        // console.log(JSON.stringify(body))
+                        console.log(JSON.stringify(body))
                         let sumallSchoolstu = parseInt(body[13].totalSex) + parseInt(body[12].totalSex)
                         this.sumtableData = [{
                             artdesign: body[11].totalDep,
@@ -512,7 +513,7 @@
 
                 }
             },
-//跳转到学生总表界面
+            //跳转到学生总表界面
             selectrouteruser() {
                 this.$router.push({
                     path: "/inforstudent",
@@ -837,7 +838,7 @@
                     console.log("...err...", err);
                 });
         },
-//确定学生录入时间
+        //确定学生录入时间
         mounted() {
             var name = this.$route.query.username;
             this.username = name;
