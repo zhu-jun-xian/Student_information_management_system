@@ -315,10 +315,11 @@
             sumdialogopen() {
                 axios({
                         method: "get",
-                        url: "/api/CountStuInfo",
+                        url: "/api/CountStuInfo1",
                     })
                     .then((response) => {
                         let body = response.data;
+                        // console.log(JSON.stringify(body))
                         let sumallSchoolstu = parseInt(body[13].totalSex) + parseInt(body[12].totalSex)
                         this.sumtableData = [{
                             artdesign: body[11].totalDep,
