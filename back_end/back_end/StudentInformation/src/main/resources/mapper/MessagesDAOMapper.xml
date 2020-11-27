@@ -1,80 +1,97 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ibm.cn.mapper.MessagesMapper">
+
+	<!--添加Messages  -->
 	<insert id="addMessages" parameterType="com.ibm.cn.model.Messages">
 		INSERT INTO studentinformationtable(stuID,stuName,stuBirth,stuSex,stuTel,stuClass,stuDep,stuAddTimed,stuImgUrl) VALUES (#{stuID},#{stuName},#{stuBirth},#{stuSex},#{stuTel},#{stuClass},#{stuDep},#{stuAddTimed},#{stuImgUrl});
 	</insert>
 	
+	<!-- 查询全部Messages -->
 	<select id="getAllMessages" resultType="com.ibm.cn.model.Messages">
 		SELECT * FROM studentinformationtable
 	</select>
 	
+	<!-- 根据stuID查询Messages -->
 	<select id="getMessagesById" parameterType="com.ibm.cn.model.Messages"
 		resultType="com.ibm.cn.model.Messages">
 		SELECT * FROM studentinformationtable WHERE stuID=#{stuID}
 	</select>
 	
+	<!-- 根据stuName查询Messgaes -->
 	<select id="getMessagesByName" parameterType="com.ibm.cn.model.Messages"
 		resultType="com.ibm.cn.model.Messages">
 		SELECT * FROM studentinformationtable WHERE stuName=#{stuName}
 	</select>
 	
+	<!-- 根据stuID删除Messgaes -->
 	<delete id="deleteMessagesById" parameterType="String">
 		DELETE FROM studentinformationtable WHERE stuID=#{stuID}
 	</delete>
 	
+	<!-- 根据stuName删除Messgaes -->
 	<delete id="deleteMessagesByName" parameterType="String">
 		DELETE FROM studentinformationtable WHERE stuName=#{stuName}
 	</delete>
 	
+	<!-- 根据stuName更新Messgaes -->
 	<update id="updateMessagesByName"
 		parameterType="com.ibm.cn.model.Messages">
 		UPDATE studentinformationtable SET stuID=#{stuID},stuName=#{stuName},stuBirth=#{stuBirth},stuSex=#{stuSex},stuTel=#{stuTel},stuClass=#{stuClass},stuDep=#{stuDep},stuAddTimed=#{stuAddTimed},stuImgUrl=#{stuImgUrl}
 		WHERE stuName=#{stuName}
 	</update>
 	
+	<!-- 根据stuID更新Messgaes -->
 	<update id="updateMessagesById"
 		parameterType="com.ibm.cn.model.Messages">
 		UPDATE studentinformationtable SET stuID=#{stuID},stuName=#{stuName},stuBirth=#{stuBirth},stuSex=#{stuSex},stuTel=#{stuTel},stuClass=#{stuClass},stuDep=#{stuDep},stuAddTimed=#{stuAddTimed},stuImgUrl=#{stuImgUrl}
 		WHERE stuID=#{stuID}
 	</update>
 	
+	<!-- 根据stuID查询Messages -->
 	<select id="getByStuID" parameterType="String"
 		resultType="com.ibm.cn.model.Messages">
 		SELECT * FROM  studentinformationtable WHERE stuID=#{stuID}
 	</select>
 	
+	<!-- 根据stuName查询Messgaes，支持模糊查询 -->
 	<select id="SelectByStuName" resultType="com.ibm.cn.model.Messages"  parameterType="com.ibm.cn.model.Messages">
 		select * from studentinformationtable where stuName like concat('%' ,#{stuName},'%') 
 	</select>
 	
+	<!-- 根据stuClass查询Messgaes -->
 	<select id="SelectByStuClass" resultType="com.ibm.cn.model.Messages"  parameterType="com.ibm.cn.model.Messages">
 		SELECT * FROM  studentinformationtable WHERE stuClass=#{stuClass}
 	</select>
 	
+	<!-- 根据stuDep查询Messgaes -->
 	<select id="SelectByStuDep" resultType="com.ibm.cn.model.Messages"  parameterType="com.ibm.cn.model.Messages">
 		SELECT * FROM  studentinformationtable WHERE stuDep=#{stuDep}
 	</select>
 	
+	<!-- 根据stuSex查询Messgaes -->
 	<select id="SelectByStuSex" resultType="com.ibm.cn.model.Messages"  parameterType="String">
 		SELECT * FROM  studentinformationtable WHERE stuSex=#{stuSex}
 	</select>
 	
+	<!-- 根据stuSex统计数据 -->
 	<select id="getCountBySex" resultType="com.ibm.cn.model.Sex">
 		select stuSex sex,Count(stuSex) count from studentinformationtable where stuSex in(select distinct stuSex from studentinformationtable) group by stuSex
 	</select>
 	
+	<!-- 根据输入的任意的值查询Messgaes,支持模糊查询 -->
 	<select id="SelectByStuAll"  parameterType="com.ibm.cn.model.Messages"  resultType="com.ibm.cn.model.Messages"  >
-  select * from studentinformationtable 
-   WHERE stuID like concat('%' ,#{stuID},'%') 
-       or stuName like concat('%' ,#{stuName},'%') 
-      or stuBirth like concat('%' ,#{stuBirth},'%')
-      or stuSex like concat('%' ,#{stuSex},'%')
-      or stuTel like concat('%' ,#{stuTel},'%')
-      or stuClass like concat('%' ,#{stuClass},'%')
-      or stuDep like concat('%' ,#{stuDep},'%')
+  	select * from studentinformationtable 
+  		WHERE stuID like concat('%' ,#{stuID},'%') 
+       	or stuName like concat('%' ,#{stuName},'%') 
+      	or stuBirth like concat('%' ,#{stuBirth},'%')
+      	or stuSex like concat('%' ,#{stuSex},'%')
+      	or stuTel like concat('%' ,#{stuTel},'%')
+      	or stuClass like concat('%' ,#{stuClass},'%')
+      	or stuDep like concat('%' ,#{stuDep},'%')
  </select> 
 	
-<select id="SelectMessagesByStuAll"  parameterType="com.ibm.cn.model.Messages"  resultType="com.ibm.cn.model.Messages"  >	
+	<!-- 根据输入的任意的值查询Messgaes,支持模糊查询 -->
+	<select id="SelectMessagesByStuAll"  parameterType="com.ibm.cn.model.Messages"  resultType="com.ibm.cn.model.Messages"  >	
 	select * from studentinformationtable 
  	 WHERE 1=1
  	  <if test="stuID != null and stuID != ''">
@@ -98,21 +115,21 @@
  	 <if test="stuDep != null and stuDep != ''">
             and stuDep like concat('%' ,#{stuDep},'%')
       </if>
-
 	 </select> 
 	
-	
+	<!-- 根据stuSex统计数据 -->
  <select id="CountByStuSex"  
   resultType="com.ibm.cn.model.Messages">
   SELECT Count(*) as totalSex ,stuSex  FROM  studentinformationtable GROUP BY stuSex
  </select>
     
+    <!-- 根据stuDep统计数据 -->
     <select id="CountByStuDep"  
   resultType="com.ibm.cn.model.Messages">
   SELECT Count(*) as totalDep,stuDep FROM  studentinformationtable GROUP BY stuDep
  </select>
     
-    
+    <!-- 根据stuClass统计数据 -->
  <select id="CountByStuClass"  
   resultType="com.ibm.cn.model.Messages">
   SELECT  Count(*) as   totalClass , stuClass  FROM  studentinformationtable GROUP BY stuClass
