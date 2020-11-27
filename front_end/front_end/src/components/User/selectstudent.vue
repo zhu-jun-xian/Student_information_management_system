@@ -252,6 +252,14 @@ export default {
           offset: 50,
           type: "warning",
         });
+      }
+      if (this.Updateform.name.length > 30) {
+        this.$message({
+          message: "错误:学生姓名大于30位，修改失败",
+          center: true,
+          offset: 50,
+          type: "warning",
+        });
       } else {
         axios({
           method: "post",
