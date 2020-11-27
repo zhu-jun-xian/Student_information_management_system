@@ -38,7 +38,6 @@
 		WHERE stuID=#{stuID}
 	</update>
 	
-	
 	<select id="getByStuID" parameterType="String"
 		resultType="com.ibm.cn.model.Messages">
 		SELECT * FROM  studentinformationtable WHERE stuID=#{stuID}
@@ -60,11 +59,9 @@
 		SELECT * FROM  studentinformationtable WHERE stuSex=#{stuSex}
 	</select>
 	
-	
 	<select id="getCountBySex" resultType="com.ibm.cn.model.Sex">
 		select stuSex sex,Count(stuSex) count from studentinformationtable where stuSex in(select distinct stuSex from studentinformationtable) group by stuSex
 	</select>
-	
 	
 	<select id="SelectByStuAll"  parameterType="com.ibm.cn.model.Messages"  resultType="com.ibm.cn.model.Messages"  >
   select * from studentinformationtable 
