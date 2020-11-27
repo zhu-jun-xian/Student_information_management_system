@@ -319,7 +319,7 @@
             sumdialogopen() {
                 axios({
                         method: "get",
-                        url: "/api/CountStuInfo1",
+                        url: "/api/CountStuInfo",
                     })
                     .then((response) => {
                         let body = response.data;
