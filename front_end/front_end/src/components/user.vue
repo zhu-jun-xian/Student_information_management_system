@@ -315,10 +315,11 @@
             sumdialogopen() {
                 axios({
                         method: "get",
-                        url: "/api/CountStuInfo",
+                        url: "/api/CountStuInfo1",
                     })
                     .then((response) => {
                         let body = response.data;
+                        console.log(JSON.stringify(body))
                         let sumallSchoolstu = parseInt(body[13].totalSex) + parseInt(body[12].totalSex)
                         this.sumtableData = [{
                             artdesign: body[11].totalDep,
@@ -335,8 +336,10 @@
                             IBM5: body[4].totalClass,
                             IBM6: body[5].totalClass,
                             IBM7: body[6].totalClass,
+
                             allSchoolstu: sumallSchoolstu
                         }, ];
+                        console.log(JSON.stringify(body))
                         var myChart = this.$echarts.init(document.getElementById('main'));
                         // 指定图表的配置项和数据
                         var option = {
@@ -441,6 +444,20 @@
                     this.addForm.adddepartment.length == 0) {
                     this.$message({
                         message: "错误:存在空输入框，添加失败",
+                        center: true,
+                        offset: 50,
+                        type: "warning",
+                    });
+                } else if (this.addForm.addstudentnumber.length > 30) {
+                    this.$message({
+                        message: "错误:学号大于30位，添加失败",
+                        center: true,
+                        offset: 50,
+                        type: "warning",
+                    });
+                } else if (this.addForm.addstudentname.length > 30) {
+                    this.$message({
+                        message: "错误:学生姓名大于30位，添加失败",
                         center: true,
                         offset: 50,
                         type: "warning",
