@@ -27,8 +27,9 @@ public class StudentController {
  @Autowired
  StudentService studentService;
 
-
+//允许前后端
  @CrossOrigin
+ //用户注册功能
  @PostMapping("/register")
  public String register(@RequestBody Student b){
 	System.out.println("注册名:"+b.getName());
@@ -45,7 +46,9 @@ public class StudentController {
 	  return "fault";
 	}
 }
+ //允许前后端
  @CrossOrigin
+ //用户登入功能
  @PostMapping("/login")
  public String login(@RequestBody Student c) {
 	 System.out.println("尝试登录用户名:"+c.getName());
@@ -69,21 +72,21 @@ public class StudentController {
 			}
 		}
  }
- 
+
  	@CrossOrigin
 	@GetMapping("/getUserById")
 	public Student getUserById(@RequestBody String id) {
 		Student student = studentService.getUserById(id);
 		return student;
 	}
- 	
+ 	//通过id查询User信息
  	@CrossOrigin
 	@PostMapping("/getUserById1")
 	public Student getUserById(@RequestBody Student stu) {
 		Student student = studentService.getUserById(stu.getId());
 		return student;
 	}
- 	
+ 	//修改密码功能
  	@CrossOrigin
  	 @PostMapping("/updateUserPassword")
  	 public String updateUser(@RequestBody Student s) {
@@ -105,14 +108,14 @@ public class StudentController {
  	    return "新密码修改成功";
  	   }
  	 }
- 	
+ 	//通过id修改User信息
  	@PostMapping("/updateUserTableByID")
  	 public String updateUserTableByID(@RequestBody Student student) {
  	  studentService.updateUserTableByID(student);
  	  return "success";
  	 }
  	
- 	
+ 	//通过id删除User信息
  	 @PostMapping("/deleteUser")
  	 public String deleteUser(@RequestBody Student s) {
  	  
@@ -126,7 +129,7 @@ public class StudentController {
  	  }
  	 }
  	 
- 	 
+ 	 //导出Excel表功能
  	@RequestMapping(value = "UserExcelDownloads", method = RequestMethod.GET)
  	public void downloadAllClassmate(HttpServletResponse response) throws IOException {
  	    System.out.println("下載信息表");

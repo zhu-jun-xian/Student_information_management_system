@@ -1,50 +1,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ibm.cn.mapper.StudentMapper">
+<!-- 添加User -->
 	<insert id="addUser" parameterType="com.ibm.cn.model.Student">
 		INSERT INTO usertable(ID,Name,Tel,Password) VALUES (#{id},#{name},#{tel},#{password})
 	</insert>
-	
+	<!-- 通过id删除User -->
 <delete id="deleteUserById" parameterType="String">
   DELETE FROM usertable WHERE id=#{id}
  </delete>
-
+<!-- 计算班级人数 -->
 	<select id="countstudent" parameterType="String">
 		select count(stuClass) from studentinformationtable where stuClass=#{stuclass};
 	</select>
+	<!-- 通过ID修改User信息 -->
 	<update id="updateUserById"
 		parameterType="com.ibm.cn.model.Student">
 		UPDATE student SET name=#{name},password=#{password}
 		WHERE id=#{id}
 	</update>
-
+<!-- 通过id查询User信息 -->
 	<select id="getUserById" parameterType="String"
 		resultType="com.ibm.cn.model.Student">
 		SELECT * FROM usertable WHERE Id=#{id}
 	</select>
+<!-- 通过name查询User信息 -->
 	<select id="getUserByName" parameterType="String"
 		resultType="com.ibm.cn.model.Student">
 		SELECT * FROM usertable WHERE Name=#{name}
 	</select>
+<!-- 通过name修改User信息 -->
 	<update id="updateUserByName"
 		parameterType="com.ibm.cn.model.Student">
 		UPDATE usertable SET password=#{password}
 		WHERE name=#{name},password=#{password}
 	</update>
+	<!-- 查询全部学生信息 -->
 	<select id="getAllUsers" resultType="com.ibm.cn.model.Student">
 		SELECT * FROM usertable
 	</select>
-
+<!-- 分页 -->
 	<select id="queryUsersBySql" parameterType="map"
 		resultType="com.ibm.cn.model.Student">
 		select * from student limit #{currIndex} , #{pageSize}
 	</select>
-
+<!-- 修改密码 -->
  	<update id="updateUser"
   		parameterType="com.ibm.cn.model.Student">
   		UPDATE usertable SET password=#{password}
  		 WHERE id=#{id}
  	</update>
- 	
+ <!-- 通过id修改User信息 -->	
  	<update id="updateUserTableByID"
   parameterType="com.ibm.cn.model.Student">
   UPDATE usertable SET name=#{name},tel=#{tel} WHERE id=#{id}

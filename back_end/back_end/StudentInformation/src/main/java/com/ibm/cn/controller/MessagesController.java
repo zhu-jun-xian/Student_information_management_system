@@ -28,14 +28,17 @@ import com.ibm.cn.service.MessagesService;
 @CrossOrigin
 @RestController
 public class MessagesController {
+	
 	@Autowired
 	MessagesService messagesService;
+	
 	//查询全部Messages
 	@GetMapping("/findAll")
 	public List<Messages> findAll() {
 		List<Messages> list =  messagesService.getAllMessages();
 		return list;
 	}
+	
 	//添加Messages
 	@PostMapping("/addMessages")
 	public String add(@RequestBody Messages messages) {
@@ -43,7 +46,8 @@ public class MessagesController {
 		System.out.println("ok");
 		return "ok";
 	}
-	//根据ID查Messages
+	
+	//根据stuID查询Messages
 	@PostMapping("/getMessagesById")
 	public Messages getMessagesById(@RequestBody Messages stuID) {
 		System.out.println("根據ID查詢-");
@@ -52,7 +56,8 @@ public class MessagesController {
 		System.out.println(messages);
 		return messages;
 	}
-	//根据Name查Messgaes
+	
+	//根据stuName查询Messgaes
 	@PostMapping("/getMessagesByName")
 	public Messages getMessagesByName(@RequestBody Messages stuName) {
 		System.out.println(stuName);
@@ -60,6 +65,7 @@ public class MessagesController {
 		return messages;
 	}
 	
+	//根据stuID删除Messgaes
 	@PostMapping("/deleteMessagesById")
 	public String deleteMessagesById(@RequestBody Messages messages) {
 		System.out.println("delete:" + messages);
@@ -73,18 +79,21 @@ public class MessagesController {
 		}
 	}
 	
+	//根据stuName删除Messgaes
 	@GetMapping("/deleteMessagesByName")
 	public String deleteMessagesByName(@RequestBody String stuName) {
 		messagesService.deleteMessagesByName(stuName);
 		return "ok";
 	}
 	
+	//根据stuName更新Messgaes
 	@PostMapping("/updateMessagesByName")
 	public String updateMessagesByName(@RequestBody Messages messages) {
 		messagesService.updateMessagesByName(messages);
 		return "ok";
 	}
 	
+	//根据stuID更新Messgaes
 	@PostMapping("/updateMessagesById")
 	public String updateMessagesById(@RequestBody Messages messages) {
 		int i = messagesService.updateMessagesById(messages);
@@ -97,23 +106,22 @@ public class MessagesController {
 		}
 	}
 	
-	
-	
+	//根据stuID查询Messgaes
 	@GetMapping("/getByStuID")
 	public Messages getByStuID(@RequestBody String stuID) {
 		System.out.println(stuID);
 		Messages messages = messagesService.getByStuID(stuID);
 		return messages;
 	}
-	
-	
-	//模糊查询
+		
+	//根据stuName查询Messgaes，支持模糊查询
 	@PostMapping("/SelectByStuName")
 	public List<Messages> SelectByStuName(@RequestBody Messages stuName) {
 		List<Messages> list =  messagesService.SelectByStuName(stuName);
 		return list;
 	}
 	
+	//根据stuClass查询Messgaes
 	@PostMapping("/SelectByStuClass")
 	public List<Messages> SelectByStuClass(@RequestBody Messages stuClass) {
 		System.out.println(stuClass);
@@ -122,6 +130,7 @@ public class MessagesController {
 		return list;
 	}
 	
+	//根据stuDep查询Messgaes
 	@PostMapping("/SelectByStuDep")
 	public List<Messages> SelectByStuDep(@RequestBody Messages stuDep) {
 		System.out.println(stuDep);
@@ -130,6 +139,7 @@ public class MessagesController {
 		return list;
 	}
 	
+	//根据stuSex查询Messgaes
 	@GetMapping("/SelectByStuSex")
 	public List<Messages> SelectByStuSex(@RequestBody String stuSex) {
 		List<Messages> list =  messagesService.SelectByStuSex(stuSex);
@@ -139,14 +149,15 @@ public class MessagesController {
 		return list;
 	}
 	
-
+	//根据输入的任意的值查询Messgaes,支持模糊查询
 	@PostMapping("/SelectByStuAll")
 	public List<Messages> SelectByStuAll(@RequestBody Messages stu) {
 		
 		List<Messages> list =  messagesService.SelectByStuAll(stu);
 		return list;
 	}
-
+	
+	//根据输入的任意的值查询Messgaes,支持模糊查询
 	@PostMapping("/SelectMessagesByStuAll")
 	public List<Messages> SelectMessagesByStuAll(@RequestBody Messages messages) {
 		System.out.println(messages);
@@ -155,20 +166,17 @@ public class MessagesController {
 		return list;
 	}
 	
-//	--------------------
+	//	统计--------------------
+	//根据stuSex统计数据
 	@PostMapping("/getCountBySex")
 	public List<Sex> getCountBySex() {
 		List<Sex> list =  messagesService.getCountBySex();
 		return list;
 	}
 	
-	
-	
 	//汇总统计
 	@GetMapping("/CountStuInfo")
 	 public  List<Messages>  CountStuInfo() {
-	   
-		
 		System.out.println("匯總查詢");
 	  //各个班级对应人数
 	  List<Messages> listClassCount  = messagesService.CountByStuClass();
