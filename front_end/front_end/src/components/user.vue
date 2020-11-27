@@ -319,7 +319,7 @@
                     })
                     .then((response) => {
                         let body = response.data;
-                        console.log(JSON.stringify(body))
+                        // console.log(JSON.stringify(body))
                         let sumallSchoolstu = parseInt(body[13].totalSex) + parseInt(body[12].totalSex)
                         this.sumtableData = [{
                             artdesign: body[11].totalDep,
@@ -682,22 +682,6 @@
             // 将表单数据添加到表格中去
             updatepassonSubmit() {
                 var reg = new RegExp("(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0-9]).{8,30}");
-                // if (this.passwordform.pass.length == 0 || this.passwordform.repass.length == 0) {
-                //     this.$message({
-                //         message: "错误:存在空输入框，修改失败",
-                //         center: true,
-                //         offset: 50,
-                //         type: "warning",
-                //     });
-                //  else 
-                // } else if (this.passwordfrom.pass.length < 8 || this.password.repass.length > 30) {
-                //     this.$message({
-                //         message: "错误:密码要符合8到30 位，修改失败",
-                //         center: true,
-                //         offset: 50,
-                //         type: "warning",
-                //     });
-                // } 
                 if (!reg.test(this.passwordform.pass) || !reg.test(this.passwordform.repass)) {
                     this.$message({
                         message: "错误:密码应由大小写字母+特殊字符组合,长度控制在8-30",
