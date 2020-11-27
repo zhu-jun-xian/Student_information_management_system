@@ -339,7 +339,6 @@
                             IBM5: body[4].totalClass,
                             IBM6: body[5].totalClass,
                             IBM7: body[6].totalClass,
-
                             allSchoolstu: sumallSchoolstu
                         }, ];
                         console.log(JSON.stringify(body))
@@ -546,6 +545,14 @@
                 if (this.passwordform.name.length == 0 && this.passwordform.tel.length == 0) {
                     this.$message({
                         message: "错误:空输入，不能修改",
+                        center: true,
+                        offset: 50,
+                        type: "warning",
+                    });
+                }
+                if (this.passwordform.name.length > 30) {
+                    this.$message({
+                        message: "错误:学生姓名大于30位，修改失败",
                         center: true,
                         offset: 50,
                         type: "warning",
